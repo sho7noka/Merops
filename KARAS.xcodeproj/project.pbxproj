@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A86D92862E523CC392B /* Extensions.swift */; };
+		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
+		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
+		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
+		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
+		E281B78C20B933B600232181 /* Cmd+Sketchfab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78920B933B600232181 /* Cmd+Sketchfab.swift */; };
+		E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78D20B933D000232181 /* GameViewSettings.swift */; };
+		E281B79020B933D000232181 /* GameViewMixin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewMixin.swift */; };
+		E281B79420B933E200232181 /* GeoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79120B933E200232181 /* GeoBuilder.swift */; };
+		E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79220B933E200232181 /* GeoPrimitives.swift */; };
+		E281B79620B933E200232181 /* GeoRepricator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79320B933E200232181 /* GeoRepricator.swift */; };
+		E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */; };
+		E281B7A220B94CAE00232181 /* driverMatX.mm in Sources */ = {isa = PBXBuildFile; fileRef = E281B79820B94CAD00232181 /* driverMatX.mm */; };
+		E281B7A420B94CAE00232181 /* Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79A20B94CAE00232181 /* Animate.swift */; };
+		E281B7A620B94CAE00232181 /* Skinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B79C20B94CAE00232181 /* Skinning.metal */; };
+		E281B7A720B94CAE00232181 /* driverMatX.h in Headers */ = {isa = PBXBuildFile; fileRef = E281B79D20B94CAE00232181 /* driverMatX.h */; };
+		E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
+		E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
+		E281B7AA20B94CAE00232181 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Models.swift */; };
+		E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Shaders.metal */; };
+		E281B7B020B94CCB00232181 /* Common.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AD20B94CCA00232181 /* Common.metal */; };
+		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
+		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
+		ED2221842021E17C00427606 /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
+		ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
+		ED32B9601EB5D298000D8823 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95F1EB5D298000D8823 /* GameView.swift */; };
+		ED32B9621EB5D298000D8823 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B9611EB5D298000D8823 /* GameViewController.swift */; };
+		ED32B9641EB5D298000D8823 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
+		ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9671EB5D298000D8823 /* MainMenu.xib */; };
+		ED32B99A1EBA0629000D8823 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9981EBA0629000D8823 /* ConsoleViewController.xib */; };
+		ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */; };
+		EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */; };
+		EDCAB6ED201F490200674C38 /* adapterUsd.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDCAB6EC201F490200674C38 /* adapterUsd.mm */; };
+		EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		94B26A86D92862E523CC392B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
+		E21859FB210374AB00653DBD /* Plugins.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = Plugins.md; path = Merops/extra/Plugins.md; sourceTree = SOURCE_ROOT; };
+		E21859FF2104136C00653DBD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
+		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
+		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
+		E281B78920B933B600232181 /* Cmd+Sketchfab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Sketchfab.swift"; sourceTree = "<group>"; };
+		E281B78D20B933D000232181 /* GameViewSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewSettings.swift; sourceTree = "<group>"; };
+		E281B78E20B933D000232181 /* GameViewMixin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewMixin.swift; sourceTree = "<group>"; };
+		E281B79120B933E200232181 /* GeoBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoBuilder.swift; sourceTree = "<group>"; };
+		E281B79220B933E200232181 /* GeoPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPrimitives.swift; sourceTree = "<group>"; };
+		E281B79320B933E200232181 /* GeoRepricator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoRepricator.swift; sourceTree = "<group>"; };
+		E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLSkinningMesh.swift; sourceTree = "<group>"; };
+		E281B79820B94CAD00232181 /* driverMatX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = driverMatX.mm; sourceTree = "<group>"; };
+		E281B79A20B94CAE00232181 /* Animate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animate.swift; sourceTree = "<group>"; };
+		E281B79B20B94CAE00232181 /* MTLTessellationRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLTessellationRenderer.swift; sourceTree = "<group>"; };
+		E281B79C20B94CAE00232181 /* Skinning.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Skinning.metal; sourceTree = "<group>"; };
+		E281B79D20B94CAE00232181 /* driverMatX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = driverMatX.h; sourceTree = "<group>"; };
+		E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLPolygonReduction.swift; sourceTree = "<group>"; };
+		E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLMeshDeformable.swift; sourceTree = "<group>"; };
+		E281B7A020B94CAE00232181 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		E281B7AB20B94CBB00232181 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		E281B7AD20B94CCA00232181 /* Common.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Common.metal; sourceTree = "<group>"; };
+		E281B7AE20B94CCA00232181 /* Lambert.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lambert.metal; sourceTree = "<group>"; };
+		E281B7AF20B94CCA00232181 /* Tessellation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Tessellation.metal; sourceTree = "<group>"; };
+		E281B7B420B950A500232181 /* MetalTessellation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalTessellation; sourceTree = "<group>"; };
+		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
+		ED2600A11F585E2D0031F4EF /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		ED32B95A1EB5D298000D8823 /* KARAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KARAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED32B95D1EB5D298000D8823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ED32B95F1EB5D298000D8823 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		ED32B9611EB5D298000D8823 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		ED32B9631EB5D298000D8823 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		ED32B9681EB5D298000D8823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		ED32B96A1EB5D298000D8823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED32B9981EBA0629000D8823 /* ConsoleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleViewController.xib; sourceTree = "<group>"; };
+		ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewOverlay.swift; sourceTree = "<group>"; };
+		ED5CB5341F4A075400FF9CCA /* KARAS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KARAS-Bridging-Header.h"; sourceTree = "<group>"; };
+		EDA91BB41FF15D1D00E14B8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = extra/Assets.xcassets; sourceTree = "<group>"; };
+		EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		EDCAB6EB201F48EC00674C38 /* adapterUsd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adapterUsd.h; sourceTree = "<group>"; };
+		EDCAB6EC201F490200674C38 /* adapterUsd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = adapterUsd.mm; sourceTree = "<group>"; };
+		EDEEFF531F8A35CB00E4785F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/Mac/ObjectiveGit.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED32B9571EB5D298000D8823 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E281B7B320B94CE700232181 /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */,
+				E281B7AB20B94CBB00232181 /* Shaders.metal */,
+				E281B7AD20B94CCA00232181 /* Common.metal */,
+				ED2221822021E17C00427606 /* DeformCompute.metal */,
+				E281B7AE20B94CCA00232181 /* Lambert.metal */,
+				E281B7AF20B94CCA00232181 /* Tessellation.metal */,
+				E281B79C20B94CAE00232181 /* Skinning.metal */,
+			);
+			name = shader;
+			sourceTree = "<group>";
+		};
+		E2A3409720B98C3600C4DF6C /* view */ = {
+			isa = PBXGroup;
+			children = (
+				ED32B95D1EB5D298000D8823 /* AppDelegate.swift */,
+				ED32B95F1EB5D298000D8823 /* GameView.swift */,
+				ED32B9611EB5D298000D8823 /* GameViewController.swift */,
+				ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */,
+				E281B78E20B933D000232181 /* GameViewMixin.swift */,
+				E281B78D20B933D000232181 /* GameViewSettings.swift */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
+				ED2600A11F585E2D0031F4EF /* Quick.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED32B9511EB5D298000D8823 = {
+			isa = PBXGroup;
+			children = (
+				EDEEFF531F8A35CB00E4785F /* README.md */,
+				E21859FF2104136C00653DBD /* METAL-DOC */,
+				ED32B95C1EB5D298000D8823 /* Merops */,
+				ED32B95B1EB5D298000D8823 /* Products */,
+				ED24CD2D1F26623A000CC0BB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		ED32B95B1EB5D298000D8823 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED32B95A1EB5D298000D8823 /* KARAS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED32B95C1EB5D298000D8823 /* Merops */ = {
+			isa = PBXGroup;
+			children = (
+				EDA91BA51FF15A6300E14B8D /* editor */,
+				EDA91BA41FF159BD00E14B8D /* engine */,
+				EDB79581201D8C40008E79B1 /* extra */,
+				ED5CB5341F4A075400FF9CCA /* KARAS-Bridging-Header.h */,
+				ED32B9671EB5D298000D8823 /* MainMenu.xib */,
+				ED32B9981EBA0629000D8823 /* ConsoleViewController.xib */,
+				ED32B9631EB5D298000D8823 /* art.scnassets */,
+				EDA91BB41FF15D1D00E14B8D /* Assets.xcassets */,
+				ED32B96A1EB5D298000D8823 /* Info.plist */,
+			);
+			path = Merops;
+			sourceTree = "<group>";
+		};
+		EDA91BA41FF159BD00E14B8D /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				E281B7B420B950A500232181 /* MetalTessellation */,
+				EDB683432025D59400AD75EE /* adapter */,
+				E281B7B320B94CE700232181 /* shader */,
+				EDB683412025D43200AD75EE /* scene */,
+			);
+			path = engine;
+			sourceTree = "<group>";
+		};
+		EDA91BA51FF15A6300E14B8D /* editor */ = {
+			isa = PBXGroup;
+			children = (
+				E2A3409720B98C3600C4DF6C /* view */,
+				EDB683442025D7EF00AD75EE /* controller */,
+			);
+			path = editor;
+			sourceTree = "<group>";
+		};
+		EDB683412025D43200AD75EE /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				E21859F921036D3400653DBD /* Serializer.swift */,
+				94B26A2A79BC7112A5660547 /* Engine.swift */,
+				E281B7A020B94CAE00232181 /* Models.swift */,
+				E281B79A20B94CAE00232181 /* Animate.swift */,
+				E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */,
+				E281B79B20B94CAE00232181 /* MTLTessellationRenderer.swift */,
+				E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */,
+				E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */,
+			);
+			name = scene;
+			sourceTree = "<group>";
+		};
+		EDB683432025D59400AD75EE /* adapter */ = {
+			isa = PBXGroup;
+			children = (
+				E281B79D20B94CAE00232181 /* driverMatX.h */,
+				E281B79820B94CAD00232181 /* driverMatX.mm */,
+				EDCAB6EB201F48EC00674C38 /* adapterUsd.h */,
+				EDCAB6EC201F490200674C38 /* adapterUsd.mm */,
+				94B26A86D92862E523CC392B /* Extensions.swift */,
+			);
+			name = adapter;
+			sourceTree = "<group>";
+		};
+		EDB683442025D7EF00AD75EE /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				E281B79120B933E200232181 /* GeoBuilder.swift */,
+				E281B79220B933E200232181 /* GeoPrimitives.swift */,
+				E281B79320B933E200232181 /* GeoRepricator.swift */,
+				E281B78820B933B600232181 /* Cmd+Git.swift */,
+				E281B78720B933B600232181 /* Cmd+USD.swift */,
+				E281B78920B933B600232181 /* Cmd+Sketchfab.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		EDB79581201D8C40008E79B1 /* extra */ = {
+			isa = PBXGroup;
+			children = (
+				E21859FB210374AB00653DBD /* Plugins.md */,
+			);
+			name = extra;
+			path = KARAS/extra;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ED32B9841EB5DD02000D8823 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */,
+				E281B7A720B94CAE00232181 /* driverMatX.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		ED32B9591EB5D298000D8823 /* KARAS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED32B96D1EB5D298000D8823 /* Build configuration list for PBXNativeTarget "KARAS" */;
+			buildPhases = (
+				ED32B9561EB5D298000D8823 /* Sources */,
+				ED32B9571EB5D298000D8823 /* Frameworks */,
+				ED32B9581EB5D298000D8823 /* Resources */,
+				ED32B9841EB5DD02000D8823 /* Headers */,
+				ED24CD341F266249000CC0BB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KARAS;
+			productName = KARAS;
+			productReference = ED32B95A1EB5D298000D8823 /* KARAS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED32B9521EB5D298000D8823 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "sho sumioka";
+				TargetAttributes = {
+					ED32B9591EB5D298000D8823 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = T7PKBR8T47;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = ED32B9551EB5D298000D8823 /* Build configuration list for PBXProject "KARAS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED32B9511EB5D298000D8823;
+			productRefGroup = ED32B95B1EB5D298000D8823 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED32B9591EB5D298000D8823 /* KARAS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED32B9581EB5D298000D8823 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED32B99A1EBA0629000D8823 /* ConsoleViewController.xib in Resources */,
+				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
+				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ED24CD341F266249000CC0BB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED32B9561EB5D298000D8823 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED32B9601EB5D298000D8823 /* GameView.swift in Sources */,
+				ED32B9621EB5D298000D8823 /* GameViewController.swift in Sources */,
+				E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */,
+				E281B79420B933E200232181 /* GeoBuilder.swift in Sources */,
+				ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */,
+				E281B7B020B94CCB00232181 /* Common.metal in Sources */,
+				E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */,
+				E21859FA21036D3400653DBD /* Serializer.swift in Sources */,
+				ED2221842021E17C00427606 /* DeformCompute.metal in Sources */,
+				E281B79620B933E200232181 /* GeoRepricator.swift in Sources */,
+				EDCAB6ED201F490200674C38 /* adapterUsd.mm in Sources */,
+				E281B79020B933D000232181 /* GameViewMixin.swift in Sources */,
+				E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */,
+				E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */,
+				E281B7A220B94CAE00232181 /* driverMatX.mm in Sources */,
+				E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */,
+				E281B7B120B94CCB00232181 /* Lambert.metal in Sources */,
+				E281B78C20B933B600232181 /* Cmd+Sketchfab.swift in Sources */,
+				E281B7A620B94CAE00232181 /* Skinning.metal in Sources */,
+				ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */,
+				E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */,
+				E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */,
+				E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */,
+				E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */,
+				E281B7AA20B94CAE00232181 /* Models.swift in Sources */,
+				94B267081AAA6682547C87FA /* Engine.swift in Sources */,
+				E281B7A420B94CAE00232181 /* Animate.swift in Sources */,
+				94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ED32B9671EB5D298000D8823 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED32B9681EB5D298000D8823 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ED32B96B1EB5D298000D8823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D Debug -enable-bridging-pch";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ED32B96C1EB5D298000D8823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		ED32B96E1EB5D298000D8823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/USD/include",
+					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sumioka.KARAS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Merops/KARAS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		ED32B96F1EB5D298000D8823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/USD/include",
+					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sumioka.KARAS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Merops/KARAS-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED32B9551EB5D298000D8823 /* Build configuration list for PBXProject "KARAS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED32B96B1EB5D298000D8823 /* Debug */,
+				ED32B96C1EB5D298000D8823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED32B96D1EB5D298000D8823 /* Build configuration list for PBXNativeTarget "KARAS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED32B96E1EB5D298000D8823 /* Debug */,
+				ED32B96F1EB5D298000D8823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ED32B9521EB5D298000D8823 /* Project object */;
+}

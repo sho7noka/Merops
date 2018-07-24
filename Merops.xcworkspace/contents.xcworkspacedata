@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Metalmd">
+   </FileRef>
+   <FileRef
+      location = "group:Merops.playground">
+   </FileRef>
+   <FileRef
+      location = "container:KARAS.xcodeproj">
+   </FileRef>
+</Workspace>
