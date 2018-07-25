@@ -65,8 +65,41 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
     var primData: MetalPrimitiveData!
     var primHandle: MetalPrimitiveHandle!
     
+    @objc func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        /// - Tag: DrawOverride
+        if let primData = gameView.prim {
+            primHandle.typeRender(prim: primData)
+        }
+        // Mark: Deformer
+        guard let deformData = gameView.deformData else {
+            return
+        }
+        deform.deform(meshData, deformData: deformData)
+        gameView.deformData = nil
+        
+        // buffer
+        let commandBuffer = mRender.commandBuffer()
+        let renderEncoder = commandBuffer!.makeRenderCommandEncoder(
+            descriptor: mRender.renderPassDescriptor()
+        )
+        let renderPipelineState = try! device.makeRenderPipelineState(descriptor: mRender.renderPipelineDescriptor())
+        renderEncoder?.setRenderPipelineState(renderPipelineState)
+        renderEncoder?.endEncoding()
+        
+        // MARK: scene and current point of view
+        render.scene = scene
+        render.pointOfView = gameView.pointOfView
+        render.render(atTime: 0,
+                      viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
+                      commandBuffer: commandBuffer!, passDescriptor: mRender.renderPassDescriptor()
+        )
+        commandBuffer?.commit()
+        commandBuffer?.waitUntilCompleted()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // MARK: Metal Render
         device = MTLCreateSystemDefaultDevice()
         library = device.makeDefaultLibrary()
@@ -74,69 +107,20 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         // MARK: Renderer
         deform = MetalMeshDeformer(device: device)
         primHandle = MetalPrimitiveHandle(device: device, library: library!, view: gameView)
-        
         mRender = MetalRender(device: device)
         render = SCNRenderer(device: device, options: nil)
         sceneInit()
         
         // MARK: set scene to view
-        gameView.delegate = self
-        gameView.allowsCameraControl = true
-        gameView.showsStatistics = true
-        gameView.autoenablesDefaultLighting = true
-        gameView.isPlaying = true
-        
         gameView.scene = scene
+        gameView.delegate = self
+        gameView.isPlaying = true
         gameView.queue = device.makeCommandQueue()
         gameView.settings = Settings(
             dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
             color: Color.lightGray
         )
-        gameView.backgroundColor = (gameView.settings?.bgColor)!
         uiInit()
-        
-        /// - Tag: Mouse Buffer
-        let kernel = library?.makeFunction(name: "compute")
-        do {
-            gameView.cps = try! device.makeComputePipelineState(function: kernel!)
-        } catch {}
-        gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
-        let bytes = [Float](repeating: 0, count: 2)
-        gameView.outBuffer = device?.makeBuffer(bytes: bytes, length: 2 * MemoryLayout<float2>.size, options: [])
-    }
-
-    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) throws {
-        
-        Swift.print(time.nextDown)
-        // deform data
-        guard let deformData = gameView.deformData else {
-            return
-        }
-        deform.deform(meshData, deformData: deformData)
-        gameView.deformData = nil
-        
-        primData = gameView.prim
-        primHandle.typeRender(prim: primData)
-
-        // buffer
-        let commandBuffer = mRender.commandBuffer()
-        let renderEncoder = commandBuffer!.makeRenderCommandEncoder(
-            descriptor: mRender.renderPassDescriptor()
-        )
-        try renderEncoder?.setRenderPipelineState(
-            device.makeRenderPipelineState(descriptor: mRender.renderPipelineDescriptor())
-        )
-        renderEncoder?.endEncoding()
-
-        // MARK: re-use scene and the current point of view
-        render.scene = scene
-        render.pointOfView = gameView.pointOfView
-        render.render(atTime: 0,
-                viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
-                commandBuffer: commandBuffer!, passDescriptor: mRender.renderPassDescriptor()
-        )
-        commandBuffer?.commit()
-        commandBuffer?.waitUntilCompleted()
     }
     
     private func sceneInit() {
@@ -156,15 +140,24 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         Builder.Light(scene: scene)
         
         // gizmos
-        let pos = PositionNode()
-        let scl = ScaleNode()
-        let rot = RotateNode()
-        [pos, rot, scl].forEach{
+        [PositionNode(), ScaleNode(), RotateNode()].forEach{
             gameView.gizmos.append($0)
         }
     }
     
+    var cameraName = "default" {
+        didSet {
+            gameView.overRay?.label_message.text = cameraName
+            gameView.pointOfView?.position = (gameView.node(name: cameraName)?.position)!
+        }
+    }
+    
     private func uiInit() {
+        gameView.showsStatistics = true
+        gameView.allowsCameraControl = true
+        gameView.autoenablesDefaultLighting = true
+        gameView.backgroundColor = (gameView.settings?.bgColor)!
+        
         /// - Tag: addSubView
         gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
         gameView.subView?.scene = SCNScene()
@@ -177,30 +170,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         gameView.subView?.scene?.rootNode.addChildNode(geo)
         gameView.addSubview(gameView.subView!)
         
-        /*
-         ImGui.initialize(.metal)
-         if let vc = ImGui.vc {
-         addChildViewController(vc)
-         vc.view.layer?.backgroundColor = NSColor.clear.cgColor
-         vc.view.frame = view.frame
-         view.addSubview(vc.view)
-         }
-         
-         ImGui.draw { (imgui) in
-         imgui.pushStyleVar(ImGuiStyleVar.windowRounding, value: 0.0)
-         imgui.begin("Hello ImGui")
-         if imgui.button("Click me") {
-         Swift.print("you clicked me.")
-         }
-         imgui.end()
-         imgui.popStyleVar()
-         }
-         */
-        
         // MARK: Overray
         gameView.overlaySKScene = GameViewOverlay(view: gameView)
         overRay = gameView.overlaySKScene as? GameViewOverlay
         overRay.isUserInteractionEnabled = false
+        self.cameraName = (gameView.defaultCameraController.pointOfView?.name)!
         gameView.resizeView()
         
         // MARK: Console
@@ -228,6 +202,32 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
     #elseif os(iOS)
         gameView.textField.addTarget(self, action: "textFieldEditingChanged:", forControlEvents: .EditingChanged)
     #endif
+        
+        /// - Tag: Mouse Buffer
+        let kernel = library?.makeFunction(name: "compute")
+        gameView.cps = try! device.makeComputePipelineState(function: kernel!)
+        gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
+        gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
+        
+        /*
+         ImGui.initialize(.metal)
+         if let vc = ImGui.vc {
+         addChildViewController(vc)
+         vc.view.layer?.backgroundColor = NSColor.clear.cgColor
+         vc.view.frame = view.frame
+         view.addSubview(vc.view)
+         }
+         
+         ImGui.draw { (imgui) in
+         imgui.pushStyleVar(ImGuiStyleVar.windowRounding, value: 0.0)
+         imgui.begin("Hello ImGui")
+         if imgui.button("Click me") {
+         Swift.print("you clicked me.")
+         }
+         imgui.end()
+         imgui.popStyleVar()
+         }
+         */
     }
 
     override func awakeFromNib() {

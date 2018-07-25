@@ -10,7 +10,7 @@ enum NodeOptions: Int {
     case noDelete = 2
 }
 
-enum EditMode {
+enum EditContext {
     case Object, PositionMode, ScaleMode, RotateMode
 }
 

@@ -63,21 +63,21 @@ class MetalPrimitiveHandle {
     func typeRender(prim: MetalPrimitiveData) {
         switch prim.type {
         case .point:
-            setupMetal(node: prim.node, type: .point)
+            metalRender(node: prim.node, type: .point)
         case .line:
             if prim.vertex.count == 0 {
                 prim.node.geometry?.firstMaterial?.fillMode = .lines
             } else {
-                setupMetal(node: prim.node, type: .line)
+                metalRender(node: prim.node, type: .line)
             }
         case .triangleStrip:
-            setupMetal(node: prim.node, type: .triangleStrip)
+            metalRender(node: prim.node, type: .triangleStrip)
         default:
             break
         }
     }
     
-    func setupMetal(node: SCNNode, type: MTLPrimitiveType) {
+    func metalRender(node: SCNNode, type: MTLPrimitiveType) {
         guard let commandQueue = device?.makeCommandQueue() else {
             fatalError("Could not create a command queue")
         }
@@ -86,20 +86,28 @@ class MetalPrimitiveHandle {
         let fragmentFunction = library?.makeFunction(name: "fragment_main")
         
         // Mesh
-        let mdlMesh = MDLMesh(sphereWithExtent: [0.75, 0.75, 0.75],
-            segments: [100, 100],
-            inwardNormals: false,
-            geometryType: .triangles,
-            allocator: allocator)
+        let mdlMesh = MDLMesh(scnNode: node, bufferAllocator: allocator)
+//        let mdlMesh = MDLMesh(sphereWithExtent: [0.75, 0.75, 0.75],
+//            segments: [100, 100],
+//            inwardNormals: false,
+//            geometryType: .triangles,
+//            allocator: allocator)
         do {
             let mesh = try MTKMesh(mesh: mdlMesh, device: device!)
+            guard let drawable = (view.layer as! CAMetalLayer).nextDrawable() else { return }
+            
             let descriptor = MTLRenderPipelineDescriptor()
-            descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+            descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm_srgb
             descriptor.vertexFunction = vertexFunction
             descriptor.fragmentFunction = fragmentFunction
             descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh.vertexDescriptor)
             let pipelineState = try device?.makeRenderPipelineState(descriptor: descriptor)
+            
             let passDescripter = MTLRenderPassDescriptor()
+            passDescripter.colorAttachments[0].texture = drawable.texture
+            passDescripter.colorAttachments[0].loadAction = .clear
+            passDescripter.colorAttachments[0].storeAction = .store
+            passDescripter.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 0, 1.0)
             
             guard let commandBuffer = commandQueue.makeCommandBuffer(),
                 let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDescripter)
@@ -110,7 +118,6 @@ class MetalPrimitiveHandle {
             renderEncoder.setVertexBuffer(
                 mesh.vertexBuffers[0].buffer, offset: 0, index: 0
             )
-            
             guard let submesh = mesh.submeshes.first else {
                 fatalError()
             }
@@ -120,10 +127,7 @@ class MetalPrimitiveHandle {
                                                 indexBuffer: submesh.indexBuffer.buffer,
                                                 indexBufferOffset: 0)
             renderEncoder.endEncoding()
-            
-            if let drawable = (view.layer as! CAMetalLayer).nextDrawable() {
-                commandBuffer.present(drawable)
-            }
+            commandBuffer.present(drawable)
             commandBuffer.commit()
         } catch {
             

@@ -113,13 +113,6 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
         button_black.fillColor = Color.black
         
         let guis : [SKNode] = [label_name, label_position, label_rotate, label_scale, label_info, button_red, button_green, button_blue, label_message, button_magenta, button_cyan, button_yellow, button_black]
-        
-//        let queue = OperationQueue()
-//        queue.addOperation {
-//            guis.forEach {
-//                self.addChild(($0))
-//            }
-//        }
         DispatchQueue.main.async {
             guis.forEach {
                 self.addChild(($0))

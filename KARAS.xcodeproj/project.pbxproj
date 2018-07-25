@@ -30,6 +30,7 @@
 		E281B7B020B94CCB00232181 /* Common.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AD20B94CCA00232181 /* Common.metal */; };
 		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
+		E2E3044C210846A40068C9AD /* METAL-DOC in Resources */ = {isa = PBXBuildFile; fileRef = E2E3044B210846A40068C9AD /* METAL-DOC */; };
 		ED2221842021E17C00427606 /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
 		ED32B9601EB5D298000D8823 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95F1EB5D298000D8823 /* GameView.swift */; };
@@ -48,7 +49,6 @@
 		94B26A86D92862E523CC392B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		E21859FB210374AB00653DBD /* Plugins.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = Plugins.md; path = Merops/extra/Plugins.md; sourceTree = SOURCE_ROOT; };
-		E21859FF2104136C00653DBD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
 		E281B78920B933B600232181 /* Cmd+Sketchfab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Sketchfab.swift"; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 		E281B7AE20B94CCA00232181 /* Lambert.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lambert.metal; sourceTree = "<group>"; };
 		E281B7AF20B94CCA00232181 /* Tessellation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Tessellation.metal; sourceTree = "<group>"; };
 		E281B7B420B950A500232181 /* MetalTessellation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalTessellation; sourceTree = "<group>"; };
+		E2E3044B210846A40068C9AD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
 		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
 		ED2600A11F585E2D0031F4EF /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		ED32B95A1EB5D298000D8823 /* KARAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KARAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				EDEEFF531F8A35CB00E4785F /* README.md */,
-				E21859FF2104136C00653DBD /* METAL-DOC */,
+				E2E3044B210846A40068C9AD /* METAL-DOC */,
 				ED32B95C1EB5D298000D8823 /* Merops */,
 				ED32B95B1EB5D298000D8823 /* Products */,
 				ED24CD2D1F26623A000CC0BB /* Frameworks */,
@@ -321,6 +322,7 @@
 				ED32B99A1EBA0629000D8823 /* ConsoleViewController.xib in Resources */,
 				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
+				E2E3044C210846A40068C9AD /* METAL-DOC in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,7 +36,7 @@ USDZ export に対応する事でXR作成に適したモバイル特化型DCCツ
 ## TODO
 他のソフトが気になることはよくありますが、それならMayaを使えば良いという考えの下、
 統合ソフトにできない機能を積極的に実装しています。将来的にiPad Proで動くアプリケーションも目指しています。
-render が動かない問題の修正、primitive override 表示の実現、primitive override マウス選択の実現
+primitive override 表示の実現、primitive override マウス選択の実現
 
 ### Editor
 - [x] マウスイベントの両立
@@ -67,15 +67,17 @@ render が動かない問題の修正、primitive override 表示の実現、pri
 `Build Settings > Produce Debuging Infomation > YES, include source code`
 
 - [dependency viewer](https://developer.apple.com/documentation/metal/tools_profiling_and_debugging/seeing_a_frame_s_render_passes_with_the_dependency_viewer)
-    [Show Debug the Navigator] タブ > [View Frame By Call] を選択
+    - [Show Debug the Navigator] タブ > [View Frame By Call] を選択
 - geometry viewer
-    [Capture GPU Frame] を押す
+    - [Capture GPU Frame] を押す
 - shader debugger
-    [Debug Shader] > [Debug] の順で押す
+    - [Debug Shader] > [Debug] の順で押す
 - enhanced shader profiler
-    A11 を搭載した実機でのみ確認可能 
+    - A11 を搭載した実機でのみ確認可能 
     
 - `/// - Tag: TextField (x-source-tag://TextField)`
+- render 内で thorows 使うと render 使えない(オーバーロード扱いされない)
+- Mojave と carthage の相性悪い(秋以降の対応)
 
 
 ----

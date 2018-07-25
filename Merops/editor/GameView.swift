@@ -33,23 +33,61 @@ extension GameView {
     
     // drawable
     internal var metalLayer: CAMetalLayer {
-        return (self.layer as? CAMetalLayer)!
+        let metalLayer = (self.layer as? CAMetalLayer)!
+        metalLayer.framebufferOnly = false
+        return metalLayer
     }
 }
 
 class GameView: SCNView {
     
-    /*
-     * MARK: Mouse Event
-     */
+    // Mark: Mouse hit point
     
     var p = CGPoint()
     var selection: SCNHitTestResult? = nil
+    var pos = float2()
     let options = [
         SCNHitTestOption.sortResults: NSNumber(value: true),
         SCNHitTestOption.boundingBoxOnly: NSNumber(value: true),
         SCNHitTestOption.categoryBitMask: NSNumber(value: true),
     ]
+    var mouseBuffer: MTLBuffer!
+    var outBuffer: MTLBuffer!
+    var queue: MTLCommandQueue! = nil
+    var cps: MTLComputePipelineState! = nil
+    
+    private func update() {
+        let bufferPointer = mouseBuffer.contents()
+        memcpy(bufferPointer, &pos, MemoryLayout<float2>.size)
+    }
+    
+    override func draw(_ dirtyRect: NSRect) {
+        
+        if let drawable = metalLayer.nextDrawable() {
+            guard let commandBuffer = queue.makeCommandBuffer() else { return }
+            
+            let commandEncoder = commandBuffer.makeComputeCommandEncoder()
+            commandEncoder?.setComputePipelineState(cps)
+            //            commandEncoder?.setTexture(drawable.texture, index: 0)
+            commandEncoder?.setBuffer(mouseBuffer, offset: 0, index: 1)
+            commandEncoder?.setBuffer(outBuffer, offset: 0, index: 2)
+            
+            update()
+            
+            let threadGroupCount = MTLSizeMake(1, 1, 1)
+            let threadGroups = MTLSizeMake(
+                drawable.texture.width / threadGroupCount.width,
+                drawable.texture.height / threadGroupCount.height, 1)
+            commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+            commandEncoder?.endEncoding()
+            commandBuffer.present(drawable)
+            commandBuffer.commit()
+        }
+    }
+    
+    /*
+     * MARK: Mouse Event
+     */
     
     override func mouseEntered(with event: Event) {
         // variables
@@ -65,45 +103,8 @@ class GameView: SCNView {
         }
         super.mouseEntered(with: event)
     }
-
-
     
-    var pos = float2()
-    var queue: MTLCommandQueue! = nil
-    var cps: MTLComputePipelineState! = nil
-    
-    var mouseBuffer: MTLBuffer!
-    var outBuffer: MTLBuffer!
-    
-//    override func draw(_ dirtyRect: NSRect) {
-//        if let drawable = metalLayer.nextDrawable() {
-//            guard let commandBuffer = queue.makeCommandBuffer() else { return }
-//            let commandEncoder = commandBuffer.makeComputeCommandEncoder()
-//            commandEncoder?.setComputePipelineState(cps)
-//            commandEncoder?.setTexture(drawable.texture, index: 0)
-//            commandEncoder?.setBuffer(mouseBuffer, offset: 0, index: 1)
-//            commandEncoder?.setBuffer(outBuffer, offset: 0, index: 2)
-//
-//            update()
-//
-//            let threadGroupCount = MTLSizeMake(1, 1, 1)
-//            let threadGroups = MTLSizeMake(
-//                drawable.texture.width / threadGroupCount.width,
-//                drawable.texture.height / threadGroupCount.height, 1)
-//            commandEncoder?.dispatchThreadgroups(
-//                threadGroups, threadsPerThreadgroup: threadGroupCount)
-//            commandEncoder?.endEncoding()
-//            commandBuffer.present(drawable)
-//            commandBuffer.commit()
-//        }
-//    }
-    
-    private func update() {
-        let bufferPointer = mouseBuffer.contents()
-        memcpy(bufferPointer, &pos, MemoryLayout<float2>.size)
-    }
-    
-    var mode = EditMode.PositionMode
+    var mode = EditContext.PositionMode
     var part = DrawOverride.Object
     var textField: TextView!
     var gizmos: [BaseNode] = []
@@ -140,6 +141,9 @@ class GameView: SCNView {
                 
             case "green":
                 Builder.Torus(scene: self.scene!)
+                
+            case "cyan":
+                isDeforming = true
                 
             /// - Tag: TextField (x-source-tag://TextField)
             case "Name":
@@ -299,16 +303,18 @@ class GameView: SCNView {
             }
             
         } else {
-            gizmos.forEach {
-                $0.removeFromParentNode()
-            }
-            
-            root.enumerateChildNodes({ child, _ in
-                if let geo = child.geometry {
-                    geo.firstMaterial?.emission.contents = Color.black
+            let queue = OperationQueue()
+            queue.addOperation {
+                self.gizmos.forEach {
+                    $0.removeFromParentNode()
                 }
-            })
-            
+                
+                self.root.enumerateChildNodes({ child, _ in
+                    if let geo = child.geometry {
+                        geo.firstMaterial?.emission.contents = Color.black
+                    }
+                })
+            }
             overRay?.label_name.text = "Name"
             overRay?.label_position.text = "Position"
             overRay?.label_rotate.text = "Rotate"
@@ -347,7 +353,7 @@ class GameView: SCNView {
             ); return
         }
 
-        if selection != nil && mode == EditMode.PositionMode {
+        if selection != nil && mode == EditContext.PositionMode {
             var unPoint = self.unprojectPoint(SCNVector3(x: mouse.x, y: mouse.y, z: 0.0))
             let p1 = selection!.node.parent!.convertPosition(unPoint, from: nil)
             unPoint = self.unprojectPoint(SCNVector3(x: mouse.x, y: mouse.y, z: 1.0))
@@ -462,7 +468,7 @@ class GameView: SCNView {
 
     var prim: MetalPrimitiveData?
     
-    func resetView(_mode: EditMode = EditMode.Object, _part: DrawOverride = DrawOverride.Object) {
+    func resetView(_mode: EditContext = EditContext.Object, _part: DrawOverride = DrawOverride.Object) {
         part = _part
         
         // MARK: curret override mode
@@ -528,12 +534,14 @@ class GameView: SCNView {
         })
     }
     
+    var console: ConsoleView!
+    
     private func clearView() {
         if console != nil {
             console.isHidden = true
         }
         
-        if (textField != nil) {
+        if textField != nil {
             textField.isHidden = true
         }
         
@@ -549,6 +557,7 @@ class GameView: SCNView {
     var subView: SCNView?
     
     override func viewWillStartLiveResize() {
+        clearView()
         resizeView()
     }
     
@@ -569,7 +578,6 @@ class GameView: SCNView {
         overRay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))
         overRay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 4))
         overRay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
-        
         overRay?.button_red.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 272)
         overRay?.button_green.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 248)
         overRay?.button_blue.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 224)
@@ -577,9 +585,7 @@ class GameView: SCNView {
         overRay?.button_cyan.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 176)
         overRay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 152)
         overRay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 128)
-        
         overRay?.label_message.position = CGPoint(x: -size.width / 2 + 300, y: -size.height / 2 + 28)
-        clearView()
     }
     
     /*
@@ -587,7 +593,6 @@ class GameView: SCNView {
      */
     
     private func removeSelNode() {
-        Swift.print("\(selection?.node)")
         if selection?.node.categoryBitMask != NodeOptions.noExport.rawValue {
             selection?.node.removeFromParentNode()
             gizmos.forEach {
@@ -597,7 +602,6 @@ class GameView: SCNView {
     }
     
     var settings: Settings?
-    var console: ConsoleView!
     
     override func keyDown(with event: Event) {
         switch event.characters! {
