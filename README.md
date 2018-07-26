@@ -60,6 +60,7 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - USD + Alembic の2枚構成を実現(add json)
 - iPadPro compatible
 
+http://appleengine.hatenablog.com/search?q=bitmask
 
 
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)

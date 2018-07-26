@@ -6,12 +6,47 @@
 import SceneKit
 
 enum NodeOptions: Int {
-    case noExport = 1
-    case noDelete = 2
+    case noSelect = 1
+    case noExport = 2
+    case noDelete = 3
 }
 
 enum EditContext {
     case Object, PositionMode, ScaleMode, RotateMode
+    
+    var toString : String! {
+        switch self {
+        case .Object:
+            return "Object"
+        case .PositionMode:
+            return "Position"
+        case .ScaleMode:
+            return "Scale"
+        case .RotateMode:
+            return "Rotate"
+        }
+    }
+}
+
+enum CameraPosition {
+    case top, right, left, back, bottom, front
+    
+    var vec : SCNVector3 {
+        switch self {
+        case .top:
+            return SCNVector3(0, 1, 0)
+        case .right:
+            return SCNVector3(1, 0, 0)
+        case .left:
+            return SCNVector3(-1, 0, 0)
+        case .front:
+            return SCNVector3(0, 0, 1)
+        case .back:
+            return SCNVector3(0, 0, -1)
+        case .bottom:
+            return SCNVector3(0, -1, 0)
+        }
+    }
 }
 
 enum DrawOverride {

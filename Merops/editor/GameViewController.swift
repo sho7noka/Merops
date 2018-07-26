@@ -145,18 +145,14 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         }
     }
     
-    var cameraName = "default" {
-        didSet {
-            gameView.overRay?.label_message.text = cameraName
-            gameView.pointOfView?.position = (gameView.node(name: cameraName)?.position)!
-        }
-    }
-    
     private func uiInit() {
         gameView.showsStatistics = true
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
         gameView.backgroundColor = (gameView.settings?.bgColor)!
+        
+        Builder.EditorDome(scene: scene)
+        Builder.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
         gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
@@ -174,7 +170,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         gameView.overlaySKScene = GameViewOverlay(view: gameView)
         overRay = gameView.overlaySKScene as? GameViewOverlay
         overRay.isUserInteractionEnabled = false
-        self.cameraName = (gameView.defaultCameraController.pointOfView?.name)!
+        gameView.cameraName = (gameView.defaultCameraController.pointOfView?.name)!
         gameView.resizeView()
         
         // MARK: Console

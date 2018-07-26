@@ -93,7 +93,7 @@ extension SCNVector4 {
 extension SCNVector3 {
     
     var xyz : [CGFloat] {
-        return [self.x, self.y, self.z]
+        return [self.x, self.y, self.z].map({ round($0) })
     }
     
     func v(_ x: SCNFloat, _ y: SCNFloat, _ z: SCNFloat) -> SCNVector3{

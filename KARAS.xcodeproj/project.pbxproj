@@ -14,7 +14,7 @@
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78C20B933B600232181 /* Cmd+Sketchfab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78920B933B600232181 /* Cmd+Sketchfab.swift */; };
 		E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78D20B933D000232181 /* GameViewSettings.swift */; };
-		E281B79020B933D000232181 /* GameViewMixin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewMixin.swift */; };
+		E281B79020B933D000232181 /* GameViewDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewDialogs.swift */; };
 		E281B79420B933E200232181 /* GeoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79120B933E200232181 /* GeoBuilder.swift */; };
 		E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79220B933E200232181 /* GeoPrimitives.swift */; };
 		E281B79620B933E200232181 /* GeoRepricator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79320B933E200232181 /* GeoRepricator.swift */; };
@@ -53,7 +53,7 @@
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
 		E281B78920B933B600232181 /* Cmd+Sketchfab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Sketchfab.swift"; sourceTree = "<group>"; };
 		E281B78D20B933D000232181 /* GameViewSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewSettings.swift; sourceTree = "<group>"; };
-		E281B78E20B933D000232181 /* GameViewMixin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewMixin.swift; sourceTree = "<group>"; };
+		E281B78E20B933D000232181 /* GameViewDialogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewDialogs.swift; sourceTree = "<group>"; };
 		E281B79120B933E200232181 /* GeoBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoBuilder.swift; sourceTree = "<group>"; };
 		E281B79220B933E200232181 /* GeoPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPrimitives.swift; sourceTree = "<group>"; };
 		E281B79320B933E200232181 /* GeoRepricator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoRepricator.swift; sourceTree = "<group>"; };
@@ -121,11 +121,10 @@
 		E2A3409720B98C3600C4DF6C /* view */ = {
 			isa = PBXGroup;
 			children = (
-				ED32B95D1EB5D298000D8823 /* AppDelegate.swift */,
 				ED32B95F1EB5D298000D8823 /* GameView.swift */,
 				ED32B9611EB5D298000D8823 /* GameViewController.swift */,
 				ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */,
-				E281B78E20B933D000232181 /* GameViewMixin.swift */,
+				E281B78E20B933D000232181 /* GameViewDialogs.swift */,
 				E281B78D20B933D000232181 /* GameViewSettings.swift */,
 			);
 			name = view;
@@ -189,6 +188,7 @@
 		EDA91BA51FF15A6300E14B8D /* editor */ = {
 			isa = PBXGroup;
 			children = (
+				ED32B95D1EB5D298000D8823 /* AppDelegate.swift */,
 				E2A3409720B98C3600C4DF6C /* view */,
 				EDB683442025D7EF00AD75EE /* controller */,
 			);
@@ -361,7 +361,7 @@
 				ED2221842021E17C00427606 /* DeformCompute.metal in Sources */,
 				E281B79620B933E200232181 /* GeoRepricator.swift in Sources */,
 				EDCAB6ED201F490200674C38 /* adapterUsd.mm in Sources */,
-				E281B79020B933D000232181 /* GameViewMixin.swift in Sources */,
+				E281B79020B933D000232181 /* GameViewDialogs.swift in Sources */,
 				E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */,
 				E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */,
 				E281B7A220B94CAE00232181 /* driverMatX.mm in Sources */,

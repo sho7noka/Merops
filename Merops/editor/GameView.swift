@@ -62,7 +62,6 @@ class GameView: SCNView {
     }
     
     override func draw(_ dirtyRect: NSRect) {
-        
         if let drawable = metalLayer.nextDrawable() {
             guard let commandBuffer = queue.makeCommandBuffer() else { return }
             
@@ -104,7 +103,20 @@ class GameView: SCNView {
         super.mouseEntered(with: event)
     }
     
-    var mode = EditContext.PositionMode
+    var cameraName = "camera" {
+        didSet {
+            self.overRay?.label_message.text = cameraName + " " + mode.toString
+            self.overRay?.label_message.fontColor = Color.white
+            self.pointOfView?.position = (self.node(name: cameraName)?.position)!
+        }
+    }
+    
+    var mode = EditContext.PositionMode {
+        didSet {
+            self.overRay?.label_message.text = cameraName + " " + mode.toString
+            self.overRay?.label_message.fontColor = Color.white
+        }
+    }
     var part = DrawOverride.Object
     var textField: TextView!
     var gizmos: [BaseNode] = []
@@ -264,7 +276,10 @@ class GameView: SCNView {
                 selection = result as? SCNHitTestResult
             }
             if let selNode = selection?.node {
-                resizeView()
+                if selNode.categoryBitMask == NodeOptions.noSelect.rawValue {
+                    return
+                }
+                clearView()
                 
                 // HUD info
                 overRay?.label_name.text = "Name: \(String(describing: selNode.name!))"
@@ -272,8 +287,6 @@ class GameView: SCNView {
                 overRay?.label_rotate.text = "Rotate: \(String(describing: selNode.rotation.xyzw))"
                 overRay?.label_scale.text = "Scale: \(selNode.scale.xyz)"
                 overRay?.label_info.text = "Info: \(selNode.scale.xyz)"
-                overRay?.label_info.text = ""
-                overRay?.label_info.isHidden = false
                 
                 // reset color
                 selNode.geometry!.firstMaterial!.emission.contents = (
@@ -303,26 +316,26 @@ class GameView: SCNView {
             }
             
         } else {
+            overRay?.label_name.text = "Name"
+            overRay?.label_position.text = "Position"
+            overRay?.label_rotate.text = "Rotate"
+            overRay?.label_scale.text = "Scale"
+            overRay?.label_info.text = "Info"
+            
             let queue = OperationQueue()
             queue.addOperation {
-                self.gizmos.forEach {
-                    $0.removeFromParentNode()
-                }
-                
                 self.root.enumerateChildNodes({ child, _ in
                     if let geo = child.geometry {
                         geo.firstMaterial?.emission.contents = Color.black
                     }
                 })
+                self.gizmos.forEach {
+                    $0.removeFromParentNode()
+                }
             }
-            overRay?.label_name.text = "Name"
-            overRay?.label_position.text = "Position"
-            overRay?.label_rotate.text = "Rotate"
-            overRay?.label_scale.text = "Scale"
-            overRay?.label_info.isHidden = true
         }
 
-        self.allowsCameraControl = (hitResults.count == 0)
+//        self.allowsCameraControl = (hitResults.count == 0)
         super.mouseDown(with: event)
     }
     
@@ -456,7 +469,7 @@ class GameView: SCNView {
         self.gestureRecognizers.forEach {
             $0.isEnabled = true
         }
-        self.allowsCameraControl = true
+//        self.allowsCameraControl = true
         p = self.convert(event.locationInWindow, to: nil)
         needsDisplay = true
     }
@@ -585,7 +598,7 @@ class GameView: SCNView {
         overRay?.button_cyan.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 176)
         overRay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 152)
         overRay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 128)
-        overRay?.label_message.position = CGPoint(x: -size.width / 2 + 300, y: -size.height / 2 + 28)
+        overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 22), y: -size.height / 2 + 28)
     }
     
     /*
@@ -607,8 +620,10 @@ class GameView: SCNView {
         switch event.characters! {
         case "\u{1B}": //ESC
             clearView()
-        case "\u{7F}": //del
-            removeSelNode()
+        case "1", "2", "3", "4":
+            self.debugOptions = SCNOptions[Int(event.characters!)!]
+        case "\t": // TAB
+            break
         case "q":
             self.resetView(_mode: .Object)
         case "w":
@@ -629,11 +644,13 @@ class GameView: SCNView {
             gitRevert(url: (settings?.projectDir)!)
         case "x":
             gitCommit(url: (settings?.projectDir)!)
-        case "1", "2", "3", "4":
-            self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "c":
             break
         case "v":
+            break
+        case "\u{7F}": //del
+            removeSelNode()
+        case "\r":
             break
         default:
             break

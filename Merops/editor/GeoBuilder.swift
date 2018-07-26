@@ -52,20 +52,50 @@ final class Builder {
         scene.rootNode.addChildNode(torusNode)
     }
 
-    class func Camera(scene: SCNScene, position: SCNVector3 = SCNVector3(x: 0, y: 5, z: 30)) {
+    class func Camera(scene: SCNScene, name: String = "camera", position: SCNVector3 = SCNVector3(x: 0, y: 5, z: 30)) {
+        let camera = SCNCamera()
+        camera.zNear = 1
+        camera.zFar = 100000
+        
         let cameraNode = SCNNode()
-        cameraNode.name = "camera"
-        cameraNode.camera = SCNCamera()
+        cameraNode.name = name
+        cameraNode.camera = camera
         cameraNode.position = position
         scene.rootNode.addChildNode(cameraNode)
     }
 
-    class func Light(scene: SCNScene, position: SCNVector3 = SCNVector3(x: 0, y: 100, z: 0)) {
+    class func Light(scene: SCNScene, name: String = "light", position: SCNVector3 = SCNVector3(x: 0, y: 100, z: 0)) {
+        let light = SCNLight()
+        light.type = .probe
+        
         let lightNode = SCNNode()
-        lightNode.name = "light"
-        lightNode.light = SCNLight()
+        lightNode.name = name
+        lightNode.light = light
         lightNode.position = position
         scene.rootNode.addChildNode(lightNode)
+    }
+    
+    class func EditorDome(scene: SCNScene) {
+        let sphere = SCNSphere()
+        sphere.firstMaterial?.isDoubleSided = true
+        
+        let node = SCNNode(geometry: sphere)
+        node.name = "Dome"
+        node.scale = SCNVector3(100000, 100000, 100000)
+        node.categoryBitMask = NodeOptions.noSelect.rawValue
+        scene.rootNode.addChildNode(node)
+    }
+    
+    class func EditorGrid(scene: SCNScene) {
+        let grid = SCNFloor()
+        grid.firstMaterial?.isDoubleSided = true
+        grid.width = 100000
+        grid.length = 100000
+        
+        let node = SCNNode(geometry: grid)
+        node.name = "grid"
+        node.categoryBitMask = NodeOptions.noSelect.rawValue
+        scene.rootNode.addChildNode(node)
     }
 }
 

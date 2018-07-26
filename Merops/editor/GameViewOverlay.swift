@@ -49,6 +49,31 @@ class ButtonOverlay: SKNode {
     }
 }
 
+extension SKScene {
+    /*
+     * sceneの中心の座標を返すメソッド
+     */
+    func GetMid() -> CGPoint {
+        return CGPoint(x: self.frame.midX, y: self.frame.midY)
+    }
+    
+    func mLabel(name : String) -> SKLabelNode {
+        let label = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        label.text = name
+        label.name = name
+        label.fontSize = 12
+        label.horizontalAlignmentMode = .left
+        label.verticalAlignmentMode = .bottom
+        return label
+    }
+    
+    func mButton(name : String) -> SKShapeNode {
+        let btn = SKShapeNode(rectOf: CGSize(width: 16.0, height: 16.0))
+        btn.name = name
+        return btn
+    }
+}
+
 class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
 
     /*
@@ -119,11 +144,28 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
             }
         }
     }
-
+    
+    func info(msg: String) {
+        label_message.fontColor = Color.green
+        label_message.text = msg
+    }
+    
+    func warn(msg: String) {
+        label_message.fontColor = Color.yellow
+        label_message.text = msg
+    }
+    
+    func error(msg: String) {
+        label_message.fontColor = Color.red
+        label_message.text = msg
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
 
 internal class BaseNode: SCNNode, SCNNodeRendererDelegate {
 
@@ -349,102 +391,5 @@ final class ScaleNode: BaseNode {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("miss")
-    }
-}
-
-extension SKScene {
-    /*
-     * sceneの中心の座標を返すメソッド
-     */
-    func GetMid() -> CGPoint {
-        return CGPoint(x: self.frame.midX, y: self.frame.midY)
-    }
-
-    func mLabel(name : String) -> SKLabelNode {
-        let label = SKLabelNode(fontNamed: "AvenirNext-Bold")
-        label.text = name
-        label.name = name
-        label.fontSize = 12
-        label.horizontalAlignmentMode = .left
-        label.verticalAlignmentMode = .bottom
-        return label
-    }
-
-    func mButton(name : String) -> SKShapeNode {
-        let btn = SKShapeNode(rectOf: CGSize(width: 16.0, height: 16.0))
-        btn.name = name
-        return btn
-    }
-}
-
-
-
-// experimental
-func vertices(node: SCNNode) -> [SCNVector3] {
-
-    // geo source
-    let planeSources = node.geometry?.sources(
-            for: SCNGeometrySource.Semantic.vertex
-    )
-    let planeSource = planeSources?.first
-
-    // Data
-    let stride = planeSource?.dataStride
-    let offset = planeSource?.dataOffset
-    let componentsPerVector = planeSource?.componentsPerVector
-    let bytesPerVector = componentsPerVector! * (planeSource?.bytesPerComponent)!
-    let vectors = [SCNVector3](repeating: SCNVector3Zero, count: (planeSource?.vectorCount)!)
-
-    // copy vertices
-    let _vertices = vectors.enumerated().map({ (index: Int, _) -> SCNVector3 in
-        var vectorData = [UInt8](repeating: 0, count: componentsPerVector!)
-        planeSource?.data.copyBytes(
-                to: &vectorData, from: NSMakeRange(index * stride! + offset!, bytesPerVector).toRange()!
-        )
-
-        return SCNVector3Make(
-                SCNFloat(vectorData[0]),
-                SCNFloat(vectorData[1]),
-                SCNFloat(vectorData[2])
-        )
-    })
-    return _vertices
-}
-
-func points(result: SCNHitTestResult) {
-    let node = SCNNode(geometry: SCNSphere(radius: 0.3))
-    node.categoryBitMask = NodeOptions.noExport.rawValue
-
-    let vectors = vertices(node: node)
-    for (index, vec) in vectors.enumerated() {
-        NSLog("\(vec)")
-        let pointNode = node.flattenedClone()
-        pointNode.name = "vertex_\(index)"
-//        pointNode.position = self.projectPoint(vec)
-        result.node.addChildNode(pointNode)
-    }
-}
-
-func lines(result: SCNHitTestResult) {
-    let node = SCNNode()
-    node.categoryBitMask = NodeOptions.noExport.rawValue
-
-    for (index, vec) in vertices(node: node).enumerated() {
-        let source = SCNGeometrySource(
-                vertices: [vec, vec]),
-                indices: [UInt8] = [0, 1],
-                data = Data(bytes: indices
-        ),
-                element = SCNGeometryElement(
-                data: data, primitiveType: .line, primitiveCount: 1, bytesPerIndex: 1
-        )
-        node.geometry = SCNGeometry(sources: [source], elements: [element])
-        let lineNode = node.flattenedClone()
-        lineNode.name = "line\(index)"
-
-        let material = SCNMaterial()
-        material.diffuse.contents = Color.red
-        lineNode.geometry!.insertMaterial(material, at: 0)
-        result.node.addChildNode(lineNode)
     }
 }

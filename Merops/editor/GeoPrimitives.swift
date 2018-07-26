@@ -173,7 +173,6 @@ class GeometryBuilder {
 
     init(uvMode: UVModeType = .StretchToFitXY) {
         self.uvMode = uvMode
-
         quads = []
     }
 
@@ -286,45 +285,75 @@ class GeometryBuilder {
     }
 }
 
-extension SCNGeometry {
 
-    func dump () {
-        for sou in (self.sources) {
 
-            NSLog("\(sou.bytesPerComponent) \(sou.vectorCount) \(sou.semantic) \(sou.data) \(sou.dataOffset) \(sou.dataStride) \(sou.componentsPerVector)")
-        }
+// experimental
+func vertices(node: SCNNode) -> [SCNVector3] {
+    
+    // geo source
+    let planeSources = node.geometry?.sources(
+        for: SCNGeometrySource.Semantic.vertex
+    )
+    let planeSource = planeSources?.first
+    
+    // Data
+    let stride = planeSource?.dataStride
+    let offset = planeSource?.dataOffset
+    let componentsPerVector = planeSource?.componentsPerVector
+    let bytesPerVector = componentsPerVector! * (planeSource?.bytesPerComponent)!
+    let vectors = [SCNVector3](repeating: SCNVector3Zero, count: (planeSource?.vectorCount)!)
+    
+    // copy vertices
+    let _vertices = vectors.enumerated().map({ (index: Int, _) -> SCNVector3 in
+        var vectorData = [UInt8](repeating: 0, count: componentsPerVector!)
+        planeSource?.data.copyBytes(
+            to: &vectorData, from: NSMakeRange(index * stride! + offset!, bytesPerVector).toRange()!
+        )
+        
+        return SCNVector3Make(
+            SCNFloat(vectorData[0]),
+            SCNFloat(vectorData[1]),
+            SCNFloat(vectorData[2])
+        )
+    })
+    return _vertices
+}
 
-        for sou in (self.elements) {
-
-            NSLog("\(sou.bytesPerIndex) \(sou.data) \(sou.maximumPointScreenSpaceRadius) \(sou.minimumPointScreenSpaceRadius) \(sou.pointSize) \(sou.primitiveCount) \(sou.primitiveType)")
-        }
+func points(result: SCNHitTestResult) {
+    let node = SCNNode(geometry: SCNSphere(radius: 0.3))
+    node.categoryBitMask = NodeOptions.noExport.rawValue
+    
+    let vectors = vertices(node: node)
+    for (index, vec) in vectors.enumerated() {
+        NSLog("\(vec)")
+        let pointNode = node.flattenedClone()
+        pointNode.name = "vertex_\(index)"
+        //        pointNode.position = self.projectPoint(vec)
+        result.node.addChildNode(pointNode)
     }
-    /*!
-     @property firstMaterial
-     @abstract Determines the first material of the geometry. Returns nil if the geometry has no material.
-     @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
-     */
-    func vertex() -> SCNGeometry {
-//        self.sources[0].data
-        return self.copy() as! SCNGeometry
-    }
+}
 
-    /*!
-     @property firstMaterial
-     @abstract Determines the first material of the geometry. Returns nil if the geometry has no material.
-     @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
-     */
-    func line() -> SCNGeometry {
-        return self.copy() as! SCNGeometry
-    }
-
-    /*!
-     @property firstMaterial
-     @abstract Determines the first material of the geometry. Returns nil if the geometry has no material.
-     @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
-     */
-    func face() -> SCNGeometry {
-        return self.copy() as! SCNGeometry
+func lines(result: SCNHitTestResult) {
+    let node = SCNNode()
+    node.categoryBitMask = NodeOptions.noExport.rawValue
+    
+    for (index, vec) in vertices(node: node).enumerated() {
+        let source = SCNGeometrySource(
+            vertices: [vec, vec]),
+        indices: [UInt8] = [0, 1],
+        data = Data(bytes: indices
+        ),
+        element = SCNGeometryElement(
+            data: data, primitiveType: .line, primitiveCount: 1, bytesPerIndex: 1
+        )
+        node.geometry = SCNGeometry(sources: [source], elements: [element])
+        let lineNode = node.flattenedClone()
+        lineNode.name = "line\(index)"
+        
+        let material = SCNMaterial()
+        material.diffuse.contents = Color.red
+        lineNode.geometry!.insertMaterial(material, at: 0)
+        result.node.addChildNode(lineNode)
     }
 }
 
