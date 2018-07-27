@@ -69,6 +69,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         /// - Tag: DrawOverride
         if let primData = gameView.prim {
             primHandle.typeRender(prim: primData)
+//            return
         }
         // Mark: Deformer
         guard let deformData = gameView.deformData else {
@@ -103,11 +104,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         // MARK: Metal Render
         device = MTLCreateSystemDefaultDevice()
         library = device.makeDefaultLibrary()
+        mRender = MetalRender(device: device)
         
         // MARK: Renderer
         deform = MetalMeshDeformer(device: device)
         primHandle = MetalPrimitiveHandle(device: device, library: library!, view: gameView)
-        mRender = MetalRender(device: device)
         render = SCNRenderer(device: device, options: nil)
         sceneInit()
         
@@ -115,7 +116,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         gameView.scene = scene
         gameView.delegate = self
         gameView.isPlaying = true
-        gameView.queue = device.makeCommandQueue()
         gameView.settings = Settings(
             dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
             color: Color.lightGray
@@ -152,6 +152,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
     }
     
     private func uiInit() {
+        gameView.queue = device.makeCommandQueue()
         gameView.showsStatistics = true
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
@@ -161,16 +162,16 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
 //        Builder.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
-        gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
-        gameView.subView?.scene = SCNScene()
-        gameView.subView?.allowsCameraControl = true
-        gameView.subView?.backgroundColor = .clear
-        gameView.subView?.isPlaying = true
-        let geo = SCNNode(geometry: SCNSphere(radius: 5))
-        geo.categoryBitMask = NodeOptions.noExport.rawValue
-        geo.geometry?.firstMaterial?.diffuse.contents = Color.white
-        gameView.subView?.scene?.rootNode.addChildNode(geo)
-        gameView.addSubview(gameView.subView!)
+//        gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
+//        gameView.subView?.scene = SCNScene()
+//        gameView.subView?.allowsCameraControl = true
+//        gameView.subView?.backgroundColor = .clear
+//        gameView.subView?.isPlaying = true
+//        let geo = SCNNode(geometry: SCNSphere(radius: 5))
+//        geo.categoryBitMask = NodeOptions.noExport.rawValue
+//        geo.geometry?.firstMaterial?.diffuse.contents = Color.white
+//        gameView.subView?.scene?.rootNode.addChildNode(geo)
+//        gameView.addSubview(gameView.subView!)
         
         // MARK: Overray
         gameView.overlaySKScene = GameViewOverlay(view: gameView)
@@ -193,16 +194,16 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
             $0.isHidden = true
             gameView.addSubview($0)
         }
-        gameView.textField = TextView()
-        gameView.textField.frame = CGRect(x: 10, y: 10, width: 100, height: 20)
-        gameView.textField.backgroundColor = Color.white
-        gameView.textField.isHidden = true
-        gameView.textField.placeholderString = "Name"
-        gameView.addSubview(gameView.textField!)
+        gameView.txtField = TextView()
+        gameView.txtField.frame = CGRect(x: 10, y: 10, width: 100, height: 20)
+        gameView.txtField.backgroundColor = Color.white
+        gameView.txtField.isHidden = true
+        gameView.txtField.placeholderString = "Name"
+        gameView.addSubview(gameView.txtField!)
     #if os(OSX)
-        gameView.textField.delegate = self
+        gameView.txtField.delegate = self
     #elseif os(iOS)
-        gameView.textField.addTarget(self, action: "textFieldEditingChanged:", forControlEvents: .EditingChanged)
+        gameView.txtField.addTarget(self, action: "textFieldEditingChanged:", forControlEvents: .EditingChanged)
     #endif
         
         /// - Tag: Mouse Buffer

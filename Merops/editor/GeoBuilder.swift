@@ -74,6 +74,15 @@ final class Builder {
         lightNode.position = position
         scene.rootNode.addChildNode(lightNode)
     }
+}
+
+final class Editor {
+    
+    class func removeSelNode(selection: SCNHitTestResult) {
+        if selection.node.categoryBitMask != NodeOptions.noExport.rawValue {
+            selection.node.removeFromParentNode()
+        }
+    }
     
     class func EditorDome(scene: SCNScene) {
         let sphere = SCNSphere()

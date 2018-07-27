@@ -86,7 +86,7 @@ extension SCNVector3: Equatable {
 extension SCNVector4 {
 
     var xyzw: [CGFloat] {
-        return [self.x, self.y, self.z, self.w]
+        return [self.x, self.y, self.z, self.w].map({ round($0) })
     }
 }
 

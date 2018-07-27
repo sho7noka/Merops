@@ -213,11 +213,11 @@
 		EDB683432025D59400AD75EE /* adapter */ = {
 			isa = PBXGroup;
 			children = (
+				94B26A86D92862E523CC392B /* Extensions.swift */,
 				E281B79D20B94CAE00232181 /* driverMatX.h */,
 				E281B79820B94CAD00232181 /* driverMatX.mm */,
 				EDCAB6EB201F48EC00674C38 /* adapterUsd.h */,
 				EDCAB6EC201F490200674C38 /* adapterUsd.mm */,
-				94B26A86D92862E523CC392B /* Extensions.swift */,
 			);
 			name = adapter;
 			sourceTree = "<group>";

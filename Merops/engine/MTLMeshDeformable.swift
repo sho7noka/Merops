@@ -46,6 +46,15 @@ class MetalMeshData {
     }
 }
 
+struct DeformData {
+    var location: vector_float3
+    var direction: vector_float3
+    var radiusSquared: Float32
+    var deformationAmplitude: Float32
+    var pad1: Float32
+    var pad2: Float32
+}
+
 /*
  Builds a SceneKit geometry object backed by a Metal buffer
  */
@@ -62,7 +71,6 @@ class MetalMeshDeformable {
         var indexList: [CInt] = []
         
         let normal = vector_float3(0, 1, 0)
-        
         var zPrevious: Float? = nil
         var z: Float = 0
         while z <= length {
@@ -288,13 +296,4 @@ class MetalMeshDeformer {
             return 3
         }
     }
-}
-
-struct DeformData {
-    var location: vector_float3
-    var direction: vector_float3
-    var radiusSquared: Float32
-    var deformationAmplitude: Float32
-    var pad1: Float32
-    var pad2: Float32
 }

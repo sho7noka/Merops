@@ -19,7 +19,7 @@ extension SKScene {
     }
     
     func mLabel(name : String) -> SKLabelNode {
-        let label = SKLabelNode(fontNamed: "Courier-Regular")
+        let label = SKLabelNode(fontNamed: "AvenirNext-Bold")
         label.text = name
         label.name = name
         label.fontSize = 12
