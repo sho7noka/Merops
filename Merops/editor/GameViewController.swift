@@ -128,6 +128,12 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         let newNode = Builder.Plane(
             meshData: MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
         )
+        
+//        let (min, max) = newNode.boundingBox
+//        let x = CGFloat(max.x - min.x)
+//        let y = CGFloat(max.y - min.y)
+//        newNode.position = SCNVector3(-(x/2), -1, -2)
+        
         if let existingNode = baseNode {
             scene.rootNode.replaceChildNode(existingNode, with: newNode)
         } else {
@@ -151,8 +157,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         gameView.autoenablesDefaultLighting = true
         gameView.backgroundColor = (gameView.settings?.bgColor)!
         
-        Builder.EditorDome(scene: scene)
-        Builder.EditorGrid(scene: scene)
+//        Builder.EditorDome(scene: scene)
+//        Builder.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
         gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))

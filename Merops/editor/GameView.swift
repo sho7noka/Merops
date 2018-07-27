@@ -119,7 +119,7 @@ class GameView: SCNView {
     }
     var part = DrawOverride.Object
     var textField: TextView!
-    var gizmos: [BaseNode] = []
+    var gizmos: [ManipulatorBase] = []
     var numFields: [TextView] = []
     var isDeforming = false
     
@@ -139,6 +139,22 @@ class GameView: SCNView {
         pos.x = Float(position.x) * scale
         pos.y = Float(bounds.height - position.y) * scale
 
+        /*
+        var selectedNode: SCNNode!
+        var zDepth: Float!
+        
+        if let hit = self.hitTest(touch.location(in: self), options: nil).first {
+            selectedNode = hit.node
+            zDepth = self.projectPoint(selectedNode.position).z
+        }
+        guard selectedNode != nil else { return }
+        let touch = touches.first!
+        let touchPoint = touch.location(in: self)
+        selectedNode.position = self.unprojectPoint(
+            SCNVector3(x: Float(touchPoint.x),
+                       y: Float(touchPoint.y),
+                       z: zDepth))
+        */
         // MARK: overray
         let _p = overRay?.convertPoint(fromView: event.locationInWindow)
         if let first = overRay?.nodes(at: _p!).first {
@@ -161,6 +177,7 @@ class GameView: SCNView {
             case "Name":
                 if let selNode = self.selection?.node {
                     clearView()
+                    
                     textField.stringValue = selNode.name!
                     textField.isHidden = false
                     textField.frame.origin = CGPoint(x: 56, y: first.position.y * 2 + 16)
@@ -276,9 +293,9 @@ class GameView: SCNView {
                 selection = result as? SCNHitTestResult
             }
             if let selNode = selection?.node {
-                if selNode.categoryBitMask == NodeOptions.noSelect.rawValue {
-                    return
-                }
+//                if selNode.categoryBitMask == NodeOptions.noSelect.rawValue {
+//                    return
+//                }
                 clearView()
                 
                 // HUD info
@@ -614,6 +631,7 @@ class GameView: SCNView {
         }
     }
     
+
     var settings: Settings?
     
     override func keyDown(with event: Event) {

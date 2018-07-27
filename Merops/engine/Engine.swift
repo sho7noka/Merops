@@ -129,6 +129,7 @@ class MetalPrimitiveHandle {
             renderEncoder.endEncoding()
             commandBuffer.present(drawable)
             commandBuffer.commit()
+            commandBuffer.waitUntilCompleted()
         } catch {
             
         }

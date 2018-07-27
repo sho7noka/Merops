@@ -10,55 +10,16 @@ import SpriteKit
 import SceneKit
 import QuartzCore
 
-class ButtonOverlay: SKNode {
-
-    private var inner: SKShapeNode!
-    private var label: SKLabelNode!
-    private var background: SKShapeNode!
-
-    func buildPad(_ text: String) {
-//        let backgroundRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(size.width), height: CGFloat(size.height))
-        background = SKShapeNode()
-//        background.path = CGPath( ellipseIn: backgroundRect, transform: nil)
-        background.strokeColor = SKColor.black
-        background.lineWidth = 3.0
-        addChild(background)
-
-        inner = SKShapeNode()
-//        inner.path = CGPath( ellipseIn: CGRect( x: 0, y: 0, width: innerSize.width, height: innerSize.height ), transform: nil)
-        inner.lineWidth = 1.0
-        inner.fillColor = SKColor.white
-        inner.strokeColor = SKColor.gray
-        addChild(inner)
-
-        label = SKLabelNode()
-//        label!.fontName = UIFont.boldSystemFont(ofSize: 24).fontName
-        label!.fontSize = 24
-        label!.fontColor = SKColor.black
-        label?.verticalAlignmentMode = .center
-        label?.horizontalAlignmentMode = .center
-//        label?.position = CGPoint(x: size.width / 2.0, y: size.height / 2.0 + 1.0)
-        label?.text = text as String
-        addChild(label!)
-    }
-
-    override func mouseDown(with event: Event) {
-
-
-        super.mouseDown(with: event)
-    }
-}
-
 extension SKScene {
     /*
      * sceneの中心の座標を返すメソッド
      */
-    func GetMid() -> CGPoint {
+    var midPoint: CGPoint {
         return CGPoint(x: self.frame.midX, y: self.frame.midY)
     }
     
     func mLabel(name : String) -> SKLabelNode {
-        let label = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        let label = SKLabelNode(fontNamed: "Courier-Regular")
         label.text = name
         label.name = name
         label.fontSize = 12
@@ -105,8 +66,6 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
     var button_cyan: SKShapeNode!
     var button_yellow: SKShapeNode!
     var button_black: SKShapeNode!
-
-    var button_mulch: ButtonOverlay!
 
     init(view: GameView) {
         super.init(size: view.frame.size)
@@ -166,8 +125,11 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
 }
 
 
+/*
+ * Mark: Manipulator
+ */
 
-internal class BaseNode: SCNNode, SCNNodeRendererDelegate {
+internal class ManipulatorBase: SCNNode, SCNNodeRendererDelegate {
 
     // variable
     let axisLen = SCNFloat(8.0)
@@ -191,7 +153,7 @@ internal class BaseNode: SCNNode, SCNNodeRendererDelegate {
     }
 }
 
-final class PositionNode: BaseNode {
+final class PositionNode: ManipulatorBase {
 
     public required init() {
 
@@ -269,7 +231,7 @@ final class PositionNode: BaseNode {
     }
 }
 
-final class RotateNode: BaseNode {
+final class RotateNode: ManipulatorBase {
 
     public required init() {
 
@@ -322,7 +284,7 @@ final class RotateNode: BaseNode {
     }
 }
 
-final class ScaleNode: BaseNode {
+final class ScaleNode: ManipulatorBase {
 
     public required init() {
 
