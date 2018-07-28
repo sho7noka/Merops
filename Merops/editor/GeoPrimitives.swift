@@ -280,186 +280,88 @@ class GeometryBuilder {
         let element = SCNGeometryElement(data: indexData as Data, primitiveType: .triangles, primitiveCount: faceIndices.count / 3, bytesPerIndex: MemoryLayout<CInt>.size)
 
         let geometry = SCNGeometry(sources: [vertexSource, normalSource, textureSource], elements: [element])
-
         return geometry
     }
 }
 
-
+extension SCNGeometry {
+    func vertices() -> [SCNVector3] {
+        var vectors = [SCNVector3]()
+        let vertexSources = sources(for: .vertex)
+        if let v = vertexSources.first {
+            v.data.withUnsafeBytes { (p: UnsafePointer<Float32>) in
+                for i in 0..<v.vectorCount {
+                    let index = (i * v.dataStride + v.dataOffset) / 4
+                    vectors.append(SCNVector3Make(
+                        CGFloat(p[index + 0]),
+                        CGFloat(p[index + 1]),
+                        CGFloat(p[index + 2])
+                    ))
+                }
+            }
+            return vectors
+        }
+        return []
+    }
+    
+    func normals() -> [SCNVector3] {
+        var vectors = [SCNVector3]()
+        let normalSources = sources(for: .normal)
+        if let v = normalSources.first {
+            v.data.withUnsafeBytes { (p: UnsafePointer<Float32>) in
+                for i in 0..<v.vectorCount {
+                    let index = (i * v.dataStride + v.dataOffset) / 4
+                    vectors.append(SCNVector3Make(
+                        CGFloat(p[index + 0]),
+                        CGFloat(p[index + 1]),
+                        CGFloat(p[index + 2])
+                    ))
+                }
+            }
+            return vectors
+        }
+        return []
+    }
+}
 
 // experimental
-func vertices(node: SCNNode) -> [SCNVector3] {
-    
-    // geo source
-    let planeSources = node.geometry?.sources(
-        for: SCNGeometrySource.Semantic.vertex
-    )
-    let planeSource = planeSources?.first
-    
-    // Data
-    let stride = planeSource?.dataStride
-    let offset = planeSource?.dataOffset
-    let componentsPerVector = planeSource?.componentsPerVector
-    let bytesPerVector = componentsPerVector! * (planeSource?.bytesPerComponent)!
-    let vectors = [SCNVector3](repeating: SCNVector3Zero, count: (planeSource?.vectorCount)!)
-    
-    // copy vertices
-    let _vertices = vectors.enumerated().map({ (index: Int, _) -> SCNVector3 in
-        var vectorData = [UInt8](repeating: 0, count: componentsPerVector!)
-        planeSource?.data.copyBytes(
-            to: &vectorData, from: NSMakeRange(index * stride! + offset!, bytesPerVector).toRange()!
-        )
-        
-        return SCNVector3Make(
-            SCNFloat(vectorData[0]),
-            SCNFloat(vectorData[1]),
-            SCNFloat(vectorData[2])
-        )
-    })
-    return _vertices
-}
-
-func points(result: SCNHitTestResult) {
-    let node = SCNNode(geometry: SCNSphere(radius: 0.3))
-    node.categoryBitMask = NodeOptions.noExport.rawValue
-    
-    let vectors = vertices(node: node)
-    for (index, vec) in vectors.enumerated() {
-        NSLog("\(vec)")
-        let pointNode = node.flattenedClone()
-        pointNode.name = "vertex_\(index)"
-        //        pointNode.position = self.projectPoint(vec)
-        result.node.addChildNode(pointNode)
-    }
-}
-
-func lines(result: SCNHitTestResult) {
-    let node = SCNNode()
-    node.categoryBitMask = NodeOptions.noExport.rawValue
-    
-    for (index, vec) in vertices(node: node).enumerated() {
-        let source = SCNGeometrySource(
-            vertices: [vec, vec]),
-        indices: [UInt8] = [0, 1],
-        data = Data(bytes: indices
-        ),
-        element = SCNGeometryElement(
-            data: data, primitiveType: .line, primitiveCount: 1, bytesPerIndex: 1
-        )
-        node.geometry = SCNGeometry(sources: [source], elements: [element])
-        let lineNode = node.flattenedClone()
-        lineNode.name = "line\(index)"
-        
-        let material = SCNMaterial()
-        material.diffuse.contents = Color.red
-        lineNode.geometry!.insertMaterial(material, at: 0)
-        result.node.addChildNode(lineNode)
-    }
-}
-
-func custumGeo(half: Float = 2) -> SCNNode {
-
-    // https://qiita.com/takabosoft/items/13114d5da7180a9b2ab0
-
-    // VBO 頂点を定義します。
-    let vertices = [
-
-        // 手前
-        SCNVector3(-half, +half, +half), // 手前+左上 0
-        SCNVector3(+half, +half, +half), // 手前+右上 1
-        SCNVector3(-half, -half, +half), // 手前+左下 2
-        SCNVector3(+half, -half, +half), // 手前+右下 3
-
-        // 奥
-        SCNVector3(-half, +half, -half), // 奥+左上 4
-        SCNVector3(+half, +half, -half), // 奥+右上 5
-        SCNVector3(-half, -half, -half), // 奥+左下 6
-        SCNVector3(+half, -half, -half), // 奥+右下 7
-
-        // 左側
-        SCNVector3(-half, +half, -half), // 8 (=4)
-        SCNVector3(-half, +half, +half), // 9 (=0)
-        SCNVector3(-half, -half, -half), // 10 (=6)
-        SCNVector3(-half, -half, +half), // 11 (=2)
-
-        // 右側
-        SCNVector3(+half, +half, +half), // 12 (=1)
-        SCNVector3(+half, +half, -half), // 13 (=5)
-        SCNVector3(+half, -half, +half), // 14 (=3)
-        SCNVector3(+half, -half, -half), // 15 (=7)
-
-        // 上側
-        SCNVector3(-half, +half, -half), // 16 (=4)
-        SCNVector3(+half, +half, -half), // 17 (=5)
-        SCNVector3(-half, +half, +half), // 18 (=0)
-        SCNVector3(+half, +half, +half), // 19 (=1)
-
-        // 下側
-        SCNVector3(-half, -half, +half), // 20 (=2)
-        SCNVector3(+half, -half, +half), // 21 (=3)
-        SCNVector3(-half, -half, -half), // 22 (=6)
-        SCNVector3(+half, -half, -half), // 23 (=7)
-    ]
-
-    // 各頂点における法線ベクトルを定義
-    let vectors = [
-        SCNVector3(0, 0, 2), // 手前
-        SCNVector3(0, 0, -1), // 奥
-        SCNVector3(-1, 0, 0), // 左側
-        SCNVector3(1, 0, 0), // 右側
-        SCNVector3(0, 1, 0), // 上側
-        SCNVector3(0, -1, 0), // 下側
-    ]
-
-    var normals: [SCNVector3] = []
-    for vec in vectors {
-        for _ in 1...4 {
-            normals.append(vec)
-        }
-    }
-
-    // IBO ポリゴンを定義します。
-    let indices: [Int32] = [
-        // 手前
-        0, 2, 1,
-        1, 2, 3,
-
-        // 奥
-        4, 5, 7,
-        4, 7, 6,
-
-        // 左側
-        8, 10, 9,
-        9, 10, 11,
-
-        // 右側
-        13, 12, 14,
-        13, 14, 15,
-
-        // 上側
-        16, 18, 17,
-        17, 18, 19,
-
-        // 下側
-        22, 23, 20,
-        23, 21, 20,
-    ]
-
-    // マテリアル
-    let material = SCNMaterial()
-//    material.lightingModel = .physicallyBased
-//    material.diffuse.contents = NSImage(named: NSImage.Name(rawValue: "texture"))
-//    material.metalness.contents = NSNumber(value: 0.5)
-    material.diffuse.contents = Color.red
-
-    // ジオメトリ
-    let customGeometry = SCNGeometry(
-            sources: [SCNGeometrySource(vertices: vertices), SCNGeometrySource(normals: normals)],
-            elements: [SCNGeometryElement(indices: indices, primitiveType: .triangles)]
-    )
-    customGeometry.materials = [material]
-    return SCNNode(geometry: customGeometry)
-}
+//func points(result: SCNHitTestResult) {
+//    let node = SCNNode(geometry: SCNSphere(radius: 0.3))
+//    node.categoryBitMask = NodeOptions.noExport.rawValue
+//    
+//    let vectors = vertices(node: node)
+//    for (index, vec) in vectors.enumerated() {
+//        NSLog("\(vec)")
+//        let pointNode = node.flattenedClone()
+//        pointNode.name = "vertex_\(index)"
+//        //        pointNode.position = self.projectPoint(vec)
+//        result.node.addChildNode(pointNode)
+//    }
+//}
+//
+//func lines(result: SCNHitTestResult) {
+//    let node = SCNNode()
+//    node.categoryBitMask = NodeOptions.noExport.rawValue
+//    
+//    for (index, vec) in vertices(node: node).enumerated() {
+//        let source = SCNGeometrySource(
+//            vertices: [vec, vec]),
+//        indices: [UInt8] = [0, 1],
+//        data = Data(bytes: indices
+//        ),
+//        element = SCNGeometryElement(
+//            data: data, primitiveType: .line, primitiveCount: 1, bytesPerIndex: 1
+//        )
+//        node.geometry = SCNGeometry(sources: [source], elements: [element])
+//        let lineNode = node.flattenedClone()
+//        lineNode.name = "line\(index)"
+//        
+//        let material = SCNMaterial()
+//        material.diffuse.contents = Color.red
+//        lineNode.geometry!.insertMaterial(material, at: 0)
+//        result.node.addChildNode(lineNode)
+//    }
+//}
 
 //extension SCNGeometrySource {
 //    convenience init(textureCoordinates texcoord: [float2]) {

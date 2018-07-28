@@ -47,19 +47,17 @@ extension SuperViewController: NSControlTextEditingDelegate {
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextFieldDelegate {
     
-    // Model
+    // base
     var scene = SCNScene()
     var baseNode: SCNNode? = nil
-    var render: SCNRenderer!
+    var device: MTLDevice!
     
     // View
     @IBOutlet weak var gameView: GameView!
     var overRay: GameViewOverlay!
     
     // Metal
-    var device: MTLDevice!
-    var library: MTLLibrary!
-    var mRender: MetalRender!
+    var render: MetalRender!
     var meshData: MetalMeshData!
     var deform: MetalMeshDeformer!
     var primData: MetalPrimitiveData!
@@ -69,7 +67,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         /// - Tag: DrawOverride
         if let primData = gameView.prim {
             primHandle.typeRender(prim: primData)
-//            return
+//            let d = gameView.metalLayer.nextDrawable()?.layer
+//            render.scene = (d as! SCNLayer).scene
         }
         // Mark: Deformer
         guard let deformData = gameView.deformData else {
@@ -79,11 +78,12 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         gameView.deformData = nil
         
         // buffer
-        let commandBuffer = mRender.commandBuffer()
-        let renderEncoder = commandBuffer!.makeRenderCommandEncoder(
-            descriptor: mRender.renderPassDescriptor()
+        let commandBuffer = render.commandBuffer()
+        commandBuffer?.pushDebugGroup("in SCNRender Buffer")
+        let renderEncoder = commandBuffer?.makeRenderCommandEncoder(
+            descriptor: render.renderPassDescriptor()
         )
-        let renderPipelineState = try! device.makeRenderPipelineState(descriptor: mRender.renderPipelineDescriptor())
+        let renderPipelineState = try! device.makeRenderPipelineState(descriptor: render.renderPipelineDescriptor())
         renderEncoder?.setRenderPipelineState(renderPipelineState)
         renderEncoder?.endEncoding()
         
@@ -92,10 +92,12 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         render.pointOfView = gameView.pointOfView
         render.render(atTime: 0,
                       viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
-                      commandBuffer: commandBuffer!, passDescriptor: mRender.renderPassDescriptor()
+                      commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor()
         )
+        
         commandBuffer?.commit()
         commandBuffer?.waitUntilCompleted()
+        commandBuffer?.popDebugGroup()
     }
 
     override func viewDidLoad() {
@@ -103,13 +105,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         
         // MARK: Metal Render
         device = MTLCreateSystemDefaultDevice()
-        library = device.makeDefaultLibrary()
-        mRender = MetalRender(device: device)
+        render = MetalRender(device: device, options: nil)
         
         // MARK: Renderer
-        deform = MetalMeshDeformer(device: device)
-        primHandle = MetalPrimitiveHandle(device: device, library: library!, view: gameView)
-        render = SCNRenderer(device: device, options: nil)
+        deform = MetalMeshDeformer(device: render.device!)
+        primHandle = MetalPrimitiveHandle(render: render, view: gameView)
         sceneInit()
         
         // MARK: set scene to view
@@ -207,8 +207,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
     #endif
         
         /// - Tag: Mouse Buffer
-        let kernel = library?.makeFunction(name: "compute")
-        gameView.cps = try! device.makeComputePipelineState(function: kernel!)
+        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         

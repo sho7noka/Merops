@@ -68,6 +68,7 @@ class GameView: SCNView {
     override func draw(_ dirtyRect: NSRect) {
         if let drawable = metalLayer.nextDrawable() {
             guard let commandBuffer = queue.makeCommandBuffer() else { return }
+            commandBuffer.pushDebugGroup("Mouse Buffer")
             
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()
             commandEncoder?.setComputePipelineState(cps)
@@ -85,6 +86,7 @@ class GameView: SCNView {
             commandEncoder?.endEncoding()
             commandBuffer.present(drawable)
             commandBuffer.commit()
+            commandBuffer.popDebugGroup()
         }
     }
     
@@ -407,23 +409,41 @@ class GameView: SCNView {
                 invertFilter?.name = "invert"
                 let pixellateFilter = CIFilter(name:"CIPixellate")
                 pixellateFilter?.name = "pixellate"
-                marken!.filters = [ pixellateFilter, invertFilter ] as! [CIFilter]
+                marken!.filters = [ pixellateFilter, invertFilter ] as? [CIFilter]
 
                 switch part {
 
                 // TODO
                 case .OverrideVertex, .OverrideFace, .OverrideEdge:
                     break
-
+                    
                 default:
+                    break
+                }
+
+                switch mode {
+                    
+                case .PositionMode:
                     marken!.position = selection!.node.position
                     gizmos.forEach {
                         $0.position = selection!.node.position
                     }
                     selection!.node.parent!.addChildNode(marken!)
                     overRay?.label_position.text = (
-                        "Position : \(String(describing: selection!.node.position.xyz))"
+                        "Position: \(String(describing: selection!.node.position.xyz))"
                     )
+                case .ScaleMode:
+                    marken!.scale = selection!.node.scale
+                    gizmos.forEach {
+                        $0.position = selection!.node.position
+                    }
+                    selection!.node.parent!.addChildNode(marken!)
+                    overRay?.label_scale.text = (
+                        "Scale: \(String(describing: selection!.node.scale.xyz))"
+                    )
+                    
+                default:
+                    break
                 }
             }
 
@@ -455,7 +475,7 @@ class GameView: SCNView {
                         )
                     }
                     overRay?.label_position.text = (
-                        "Position : \(String(describing: selection!.node.position.xyz))"
+                        "Position: \(String(describing: selection!.node.position.xyz))"
                     )
                 }
                 marken!.removeFromParentNode()

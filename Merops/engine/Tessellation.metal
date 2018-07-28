@@ -5,11 +5,9 @@
 //  Created by M.Ike on 2017/01/29.
 //  Copyright © 2017年 M.Ike. All rights reserved.
 //
-
 #include "Common.metal"
 
 typedef VertexInput ControlPoint;
-
 
 struct PatchIn {
     patch_control_point <ControlPoint> controlPoints;

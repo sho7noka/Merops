@@ -8,23 +8,28 @@ using namespace metal;
 
 #define lightDirection float3(1/1.73, 1/1.73, 1/1.73)
 
-kernel void compute(texture2d<float, access::write> output [[texture(0)]],
-                    constant float2 &mouse [[buffer(1)]],
-                    device float2 *out [[buffer(2)]],
-                    uint2 gid [[thread_position_in_grid]])
+kernel void
+compute(texture2d<float, access::write> output [[texture(0)]],
+        constant float2 &mouse [[buffer(1)]],
+        device float2 *out [[buffer(2)]],
+        uint2 gid [[thread_position_in_grid]])
 {
     out[0] = mouse[0];
     out[1] = mouse[1];
     output.write(float4(0, 0.5, 0.5, 1), gid);
 }
 
-struct VertexIn {
+struct
+VertexIn {
     float4 position [[ attribute(0) ]];
 };
-vertex float4 vertex_main(const VertexIn vertex_in [[ stage_in ]]) {
+
+vertex float4
+vertex_main(const VertexIn vertex_in [[ stage_in ]]) {
     return vertex_in.position;
 }
-fragment float4 fragment_main() {
+fragment float4
+fragment_main() {
     return float4(1, 0, 0, 1);
 }
 

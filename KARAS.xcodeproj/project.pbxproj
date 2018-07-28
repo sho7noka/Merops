@@ -110,9 +110,9 @@
 				EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */,
 				E281B7AB20B94CBB00232181 /* Shaders.metal */,
 				E281B7AD20B94CCA00232181 /* Common.metal */,
-				ED2221822021E17C00427606 /* DeformCompute.metal */,
 				E281B7AE20B94CCA00232181 /* Lambert.metal */,
 				E281B7AF20B94CCA00232181 /* Tessellation.metal */,
+				ED2221822021E17C00427606 /* DeformCompute.metal */,
 				E281B79C20B94CAE00232181 /* Skinning.metal */,
 			);
 			name = shader;
@@ -177,6 +177,7 @@
 		EDA91BA41FF159BD00E14B8D /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				94B26A86D92862E523CC392B /* Extensions.swift */,
 				E281B7B420B950A500232181 /* MetalTessellation */,
 				EDB683432025D59400AD75EE /* adapter */,
 				E281B7B320B94CE700232181 /* shader */,
@@ -213,7 +214,6 @@
 		EDB683432025D59400AD75EE /* adapter */ = {
 			isa = PBXGroup;
 			children = (
-				94B26A86D92862E523CC392B /* Extensions.swift */,
 				E281B79D20B94CAE00232181 /* driverMatX.h */,
 				E281B79820B94CAD00232181 /* driverMatX.mm */,
 				EDCAB6EB201F48EC00674C38 /* adapterUsd.h */,

@@ -7,23 +7,27 @@ import Metal
 import MetalKit
 import SceneKit
 
-class MetalRender {
-    let device: MTLDevice
-    
-    init(device: MTLDevice) {
-        self.device = device
-    }
+/// - Tag: engine
+class MetalRender : SCNRenderer {
     
     var library: MTLLibrary {
-        return self.device.makeDefaultLibrary()!
+        return self.device!.makeDefaultLibrary()!
     }
-
-    func commandQueue() -> MTLCommandQueue! {
-        return self.device.makeCommandQueue()
+    
+    var vertexFunction: MTLFunction {
+        return self.library.makeFunction(name: "vertex_main")!
+    }
+    
+    var fragmentFunction: MTLFunction {
+        return self.library.makeFunction(name: "fragment_main")!
+    }
+    
+    var mouseFunction : MTLFunction {
+        return self.library.makeFunction(name: "compute")!
     }
 
     func commandBuffer() -> MTLCommandBuffer! {
-        let buffer = self.commandQueue().makeCommandBuffer()
+        let buffer = self.commandQueue?.makeCommandBuffer()
         buffer!.label = "deform buffer"
         return buffer
     }
@@ -38,9 +42,9 @@ class MetalRender {
 
     func renderPipelineDescriptor() -> MTLRenderPipelineDescriptor {
         let renderPipeDescriptor = MTLRenderPipelineDescriptor()
-        renderPipeDescriptor.depthAttachmentPixelFormat = .bgra8Unorm
-        renderPipeDescriptor.stencilAttachmentPixelFormat = .bgra8Unorm
-        renderPipeDescriptor.tessellationControlPointIndexType = .uint16
+//        renderPipeDescriptor.depthAttachmentPixelFormat = .depth16Unorm
+//        renderPipeDescriptor.stencilAttachmentPixelFormat = .stecil
+//        renderPipeDescriptor.tessellationControlPointIndexType = .uint16
         return renderPipeDescriptor
     }
 }
@@ -55,16 +59,21 @@ struct MetalPrimitiveData {
 class MetalPrimitiveHandle {
     var device: MTLDevice?
     var library: MTLLibrary?
+    
+    var render: MetalRender
     var view: SCNView
     
-    init (device: MTLDevice, library: MTLLibrary, view: SCNView){
-        self.device = device
-        self.library = library
+    init (render: MetalRender, view: SCNView){
+        self.device = render.device
+        self.library = render.library
+        
+        self.render = render
         self.view = view
     }
     
     /// - Tag: DrawOverride
     func typeRender(prim: MetalPrimitiveData) {
+        Swift.print(prim.vertex)
         switch prim.type {
         case .point:
             metalRender(node: prim.node, type: .point)
@@ -88,8 +97,6 @@ class MetalPrimitiveHandle {
             fatalError("Could not create a command queue")
         }
         let allocator = MTKMeshBufferAllocator(device: device!)
-        let vertexFunction = library?.makeFunction(name: "vertex_main")
-        let fragmentFunction = library?.makeFunction(name: "fragment_main")
         
         // Mesh
 //        let mdlMesh = MDLMesh(scnNode: node, bufferAllocator: allocator)
@@ -109,16 +116,14 @@ class MetalPrimitiveHandle {
             }
             
             // descriptor
-            let descriptor = MTLRenderPipelineDescriptor()
-            let passDescripter = MTLRenderPassDescriptor()
+            let descriptor = render.renderPipelineDescriptor()
+            let passDescripter = render.renderPassDescriptor()
+            
             descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm_srgb
-            descriptor.vertexFunction = vertexFunction
-            descriptor.fragmentFunction = fragmentFunction
+            descriptor.vertexFunction = render.vertexFunction
+            descriptor.fragmentFunction = render.fragmentFunction
             descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh.vertexDescriptor)
             passDescripter.colorAttachments[0].texture = drawable.texture
-            passDescripter.colorAttachments[0].loadAction = .clear
-            passDescripter.colorAttachments[0].storeAction = .store
-            passDescripter.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 0, 1.0)
             
             // buffer & renderEncoder
             guard let commandBuffer = commandQueue.makeCommandBuffer(),
@@ -126,6 +131,7 @@ class MetalPrimitiveHandle {
             else {
                 fatalError()
             }
+            commandBuffer.pushDebugGroup("Override encoder")
             let pipelineState = try device!.makeRenderPipelineState(descriptor: descriptor)
             renderEncoder.setRenderPipelineState(pipelineState)
             renderEncoder.setVertexBuffer(mesh.vertexBuffers[0].buffer, offset: 0, index: 0)
@@ -134,10 +140,12 @@ class MetalPrimitiveHandle {
                                                 indexType: submesh.indexType,
                                                 indexBuffer: submesh.indexBuffer.buffer,
                                                 indexBufferOffset: 0)
+            renderEncoder.setTriangleFillMode(.lines)
             renderEncoder.endEncoding()
             commandBuffer.present(drawable)
             commandBuffer.commit()
             commandBuffer.waitUntilCompleted()
+            commandBuffer.popDebugGroup()
             
         } catch {
             Swift.print("Error info: \(error)")
