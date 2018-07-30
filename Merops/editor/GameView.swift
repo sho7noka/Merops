@@ -72,7 +72,6 @@ class GameView: SCNView {
             
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()
             commandEncoder?.setComputePipelineState(cps)
-            //            commandEncoder?.setTexture(drawable.texture, index: 0)
             commandEncoder?.setBuffer(mouseBuffer, offset: 0, index: 1)
             commandEncoder?.setBuffer(outBuffer, offset: 0, index: 2)
             
@@ -81,7 +80,8 @@ class GameView: SCNView {
             let threadGroupCount = MTLSizeMake(1, 1, 1)
             let threadGroups = MTLSizeMake(
                 drawable.texture.width / threadGroupCount.width,
-                drawable.texture.height / threadGroupCount.height, 1)
+                drawable.texture.height / threadGroupCount.height, 1
+            )
             commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
             commandEncoder?.endEncoding()
             commandBuffer.present(drawable)
@@ -110,21 +110,28 @@ class GameView: SCNView {
     }
     
     var cameraName = "camera" {
+        willSet {
+            self.root.enumerateChildNodes({ child, _ in
+                if let camera = child.camera {
+                    Swift.print(camera.name)
+                }
+            })
+            self.pointOfView?.position
+        }
         didSet {
-            self.overRay?.label_message.text = cameraName + " " + mode.toString
-            self.overRay?.label_message.fontColor = Color.white
-            self.pointOfView?.position = (self.node(name: cameraName)?.position)!
+            self.pointOfView = self.node(name: cameraName)
+            self.overRay?.label_message.text = cameraName + " / " + mode.toString
         }
     }
     
     var mode = EditContext.PositionMode {
         didSet {
-            self.overRay?.label_message.text = cameraName + " " + mode.toString
+            self.overRay?.label_message.text = cameraName + " / " + mode.toString
             self.overRay?.label_message.fontColor = Color.white
         }
     }
     
-    var isDeforming = false {
+    var isDeforming = true {
         didSet {
             self.gestureRecognizers.forEach {
                 $0.isEnabled = !isDeforming
@@ -143,7 +150,7 @@ class GameView: SCNView {
         p = self.convert(event.locationInWindow, from: nil)
         let hitResults = self.hitTest(p, options: options)
         let position = convertToLayer(p)
-        let scale = Float(self.layer!.contentsScale)
+        let scale = Float((self.layer?.contentsScale)!)
         pos.x = Float(position.x) * scale
         pos.y = Float(bounds.height - position.y) * scale
         
@@ -151,6 +158,7 @@ class GameView: SCNView {
             selectedNode = hit.node
             zDepth = self.projectPoint(selectedNode.position).z
         }
+        let queue = OperationQueue()
         
         // MARK: overray
         let _p = overRay?.convertPoint(fromView: event.locationInWindow)
@@ -168,7 +176,15 @@ class GameView: SCNView {
                 Builder.Torus(scene: self.scene!)
                 
             case "cyan":
-                isDeforming = true
+                cameraName = "camera1"
+                
+            case "magenta":
+                cameraName = "camera"
+                
+            case "black":
+                let setwindow = SettingDialog()
+                self.addSubview(setwindow)
+                
                 
             /// - Tag: TextField (x-source-tag://TextField)
             case "Name":
@@ -193,7 +209,7 @@ class GameView: SCNView {
                                 return selNode.position.y
                             }
                             return selNode.position.z
-                        }().rounded())
+                        }())
                         item.placeholderString = { () -> String in
                             if i == 0 {
                                 return "positionX"
@@ -215,12 +231,12 @@ class GameView: SCNView {
                     for (i, item) in numFields.enumerated() {
                         item.stringValue = String(describing: { () -> CGFloat in
                             if i == 0 {
-                                return selNode.rotation.x
+                                return selNode.eulerAngles.x
                             } else if i == 1 {
-                                return selNode.rotation.y
+                                return selNode.eulerAngles.y
                             }
-                            return selNode.rotation.z
-                        }().rounded())
+                            return selNode.eulerAngles.z
+                        }())
                         item.placeholderString = { () -> String in
                             if i == 0 {
                                 return "rotationX"
@@ -231,7 +247,7 @@ class GameView: SCNView {
                         }()
                         item.isHidden = false
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 56)
-                        overRay?.label_position.text = "Rotate"
+                        overRay?.label_rotate.text = "Rotate"
                     }
                 }
                 
@@ -247,7 +263,7 @@ class GameView: SCNView {
                                 return selNode.scale.y
                             }
                             return selNode.scale.z
-                        }().rounded())
+                        }())
                         item.placeholderString = { () -> String in
                             if i == 0 {
                                 return "scaleX"
@@ -258,43 +274,32 @@ class GameView: SCNView {
                         }()
                         item.isHidden = false
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 76)
-                        overRay?.label_position.text = "Scale"
+                        overRay?.label_scale.text = "Scale"
                     }
                 }
-                
             default:
-                overRay?.label_name.text = "Name"
-                overRay?.label_position.text = "Position"
-                overRay?.label_rotate.text = "Rotate"
-                overRay?.label_scale.text = "Scale"
-                overRay?.label_info.text = "Info"
+                break
             }
             
+            // finally
+            super.mouseDown(with: event)
             return
         }
         
-        
-        let result: AnyObject = hitResults[0]
-        if result is SCNHitTestResult {
-            selection = result as? SCNHitTestResult
-        }
-        let queue = OperationQueue()
-        
         // MARK: SCNNode
-        if let selNode = selection?.node {
-            
+        if hitResults.count > 0 {
+            let result: AnyObject = hitResults[0]
+            if result is SCNHitTestResult {
+                selection = result as? SCNHitTestResult
+            }
+            guard let selNode = selection?.node else {
+                return
+            }
             // reset color
             clearView()
             selNode.geometry!.firstMaterial!.emission.contents = (
                 (selNode.geometry != nil) ? Color.red : Color.yellow
             )
-            
-            // HUD info
-            overRay?.label_name.text = "Name: \(String(describing: selNode.name!))"
-            overRay?.label_position.text = "Position: \(String(describing: selNode.position.xyz))"
-            overRay?.label_rotate.text = "Rotate: \(String(describing: selNode.rotation.xyzw))"
-            overRay?.label_scale.text = "Scale: \(selNode.scale.xyz)"
-            overRay?.label_info.text = "Info: \(selNode.scale.xyz)"
             
             // Show Gizmo
             gizmos.forEach {
@@ -302,6 +307,14 @@ class GameView: SCNView {
                 $0.position = selNode.position
                 $0.isHidden = true
             }
+            
+            // HUD info
+            overRay?.label_name.text = "Name: \(String(describing: selNode.name!))"
+            overRay?.label_position.text = "Position: \(String(describing: selNode.position.xyz))"
+            overRay?.label_rotate.text = "Rotate: \(String(describing: selNode.eulerAngles.xyz))"
+            overRay?.label_scale.text = "Scale: \(selNode.scale.xyz)"
+            overRay?.label_info.text = "Info: \(selNode.scale.xyz)"
+
             switch mode {
             case .PositionMode:
                 node(name: "pos")?.isHidden = false
@@ -341,9 +354,13 @@ class GameView: SCNView {
                 self.gizmos.forEach {
                     $0.removeFromParentNode()
                 }
+                self.overRay?.label_name.text = "Name"
+                self.overRay?.label_position.text = "Position"
+                self.overRay?.label_rotate.text = "Rotate"
+                self.overRay?.label_scale.text = "Scale"
+                self.overRay?.label_info.text = "Info"
             }
         }
-        
         super.mouseDown(with: event)
     }
     
@@ -357,10 +374,10 @@ class GameView: SCNView {
         var hitTests = self.hitTest(mouse, options: nil)
         let result = hitTests[0]
 
-        if isDeforming {
+        if isDeforming && mode == .Object {
             let loc = result.localCoordinates
-            let globalDir = self.cameraZaxis(self) * -1
-            let localDir = result.node.convertPosition(globalDir, from: nil)
+//            let globalDir = self.cameraZaxis(self) * -1
+//            let localDir = result.node.convertPosition(globalDir, from: nil)
             deformData = DeformData(location: float3(loc),
                 direction: float3(loc),
                 radiusSquared: 16.0, deformationAmplitude: 1.5, pad1: 0, pad2: 0
@@ -377,7 +394,7 @@ class GameView: SCNView {
              z: zDepth))
          */
 
-        if selection != nil && mode == EditContext.PositionMode {
+        if selection != nil {
             var unPoint = self.unprojectPoint(SCNVector3(x: mouse.x, y: mouse.y, z: 0.0))
             let p1 = selection!.node.parent!.convertPosition(unPoint, from: nil)
             unPoint = self.unprojectPoint(SCNVector3(x: mouse.x, y: mouse.y, z: 1.0))
@@ -392,15 +409,35 @@ class GameView: SCNView {
             )
             let offset = (hit - hit_old) * 100
             hit_old = hit
+            Swift.print(offset)
 
             if marken != nil {
-                marken!.position = marken!.position + offset
+                switch mode {
+                    
+                case .PositionMode:
+                    marken!.position = marken!.position + offset
+                    overRay?.label_position.text = (
+                        "Position: \(String(describing: marken!.position.xyz))"
+                    )
+                    
+                case .RotateMode:
+                    marken!.eulerAngles = marken!.eulerAngles + offset
+                    overRay?.label_rotate.text = (
+                        "Rotate: \(String(describing: marken!.eulerAngles.xyz))"
+                    )
+                    
+                case .ScaleMode:
+                    marken!.scale = marken!.scale + offset
+                    overRay?.label_scale.text = (
+                        "Scale: \(String(describing: marken!.scale.xyz))"
+                    )
+                    
+                default:
+                    break
+                }
                 gizmos.forEach {
                     $0.position = marken!.position + offset
                 }
-                overRay?.label_position.text = (
-                    "Position : \(String(describing: selection!.node.position.xyz))"
-                )
 
             } else {
                 marken = selection!.node.clone()
@@ -411,33 +448,22 @@ class GameView: SCNView {
                 pixellateFilter?.name = "pixellate"
                 marken!.filters = [ pixellateFilter, invertFilter ] as? [CIFilter]
 
-                switch part {
-
-                // TODO
-                case .OverrideVertex, .OverrideFace, .OverrideEdge:
-                    break
-                    
-                default:
-                    break
-                }
-
                 switch mode {
                     
                 case .PositionMode:
                     marken!.position = selection!.node.position
-                    gizmos.forEach {
-                        $0.position = selection!.node.position
-                    }
-                    selection!.node.parent!.addChildNode(marken!)
                     overRay?.label_position.text = (
                         "Position: \(String(describing: selection!.node.position.xyz))"
                     )
+                    
+                case .RotateMode:
+                    marken!.rotation = selection!.node.rotation
+                    overRay?.label_rotate.text = (
+                        "Rotate: \(String(describing: selection!.node.eulerAngles.xyz))"
+                    )
+                
                 case .ScaleMode:
                     marken!.scale = selection!.node.scale
-                    gizmos.forEach {
-                        $0.position = selection!.node.position
-                    }
-                    selection!.node.parent!.addChildNode(marken!)
                     overRay?.label_scale.text = (
                         "Scale: \(String(describing: selection!.node.scale.xyz))"
                     )
@@ -445,6 +471,10 @@ class GameView: SCNView {
                 default:
                     break
                 }
+                gizmos.forEach {
+                    $0.position = selection!.node.position
+                }
+                selection!.node.parent!.addChildNode(marken!)
             }
 
         } else {
@@ -459,23 +489,38 @@ class GameView: SCNView {
                 marken!.filters = nil
                 
             } else {
-                switch part {
+                
+                switch mode {
                     
-                // TODO
-                case .OverrideVertex, .OverrideFace, .OverrideEdge:
-                    break
-
-                default:
+                case .PositionMode:
                     selection!.node.position = selection!.node.convertPosition(
                         marken!.position, from: selection!.node
                     )
-                    gizmos.forEach {
-                        $0.position = selection!.node.convertPosition(
-                            marken!.position, from: selection!.node
-                        )
-                    }
                     overRay?.label_position.text = (
                         "Position: \(String(describing: selection!.node.position.xyz))"
+                    )
+                case .RotateMode:
+                    selection!.node.eulerAngles = selection!.node.convertVector(
+                        marken!.eulerAngles, from: selection!.node
+                    )
+                    overRay?.label_rotate.text = (
+                        "Rotate: \(String(describing: selection!.node.eulerAngles.xyz))"
+                    )
+                case .ScaleMode:
+                    selection!.node.position = selection!.node.convertVector(
+                        marken!.scale, from: selection!.node
+                    )
+                    overRay?.label_scale.text = (
+                        "Scale: \(String(describing: selection!.node.position.xyz))"
+                    )
+                    
+                default:
+                    break
+                }
+                
+                gizmos.forEach {
+                    $0.position = selection!.node.convertPosition(
+                        marken!.position, from: selection!.node
                     )
                 }
                 marken!.removeFromParentNode()
@@ -596,7 +641,7 @@ class GameView: SCNView {
             gizmos.forEach {
                 $0.isHidden = true
             }
-        case "\r":
+        case "\r": //Enter
             break
         default:
             break

@@ -12,7 +12,9 @@ import SpriteKit
 import SceneKit
 import QuartzCore
 //import ImGui
+import Python
 
+#if os(OSX)
 extension SuperViewController: NSControlTextEditingDelegate {
     open override func controlTextDidEndEditing(_ notification: Notification) {
         if let textField = notification.object as? TextView {
@@ -27,11 +29,11 @@ extension SuperViewController: NSControlTextEditingDelegate {
             case "positionZ":
                 node?.position.z = CGFloat(textField.doubleValue)
             case "rotationX":
-                node?.rotation.x = CGFloat(textField.doubleValue)
+                node?.eulerAngles.x = CGFloat(textField.doubleValue)
             case "rotationY":
-                node?.rotation.y = CGFloat(textField.doubleValue)
+                node?.eulerAngles.y = CGFloat(textField.doubleValue)
             case "rotationZ":
-                node?.rotation.z = CGFloat(textField.doubleValue)
+                node?.eulerAngles.z = CGFloat(textField.doubleValue)
             case "scaleX":
                 node?.scale.x = CGFloat(textField.doubleValue)
             case "scaleY":
@@ -41,11 +43,16 @@ extension SuperViewController: NSControlTextEditingDelegate {
             default:
                 break
             }
+            
+            (self as! GameViewController).gameView.gizmos.forEach {
+                $0.position = (node?.position)!
+            }
         }
     }
 }
+#endif
 
-class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextFieldDelegate {
+class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
     
     // base
     var scene = SCNScene()
@@ -63,13 +70,13 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
     var primData: MetalPrimitiveData!
     var primHandle: MetalPrimitiveHandle!
     
-    @objc func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+    @objc
+    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         /// - Tag: DrawOverride
         if let primData = gameView.prim {
             primHandle.typeRender(prim: primData)
-//            let d = gameView.metalLayer.nextDrawable()?.layer
-//            render.scene = (d as! SCNLayer).scene
         }
+
         // Mark: Deformer
         guard let deformData = gameView.deformData else {
             return
@@ -128,7 +135,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         let newNode = Builder.Plane(
             meshData: MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
         )
-        
 //        let (min, max) = newNode.boundingBox
 //        let x = CGFloat(max.x - min.x)
 //        let y = CGFloat(max.y - min.y)
@@ -144,6 +150,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
         
         Builder.Camera(scene: scene)
         Builder.Light(scene: scene)
+        Builder.Camera(scene: scene, name: "camera1", position: SCNVector3(0, 0, 10))
         
         // gizmos
         [PositionNode(), ScaleNode(), RotateNode()].forEach{
@@ -162,16 +169,15 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, NSTextF
 //        Builder.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
-//        gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
-//        gameView.subView?.scene = SCNScene()
-//        gameView.subView?.allowsCameraControl = true
-//        gameView.subView?.backgroundColor = .clear
-//        gameView.subView?.isPlaying = true
-//        let geo = SCNNode(geometry: SCNSphere(radius: 5))
-//        geo.categoryBitMask = NodeOptions.noExport.rawValue
-//        geo.geometry?.firstMaterial?.diffuse.contents = Color.white
-//        gameView.subView?.scene?.rootNode.addChildNode(geo)
-//        gameView.addSubview(gameView.subView!)
+        gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
+        gameView.subView?.scene = SCNScene()
+        gameView.subView?.allowsCameraControl = true
+        gameView.subView?.backgroundColor = .clear
+        gameView.subView?.isPlaying = true
+        let pos = PositionNode()
+        pos.isHidden = false
+        gameView.subView?.scene?.rootNode.addChildNode(pos)
+        gameView.addSubview(gameView.subView!)
         
         // MARK: Overray
         gameView.overlaySKScene = GameViewOverlay(view: gameView)

@@ -75,8 +75,6 @@ final class USDExporter {
 
         USDExporter.initialize(scene: scene)
 
-        var keeps: [SCNNode] = []
-
         // MARK: Y-Up
         scene.rootNode.name = "root"
         let asset = MDLAsset(scnScene: scene)
@@ -103,7 +101,6 @@ final class USDExporter {
             
             // MARK: skin
             if (child.skinner != nil) {
-                child.skinner?.skeleton
                 let exportFile = userDocument(fileName: "skin.usd")
                 try! asset.exportWriter(to: exportFile, text: "\ndef Cube \"cy\" {\n}")
             }
@@ -152,7 +149,7 @@ extension MDLAsset {
     func exportWriter(to: URL, text: String) throws {
         try self.export(to: to)
 //        USDCat(infile: exportFile.path, outfile: exportFile.path)
-        write(url: to, text: text)
+        let _ = write(url: to, text: text)
     }
 }
 

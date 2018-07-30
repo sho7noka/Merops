@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ED32B9591EB5D298000D8823"
-               BuildableName = "KARAS.app"
-               BlueprintName = "KARAS"
-               ReferencedContainer = "container:KARAS.xcodeproj">
+               BuildableName = "Merops.app"
+               BlueprintName = "Merops"
+               ReferencedContainer = "container:Merops.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,9 +48,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ED32B9591EB5D298000D8823"
-            BuildableName = "KARAS.app"
-            BlueprintName = "KARAS"
-            ReferencedContainer = "container:KARAS.xcodeproj">
+            BuildableName = "Merops.app"
+            BlueprintName = "Merops"
+            ReferencedContainer = "container:Merops.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

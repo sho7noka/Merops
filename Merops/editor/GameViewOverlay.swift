@@ -136,6 +136,7 @@ internal class ManipulatorBase: SCNNode, SCNNodeRendererDelegate {
     let offset = SCNFloat(8.0 / 2.0)
     let axisSide = SCNFloat(0.2)
     let radius = SCNFloat(0.2)
+    let opaque = CGFloat(0.1)
 
     required override init() {
         super.init()
@@ -145,7 +146,19 @@ internal class ManipulatorBase: SCNNode, SCNNodeRendererDelegate {
     }
     
     func renderNode(_ node: SCNNode, renderer: SCNRenderer, arguments: [String: Any]) {
-        
+        if let commandQueue = renderer.commandQueue {
+            if let encoder = renderer.currentRenderCommandEncoder {
+                
+//                let projMat = float4x4.init((self.sceneView.pointOfView?.camera?.projectionTransform)!)
+//                let modelViewMat = float4x4.init((self.sceneView.pointOfView?.worldTransform)!).inverse
+//                
+//                self.metalScene.render(commandQueue: commandQueue,
+//                                       renderEncoder: encoder,
+//                                       parentModelViewMatrix: modelViewMat,
+//                                       projectionMatrix: projMat)
+                
+            }
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -206,7 +219,7 @@ final class PositionNode: ManipulatorBase {
         let control = SCNBox(width: axisLen, height: axisLen, length: axisLen, chamferRadius: 0)
         control.firstMaterial?.diffuse.contents = Color.gray
         let controlNode = SCNNode(geometry: control)
-        controlNode.opacity = 0.05
+        controlNode.opacity = opaque
         controlNode.position = SCNVector3Make(xLine.width / 2, axisLen / 2, zLine.width / 2)
 
         // append
@@ -266,7 +279,7 @@ final class RotateNode: ManipulatorBase {
         let control = SCNSphere(radius: 8)
         control.firstMaterial?.diffuse.contents = Color.gray
         let controlNode = SCNNode(geometry: control)
-        controlNode.opacity = 0.05
+        controlNode.opacity = opaque
 
         xCircleNode.name = "xrotate"
         yCircleNode.name = "yrotate"
@@ -333,7 +346,7 @@ final class ScaleNode: ManipulatorBase {
         let control = SCNBox(width: axisLen, height: axisLen, length: axisLen, chamferRadius: 0)
         control.firstMaterial?.diffuse.contents = Color.gray
         let controlNode = SCNNode(geometry: control)
-        controlNode.opacity = 0.05
+        controlNode.opacity = opaque
         controlNode.position = SCNVector3Make(xLine.width / 2, axisLen / 2, zLine.width / 2)
 
         // append

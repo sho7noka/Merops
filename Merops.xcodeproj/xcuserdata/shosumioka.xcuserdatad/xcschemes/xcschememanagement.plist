@@ -9,13 +9,18 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Merops-ios.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>ED32B9591EB5D298000D8823</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -52,6 +52,7 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - [ ] Metal2 でモディファイヤ ml/noise/lattice/edit 
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
 - [ ] USD 0.85 を組み込む / C++ のビルド
+- [ ] [simd](https://developer.apple.com/videos/play/wwdc2018/701/)  [](https://developer.apple.com/documentation/accelerate/simd/rotating_a_cube_by_transforming_its_vertices)
 
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
 先に以下の設定が必要。
@@ -87,7 +88,7 @@ renderCommandEncoder.popDebugGroup()
 #### Research Level
 - intelligent shape (Swift for TensorFlow) 
 - USD + Alembic の2枚構成を実現(add json)
-- iPadPro compatible
+- [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 
 
 
@@ -96,7 +97,9 @@ renderCommandEncoder.popDebugGroup()
 
 
 ##### tips
+- ARKit で作られたアプリは Scenekit ベースが多く、応用に Metal 使うので参考になる
 - render 内で `thorows` 使うと render 使えない(オーバーロード扱いされない)
+- SCNView layer は iOS/macOS 両方で扱える
 
 ##### snippets
 - `/// - Tag: TextField (x-source-tag://TextField)`
@@ -105,5 +108,6 @@ renderCommandEncoder.popDebugGroup()
 metalLayer = self.layer as? CAMetalLayer
 if let drawable = metalLayer.nextDrawable()
 
+// https://developer.apple.com/documentation/scenekit/scnnode/1407998-hittestwithsegment
 child.hitTestWithSegment(from: <#T##SCNVector3#>, to: <#T##SCNVector3#>, options: <#T##[String : Any]?#>)
 ```

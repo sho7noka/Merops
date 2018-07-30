@@ -5,6 +5,6 @@
       location = "group:Merops.playground">
    </FileRef>
    <FileRef
-      location = "container:KARAS.xcodeproj">
+      location = "container:/Users/shosumioka/Merops/Merops.xcodeproj">
    </FileRef>
 </Workspace>

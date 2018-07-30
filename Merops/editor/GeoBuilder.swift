@@ -54,6 +54,7 @@ final class Builder {
 
     class func Camera(scene: SCNScene, name: String = "camera", position: SCNVector3 = SCNVector3(x: 0, y: 5, z: 30)) {
         let camera = SCNCamera()
+        camera.name = name
         camera.zNear = 1
         camera.zFar = 100000
         

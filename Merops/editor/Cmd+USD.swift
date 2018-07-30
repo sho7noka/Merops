@@ -87,12 +87,7 @@ private func stdOutOfCommand(cmd: String, arguments args: [String],
 
     let pipe: Pipe = Pipe()
     task.standardOutput = pipe
-    do {
-        try task.launch()
-    } catch {
-
-    }
-
+    try? task.launch()
     let out: NSData = pipe.fileHandleForReading.readDataToEndOfFile() as NSData
     let outStr = NSString(data: out as Data, encoding: String.Encoding.utf8.rawValue)
     return outStr == nil

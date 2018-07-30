@@ -377,9 +377,7 @@ class MeshDrawer {
         frameUniformBuffer = device.makeBuffer(length: MemoryLayout<FrameUniforms>.size, options: [])!
         
         render = MetalRender(device: device)
-        let model = HalfEdgeStructure.LoadModel(device: device, name: "realship", reduction: 2300)
-
-
+//        let model = HalfEdgeStructure.LoadModel(device: device, name: "realship", reduction: 2300)
 //        let tex = world.mtlEz.loader.loadTexture(name: "shipDiffuse", type: "png")
 //        let mesh = world.mtlEz.loader.loadMesh(name: "realship")
 //        let d = MetalEz.MeshDrawer(mtlEz: world.mtlEz ,mesh: mesh, texture: tex)
@@ -387,13 +385,13 @@ class MeshDrawer {
         
 //        var mdlBff = world.mtlEz.line.makeVertexBuffer(count: model.polygons.count * 3 * 2)
 //        var pnts = [MetalEzLineRendererPoint]()
-        for (_, fullEdge) in model.fullEdges {
+//        for (_, fullEdge) in model.fullEdges {
 //            pnts.append(MetalEzLineRendererPoint(point: fullEdge.startVertex.toFloat4))
 //            pnts.append(MetalEzLineRendererPoint(point: fullEdge.endVertex.toFloat4))
-        }
+//        }
 //        world.mtlEz.line.set(points: pnts, buffer: &mdlBff)
 //        mdlBffs.append(mdlBff)
-        let vertexCount = model.polygons.count * 3 * 2
+//        let vertexCount = model.polygons.count * 3 * 2
 //        vertexCounts.append(vertexCount)
         
     }

@@ -14,6 +14,7 @@ public typealias Event = NSEvent
 public typealias View = NSView
 public typealias TextView = NSTextField
 public typealias GestureRecognizer = NSPanGestureRecognizer
+public typealias TextFieldDelegate = NSTextFieldDelegate
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -32,15 +33,17 @@ public typealias SuperViewController = UIViewController
 public typealias Color = UIColor
 public typealias Event = UIEvent
 public typealias View = UIView
-public typealias TextView = NSTextField
+public typealias TextView = UITextField
 public typealias GestureRecognizer = UIGestureRecognizer
+public typealias Float = CGFloat
+public typealias TextFieldDelegate = UITextFieldDelegate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
     }
 

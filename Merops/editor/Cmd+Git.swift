@@ -5,7 +5,12 @@
 //  Copyright © 2017年 sho sumioka. All rights reserved.
 //
 
+
+#if os(OSX)
 import Cocoa
+#elseif os(iOS)
+import UIKit
+#endif
 import ObjectiveGit
 
 /// - Tag: libgit
@@ -89,7 +94,7 @@ func gitDiff(url: String) {
         let repo = try GTRepository(url: URL(fileURLWithPath: url))
         let diff = try GTDiff(workingDirectoryToHEADIn: repo, options: nil)
         diff.enumerateDeltas({ delta, _ in
-            print(delta.oldFile?.path, delta.newFile?.path)
+            print(delta.oldFile?.path as Any, delta.newFile?.path as Any)
         })
     } catch {
         print(error)

@@ -14,26 +14,27 @@ final class Models {
 
     func copyModels() {
         models.removeAll()
-        var tmp: [SCNNode] = []
+        
+//        var tmp: [SCNNode] = []
 //        gameView.scene?.rootNode.enumerateChildNodes({ child, _ in
 //            if child.geometry != nil && child.categoryBitMask != 2 {
 //                tmp.append(child.clone())
 //            }
 //        })
-        models = tmp
+//        models = tmp
     }
 
     func setModels() {
         models.removeAll()
 
-        var tmp: [SCNNode] = []
+//        var tmp: [SCNNode] = []
 //        gameView.scene?.rootNode.enumerateChildNodes({ child, _ in
 //            if child.geometry != nil && child.categoryBitMask != 2 {
 //                tmp.append(child.clone())
 //                child.removeFromParentNode()
 //            }
 //        })
-        models = tmp
+//        models = tmp
     }
 
     func getModels() {
