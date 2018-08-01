@@ -110,4 +110,24 @@ if let drawable = metalLayer.nextDrawable()
 
 // https://developer.apple.com/documentation/scenekit/scnnode/1407998-hittestwithsegment
 child.hitTestWithSegment(from: <#T##SCNVector3#>, to: <#T##SCNVector3#>, options: <#T##[String : Any]?#>)
+
+func degreesToRadians(_ degrees: Float) -> Float {
+return degrees * .pi / 180
+}
+
+let sceneKitVertices = vertices.map {
+let cube = newNode.flattenedClone()
+cube.simdPosition = SCNVector3(x: $0.x, y: $0.y, z: $0.z)
+return cube
+}
+
+// scenekit で頂点作るパターン
+1. ジオメトリから simd vertex position を取得する
+2. cube を配置する
+
+scene.rootNode.replaceChildNode(<#T##oldChild: SCNNode##SCNNode#>, with: <#T##SCNNode#>)
+
+// Metal のバッファを後から取得する方法
+
+http://dsas.blog.klab.org/tag/3D
 ```
