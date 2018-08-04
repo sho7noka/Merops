@@ -30,6 +30,9 @@
 		E281B7B020B94CCB00232181 /* Common.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AD20B94CCA00232181 /* Common.metal */; };
 		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
+		E2BA751E2111E1FC008FF166 /* pybind11 in Resources */ = {isa = PBXBuildFile; fileRef = E2BA751D2111E1FC008FF166 /* pybind11 */; };
+		E2BA75202111E3CF008FF166 /* wrapPybind.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2BA751F2111E3CF008FF166 /* wrapPybind.mm */; };
+		E2BA75222111E6D7008FF166 /* MaterialX in Resources */ = {isa = PBXBuildFile; fileRef = E2BA75212111E6D7008FF166 /* MaterialX */; };
 		E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46114210D5D6F00C0DB39 /* Main.storyboard */; };
 		E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46119210D5D7100C0DB39 /* LaunchScreen.storyboard */; };
 		E2E46121210D5DE000C0DB39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
@@ -88,6 +91,9 @@
 		E281B7AE20B94CCA00232181 /* Lambert.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lambert.metal; sourceTree = "<group>"; };
 		E281B7AF20B94CCA00232181 /* Tessellation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Tessellation.metal; sourceTree = "<group>"; };
 		E281B7B420B950A500232181 /* MetalTessellation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalTessellation; sourceTree = "<group>"; };
+		E2BA751D2111E1FC008FF166 /* pybind11 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybind11; path = Merops/extra/pybind11; sourceTree = SOURCE_ROOT; };
+		E2BA751F2111E3CF008FF166 /* wrapPybind.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = wrapPybind.mm; sourceTree = "<group>"; };
+		E2BA75212111E6D7008FF166 /* MaterialX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MaterialX; path = Merops/extra/MaterialX; sourceTree = SOURCE_ROOT; };
 		E2E3044B210846A40068C9AD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
 		E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 				E281B79820B94CAD00232181 /* driverMatX.mm */,
 				EDCAB6EB201F48EC00674C38 /* adapterUsd.h */,
 				EDCAB6EC201F490200674C38 /* adapterUsd.mm */,
+				E2BA751F2111E3CF008FF166 /* wrapPybind.mm */,
 			);
 			name = adapter;
 			sourceTree = "<group>";
@@ -284,6 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				E21859FB210374AB00653DBD /* Plugins.md */,
+				E2BA75212111E6D7008FF166 /* MaterialX */,
+				E2BA751D2111E1FC008FF166 /* pybind11 */,
 			);
 			name = extra;
 			path = KARAS/extra;
@@ -398,7 +407,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BA751E2111E1FC008FF166 /* pybind11 in Resources */,
 				ED32B99A1EBA0629000D8823 /* ConsoleViewController.xib in Resources */,
+				E2BA75222111E6D7008FF166 /* MaterialX in Resources */,
 				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
 			);
@@ -453,6 +464,7 @@
 				E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */,
 				E281B79420B933E200232181 /* GeoBuilder.swift in Sources */,
 				ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */,
+				E2BA75202111E3CF008FF166 /* wrapPybind.mm in Sources */,
 				E281B7B020B94CCB00232181 /* Common.metal in Sources */,
 				E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */,
 				E21859FA21036D3400653DBD /* Serializer.swift in Sources */,
@@ -679,6 +691,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/USD/include",
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
+					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
+					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
+					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -691,6 +706,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -711,6 +727,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/USD/include",
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
+					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
+					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
+					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -722,6 +741,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
