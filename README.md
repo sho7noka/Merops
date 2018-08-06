@@ -89,6 +89,7 @@ renderCommandEncoder.popDebugGroup()
 - intelligent shape (Swift for TensorFlow) 
 - USD + Alembic の2枚構成を実現(add json)
 - [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
+- embed [Python](https://docs.python.jp/3/extending/embedding.html)
 
 
 

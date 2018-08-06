@@ -12,7 +12,6 @@ import SpriteKit
 import SceneKit
 import QuartzCore
 //import ImGui
-import Python
 
 #if os(OSX)
 extension SuperViewController: NSControlTextEditingDelegate {

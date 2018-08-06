@@ -7,16 +7,34 @@
 //
 
 #if os(OSX)
-import Cocoa
+    import Cocoa
 #elseif os(iOS)
-import UIKit
+    import UIKit
 #endif
 
-class SettingDialog: View {
 
+final class SettingDialog: View {
+    let colorPallete = NSColorPanel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder decoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
-class OutLiner: View {
+final class OutLiner: View {
+    let treeview = NSTreeNode()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder decoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
 
