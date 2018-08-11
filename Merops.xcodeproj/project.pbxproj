@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A86D92862E523CC392B /* Extensions.swift */; };
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
+		E2101239211EC136001664AD /* USD-bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDCAB6EC201F490200674C38 /* USD-bind.mm */; };
+		E210123A211EC13E001664AD /* USD-bind.h in Headers */ = {isa = PBXBuildFile; fileRef = EDCAB6EB201F48EC00674C38 /* USD-bind.h */; };
+		E210123B211EC14D001664AD /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
@@ -19,10 +22,10 @@
 		E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79220B933E200232181 /* GeoPrimitives.swift */; };
 		E281B79620B933E200232181 /* GeoRepricator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79320B933E200232181 /* GeoRepricator.swift */; };
 		E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */; };
-		E281B7A220B94CAE00232181 /* driverMatX.mm in Sources */ = {isa = PBXBuildFile; fileRef = E281B79820B94CAD00232181 /* driverMatX.mm */; };
+		E281B7A220B94CAE00232181 /* MaterialX-bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = E281B79820B94CAD00232181 /* MaterialX-bind.mm */; };
 		E281B7A420B94CAE00232181 /* Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79A20B94CAE00232181 /* Animate.swift */; };
 		E281B7A620B94CAE00232181 /* Skinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B79C20B94CAE00232181 /* Skinning.metal */; };
-		E281B7A720B94CAE00232181 /* driverMatX.h in Headers */ = {isa = PBXBuildFile; fileRef = E281B79D20B94CAE00232181 /* driverMatX.h */; };
+		E281B7A720B94CAE00232181 /* MaterialX-bind.h in Headers */ = {isa = PBXBuildFile; fileRef = E281B79D20B94CAE00232181 /* MaterialX-bind.h */; };
 		E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
 		E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E281B7AA20B94CAE00232181 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Models.swift */; };
@@ -60,13 +63,13 @@
 		ED32B99A1EBA0629000D8823 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9981EBA0629000D8823 /* ConsoleViewController.xib */; };
 		ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */; };
 		EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */; };
-		EDCAB6ED201F490200674C38 /* adapterUsd.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDCAB6EC201F490200674C38 /* adapterUsd.mm */; };
 		EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		94B26A86D92862E523CC392B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E2101237211EBE08001664AD /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = USD/lib; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		E21859FB210374AB00653DBD /* Plugins.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = Plugins.md; path = Merops/extra/Plugins.md; sourceTree = SOURCE_ROOT; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
@@ -78,11 +81,11 @@
 		E281B79220B933E200232181 /* GeoPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPrimitives.swift; sourceTree = "<group>"; };
 		E281B79320B933E200232181 /* GeoRepricator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoRepricator.swift; sourceTree = "<group>"; };
 		E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLSkinningMesh.swift; sourceTree = "<group>"; };
-		E281B79820B94CAD00232181 /* driverMatX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = driverMatX.mm; sourceTree = "<group>"; };
+		E281B79820B94CAD00232181 /* MaterialX-bind.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "MaterialX-bind.mm"; sourceTree = "<group>"; };
 		E281B79A20B94CAE00232181 /* Animate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animate.swift; sourceTree = "<group>"; };
 		E281B79B20B94CAE00232181 /* MTLTessellationRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLTessellationRenderer.swift; sourceTree = "<group>"; };
 		E281B79C20B94CAE00232181 /* Skinning.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Skinning.metal; sourceTree = "<group>"; };
-		E281B79D20B94CAE00232181 /* driverMatX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = driverMatX.h; sourceTree = "<group>"; };
+		E281B79D20B94CAE00232181 /* MaterialX-bind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MaterialX-bind.h"; sourceTree = "<group>"; };
 		E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLPolygonReduction.swift; sourceTree = "<group>"; };
 		E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLMeshDeformable.swift; sourceTree = "<group>"; };
 		E281B7A020B94CAE00232181 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -115,8 +118,8 @@
 		ED5CB5341F4A075400FF9CCA /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Merops-Bridging-Header.h"; sourceTree = "<group>"; };
 		EDA91BB41FF15D1D00E14B8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = extra/Assets.xcassets; sourceTree = "<group>"; };
 		EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
-		EDCAB6EB201F48EC00674C38 /* adapterUsd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adapterUsd.h; sourceTree = "<group>"; };
-		EDCAB6EC201F490200674C38 /* adapterUsd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = adapterUsd.mm; sourceTree = "<group>"; };
+		EDCAB6EB201F48EC00674C38 /* USD-bind.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "USD-bind.h"; sourceTree = "<group>"; };
+		EDCAB6EC201F490200674C38 /* USD-bind.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "USD-bind.mm"; sourceTree = "<group>"; };
 		EDEEFF531F8A35CB00E4785F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/Mac/ObjectiveGit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E210123B211EC14D001664AD /* lib in Frameworks */,
 				E2E46158210DE97800C0DB39 /* Python.framework in Frameworks */,
 				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
 			);
@@ -181,6 +185,7 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2101237211EBE08001664AD /* lib */,
 				E2E46157210DE97800C0DB39 /* Python.framework */,
 				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
 				ED2600A11F585E2D0031F4EF /* Quick.framework */,
@@ -265,10 +270,10 @@
 		EDB683432025D59400AD75EE /* adapter */ = {
 			isa = PBXGroup;
 			children = (
-				E281B79D20B94CAE00232181 /* driverMatX.h */,
-				E281B79820B94CAD00232181 /* driverMatX.mm */,
-				EDCAB6EB201F48EC00674C38 /* adapterUsd.h */,
-				EDCAB6EC201F490200674C38 /* adapterUsd.mm */,
+				E281B79D20B94CAE00232181 /* MaterialX-bind.h */,
+				E281B79820B94CAD00232181 /* MaterialX-bind.mm */,
+				EDCAB6EB201F48EC00674C38 /* USD-bind.h */,
+				EDCAB6EC201F490200674C38 /* USD-bind.mm */,
 				E2BA751F2111E3CF008FF166 /* wrapPybind.mm */,
 			);
 			name = adapter;
@@ -306,7 +311,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */,
-				E281B7A720B94CAE00232181 /* driverMatX.h in Headers */,
+				E281B7A720B94CAE00232181 /* MaterialX-bind.h in Headers */,
+				E210123A211EC13E001664AD /* USD-bind.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,21 +473,21 @@
 				E2BA75202111E3CF008FF166 /* wrapPybind.mm in Sources */,
 				E281B7B020B94CCB00232181 /* Common.metal in Sources */,
 				E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */,
+				E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */,
 				E21859FA21036D3400653DBD /* Serializer.swift in Sources */,
 				ED2221842021E17C00427606 /* DeformCompute.metal in Sources */,
 				E281B79620B933E200232181 /* GeoRepricator.swift in Sources */,
-				EDCAB6ED201F490200674C38 /* adapterUsd.mm in Sources */,
 				E281B79020B933D000232181 /* GameViewDialogs.swift in Sources */,
 				E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */,
 				E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */,
-				E281B7A220B94CAE00232181 /* driverMatX.mm in Sources */,
-				E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */,
+				E281B7A220B94CAE00232181 /* MaterialX-bind.mm in Sources */,
 				E281B7B120B94CCB00232181 /* Lambert.metal in Sources */,
 				E281B78C20B933B600232181 /* Cmd+Sketchfab.swift in Sources */,
 				E281B7A620B94CAE00232181 /* Skinning.metal in Sources */,
 				ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */,
 				E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */,
 				E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */,
+				E2101239211EC136001664AD /* USD-bind.mm in Sources */,
 				E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */,
 				E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */,
 				E281B7AA20B94CAE00232181 /* Models.swift in Sources */,
@@ -572,7 +578,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -601,7 +607,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -631,7 +637,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -660,7 +666,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -689,11 +695,11 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/USD/include",
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
-					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
+					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
+					"\"$(SRCROOT)/USD/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -725,11 +731,11 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/USD/include",
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
-					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
+					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
+					"\"$(SRCROOT)/USD/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
