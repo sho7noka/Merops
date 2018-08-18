@@ -166,22 +166,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "555665110.8197401"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -198,15 +182,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/Cmd+USD.swift"
-            timestampString = "555679986.137154"
+            timestampString = "556217237.05638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "stdOutOfCommand(cmd:arguments:currentDirPath:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -218,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/Cmd+USD.swift"
-            timestampString = "555679986.1394351"
+            timestampString = "556217237.056813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "stdOutOfCommand(cmd:arguments:currentDirPath:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -234,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/Cmd+USD.swift"
-            timestampString = "555679986.140149"
+            timestampString = "556217237.056901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "stdOutOfCommand(cmd:arguments:currentDirPath:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -250,11 +234,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/Cmd+USD.swift"
-            timestampString = "555679986.140836"
+            timestampString = "556217237.05697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "stdOutOfCommand(cmd:arguments:currentDirPath:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Merops/editor/Cmd+USD.swift"
+            timestampString = "556217237.057034"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "stdOutOfCommand(cmd:arguments:currentDirPath:)"
             landmarkType = "9">
          </BreakpointContent>

@@ -105,7 +105,6 @@
 		E2E4611C210D5D7100C0DB39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E46157210DE97800C0DB39 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
 		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
-		ED2600A11F585E2D0031F4EF /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		ED32B95A1EB5D298000D8823 /* Merops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED32B95D1EB5D298000D8823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED32B95F1EB5D298000D8823 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -188,7 +187,6 @@
 				E2101237211EBE08001664AD /* lib */,
 				E2E46157210DE97800C0DB39 /* Python.framework */,
 				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
-				ED2600A11F585E2D0031F4EF /* Quick.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -326,6 +324,7 @@
 				E2E46108210D5D6F00C0DB39 /* Sources */,
 				E2E46109210D5D6F00C0DB39 /* Frameworks */,
 				E2E4610A210D5D6F00C0DB39 /* Resources */,
+				E2AD5D9B212727FD0080F3F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -344,7 +343,7 @@
 				ED32B9571EB5D298000D8823 /* Frameworks */,
 				ED32B9581EB5D298000D8823 /* Resources */,
 				ED32B9841EB5DD02000D8823 /* Headers */,
-				ED24CD341F266249000CC0BB /* ShellScript */,
+				ED24CD341F266249000CC0BB /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -375,6 +374,11 @@
 						DevelopmentTeam = T7PKBR8T47;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -424,19 +428,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		ED24CD341F266249000CC0BB /* ShellScript */ = {
+		E2AD5D9B212727FD0080F3F2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework",
+			);
+			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		ED24CD341F266249000CC0BB /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\ncp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/Python\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

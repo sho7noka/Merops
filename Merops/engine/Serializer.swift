@@ -63,7 +63,7 @@ final class USDExporter {
 
     public static func initialize(scene: SCNScene) {
         let asset = MDLAsset(scnScene: scene)
-        let exportFile = userDocument(fileName: "geo.usd")
+        let exportFile = userDocument(fileName: "geo.usda")
 
         // export with ascii format
         gitInit(dir: exportFile.deletingLastPathComponent().path)
@@ -95,7 +95,7 @@ final class USDExporter {
 
             // MARK: light
             if (child.light != nil) {
-                let exportFile = userDocument(fileName: "light.usd")
+                let exportFile = userDocument(fileName: "light.usda")
                 try! asset.exportWriter(to: exportFile, text: "\ndef Cube \"cy\" {\n}")
             }
             
@@ -148,7 +148,7 @@ final class USDExporter {
 extension MDLAsset {
     func exportWriter(to: URL, text: String) throws {
         try self.export(to: to)
-//        USDCat(infile: exportFile.path, outfile: exportFile.path)
+//        USDCat(infile: to.path, outfile: to.path)
         let _ = write(url: to, text: text)
     }
 }

@@ -6,7 +6,6 @@
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
 //
 #if os(OSX)
-    
 import Cocoa
 public typealias SuperViewController = NSViewController
 public typealias Color = NSColor
@@ -21,8 +20,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var window: NSWindow!
     
+    func applicationDidBecomeActive(_ notification: Notification) {
+        Py_Initialize()
+        
+        PyRun_SimpleStringFlags("""
+import sys, os
+pwd = os.environ[\"PWD\"]
+os.environ[\"PATH\"] = pwd + \"/USD/bin\"
+os.environ[\"PATH\"] = pwd + \"/USD/lib\"
+os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
+sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
+os.chdir(os.path.join(pwd, \"USD/lib/python\"))
+print sys.path, os.getcwd()
+# from pxr import Tf; print Tf.__doc__
+""", nil)
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
+        Py_Finalize()
     }
 }
     

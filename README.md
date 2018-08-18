@@ -51,7 +51,7 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - [ ] Metal2 でテッセレーションとリダクション
 - [ ] Metal2 でモディファイヤ ml/noise/lattice/edit 
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
-- [ ] USD 0.85 を組み込む / C++ のビルド
+- [x] USD 0.85 を組み込む / C++ のビルド
 - [ ] [simd](https://developer.apple.com/videos/play/wwdc2018/701/)  [](https://developer.apple.com/documentation/accelerate/simd/rotating_a_cube_by_transforming_its_vertices)
 
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
@@ -132,3 +132,17 @@ scene.rootNode.replaceChildNode(<#T##oldChild: SCNNode##SCNNode#>, with: <#T##SC
 
 http://dsas.blog.klab.org/tag/3D
 ```
+
+https://github.com/mzyy94/ARKit-Live2D
+
+Xcode + Swift + python
+Bridging-header.h (#import SDK-bind.h)
+SDK-bind.h (C++を見せない)
+SDK-bind.mm (Objective-C++)
+SDK.h / SDK.lib (ビルド済)
+
+USD
+MaterialX
+Alembic
+usdz
+Houdini 17

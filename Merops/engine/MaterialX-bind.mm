@@ -6,16 +6,14 @@
 //  Copyright © 2018年 sho sumioka. All rights reserved.
 //
 
-#include "driverMatX.h"
-#include <MaterialXCore/Document.h>
+#import "MaterialX-bind.h"
+#import <MaterialXCore/Document.h>
 
-namespace MaterialX {
-    
 void setD() {
-    
-//    DocumentPtr doc = createDocument();
+    using namespace MaterialX;
+//    MaterialX::DocumentPtr doc = MaterialX::createDocument();
 //    // Create a node graph with a single image node and output.
-//    NodeGraphPtr nodeGraph = doc->addNodeGraph();
+//    MaterialX::NodeGraphPtr nodeGraph = doc->addNodeGraph();
 //    NodePtr image = nodeGraph->addNode("image");
 //    image->setParameterValue("file", "image1.tif", "filename");
 //    OutputPtr output = nodeGraph->addOutput();
@@ -31,6 +29,4 @@ void setD() {
 //    // Bind roughness to a new value within this material.
 //    BindParamPtr bindParam = shaderRef->addBindParam("roughness");
 //    bindParam->setValue(0.5f);
-}
-
 }

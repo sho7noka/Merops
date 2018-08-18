@@ -7,8 +7,9 @@
 //
 
 import Cocoa
+import Foundation
 
-private let rpath = "/Users/sumioka_air/Documents/KARAS" //NSHomeDirectory()
+private let rpath = Bundle.main.bundleURL.deletingLastPathComponent().path
 
 func USDStitch(out: String, files: String...) {
     if FileManager.default.fileExists(atPath: out) {
@@ -20,7 +21,7 @@ func USDStitch(out: String, files: String...) {
     }
 
     let ret = stdOutOfCommand(
-            cmd: rpath + "/USD/bin/usdstitch",
+            cmd: rpath + "USD/bin/usdstitch",
             arguments: ["--out", out, files.joined(separator: " ")]
     )
     print(ret)
@@ -28,16 +29,25 @@ func USDStitch(out: String, files: String...) {
 
 func USDDiff(file1: String, file2: String) {
     let ret = stdOutOfCommand(
-            cmd: rpath + "/USD/bin/usddiff", arguments: [file1, file2]
+            cmd: rpath + "USD/bin/usddiff", arguments: [file1, file2]
     )
     print(ret)
 }
 
 func USDCat(infile: String, outfile: String) {
     let ret = stdOutOfCommand(
-            cmd: rpath + "/USD/bin/usdcat", arguments: [
-        infile, "--out", outfile, "-f", "--usdFormat", "usda"
+            cmd: rpath + "USD/bin/usdcat", arguments: [
+            infile, "--out", outfile, "-f", "--usdFormat", "usda"
     ]
+    )
+    print(ret)
+}
+
+func USDZexport(infile: String, outfile: String) {
+    let ret = stdOutOfCommand(
+        cmd: rpath + "USD/bin/usdz", arguments: [
+            infile, "--out", outfile, "-f", "--usdFormat", "usda"
+        ]
     )
     print(ret)
 }
@@ -52,7 +62,7 @@ func USDEdit(infile: String) {
     }
 
 //    let ret = stdOutOfCommand(
-//        cmd: rpath + "/USD/bin/usdedit", arguments: [infile]
+//        cmd: rpath + "USD/bin/usdedit", arguments: [infile]
 //    )
 //    print(ret)
 }
@@ -72,27 +82,36 @@ func USDEdit(infile: String) {
 //    )
 //}
 
-private func stdOutOfCommand(cmd: String, arguments args: [String],
-                             currentDirPath currentDir: String? = nil) -> String {
-    let task: Process = Process()
-    task.environment = [
-        "PATH": rpath + "/USD/bin;/USD/lib;",
-        "PYTHONPATH": rpath + "/USD/lib/python"
-    ]
-    task.launchPath = cmd
-    task.arguments = args
-    if currentDir != nil {
-        task.currentDirectoryPath = currentDir!
-    }
+// export PATH=$PATH:/Users/shosumioka/Merops/USD/bin;
+// export PATH=$PATH:/Users/shosumioka/Merops/USD/lib;
+// export PYTHONPATH=$PYTHONPATH:/Users/shosumioka/Merops/USD/lib/python
+// xcrun scntool --convert cube.usda --format scn --output cube.scn
 
-    let pipe: Pipe = Pipe()
+func stdOutOfCommand(cmd: String, arguments args: [String],
+                             currentDirPath currentDir: String? = nil) -> String {
+    let task = Process()
+    task.environment = [
+        "PATH": "\(rpath)\"USD/bin;\"\(rpath)\"USD/lib;",
+        "PYTHONPATH": "\(rpath)\"/USD/lib/python"
+    ]
+    task.arguments = args
+//    task.launchPath = "/bin/bash\n" + cmd
+
+    if currentDir != nil {
+        task.currentDirectoryURL = URL(string: currentDir!)
+    }
+    
+    let pipe = Pipe()
     task.standardOutput = pipe
-    try? task.launch()
-    let out: NSData = pipe.fileHandleForReading.readDataToEndOfFile() as NSData
+    do {
+        try task.run()
+    } catch {
+        return ""
+    }
+    task.waitUntilExit()
+    let out = pipe.fileHandleForReading.readDataToEndOfFile() as NSData
     let outStr = NSString(data: out as Data, encoding: String.Encoding.utf8.rawValue)
     return outStr == nil
             ? ""
             : cmd + " " + args.joined(separator: " ") + "\n" + (outStr! as String)
 }
-
-//xcrun scntool --convert cube.usda --format scn --output cube.scn

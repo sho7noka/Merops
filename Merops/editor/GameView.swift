@@ -527,6 +527,7 @@ class GameView: SCNView {
             }
             
             // set nil
+            isEdit = true
             selection = nil
             marken = nil
             
