@@ -16,12 +16,6 @@ extension GameView {
         return (overlaySKScene as? GameViewOverlay)
     }
     
-    internal func keybind(modify: Event.ModifierFlags, k: String, e: Event) -> Bool {
-        return (e.characters! == k &&
-            e.modifierFlags.intersection(Event.ModifierFlags.deviceIndependentFlagsMask) == modify
-        )
-    }
-    
     // node
     internal var root: SCNNode {
         return self.scene!.rootNode
@@ -36,6 +30,14 @@ extension GameView {
         let metalLayer = (self.layer as? CAMetalLayer)!
         metalLayer.framebufferOnly = false
         return metalLayer
+    }
+}
+
+extension View {
+    func keybind(modify: Event.ModifierFlags, k: String, e: Event) -> Bool {
+        return (e.characters! == k &&
+            e.modifierFlags.intersection(Event.ModifierFlags.deviceIndependentFlagsMask) == modify
+        )
     }
 }
 
@@ -110,14 +112,6 @@ class GameView: SCNView {
     }
     
     var cameraName = "camera" {
-        willSet {
-            self.root.enumerateChildNodes({ child, _ in
-                if let camera = child.camera {
-                    Swift.print(camera.name)
-                }
-            })
-            self.pointOfView?.position
-        }
         didSet {
             self.pointOfView = self.node(name: cameraName)
             self.overRay?.label_message.text = cameraName + " / " + mode.toString
@@ -136,7 +130,7 @@ class GameView: SCNView {
             self.gestureRecognizers.forEach {
                 $0.isEnabled = !isDeforming
             }
-//            self.allowsCameraControl = !isDeforming
+            self.allowsCameraControl = !isDeforming
         }
     }
     
@@ -176,15 +170,18 @@ class GameView: SCNView {
                 Builder.Torus(scene: self.scene!)
                 
             case "cyan":
-                cameraName = "camera1"
-                
-            case "magenta":
                 cameraName = "camera"
                 
-            case "black":
-                let setwindow = SettingDialog()
-                self.addSubview(setwindow)
+            case "magenta":
+                cameraName = "camera1"
+                console.isHidden = false
+                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Merops/resource/index.html"))
+//                console.textview.delegate = self as! NSTextFieldDelegate
                 
+            case "black":
+                let settingDlg = SettingDialog(
+                    frame: self.frame, setting: self.settings!)
+                self.addSubview(settingDlg)
                 
             /// - Tag: TextField (x-source-tag://TextField)
             case "Name":
@@ -409,7 +406,6 @@ class GameView: SCNView {
             )
             let offset = (hit - hit_old) * 100
             hit_old = hit
-            Swift.print(offset)
 
             if marken != nil {
                 switch mode {
@@ -480,6 +476,17 @@ class GameView: SCNView {
         } else {
             super.mouseDragged(with: event)
         }
+    }
+    
+    override func swipe(with event: NSEvent) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.1
+        self.subView?.pointOfView = self.root
+        SCNTransaction.commit()
+        
+        Swift.print(event.type)
+        
+        super.swipe(with: event)
     }
     
     override func mouseUp(with event: Event) {
@@ -598,7 +605,7 @@ class GameView: SCNView {
             $0.isHidden = true
         }
     }
-    var console: ConsoleView!
+    var console: PythonConsole!
     var subView: SCNView?
     
     /*

@@ -6,12 +6,13 @@
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
 //
 #if os(OSX)
+
 import Cocoa
-public typealias SuperViewController = NSViewController
+public typealias View = NSView
 public typealias Color = NSColor
 public typealias Event = NSEvent
-public typealias View = NSView
 public typealias TextView = NSTextField
+public typealias SuperViewController = NSViewController
 public typealias GestureRecognizer = NSPanGestureRecognizer
 public typealias TextFieldDelegate = NSTextFieldDelegate
 
@@ -44,14 +45,14 @@ print sys.path, os.getcwd()
 #elseif os(iOS)
     
 import UIKit
-public typealias SuperViewController = UIViewController
+public typealias View = UIView
 public typealias Color = UIColor
 public typealias Event = UIEvent
-public typealias View = UIView
 public typealias TextView = UITextField
+public typealias SuperViewController = UIViewController
 public typealias GestureRecognizer = UIGestureRecognizer
-public typealias Float = CGFloat
 public typealias TextFieldDelegate = UITextFieldDelegate
+public typealias Float = CGFloat
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

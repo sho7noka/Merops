@@ -5,10 +5,28 @@
 
 import SceneKit
 
+struct Settings{
+    let projectDir: String
+    let bgColor: Color
+    let usdDir: String
+    let pythonDir: String
+    
+    init(dir: String, color: Color, usdDir: String, pyDir: String) {
+        self.projectDir = dir
+        self.bgColor = color
+        self.usdDir = usdDir
+        self.pythonDir = pyDir
+    }
+}
+
 enum NodeOptions: Int {
     case noSelect = 1
     case noExport = 2
     case noDelete = 3
+}
+
+enum DrawOverride {
+    case Object, OverrideVertex, OverrideEdge, OverrideFace
 }
 
 enum EditContext {
@@ -48,33 +66,6 @@ enum CameraPosition {
         }
     }
 }
-
-enum DrawOverride {
-    case Object, OverrideVertex, OverrideEdge, OverrideFace
-}
-
-struct Settings {
-    let projectDir: String
-//    let remoteDir: URL
-    let bgColor: Color
-
-    // イニシャライザ
-    init(dir: String, color: Color) {
-        self.projectDir = dir
-        self.bgColor = color
-    }
-}
-
-//let data = Data
-//
-//let decoder: JSONDecoder = JSONDecoder()
-//let encoder: JSONEncoder = JSONEncoder()
-//do {
-//    let settings: Settings = try decoder.decode(Settings.self, from: data)
-//    print(settings) //Success!!!
-//} catch {
-//    print("json convert failed in JSONDecoder", error.localizedDescription)
-//}
 
 let SCNOptions: [SCNDebugOptions] = [
     .showPhysicsShapes,

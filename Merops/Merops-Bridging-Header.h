@@ -11,6 +11,7 @@
 #import "ObjectiveGit/ObjectiveGit.h"
 
 // lib
+#import "MaterialX-bind.h"
 #import "USD-bind.h"
 
 // engine

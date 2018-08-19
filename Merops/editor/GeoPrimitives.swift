@@ -325,6 +325,7 @@ extension SCNGeometry {
 }
 
 // experimental
+
 //func points(result: SCNHitTestResult) {
 //    let node = SCNNode(geometry: SCNSphere(radius: 0.3))
 //    node.categoryBitMask = NodeOptions.noExport.rawValue

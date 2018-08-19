@@ -17,34 +17,35 @@ import QuartzCore
 extension SuperViewController: NSControlTextEditingDelegate {
     open override func controlTextDidEndEditing(_ notification: Notification) {
         if let textField = notification.object as? TextView {
-            let node = (self as! GameViewController).gameView.selection?.node
+            guard let node = (self as! GameViewController).gameView.selection?.node else { return }
+            
             switch textField.placeholderString {
             case "Name":
-                node?.name = textField.stringValue
+                node.name = textField.stringValue
             case "positionX":
-                node?.position.x = CGFloat(textField.doubleValue)
+                node.position.x = CGFloat(textField.doubleValue)
             case "positionY":
-                node?.position.y = CGFloat(textField.doubleValue)
+                node.position.y = CGFloat(textField.doubleValue)
             case "positionZ":
-                node?.position.z = CGFloat(textField.doubleValue)
+                node.position.z = CGFloat(textField.doubleValue)
             case "rotationX":
-                node?.eulerAngles.x = CGFloat(textField.doubleValue)
+                node.eulerAngles.x = CGFloat(textField.doubleValue)
             case "rotationY":
-                node?.eulerAngles.y = CGFloat(textField.doubleValue)
+                node.eulerAngles.y = CGFloat(textField.doubleValue)
             case "rotationZ":
-                node?.eulerAngles.z = CGFloat(textField.doubleValue)
+                node.eulerAngles.z = CGFloat(textField.doubleValue)
             case "scaleX":
-                node?.scale.x = CGFloat(textField.doubleValue)
+                node.scale.x = CGFloat(textField.doubleValue)
             case "scaleY":
-                node?.scale.y = CGFloat(textField.doubleValue)
+                node.scale.y = CGFloat(textField.doubleValue)
             case "scaleZ":
-                node?.scale.z = CGFloat(textField.doubleValue)
+                node.scale.z = CGFloat(textField.doubleValue)
             default:
                 break
             }
             
             (self as! GameViewController).gameView.gizmos.forEach {
-                $0.position = (node?.position)!
+                $0.position = node.position
             }
         }
     }
@@ -100,7 +101,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                       viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
                       commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor()
         )
-        
+
         commandBuffer?.commit()
         commandBuffer?.waitUntilCompleted()
         commandBuffer?.popDebugGroup()
@@ -124,7 +125,9 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.isPlaying = true
         gameView.settings = Settings(
             dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
-            color: Color.lightGray
+            color: Color.lightGray,
+            usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
+            pyDir: "/usr/bin/python"
         )
         uiInit()
     }
@@ -164,8 +167,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.autoenablesDefaultLighting = true
         gameView.backgroundColor = (gameView.settings?.bgColor)!
         
-//        Builder.EditorDome(scene: scene)
-//        Builder.EditorGrid(scene: scene)
+//        Editor.EditorDome(scene: scene)
+        Editor.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
         gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
@@ -173,6 +176,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
         gameView.subView?.isPlaying = true
+        
         let pos = PositionNode()
         pos.isHidden = false
         gameView.subView?.scene?.rootNode.addChildNode(pos)
@@ -186,7 +190,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.resizeView()
         
         // MARK: Console
-        gameView.console = ConsoleView(frame: gameView.frame)
+        gameView.console = PythonConsole(frame: gameView.frame, view: gameView)
+        gameView.console.textview.delegate = self
         gameView.console.isHidden = true
         gameView.addSubview(gameView.console)
         
