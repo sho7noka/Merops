@@ -175,8 +175,7 @@ class GameView: SCNView {
             case "magenta":
                 cameraName = "camera1"
                 console.isHidden = false
-                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Merops/resource/index.html"))
-//                console.textview.delegate = self as! NSTextFieldDelegate
+                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Documents/Merops/geo.usda"))
                 
             case "black":
                 let settingDlg = SettingDialog(

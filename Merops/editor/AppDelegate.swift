@@ -24,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidBecomeActive(_ notification: Notification) {
         Py_Initialize()
         
+        
         PyRun_SimpleStringFlags("""
 import sys, os
 pwd = os.environ[\"PWD\"]

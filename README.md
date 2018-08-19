@@ -45,14 +45,17 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride)
 - [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装 / Mojave と carthage の相性悪い(秋以降の対応)
+- 背景とグリッドを描画 /カメラコントロールを同期 /設定画面を表示
+
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
+- [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D)
+- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
+- [ ] [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でテッセレーションとリダクション
 - [ ] Metal2 でモディファイヤ ml/noise/lattice/edit 
-- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
-- [x] USD 0.85 を組み込む / C++ のビルド
-- [ ] [simd](https://developer.apple.com/videos/play/wwdc2018/701/)  [](https://developer.apple.com/documentation/accelerate/simd/rotating_a_cube_by_transforming_its_vertices)
+
 
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
 先に以下の設定が必要。
@@ -127,31 +130,4 @@ return cube
 2. cube を配置する
 
 scene.rootNode.replaceChildNode(<#T##oldChild: SCNNode##SCNNode#>, with: <#T##SCNNode#>)
-
-// Metal のバッファを後から取得する方法
-
-http://dsas.blog.klab.org/tag/3D
 ```
-
-https://github.com/mzyy94/ARKit-Live2D
-
-Xcode + Swift + python
-Bridging-header.h (#import SDK-bind.h)
-SDK-bind.h (C++を見せない)
-SDK-bind.mm (Objective-C++)
-SDK.h / SDK.lib (ビルド済)
-
-USD
-MaterialX
-Alembic
-usdz
-Houdini 17
-
-背景に使えるものを描画する
-グリッドを描画する
-カメラコントロールを同期する
-設定画面を表示する
-スクリプトエディタを表示する
-imgui でジオメトリをコントロールする
-
-

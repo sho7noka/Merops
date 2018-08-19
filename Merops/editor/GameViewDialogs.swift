@@ -12,6 +12,9 @@
     import UIKit
 #endif
 
+import SceneKit
+import ModelIO
+
 final class OutLiner: View {
     let treeview = NSTreeNode()
     
@@ -38,18 +41,20 @@ final class SettingDialog: View {
 
 final class PythonConsole: View, TextFieldDelegate {
     let textview = TextView()
+    var url: URL?
+    var view: GameView?
 
     init(frame: CGRect, view: GameView) {
         super.init(frame: frame)
+        self.view = view
         textview.delegate = self
         textview.frame = frame
         textview.backgroundColor = Color.black.withAlphaComponent(0.2)
-        
         textview.lineBreakMode = .byWordWrapping
         textview.usesSingleLineMode = false
         textview.cell?.wraps = true
         textview.cell?.isScrollable = false
-//        textview.lineBreakMode = .byWordWrapping
+        textview.lineBreakMode = .byWordWrapping
 
         self.addSubview(textview)
     }
@@ -62,7 +67,9 @@ final class PythonConsole: View, TextFieldDelegate {
         
         // Command + s
         if keybind(modify: Event.ModifierFlags.command, k: "s", e: event) {
-            Swift.print("save")
+            try! self.textview.stringValue.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+            
+            self.view?.scene = SCNScene(mdlAsset: MDLAsset(url: url!))
         }
         
         // Command + Enter
@@ -82,9 +89,9 @@ final class PythonConsole: View, TextFieldDelegate {
     }
     
     func setUsd(url: URL) -> String {
-        // URL(fileURLWithPath: "/Users/shosumioka/Merops/resource/index.html"
         let text = try! String(contentsOf: url,
                                encoding: String.Encoding.utf8)
+        self.url = url
         setSyntax(file: url)
         self.textview.stringValue = text
         return text
