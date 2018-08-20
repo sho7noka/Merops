@@ -29,9 +29,25 @@ final class OutLiner: View {
 
 final class SettingDialog: View {
     let colorPallete = NSColorPanel()
+    let txtProject = TextView()
+    let btnProject = NSButton()
+    let txtUsd = TextView()
+    let btnUsd = NSButton()
+    let txtPython = TextView()
+    let btnPython = NSButton()
     
     init(frame: CGRect, setting: Settings) {
         super.init(frame: frame)
+        txtProject.stringValue = setting.projectDir
+        btnProject.title = "..."
+        txtUsd.stringValue = setting.usdDir
+        btnUsd.title = "..."
+        txtPython.stringValue = setting.pythonDir
+        btnPython.title = "..."
+        
+        [txtProject, txtUsd, txtPython].forEach {
+            self.addSubview($0)
+        }
     }
     
     required init?(coder decoder: NSCoder) {
@@ -60,14 +76,24 @@ final class PythonConsole: View, TextFieldDelegate {
     }
     
     override func performKeyEquivalent(with event: Event) -> Bool {
+        
         // Command + o
         if keybind(modify: Event.ModifierFlags.command, k: "o", e: event) {
-            Swift.print("open")
+            let op = NSOpenPanel()
+            op.canChooseFiles = true
+            op.allowsMultipleSelection = false
+            op.allowsMultipleSelection = false
+            op.allowedFileTypes = ["py", "usd", "usda"]
+            
+            if op.runModal() == NSApplication.ModalResponse.OK {
+                let u = op.url
+                self.textview.stringValue = try! String(contentsOf: u!, encoding: String.Encoding.utf8)
+            }
         }
         
         // Command + s
         if keybind(modify: Event.ModifierFlags.command, k: "s", e: event) {
-            try! self.textview.stringValue.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+            try! self.textview.stringValue.write(to: self.url!, atomically: false, encoding: .utf8)
             
             self.view?.scene = SCNScene(mdlAsset: MDLAsset(url: url!))
         }

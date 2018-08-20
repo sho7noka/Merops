@@ -175,7 +175,7 @@ class GameView: SCNView {
             case "magenta":
                 cameraName = "camera1"
                 console.isHidden = false
-                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Documents/Merops/geo.usda"))
+//                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Documents/Merops/geo.usda"))
                 
             case "black":
                 let settingDlg = SettingDialog(
