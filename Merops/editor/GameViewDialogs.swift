@@ -14,6 +14,7 @@
 
 import SceneKit
 import ModelIO
+import Highlightr
 
 final class OutLiner: View {
     let treeview = NSTreeNode()
@@ -125,7 +126,11 @@ final class PythonConsole: View, TextFieldDelegate {
     
     private func setSyntax(file: URL) {
         switch file.pathExtension {
-        case "py": break
+        case "py":
+            let hilight = Highlightr()
+//            hilight?.highlight()
+            let code = hilight?.highlight("aaa", as: "python", fastRender: true)
+            textview.attributedStringValue = code!
         case "usd": break
         case "metal": break
         default:

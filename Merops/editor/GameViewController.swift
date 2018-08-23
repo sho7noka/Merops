@@ -175,6 +175,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.subView?.scene = SCNScene()
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
+//        gameView.subView?.defaultCameraController
         gameView.subView?.isPlaying = true
         
         let pos = PositionNode()

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A86D92862E523CC392B /* Extensions.swift */; };
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
+		E20E1AA4212B0D4200EE5B91 /* Highlightr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */; };
 		E2101239211EC136001664AD /* USD-bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDCAB6EC201F490200674C38 /* USD-bind.mm */; };
 		E210123A211EC13E001664AD /* USD-bind.h in Headers */ = {isa = PBXBuildFile; fileRef = EDCAB6EB201F48EC00674C38 /* USD-bind.h */; };
 		E210123B211EC14D001664AD /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		94B26A86D92862E523CC392B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Highlightr.framework; path = Carthage/Build/Mac/Highlightr.framework; sourceTree = "<group>"; };
 		E2101237211EBE08001664AD /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = USD/lib; sourceTree = "<group>"; };
 		E216B24421299C4D004D0CE8 /* interpolate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interpolate.swift; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				E210123B211EC14D001664AD /* lib in Frameworks */,
 				E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */,
 				E2E46158210DE97800C0DB39 /* Python.framework in Frameworks */,
+				E20E1AA4212B0D4200EE5B91 /* Highlightr.framework in Frameworks */,
 				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +188,7 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */,
 				E2E46157210DE97800C0DB39 /* Python.framework */,
 				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
 				E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */,
@@ -453,6 +457,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Highlightr.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
