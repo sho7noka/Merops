@@ -6,16 +6,13 @@
 //  Copyright © 2018 sho sumioka. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <ModelIO/MDLMesh.h>
+#include <Foundation/Foundation.h>
+#include <ModelIO/MDLMesh.h>
 #include <pybind11/pybind11.h>
-
-
 
 int add(int i, int j) {
     return i + j;
 }
-
 
 // bind
 namespace py = pybind11;

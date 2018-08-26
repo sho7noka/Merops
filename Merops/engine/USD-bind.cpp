@@ -6,7 +6,7 @@
 //  Copyright © 2018年 sho sumioka. All rights reserved.
 //
 
-#import "USD-bind.h"
+#import "USD-bind.hpp"
 
 #import "pxr/pxr.h"
 #import "pxr/base/gf/gamma.h"

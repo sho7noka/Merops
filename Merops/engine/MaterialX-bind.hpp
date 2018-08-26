@@ -9,13 +9,7 @@
 #ifndef driverMatX_hpp
 #define driverMatX_hpp
 
-#import <Foundation/Foundation.h>
+#include <Foundation/Foundation.h>
 
-// This is a wrapper Objective-C++ class around the C++ class
-@interface driverMatX : NSObject
-
-- (void)setD;
-
-@end
 
 #endif /* driverMatX_hpp */

@@ -6,11 +6,11 @@
 //  Copyright © 2018年 sho sumioka. All rights reserved.
 //
 
-#import "MaterialX-bind.h"
-#import <MaterialXCore/Document.h>
+#include "MaterialX-bind.hpp"
+#include <MaterialXCore/Document.h>
 
-void setD() {
-    using namespace MaterialX;
+using namespace MaterialX;
+
 //    MaterialX::DocumentPtr doc = MaterialX::createDocument();
 //    // Create a node graph with a single image node and output.
 //    MaterialX::NodeGraphPtr nodeGraph = doc->addNodeGraph();

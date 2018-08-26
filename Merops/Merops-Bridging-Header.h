@@ -11,8 +11,8 @@
 #import "ObjectiveGit/ObjectiveGit.h"
 
 // lib
-#import "MaterialX-bind.h"
-#import "USD-bind.h"
+#import "MaterialX-bind.hpp"
+#import "USD-bind.hpp"
 
 // engine
 #import "Python.h"
