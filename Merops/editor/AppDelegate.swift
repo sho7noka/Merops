@@ -28,13 +28,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         PyRun_SimpleStringFlags("""
 import sys, os
 pwd = os.environ[\"PWD\"]
+
 os.environ[\"PATH\"] = pwd + \"/USD/bin\"
 os.environ[\"PATH\"] = pwd + \"/USD/lib\"
 os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
 sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
+sys.path.append(os.path.join(pwd, \"Python\"))
 os.chdir(os.path.join(pwd, \"USD/lib/python\"))
-print sys.path, os.getcwd()
+# print os.getcwd(), sys.path
 # from pxr import Tf; print Tf.__doc__
+import _merops
+print _merops.add(1, 2)
 """, nil)
     }
     

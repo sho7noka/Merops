@@ -45,7 +45,7 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride)
 - [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装 / Mojave と carthage の相性悪い(秋以降の対応)
-- 背景とグリッドを描画 /カメラコントロールを同期 /設定画面を表示
+- 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 
 
 ### Engine

@@ -3,17 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A86D92862E523CC392B /* Extensions.swift */; };
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E20E1AA4212B0D4200EE5B91 /* Highlightr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */; };
-		E2101239211EC136001664AD /* USD-bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDCAB6EC201F490200674C38 /* USD-bind.mm */; };
-		E210123A211EC13E001664AD /* USD-bind.h in Headers */ = {isa = PBXBuildFile; fileRef = EDCAB6EB201F48EC00674C38 /* USD-bind.h */; };
-		E210123B211EC14D001664AD /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
+		E25C20E221336A7A00EE861F /* MaterialX-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E021336A7A00EE861F /* MaterialX-bind.hpp */; };
+		E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E421336ABA00EE861F /* USD-bind.hpp */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78C20B933B600232181 /* Cmd+REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78920B933B600232181 /* Cmd+REST.swift */; };
@@ -23,9 +22,7 @@
 		E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79220B933E200232181 /* GeoPrimitives.swift */; };
 		E281B79620B933E200232181 /* GeoRepricator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79320B933E200232181 /* GeoRepricator.swift */; };
 		E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */; };
-		E281B7A220B94CAE00232181 /* MaterialX-bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = E281B79820B94CAD00232181 /* MaterialX-bind.mm */; };
 		E281B7A620B94CAE00232181 /* Skinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B79C20B94CAE00232181 /* Skinning.metal */; };
-		E281B7A720B94CAE00232181 /* MaterialX-bind.h in Headers */ = {isa = PBXBuildFile; fileRef = E281B79D20B94CAE00232181 /* MaterialX-bind.h */; };
 		E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
 		E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E281B7AA20B94CAE00232181 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Model.swift */; };
@@ -35,8 +32,10 @@
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
 		E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */; };
 		E2BA751E2111E1FC008FF166 /* pybind11 in Resources */ = {isa = PBXBuildFile; fileRef = E2BA751D2111E1FC008FF166 /* pybind11 */; };
-		E2BA75202111E3CF008FF166 /* wrapPybind.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2BA751F2111E3CF008FF166 /* wrapPybind.mm */; };
 		E2BA75222111E6D7008FF166 /* MaterialX in Resources */ = {isa = PBXBuildFile; fileRef = E2BA75212111E6D7008FF166 /* MaterialX */; };
+		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
+		E2CDF1CD2134490E004D8E39 /* MaterialX-bind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E25C20DF21336A7A00EE861F /* MaterialX-bind.cpp */; };
+		E2CDF1D121357B6B004D8E39 /* Python in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* Python */; };
 		E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46114210D5D6F00C0DB39 /* Main.storyboard */; };
 		E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46119210D5D7100C0DB39 /* LaunchScreen.storyboard */; };
 		E2E46121210D5DE000C0DB39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
@@ -73,6 +72,25 @@
 		E216B24421299C4D004D0CE8 /* interpolate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interpolate.swift; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		E21859FB210374AB00653DBD /* Plugins.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = Plugins.md; path = Merops/extra/Plugins.md; sourceTree = SOURCE_ROOT; };
+		E24FC7DD21337549006860D9 /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = USD/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
+		E24FC7DE21337549006860D9 /* libusdGeom.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdGeom.dylib; path = USD/lib/libusdGeom.dylib; sourceTree = "<group>"; };
+		E24FC7DF21337549006860D9 /* libIlmThread-2_2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmThread-2_2.dylib"; path = "USD/lib/libIlmThread-2_2.dylib"; sourceTree = "<group>"; };
+		E24FC7E021337549006860D9 /* libIlmImfUtil-2_2.22.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmImfUtil-2_2.22.0.0.dylib"; path = "USD/lib/libIlmImfUtil-2_2.22.0.0.dylib"; sourceTree = "<group>"; };
+		E24FC7E121337549006860D9 /* libIlmImf-2_2.22.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmImf-2_2.22.dylib"; path = "USD/lib/libIlmImf-2_2.22.dylib"; sourceTree = "<group>"; };
+		E24FC7E221337549006860D9 /* libIlmThread-2_2.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmThread-2_2.12.0.0.dylib"; path = "USD/lib/libIlmThread-2_2.12.0.0.dylib"; sourceTree = "<group>"; };
+		E25C20DF21336A7A00EE861F /* MaterialX-bind.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = "MaterialX-bind.cpp"; sourceTree = "<group>"; };
+		E25C20E021336A7A00EE861F /* MaterialX-bind.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "MaterialX-bind.hpp"; sourceTree = "<group>"; };
+		E25C20E321336ABA00EE861F /* USD-bind.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = "USD-bind.cpp"; sourceTree = "<group>"; };
+		E25C20E421336ABA00EE861F /* USD-bind.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "USD-bind.hpp"; sourceTree = "<group>"; };
+		E25C20E82133750400EE861F /* libHalf.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libHalf.dylib; path = USD/lib/libHalf.dylib; sourceTree = "<group>"; };
+		E25C20E92133750400EE861F /* libIlmImf-2_2.22.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmImf-2_2.22.0.0.dylib"; path = "USD/lib/libIlmImf-2_2.22.0.0.dylib"; sourceTree = "<group>"; };
+		E25C20EA2133750400EE861F /* libarch.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libarch.dylib; path = USD/lib/libarch.dylib; sourceTree = "<group>"; };
+		E25C20EB2133750400EE861F /* libusd.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusd.dylib; path = USD/lib/libusd.dylib; sourceTree = "<group>"; };
+		E25C20EC2133750400EE861F /* libIex-2_2.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIex-2_2.12.dylib"; path = "USD/lib/libIex-2_2.12.dylib"; sourceTree = "<group>"; };
+		E25C20ED2133750400EE861F /* libboost_python.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_python.dylib; path = USD/lib/libboost_python.dylib; sourceTree = "<group>"; };
+		E25C20EE2133750500EE861F /* libIexMath-2_2.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIexMath-2_2.12.0.0.dylib"; path = "USD/lib/libIexMath-2_2.12.0.0.dylib"; sourceTree = "<group>"; };
+		E25C20EF2133750500EE861F /* libMaterialXCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMaterialXCore.a; path = USD/lib/libMaterialXCore.a; sourceTree = "<group>"; };
+		E25C20F02133750500EE861F /* libusdLux.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdLux.dylib; path = USD/lib/libusdLux.dylib; sourceTree = "<group>"; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
 		E281B78920B933B600232181 /* Cmd+REST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+REST.swift"; sourceTree = "<group>"; };
@@ -82,10 +100,8 @@
 		E281B79220B933E200232181 /* GeoPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPrimitives.swift; sourceTree = "<group>"; };
 		E281B79320B933E200232181 /* GeoRepricator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoRepricator.swift; sourceTree = "<group>"; };
 		E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLSkinningMesh.swift; sourceTree = "<group>"; };
-		E281B79820B94CAD00232181 /* MaterialX-bind.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "MaterialX-bind.mm"; sourceTree = "<group>"; };
 		E281B79B20B94CAE00232181 /* MTLTessellator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLTessellator.swift; sourceTree = "<group>"; };
 		E281B79C20B94CAE00232181 /* Skinning.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Skinning.metal; sourceTree = "<group>"; };
-		E281B79D20B94CAE00232181 /* MaterialX-bind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MaterialX-bind.h"; sourceTree = "<group>"; };
 		E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLPolygonReduction.swift; sourceTree = "<group>"; };
 		E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLMeshDeformable.swift; sourceTree = "<group>"; };
 		E281B7A020B94CAE00232181 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -94,11 +110,22 @@
 		E281B7AE20B94CCA00232181 /* Lambert.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lambert.metal; sourceTree = "<group>"; };
 		E281B7AF20B94CCA00232181 /* Tessellation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Tessellation.metal; sourceTree = "<group>"; };
 		E281B7B420B950A500232181 /* MetalTessellation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalTessellation; sourceTree = "<group>"; };
+		E294EFDA2133757D00E582CB /* libAlembic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libAlembic.dylib; path = USD/lib/libAlembic.dylib; sourceTree = "<group>"; };
+		E294EFDB2133757D00E582CB /* libvt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvt.dylib; path = USD/lib/libvt.dylib; sourceTree = "<group>"; };
+		E294EFDC2133757D00E582CB /* libndr.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libndr.dylib; path = USD/lib/libndr.dylib; sourceTree = "<group>"; };
+		E294EFDD2133757E00E582CB /* libMaterialXFormat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMaterialXFormat.a; path = USD/lib/libMaterialXFormat.a; sourceTree = "<group>"; };
+		E294EFDE2133757E00E582CB /* libkind.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libkind.dylib; path = USD/lib/libkind.dylib; sourceTree = "<group>"; };
+		E294EFDF2133757E00E582CB /* libusdShade.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdShade.dylib; path = USD/lib/libusdShade.dylib; sourceTree = "<group>"; };
+		E294EFE02133757E00E582CB /* libIex-2_2.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIex-2_2.12.0.0.dylib"; path = "USD/lib/libIex-2_2.12.0.0.dylib"; sourceTree = "<group>"; };
+		E294EFE12133757E00E582CB /* libsdf.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsdf.dylib; path = USD/lib/libsdf.dylib; sourceTree = "<group>"; };
+		E294EFE22133757E00E582CB /* libboost_date_time.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_date_time.dylib; path = USD/lib/libboost_date_time.dylib; sourceTree = "<group>"; };
+		E294EFE32133757E00E582CB /* libsdr.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsdr.dylib; path = USD/lib/libsdr.dylib; sourceTree = "<group>"; };
+		E294EFE42133757E00E582CB /* libusdSkel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdSkel.dylib; path = USD/lib/libusdSkel.dylib; sourceTree = "<group>"; };
 		E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
-		E2AD5D9E21281AF50080F3F2 /* wrapPybind.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapPybind.h; sourceTree = "<group>"; };
 		E2BA751D2111E1FC008FF166 /* pybind11 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybind11; path = Merops/extra/pybind11; sourceTree = SOURCE_ROOT; };
-		E2BA751F2111E3CF008FF166 /* wrapPybind.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = wrapPybind.mm; sourceTree = "<group>"; };
+		E2BA751F2111E3CF008FF166 /* wrapPybind.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = wrapPybind.cpp; sourceTree = "<group>"; };
 		E2BA75212111E6D7008FF166 /* MaterialX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MaterialX; path = Merops/extra/MaterialX; sourceTree = SOURCE_ROOT; };
+		E2CDF1D021357B6B004D8E39 /* Python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Python; path = Merops/extra/Python; sourceTree = SOURCE_ROOT; };
 		E2E3044B210846A40068C9AD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
 		E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,6 +133,32 @@
 		E2E4611A210D5D7100C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2E4611C210D5D7100C0DB39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E46157210DE97800C0DB39 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
+		E2F5171521337603005F1515 /* libboost_regex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_regex.dylib; path = USD/lib/libboost_regex.dylib; sourceTree = "<group>"; };
+		E2F5171621337603005F1515 /* libImath-2_2.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libImath-2_2.12.0.0.dylib"; path = "USD/lib/libImath-2_2.12.0.0.dylib"; sourceTree = "<group>"; };
+		E2F5171721337603005F1515 /* libusdUtils.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdUtils.dylib; path = USD/lib/libusdUtils.dylib; sourceTree = "<group>"; };
+		E2F5171821337603005F1515 /* libgf.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgf.dylib; path = USD/lib/libgf.dylib; sourceTree = "<group>"; };
+		E2F5171921337603005F1515 /* libIexMath-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIexMath-2_2.la"; path = "USD/lib/libIexMath-2_2.la"; sourceTree = "<group>"; };
+		E2F5171A21337603005F1515 /* libjs.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjs.dylib; path = USD/lib/libjs.dylib; sourceTree = "<group>"; };
+		E2F5171B21337603005F1515 /* libtrace.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtrace.dylib; path = USD/lib/libtrace.dylib; sourceTree = "<group>"; };
+		E2F5171C21337603005F1515 /* libz.1.2.11.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.11.dylib; path = USD/lib/libz.1.2.11.dylib; sourceTree = "<group>"; };
+		E2F5171D21337603005F1515 /* libtbbmalloc_proxy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtbbmalloc_proxy.dylib; path = USD/lib/libtbbmalloc_proxy.dylib; sourceTree = "<group>"; };
+		E2F5171E21337603005F1515 /* libusdRi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdRi.dylib; path = USD/lib/libusdRi.dylib; sourceTree = "<group>"; };
+		E2F5171F21337603005F1515 /* libwork.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwork.dylib; path = USD/lib/libwork.dylib; sourceTree = "<group>"; };
+		E2F5172021337603005F1515 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = USD/lib/libz.a; sourceTree = "<group>"; };
+		E2F5172121337603005F1515 /* libImath-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libImath-2_2.la"; path = "USD/lib/libImath-2_2.la"; sourceTree = "<group>"; };
+		E2F5172221337603005F1515 /* libplug.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libplug.dylib; path = USD/lib/libplug.dylib; sourceTree = "<group>"; };
+		E2F5172321337603005F1515 /* libboost_atomic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_atomic.dylib; path = USD/lib/libboost_atomic.dylib; sourceTree = "<group>"; };
+		E2F5172421337603005F1515 /* libusdHydra.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdHydra.dylib; path = USD/lib/libusdHydra.dylib; sourceTree = "<group>"; };
+		E2F5172521337603005F1515 /* libtbb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtbb.dylib; path = USD/lib/libtbb.dylib; sourceTree = "<group>"; };
+		E2F5172621337604005F1515 /* libusdUI.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdUI.dylib; path = USD/lib/libusdUI.dylib; sourceTree = "<group>"; };
+		E2F5172721337604005F1515 /* libHalf.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libHalf.12.0.0.dylib; path = USD/lib/libHalf.12.0.0.dylib; sourceTree = "<group>"; };
+		E2F5172821337604005F1515 /* libtbbmalloc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtbbmalloc.dylib; path = USD/lib/libtbbmalloc.dylib; sourceTree = "<group>"; };
+		E2F5172921337604005F1515 /* libtf.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtf.dylib; path = USD/lib/libtf.dylib; sourceTree = "<group>"; };
+		E2F5172A21337604005F1515 /* libar.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libar.dylib; path = USD/lib/libar.dylib; sourceTree = "<group>"; };
+		E2F5172B21337604005F1515 /* libpcp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcp.dylib; path = USD/lib/libpcp.dylib; sourceTree = "<group>"; };
+		E2F5172C21337604005F1515 /* libboost_thread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_thread.dylib; path = USD/lib/libboost_thread.dylib; sourceTree = "<group>"; };
+		E2F5172D21337604005F1515 /* libIlmThread-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIlmThread-2_2.la"; path = "USD/lib/libIlmThread-2_2.la"; sourceTree = "<group>"; };
+		E2F5172E21337604005F1515 /* libIex-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIex-2_2.la"; path = "USD/lib/libIex-2_2.la"; sourceTree = "<group>"; };
 		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
 		ED32B95A1EB5D298000D8823 /* Merops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED32B95D1EB5D298000D8823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,8 +171,6 @@
 		ED5CB5341F4A075400FF9CCA /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Merops-Bridging-Header.h"; sourceTree = "<group>"; };
 		EDA91BB41FF15D1D00E14B8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = extra/Assets.xcassets; sourceTree = "<group>"; };
 		EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
-		EDCAB6EB201F48EC00674C38 /* USD-bind.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "USD-bind.h"; sourceTree = "<group>"; };
-		EDCAB6EC201F490200674C38 /* USD-bind.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "USD-bind.mm"; sourceTree = "<group>"; };
 		EDEEFF531F8A35CB00E4785F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/Mac/ObjectiveGit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,7 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E210123B211EC14D001664AD /* lib in Frameworks */,
+				E2CDF1CC21344812004D8E39 /* lib in Frameworks */,
 				E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */,
 				E2E46158210DE97800C0DB39 /* Python.framework in Frameworks */,
 				E20E1AA4212B0D4200EE5B91 /* Highlightr.framework in Frameworks */,
@@ -188,6 +239,58 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2F5172A21337604005F1515 /* libar.dylib */,
+				E2F5172321337603005F1515 /* libboost_atomic.dylib */,
+				E2F5171521337603005F1515 /* libboost_regex.dylib */,
+				E2F5172C21337604005F1515 /* libboost_thread.dylib */,
+				E2F5171821337603005F1515 /* libgf.dylib */,
+				E2F5172721337604005F1515 /* libHalf.12.0.0.dylib */,
+				E2F5172E21337604005F1515 /* libIex-2_2.la */,
+				E2F5171921337603005F1515 /* libIexMath-2_2.la */,
+				E2F5172D21337604005F1515 /* libIlmThread-2_2.la */,
+				E2F5171621337603005F1515 /* libImath-2_2.12.0.0.dylib */,
+				E2F5172121337603005F1515 /* libImath-2_2.la */,
+				E2F5171A21337603005F1515 /* libjs.dylib */,
+				E2F5172B21337604005F1515 /* libpcp.dylib */,
+				E2F5172221337603005F1515 /* libplug.dylib */,
+				E2F5172521337603005F1515 /* libtbb.dylib */,
+				E2F5171D21337603005F1515 /* libtbbmalloc_proxy.dylib */,
+				E2F5172821337604005F1515 /* libtbbmalloc.dylib */,
+				E2F5172921337604005F1515 /* libtf.dylib */,
+				E2F5171B21337603005F1515 /* libtrace.dylib */,
+				E2F5172421337603005F1515 /* libusdHydra.dylib */,
+				E2F5171E21337603005F1515 /* libusdRi.dylib */,
+				E2F5172621337604005F1515 /* libusdUI.dylib */,
+				E2F5171721337603005F1515 /* libusdUtils.dylib */,
+				E2F5171F21337603005F1515 /* libwork.dylib */,
+				E2F5171C21337603005F1515 /* libz.1.2.11.dylib */,
+				E2F5172021337603005F1515 /* libz.a */,
+				E294EFDA2133757D00E582CB /* libAlembic.dylib */,
+				E294EFE22133757E00E582CB /* libboost_date_time.dylib */,
+				E294EFE02133757E00E582CB /* libIex-2_2.12.0.0.dylib */,
+				E294EFDE2133757E00E582CB /* libkind.dylib */,
+				E294EFDD2133757E00E582CB /* libMaterialXFormat.a */,
+				E294EFDC2133757D00E582CB /* libndr.dylib */,
+				E294EFE12133757E00E582CB /* libsdf.dylib */,
+				E294EFE32133757E00E582CB /* libsdr.dylib */,
+				E294EFDF2133757E00E582CB /* libusdShade.dylib */,
+				E294EFE42133757E00E582CB /* libusdSkel.dylib */,
+				E294EFDB2133757D00E582CB /* libvt.dylib */,
+				E24FC7DD21337549006860D9 /* libboost_program_options.dylib */,
+				E24FC7E121337549006860D9 /* libIlmImf-2_2.22.dylib */,
+				E24FC7E021337549006860D9 /* libIlmImfUtil-2_2.22.0.0.dylib */,
+				E24FC7E221337549006860D9 /* libIlmThread-2_2.12.0.0.dylib */,
+				E24FC7DF21337549006860D9 /* libIlmThread-2_2.dylib */,
+				E24FC7DE21337549006860D9 /* libusdGeom.dylib */,
+				E25C20EA2133750400EE861F /* libarch.dylib */,
+				E25C20ED2133750400EE861F /* libboost_python.dylib */,
+				E25C20E82133750400EE861F /* libHalf.dylib */,
+				E25C20EC2133750400EE861F /* libIex-2_2.12.dylib */,
+				E25C20EE2133750500EE861F /* libIexMath-2_2.12.0.0.dylib */,
+				E25C20E92133750400EE861F /* libIlmImf-2_2.22.0.0.dylib */,
+				E25C20EF2133750500EE861F /* libMaterialXCore.a */,
+				E25C20EB2133750400EE861F /* libusd.dylib */,
+				E25C20F02133750500EE861F /* libusdLux.dylib */,
 				E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */,
 				E2E46157210DE97800C0DB39 /* Python.framework */,
 				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
@@ -200,8 +303,8 @@
 		ED32B9511EB5D298000D8823 = {
 			isa = PBXGroup;
 			children = (
-				EDEEFF531F8A35CB00E4785F /* README.md */,
 				E2E3044B210846A40068C9AD /* METAL-DOC */,
+				EDEEFF531F8A35CB00E4785F /* README.md */,
 				ED32B95C1EB5D298000D8823 /* Merops */,
 				E2E4610D210D5D6F00C0DB39 /* Merops-ios */,
 				ED32B95B1EB5D298000D8823 /* Products */,
@@ -256,6 +359,7 @@
 		EDB683412025D43200AD75EE /* scene */ = {
 			isa = PBXGroup;
 			children = (
+				E281B7B320B94CE700232181 /* shader */,
 				E281B7A020B94CAE00232181 /* Model.swift */,
 				94B26A2A79BC7112A5660547 /* Engine.swift */,
 				E21859F921036D3400653DBD /* Serializer.swift */,
@@ -263,7 +367,6 @@
 				E281B79B20B94CAE00232181 /* MTLTessellator.swift */,
 				E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */,
 				E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */,
-				E281B7B320B94CE700232181 /* shader */,
 			);
 			name = scene;
 			sourceTree = "<group>";
@@ -272,12 +375,11 @@
 			isa = PBXGroup;
 			children = (
 				94B26A86D92862E523CC392B /* Extensions.swift */,
-				E281B79D20B94CAE00232181 /* MaterialX-bind.h */,
-				E281B79820B94CAD00232181 /* MaterialX-bind.mm */,
-				EDCAB6EB201F48EC00674C38 /* USD-bind.h */,
-				EDCAB6EC201F490200674C38 /* USD-bind.mm */,
-				E2AD5D9E21281AF50080F3F2 /* wrapPybind.h */,
-				E2BA751F2111E3CF008FF166 /* wrapPybind.mm */,
+				E2BA751F2111E3CF008FF166 /* wrapPybind.cpp */,
+				E25C20E021336A7A00EE861F /* MaterialX-bind.hpp */,
+				E25C20DF21336A7A00EE861F /* MaterialX-bind.cpp */,
+				E25C20E421336ABA00EE861F /* USD-bind.hpp */,
+				E25C20E321336ABA00EE861F /* USD-bind.cpp */,
 			);
 			name = bind;
 			sourceTree = "<group>";
@@ -299,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				E21859FB210374AB00653DBD /* Plugins.md */,
+				E2CDF1D021357B6B004D8E39 /* Python */,
 				E2BA75212111E6D7008FF166 /* MaterialX */,
 				E2BA751D2111E1FC008FF166 /* pybind11 */,
 			);
@@ -313,9 +416,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */,
 				EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */,
-				E281B7A720B94CAE00232181 /* MaterialX-bind.h in Headers */,
-				E210123A211EC13E001664AD /* USD-bind.h in Headers */,
+				E25C20E221336A7A00EE861F /* MaterialX-bind.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +451,7 @@
 				ED32B9571EB5D298000D8823 /* Frameworks */,
 				ED32B9581EB5D298000D8823 /* Resources */,
 				ED32B9841EB5DD02000D8823 /* Headers */,
+				E2CDF1CF21356BE6004D8E39 /* ShellScript */,
 				ED24CD341F266249000CC0BB /* Run Script */,
 			);
 			buildRules = (
@@ -388,7 +492,7 @@
 				};
 			};
 			buildConfigurationList = ED32B9551EB5D298000D8823 /* Build configuration list for PBXProject "Merops" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -422,6 +526,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2CDF1D121357B6B004D8E39 /* Python in Resources */,
 				E2BA751E2111E1FC008FF166 /* pybind11 in Resources */,
 				E2BA75222111E6D7008FF166 /* MaterialX in Resources */,
 				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
@@ -450,6 +555,23 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		E2CDF1CF21356BE6004D8E39 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "c++ -O3 -shared -std=c++11 -fPIC -I Merops/extra/pybind11/include/ `python-config --cflags --ldflags` Merops/engine/wrapPybind.cpp -o _merops.so\ncp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncp -r _merops.so $BUILT_PRODUCTS_DIR/Python\n";
+		};
 		ED24CD341F266249000CC0BB /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -464,7 +586,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\ncp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/Python\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -492,12 +614,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2CDF1CD2134490E004D8E39 /* MaterialX-bind.cpp in Sources */,
 				ED32B9601EB5D298000D8823 /* GameView.swift in Sources */,
 				ED32B9621EB5D298000D8823 /* GameViewController.swift in Sources */,
 				E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */,
 				E281B79420B933E200232181 /* GeoBuilder.swift in Sources */,
 				ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */,
-				E2BA75202111E3CF008FF166 /* wrapPybind.mm in Sources */,
 				E281B7B020B94CCB00232181 /* Common.metal in Sources */,
 				E281B79520B933E200232181 /* GeoPrimitives.swift in Sources */,
 				E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */,
@@ -507,14 +629,12 @@
 				E281B79020B933D000232181 /* GameViewDialogs.swift in Sources */,
 				E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */,
 				E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */,
-				E281B7A220B94CAE00232181 /* MaterialX-bind.mm in Sources */,
 				E281B7B120B94CCB00232181 /* Lambert.metal in Sources */,
 				E281B78C20B933B600232181 /* Cmd+REST.swift in Sources */,
 				E281B7A620B94CAE00232181 /* Skinning.metal in Sources */,
 				ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */,
 				E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */,
 				E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */,
-				E2101239211EC136001664AD /* USD-bind.mm in Sources */,
 				E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */,
 				E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */,
 				E281B7AA20B94CAE00232181 /* Model.swift in Sources */,
@@ -566,7 +686,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sho.Merops-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -588,7 +711,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sho.Merops-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -604,7 +730,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -633,7 +759,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -654,6 +780,7 @@
 				OTHER_SWIFT_FLAGS = "-D Debug -enable-bridging-pch";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -664,7 +791,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -693,7 +820,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -705,7 +832,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -713,7 +841,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -722,6 +853,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
 					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
@@ -730,16 +862,28 @@
 					"\"$(SRCROOT)/USD/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					/Users/shosumioka/Merops/USD/lib,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/USD/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-lboost_system";
+				OTHER_SWIFT_FLAGS = "-D Debug";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sumioka.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -750,7 +894,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -759,6 +906,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
 					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
@@ -767,7 +915,15 @@
 					"\"$(SRCROOT)/USD/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					/Users/shosumioka/Merops/USD/lib,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/USD/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
@@ -775,7 +931,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";

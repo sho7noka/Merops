@@ -1,14 +1,14 @@
 //
-//  adapterUsd.h
+//  USD-bind.hpp
 //  Merops
 //
-//  Created by sumioka-air on 2018/01/29.
-//  Copyright © 2018年 sho sumioka. All rights reserved.
+//  Created by sho sumioka on 2018/08/27.
+//  Copyright © 2018 sho sumioka. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef USD_bind_hpp
+#define USD_bind_hpp
 
-@interface MetalUSD : NSObject
-- (void)setDocument;
-@end
+#include <stdio.h>
 
+#endif /* USD_bind_hpp */

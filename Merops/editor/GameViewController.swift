@@ -192,7 +192,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         // MARK: Console
         gameView.console = PythonConsole(frame: gameView.frame, view: gameView)
-        gameView.console.textview.delegate = self
         gameView.console.isHidden = true
         gameView.addSubview(gameView.console)
         

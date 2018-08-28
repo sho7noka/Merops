@@ -589,6 +589,12 @@ class GameView: SCNView {
         overRay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 152)
         overRay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 128)
         overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 22), y: -size.height / 2 + 28)
+        
+        if console != nil {
+            console.frame.size = self.frame.size
+        } else {
+            return
+        }
     }
     
     private func clearView() {
@@ -618,7 +624,7 @@ class GameView: SCNView {
         case "1", "2", "3", "4":
             self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "\t": // TAB
-            break
+            console.isHidden = !console.isHidden
         case "q":
             self.resetView(_mode: .Object)
         case "w":

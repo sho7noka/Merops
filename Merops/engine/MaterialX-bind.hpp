@@ -1,15 +1,14 @@
 //
-//  driverMatX.hpp
-//  KARAS
+//  MaterialX-bind.hpp
+//  Merops
 //
-//  Created by sumioka-air on 2018/05/22.
-//  Copyright © 2018年 sho sumioka. All rights reserved.
+//  Created by sho sumioka on 2018/08/27.
+//  Copyright © 2018 sho sumioka. All rights reserved.
 //
 
-#ifndef driverMatX_hpp
-#define driverMatX_hpp
+#ifndef MaterialX_bind_hpp
+#define MaterialX_bind_hpp
 
-#include <Foundation/Foundation.h>
+#include <stdio.h>
 
-
-#endif /* driverMatX_hpp */
+#endif /* MaterialX_bind_hpp */

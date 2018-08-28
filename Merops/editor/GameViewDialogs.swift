@@ -56,45 +56,39 @@ final class SettingDialog: View {
     }
 }
 
-final class PythonConsole: View, TextFieldDelegate {
-    let textview = TextView()
+final class PythonConsole: View, NSTextViewDelegate {
+    var textview: NSTextView?
     var url: URL?
     var view: GameView?
 
     init(frame: CGRect, view: GameView) {
         super.init(frame: frame)
         self.view = view
-        textview.delegate = self
-        textview.frame = frame
-        textview.backgroundColor = Color.black.withAlphaComponent(0.2)
-        textview.lineBreakMode = .byWordWrapping
-        textview.usesSingleLineMode = false
-        textview.cell?.wraps = true
-        textview.cell?.isScrollable = false
-        textview.lineBreakMode = .byWordWrapping
-
-        self.addSubview(textview)
+        
+        textview = NSTextView(frame: frame)
+        textview?.backgroundColor = Color.black.withAlphaComponent(0.5)
+        self.addSubview(textview!)
     }
     
     override func performKeyEquivalent(with event: Event) -> Bool {
+        super.keyDown(with: event)
         
         // Command + o
         if keybind(modify: Event.ModifierFlags.command, k: "o", e: event) {
             let op = NSOpenPanel()
             op.canChooseFiles = true
             op.allowsMultipleSelection = false
-            op.allowsMultipleSelection = false
             op.allowedFileTypes = ["py", "usd", "usda"]
             
             if op.runModal() == NSApplication.ModalResponse.OK {
                 let u = op.url
-                self.textview.stringValue = try! String(contentsOf: u!, encoding: String.Encoding.utf8)
+                setUsd(url: u!)
             }
         }
         
         // Command + s
         if keybind(modify: Event.ModifierFlags.command, k: "s", e: event) {
-            try! self.textview.stringValue.write(to: self.url!, atomically: false, encoding: .utf8)
+            try! self.textview?.string.write(to: self.url!, atomically: false, encoding: .utf8)
             
             self.view?.scene = SCNScene(mdlAsset: MDLAsset(url: url!))
         }
@@ -102,7 +96,7 @@ final class PythonConsole: View, TextFieldDelegate {
         // Command + Enter
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
             Py_Initialize()
-            PyRun_SimpleStringFlags(textview.stringValue, nil)
+            PyRun_SimpleStringFlags(textview?.string, nil)
             Py_Finalize()
         }
         
@@ -110,8 +104,6 @@ final class PythonConsole: View, TextFieldDelegate {
         if event.characters == "\u{1B}" {
             self.isHidden = true
         }
-        
-        super.keyDown(with: event)
         return true
     }
     
@@ -120,7 +112,7 @@ final class PythonConsole: View, TextFieldDelegate {
                                encoding: String.Encoding.utf8)
         self.url = url
         setSyntax(file: url)
-        self.textview.stringValue = text
+        self.textview?.string = text
         return text
     }
     
@@ -130,7 +122,7 @@ final class PythonConsole: View, TextFieldDelegate {
             let hilight = Highlightr()
 //            hilight?.highlight()
             let code = hilight?.highlight("aaa", as: "python", fastRender: true)
-            textview.attributedStringValue = code!
+//            textview.attributedStringValue = code!
         case "usd": break
         case "metal": break
         default:
