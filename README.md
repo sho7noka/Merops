@@ -14,8 +14,8 @@ USDZ に対応する事でXRのコンテンツ制作に適したモバイル特�
 
 ### Support (future)
 - [x] geometry
-- [ ] animation
-- [ ] scripting
+- [  ] material 
+- [  ] scripting
 
 ### Not support
 - Layout/Shot
@@ -46,15 +46,16 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride)
 - [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装 / Mojave と carthage の相性悪い(秋以降の対応)
 - 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
-
+- [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
 - [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D)
-- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
 - [ ] [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でテッセレーションとリダクション
 - [ ] Metal2 でモディファイヤ ml/noise/lattice/edit 
+- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
+- [ ] USD + Alembic の2枚構成を実現 (+ json scheme)
 
 
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
@@ -90,11 +91,7 @@ renderCommandEncoder.popDebugGroup()
 
 #### Research Level
 - intelligent shape (Swift for TensorFlow) 
-- USD + Alembic の2枚構成を実現(add json)
 - [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
-- embed [Python](https://docs.python.jp/3/extending/embedding.html)
-
-
 
 ----
 

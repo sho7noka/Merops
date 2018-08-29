@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A86D92862E523CC392B /* Extensions.swift */; };
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
-		E20E1AA4212B0D4200EE5B91 /* Highlightr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */; };
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E25C20E221336A7A00EE861F /* MaterialX-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E021336A7A00EE861F /* MaterialX-bind.hpp */; };
 		E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E421336ABA00EE861F /* USD-bind.hpp */; };
@@ -123,6 +122,7 @@
 		E294EFE32133757E00E582CB /* libsdr.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsdr.dylib; path = USD/lib/libsdr.dylib; sourceTree = "<group>"; };
 		E294EFE42133757E00E582CB /* libusdSkel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdSkel.dylib; path = USD/lib/libusdSkel.dylib; sourceTree = "<group>"; };
 		E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
+		E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "pyobjc-framework-Merops"; sourceTree = "<group>"; };
 		E2BA751D2111E1FC008FF166 /* pybind11 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybind11; path = Merops/extra/pybind11; sourceTree = SOURCE_ROOT; };
 		E2BA751F2111E3CF008FF166 /* wrapPybind.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = wrapPybind.cpp; sourceTree = "<group>"; };
 		E2BA75212111E6D7008FF166 /* MaterialX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MaterialX; path = Merops/extra/MaterialX; sourceTree = SOURCE_ROOT; };
@@ -193,7 +193,6 @@
 				E2CDF1CC21344812004D8E39 /* lib in Frameworks */,
 				E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */,
 				E2E46158210DE97800C0DB39 /* Python.framework in Frameworks */,
-				E20E1AA4212B0D4200EE5B91 /* Highlightr.framework in Frameworks */,
 				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,7 +376,7 @@
 		EDB683432025D59400AD75EE /* bind */ = {
 			isa = PBXGroup;
 			children = (
-				94B26A86D92862E523CC392B /* Extensions.swift */,
+				E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */,
 				E2BA751F2111E3CF008FF166 /* wrapPybind.cpp */,
 				E2CDF1D62135AAF9004D8E39 /* wrapModels.h */,
 				E2CDF1D42135AAD9004D8E39 /* wrapModels.m */,
@@ -385,6 +384,7 @@
 				E25C20DF21336A7A00EE861F /* MaterialX-bind.cpp */,
 				E25C20E421336ABA00EE861F /* USD-bind.hpp */,
 				E25C20E321336ABA00EE861F /* USD-bind.cpp */,
+				94B26A86D92862E523CC392B /* Extensions.swift */,
 			);
 			name = bind;
 			sourceTree = "<group>";
@@ -562,7 +562,7 @@
 		};
 		E2CDF1CF21356BE6004D8E39 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -573,9 +573,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "c++ -O3 -shared -std=c++11 -fPIC -I Merops/extra/pybind11/include/ `python-config --cflags --ldflags` Merops/engine/wrapPybind.cpp -o _merops.so\ncp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncp -r _merops.so $BUILT_PRODUCTS_DIR/Python\n";
+			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncd Merops/engine/pyobjc-framework-Merops\npython setup.py build\ncp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\n\n#c++ -O3 -shared -std=c++11 -fPIC -I Merops/extra/pybind11/include/ `python-config --cflags --ldflags` Merops/engine/wrapPybind.cpp -o _merops.so\n#cp -r _merops.so $BUILT_PRODUCTS_DIR/Python\n";
 		};
 		ED24CD341F266249000CC0BB /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;

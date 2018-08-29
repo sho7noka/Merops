@@ -93,9 +93,22 @@ final class PythonConsole: View, NSTextViewDelegate {
             self.view?.scene = SCNScene(mdlAsset: MDLAsset(url: url!))
         }
         
-        // Command + Enter
+        
+        /*
+         Command + Enter
+         http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring
+         https://www.hardcoded.net/articles/
+        */
+        /// - Tag: gil
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
+//            let state = PyGILState_Ensure()
+//            Py_NewInterpreter()
+//            PyGILState_Release(PyGILState_UNLOCKED)
+//            PyObjC_BEGIN_WITH_GIL
             PyRun_SimpleStringFlags(textview?.string, nil)
+//            PyObjC_END_WITH_GIL
+//            PyGILState_Release(PyGILState_LOCKED)
+//            PyGILState_Release(state)
         }
         
         // escape

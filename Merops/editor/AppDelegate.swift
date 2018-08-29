@@ -22,8 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     
     func applicationDidBecomeActive(_ notification: Notification) {
+//        Py_SetProgramName(UnsafeMutablePointer.allocate(capacity: "/usr/bin/python"))
         Py_Initialize()
-        
         
         PyRun_SimpleStringFlags("""
 import sys, os
