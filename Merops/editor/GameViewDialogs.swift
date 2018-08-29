@@ -95,9 +95,7 @@ final class PythonConsole: View, NSTextViewDelegate {
         
         // Command + Enter
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
-            Py_Initialize()
             PyRun_SimpleStringFlags(textview?.string, nil)
-            Py_Finalize()
         }
         
         // escape

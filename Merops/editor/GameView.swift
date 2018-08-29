@@ -625,6 +625,12 @@ class GameView: SCNView {
             self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "\t": // TAB
             console.isHidden = !console.isHidden
+            //        Py_Initialize()
+            PyRun_SimpleStringFlags("""
+from pxr import Gf
+print Gf.__name__
+""", nil)
+        //        Py_Finalize()
         case "q":
             self.resetView(_mode: .Object)
         case "w":

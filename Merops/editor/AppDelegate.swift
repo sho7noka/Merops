@@ -35,10 +35,6 @@ os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
 sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
 sys.path.append(os.path.join(pwd, \"Python\"))
 os.chdir(os.path.join(pwd, \"USD/lib/python\"))
-# print os.getcwd(), sys.path
-# from pxr import Tf; print Tf.__doc__
-import _merops
-print _merops.add(1, 2)
 """, nil)
     }
     
