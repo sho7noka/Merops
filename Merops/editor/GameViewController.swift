@@ -53,7 +53,6 @@ extension SuperViewController: NSControlTextEditingDelegate {
 #endif
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
-    
     // base
     var scene = SCNScene()
     var baseNode: SCNNode? = nil
@@ -101,7 +100,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                       viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
                       commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor()
         )
-
         commandBuffer?.commit()
         commandBuffer?.waitUntilCompleted()
         commandBuffer?.popDebugGroup()
@@ -129,6 +127,10 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
             pyDir: "/usr/bin/python"
         )
+        gameView.setsView = SettingDialog(
+            frame: gameView.frame, setting: gameView.settings!)
+        gameView.setsView?.isHidden = true
+        gameView.addSubview(gameView.setsView!)
         uiInit()
     }
     

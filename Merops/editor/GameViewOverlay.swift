@@ -10,6 +10,8 @@ import SpriteKit
 import SceneKit
 import QuartzCore
 
+import Cocoa
+
 extension SKScene {
     /*
      * sceneの中心の座標を返すメソッド
@@ -28,9 +30,10 @@ extension SKScene {
         return label
     }
     
-    func mButton(name : String) -> SKShapeNode {
-        let btn = SKShapeNode(rectOf: CGSize(width: 16.0, height: 16.0))
+    func mButton(name : String) -> SKSpriteNode {
+        let btn = SKSpriteNode(imageNamed: name)
         btn.name = name
+        btn.size = CGSize(width: 24, height: 24)
         return btn
     }
 }
@@ -59,13 +62,13 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
     var label_info: SKLabelNode!
     var label_message: SKLabelNode!
 
-    var button_red: SKShapeNode!
-    var button_blue: SKShapeNode!
-    var button_green: SKShapeNode!
-    var button_magenta: SKShapeNode!
-    var button_cyan: SKShapeNode!
-    var button_yellow: SKShapeNode!
-    var button_black: SKShapeNode!
+    var button_red: SKSpriteNode!
+    var button_blue: SKSpriteNode!
+    var button_green: SKSpriteNode!
+    var button_magenta: SKSpriteNode!
+    var button_cyan: SKSpriteNode!
+    var button_yellow: SKSpriteNode!
+    var button_black: SKSpriteNode!
 
     init(view: GameView) {
         super.init(size: view.frame.size)
@@ -79,22 +82,18 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
         label_scale = mLabel(name: "Scale")
         label_info = mLabel(name: "Info")
         label_message = mLabel(name: "")
-
-        // HUD
-        button_red = mButton(name: "red")
-        button_red.fillColor = Color.red
-        button_green = mButton(name: "green")
-        button_green.fillColor = Color.green
-        button_blue = mButton(name: "blue")
-        button_blue.fillColor = Color.blue
-        button_magenta = mButton(name: "magenta")
-        button_magenta.fillColor = Color.magenta
-        button_cyan = mButton(name: "cyan")
-        button_cyan.fillColor = Color.cyan
-        button_yellow = mButton(name: "yellow")
-        button_yellow.fillColor = Color.yellow
-        button_black = mButton(name: "black")
-        button_black.fillColor = Color.black
+        
+        /*
+         * iOS: https://developer.apple.com/documentation/uikit/uibarbuttonitem/systemitem
+         * macOS: https://developer.apple.com/documentation/appkit/nsimage/name
+        */
+        button_red = mButton(name: NSImage.Name.multipleDocuments.rawValue)
+        button_green = mButton(name: NSImage.Name.colorPanel.rawValue)
+        button_blue = mButton(name: NSImage.Name.info.rawValue)
+        button_magenta = mButton(name: NSImage.Name.computer.rawValue)
+        button_cyan = mButton(name: NSImage.Name.network.rawValue)
+        button_yellow = mButton(name: NSImage.Name.folder.rawValue)
+        button_black = mButton(name: NSImage.Name.advanced.rawValue)
         
         let guis : [SKNode] = [label_name, label_position, label_rotate, label_scale, label_info, button_red, button_green, button_blue, label_message, button_magenta, button_cyan, button_yellow, button_black]
         DispatchQueue.main.async {

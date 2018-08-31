@@ -28,7 +28,8 @@ final class OutLiner: View {
     }
 }
 
-final class SettingDialog: View {
+final class SettingDialog: View, NSTextViewDelegate {
+    
     let colorPallete = NSColorPanel()
     let txtProject = TextView()
     let btnProject = NSButton()
@@ -39,6 +40,7 @@ final class SettingDialog: View {
     
     init(frame: CGRect, setting: Settings) {
         super.init(frame: frame)
+        
         txtProject.stringValue = setting.projectDir
         btnProject.title = "..."
         txtUsd.stringValue = setting.usdDir
@@ -92,7 +94,6 @@ final class PythonConsole: View, NSTextViewDelegate {
             
             self.view?.scene = SCNScene(mdlAsset: MDLAsset(url: url!))
         }
-        
         
         /*
          Command + Enter

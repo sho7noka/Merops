@@ -50,7 +50,7 @@ primitive override 表示の実現、primitive override マウス選択の実現
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
-- [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D)
+- [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D) / [USDKit](https://github.com/superfunc/USDKit)
 - [ ] [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でテッセレーションとリダクション
 - [ ] Metal2 でモディファイヤ ml/noise/lattice/edit 
@@ -101,6 +101,7 @@ renderCommandEncoder.popDebugGroup()
 - ARKit で作られたアプリは Scenekit ベースが多く、応用に Metal 使うので参考になる
 - render 内で `thorows` 使うと render 使えない(オーバーロード扱いされない)
 - SCNView layer は iOS/macOS 両方で扱える
+- [standard library](https://developer.apple.com/documentation/swift/swift_standard_library)
 
 ##### snippets
 - `/// - Tag: TextField (x-source-tag://TextField)`

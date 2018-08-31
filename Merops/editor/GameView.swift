@@ -8,6 +8,7 @@
 
 import SpriteKit
 import SceneKit
+import WebKit
 
 extension GameView {
     
@@ -160,27 +161,28 @@ class GameView: SCNView {
             resizeView()
             
             switch first.name {
-            case "red":
+            case "NSMultipleDocuments"?:
                 Builder.Cone(scene: self.scene!)
                 
-            case "blue":
+            case "NSColorPanel"?:
                 Builder.Grid(scene: self.scene!)
                 
-            case "green":
+            case "NSInfo"?:
                 Builder.Torus(scene: self.scene!)
                 
-            case "cyan":
+            case "NSComputer"?:
                 cameraName = "camera"
                 
-            case "magenta":
+            case "NSNetwork"?:
                 cameraName = "camera1"
                 console.isHidden = false
 //                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Documents/Merops/geo.usda"))
                 
-            case "black":
-                let settingDlg = SettingDialog(
-                    frame: self.frame, setting: self.settings!)
-                self.addSubview(settingDlg)
+            case "NSFolder"?:
+                break
+                
+            case "NSAdvanced"?:
+                setsView?.isHidden = false
                 
             /// - Tag: TextField (x-source-tag://TextField)
             case "Name":
@@ -665,6 +667,7 @@ class GameView: SCNView {
         
         }
 
+        
         // Update
         self.draw(NSRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         needsDisplay = true
@@ -738,4 +741,5 @@ class GameView: SCNView {
     }
 
     var settings: Settings?
+    var setsView: SettingDialog!
 }
