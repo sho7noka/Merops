@@ -1,26 +1,18 @@
 # [Merops](https://github.com/sho7noka/Merops)
 
 [English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/sho7noka/Merops)
-
-`Pixar USD`と`libgit`をエディタ内に組み込んだ、次世代型DCCツールの実験プロジェクトです。
-USDZ に対応する事でXRのコンテンツ制作に適したモバイル特化型DCCツールを目標に開発を進めています。
-
+`Pixar USD` と `libgit` をベースにした、次世代型DCCツールの実験プロジェクトです。
 
 ## Concept
 シンプル、早い、イテレーションの3軸を基本に考えています。
 - `Metal2` ベースの Viewport と Modifier
 - ウィジェットを極力排したジェスチャ(中ボタンを使わない)、ゲーム画面に近い使用感
-- [Pixar USD](https://github.com/PixarAnimationStudios/USD) と [libgit2](https://github.com/libgit2/objective-git) によるパイプラインを意識したイテレーション
+- [Pixar USD](https://github.com/PixarAnimationStudios/USD) と [libgit2](https://github.com/libgit2/objective-git) によるパイプライン・イテレーション
 
-### Support (future)
+### future
 - [x] geometry
 - [  ] material 
-- [  ] scripting
-
-### Not support
-- Layout/Shot
-- Rendering
-- Simulation
+- [x] scripting
 
 ### Author
 [sho7noka](shosumioka@gmail.com)
@@ -33,37 +25,54 @@ USDZ に対応する事でXRのコンテンツ制作に適したモバイル特�
 
 
 
+----
+
+
+
+## Why
+3Dソフトの操作は難しく複雑です。OpenGL deprecate の環境下で Metal をベースにしています。
+マルチプラットフォームのアプリケーションも [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現しているとは言えません。
+出力フォーマットに標準で USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
+
 ## TODO
-他のソフトが気になることはよくありますが、それならMayaを使えば良いという考えの下、
+他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指していません。
 統合ソフトにできない機能を積極的に実装しています。将来的にiPad Proで動くアプリケーションも目指しています。
-primitive override 表示の実現、primitive override マウス選択の実現
+
 
 ### Editor
 - [x] マウスイベントの両立
 - [x] [libgit2 (commit以外)](x-source-tag://libgit)
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
-- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride)
+- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)
 - [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装 / Mojave と carthage の相性悪い(秋以降の対応)
 - 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
 
+
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
 - [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D) / [USDKit](https://github.com/superfunc/USDKit)
-- [ ] [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
-- [ ] Metal2 でテッセレーションとリダクション
-- [ ] Metal2 でモディファイヤ ml/noise/lattice/edit 
-- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
-- [ ] USD + Alembic の2枚構成を実現 (+ json scheme)
+- [ ] interpolation を [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
+- [ ] Metal2 でモディファイヤ テッセレーションとリダクション + ml/noise/lattice/edit 
+- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更 / USD + Alembic の2枚構成 (+ json scheme)
+
+
+### Research
+- intelligent shape (Swift for TensorFlow) 
+- [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 
 
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
+
+1. [スキーマ](https://cocoaengineering.com/2018/01/01/some-useful-url-schemes-in-xcode-9/)
+- `/// - Tag: TextField (x-source-tag://TextField)`
+
+2. [break point](https://qiita.com/shu223/items/1e88d19fbb31298146ca)
 先に以下の設定が必要。
 `Build Settings > Produce Debuging Infomation > YES, include source code`
 
 - [Show Debug the navigator] タブの [FPS] をクリック
-
 - [dependency viewer](https://developer.apple.com/documentation/metal/tools_profiling_and_debugging/seeing_a_frame_s_render_passes_with_the_dependency_viewer)
     - [Show Debug the Navigator] タブ > [View Frame By Call] を選択
 - geometry viewer
@@ -73,7 +82,7 @@ primitive override 表示の実現、primitive override マウス選択の実現
 - enhanced shader profiler
     - A11 を搭載した実機でのみ確認可能
 
-- キャプチャ、ラベル、グループ
+3. キャプチャ、ラベル、グループ
 ```swift
 renderCommandEncoder.label = "hoge"
 
@@ -89,23 +98,12 @@ renderCommandEncoder.popDebugGroup()
 ```
 
 
-#### Research Level
-- intelligent shape (Swift for TensorFlow) 
-- [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 
 ----
 
 
 
-##### tips
-- ARKit で作られたアプリは Scenekit ベースが多く、応用に Metal 使うので参考になる
-- render 内で `thorows` 使うと render 使えない(オーバーロード扱いされない)
-- SCNView layer は iOS/macOS 両方で扱える
-- [standard library](https://developer.apple.com/documentation/swift/swift_standard_library)
-
 ##### snippets
-- `/// - Tag: TextField (x-source-tag://TextField)`
-
 ```swift
 metalLayer = self.layer as? CAMetalLayer
 if let drawable = metalLayer.nextDrawable()

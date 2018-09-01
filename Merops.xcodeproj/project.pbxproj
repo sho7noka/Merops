@@ -33,7 +33,6 @@
 		E2BA751E2111E1FC008FF166 /* pybind11 in Resources */ = {isa = PBXBuildFile; fileRef = E2BA751D2111E1FC008FF166 /* pybind11 */; };
 		E2BA75222111E6D7008FF166 /* MaterialX in Resources */ = {isa = PBXBuildFile; fileRef = E2BA75212111E6D7008FF166 /* MaterialX */; };
 		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
-		E2CDF1CD2134490E004D8E39 /* MaterialX-bind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E25C20DF21336A7A00EE861F /* MaterialX-bind.cpp */; };
 		E2CDF1D121357B6B004D8E39 /* Python in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* Python */; };
 		E2CDF1D52135AAD9004D8E39 /* wrapModels.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CDF1D42135AAD9004D8E39 /* wrapModels.m */; };
 		E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46114210D5D6F00C0DB39 /* Main.storyboard */; };
@@ -456,7 +455,7 @@
 				ED32B9571EB5D298000D8823 /* Frameworks */,
 				ED32B9581EB5D298000D8823 /* Resources */,
 				ED32B9841EB5DD02000D8823 /* Headers */,
-				E2CDF1CF21356BE6004D8E39 /* ShellScript */,
+				E2CDF1CF21356BE6004D8E39 /* Run Script */,
 				ED24CD341F266249000CC0BB /* Run Script */,
 			);
 			buildRules = (
@@ -560,7 +559,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		E2CDF1CF21356BE6004D8E39 /* ShellScript */ = {
+		E2CDF1CF21356BE6004D8E39 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
@@ -569,6 +568,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -619,7 +619,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2CDF1CD2134490E004D8E39 /* MaterialX-bind.cpp in Sources */,
 				ED32B9601EB5D298000D8823 /* GameView.swift in Sources */,
 				ED32B9621EB5D298000D8823 /* GameViewController.swift in Sources */,
 				E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */,
@@ -869,6 +868,7 @@
 					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 					"\"$(SRCROOT)/USD/include\"",
+					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/toolkit/include/HAPI,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -879,6 +879,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/USD/lib",
+					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/houdini/dso,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -923,6 +924,7 @@
 					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 					"\"$(SRCROOT)/USD/include\"",
+					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/toolkit/include/HAPI,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -933,6 +935,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/USD/lib",
+					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/houdini/dso,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
