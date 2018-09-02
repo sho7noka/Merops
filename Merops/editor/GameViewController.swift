@@ -11,49 +11,10 @@ import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
-//import ImGui
-
-#if os(OSX)
-extension SuperViewController: NSControlTextEditingDelegate {
-    open override func controlTextDidEndEditing(_ notification: Notification) {
-        if let textField = notification.object as? TextView {
-            guard let node = (self as! GameViewController).gameView.selection?.node else { return }
-            
-            switch textField.placeholderString {
-            case "Name":
-                node.name = textField.stringValue
-            case "positionX":
-                node.position.x = CGFloat(textField.doubleValue)
-            case "positionY":
-                node.position.y = CGFloat(textField.doubleValue)
-            case "positionZ":
-                node.position.z = CGFloat(textField.doubleValue)
-            case "rotationX":
-                node.eulerAngles.x = CGFloat(textField.doubleValue)
-            case "rotationY":
-                node.eulerAngles.y = CGFloat(textField.doubleValue)
-            case "rotationZ":
-                node.eulerAngles.z = CGFloat(textField.doubleValue)
-            case "scaleX":
-                node.scale.x = CGFloat(textField.doubleValue)
-            case "scaleY":
-                node.scale.y = CGFloat(textField.doubleValue)
-            case "scaleZ":
-                node.scale.z = CGFloat(textField.doubleValue)
-            default:
-                break
-            }
-            
-            (self as! GameViewController).gameView.gizmos.forEach {
-                $0.position = node.position
-            }
-        }
-    }
-}
-#endif
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
-    // base
+    
+    // Base
     var scene = SCNScene()
     var baseNode: SCNNode? = nil
     var device: MTLDevice!
@@ -69,6 +30,9 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     var primData: MetalPrimitiveData!
     var primHandle: MetalPrimitiveHandle!
     
+    /*
+     * NOTE: render 内で `thorows` 使うと render 使えない(オーバーロード扱いされない)
+     */
     @objc
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         /// - Tag: DrawOverride
@@ -85,6 +49,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         // buffer
         let commandBuffer = render.commandBuffer()
+        
         commandBuffer?.pushDebugGroup("in SCNRender Buffer")
         let renderEncoder = commandBuffer?.makeRenderCommandEncoder(
             descriptor: render.renderPassDescriptor()
@@ -92,7 +57,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         let renderPipelineState = try! device.makeRenderPipelineState(descriptor: render.renderPipelineDescriptor())
         renderEncoder?.setRenderPipelineState(renderPipelineState)
         renderEncoder?.endEncoding()
-        
+
         // MARK: scene and current point of view
         render.scene = scene
         render.pointOfView = gameView.pointOfView
@@ -101,7 +66,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                       commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor()
         )
         commandBuffer?.commit()
-        commandBuffer?.waitUntilCompleted()
         commandBuffer?.popDebugGroup()
     }
 
@@ -121,28 +85,17 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.scene = scene
         gameView.delegate = self
         gameView.isPlaying = true
-        gameView.settings = Settings(
-            dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
-            color: Color.lightGray,
-            usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
-            pyDir: "/usr/bin/python"
-        )
-        gameView.setsView = SettingDialog(
-            frame: gameView.frame, setting: gameView.settings!)
-        gameView.setsView?.isHidden = true
-        gameView.addSubview(gameView.setsView!)
         uiInit()
     }
     
     private func sceneInit() {
         // MARK: replace object
-        let newNode = Builder.Plane(
-            meshData: MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
-        )
-//        let (min, max) = newNode.boundingBox
-//        let x = CGFloat(max.x - min.x)
-//        let y = CGFloat(max.y - min.y)
-//        newNode.position = SCNVector3(-(x/2), -1, -2)
+        meshData = MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
+        let newNode = Builder.Plane(meshData: meshData)
+        let (min, max) = newNode.boundingBox
+        let x = CGFloat(max.x - min.x)
+        let y = CGFloat(max.y - min.y)
+        newNode.position = SCNVector3(-(x/2), -1, -2)
         
         if let existingNode = baseNode {
             scene.rootNode.replaceChildNode(existingNode, with: newNode)
@@ -150,7 +103,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             scene.rootNode.addChildNode(newNode)
         }
         baseNode = newNode
-        // HalfEdgeStructure.LoadModel(device: device, name: "", reduction: 100)
+//        HalfEdgeStructure.LoadModel(device: device, name: "", reduction: 100)
         
         Builder.Camera(scene: scene)
         Builder.Light(scene: scene)
@@ -163,6 +116,18 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     }
     
     private func uiInit() {
+        // MARK: Settings
+        gameView.settings = Settings(
+            dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
+            color: Color.lightGray,
+            usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
+            pyDir: "/usr/bin/python"
+        )
+        gameView.setsView = SettingDialog(
+            frame: gameView.frame, setting: gameView.settings!)
+        gameView.setsView?.isHidden = true
+        gameView.addSubview(gameView.setsView!)
+        
         gameView.queue = device.makeCommandQueue()
         gameView.showsStatistics = true
         gameView.allowsCameraControl = true
@@ -224,6 +189,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
         /*
+         import ImGui
          ImGui.initialize(.metal)
          if let vc = ImGui.vc {
          addChildViewController(vc)
@@ -248,3 +214,42 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         super.awakeFromNib()
     }
 }
+
+#if os(OSX)
+extension SuperViewController: NSControlTextEditingDelegate {
+    open override func controlTextDidEndEditing(_ notification: Notification) {
+        if let textField = notification.object as? TextView {
+            guard let node = (self as! GameViewController).gameView.selection?.node else { return }
+            
+            switch textField.placeholderString {
+            case "Name":
+                node.name = textField.stringValue
+            case "positionX":
+                node.position.x = CGFloat(textField.doubleValue)
+            case "positionY":
+                node.position.y = CGFloat(textField.doubleValue)
+            case "positionZ":
+                node.position.z = CGFloat(textField.doubleValue)
+            case "rotationX":
+                node.eulerAngles.x = CGFloat(textField.doubleValue)
+            case "rotationY":
+                node.eulerAngles.y = CGFloat(textField.doubleValue)
+            case "rotationZ":
+                node.eulerAngles.z = CGFloat(textField.doubleValue)
+            case "scaleX":
+                node.scale.x = CGFloat(textField.doubleValue)
+            case "scaleY":
+                node.scale.y = CGFloat(textField.doubleValue)
+            case "scaleZ":
+                node.scale.z = CGFloat(textField.doubleValue)
+            default:
+                break
+            }
+            
+            (self as! GameViewController).gameView.gizmos.forEach {
+                $0.position = node.position
+            }
+        }
+    }
+}
+#endif

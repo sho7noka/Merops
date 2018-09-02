@@ -102,14 +102,14 @@ final class PythonConsole: View, NSTextViewDelegate {
         */
         /// - Tag: gil
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
-//            let state = PyGILState_Ensure()
+            let state = PyGILState_Ensure()
 //            Py_NewInterpreter()
 //            PyGILState_Release(PyGILState_UNLOCKED)
 //            PyObjC_BEGIN_WITH_GIL
             PyRun_SimpleStringFlags(textview?.string, nil)
 //            PyObjC_END_WITH_GIL
 //            PyGILState_Release(PyGILState_LOCKED)
-//            PyGILState_Release(state)
+            PyGILState_Release(state)
         }
         
         // escape

@@ -126,4 +126,11 @@ return cube
 2. cube を配置する
 
 scene.rootNode.replaceChildNode(<#T##oldChild: SCNNode##SCNNode#>, with: <#T##SCNNode#>)
+
+let vector:[Float] = [0,1,2,3,4,5,6,7,8,9]   
+let byteLength = arr1.count*MemoryLayout<Float>.size
+let buffer = metalDevice.makeBuffer(bytes: &vector, length: byteLength, options: MTLResourceOptions())
+let vector2:[Float] = [10,20,30,40,50,60,70,80,90]
+
+buffer.contents().copyBytes(from: vector2, count: vector2.count * MemoryLayout<Float>.stride)
 ```

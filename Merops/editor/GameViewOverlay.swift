@@ -38,6 +38,7 @@ extension SKScene {
     }
 }
 
+@objcMembers
 class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
 
     /*

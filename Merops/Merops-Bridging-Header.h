@@ -16,5 +16,6 @@
 
 // engine
 #import "Python.h"
+#import "wrapModels.h"
 
 #endif

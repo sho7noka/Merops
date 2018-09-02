@@ -47,13 +47,14 @@ func gitCommit(url: String, msg: String = "update") {
         let list = try manager.contentsOfDirectory(atPath: URL(fileURLWithPath: url).deletingLastPathComponent().path)
         try list.forEach {
             if ($0.starts(with: ".") == false) {
-                try index.addFile($0) //try index.addFile(URL(string: url)!.lastPathComponent)
+                try index.addFile($0)
             }
         }
-
         let tree = try index.writeTree(to: repo)
-        try repo.createCommit(with: tree, message: msg, parents: nil, updatingReferenceNamed: "HEAD")
-
+        
+        try repo.createCommit(with: tree,
+                              message: msg,
+                              parents: nil, updatingReferenceNamed: "HEAD")
     } catch {
         print(error)
     }

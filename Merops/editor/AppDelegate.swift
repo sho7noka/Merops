@@ -37,7 +37,7 @@ sys.path.append(os.path.join(pwd, \"Python\"))
 os.chdir(os.path.join(pwd, \"USD/lib/python\"))
 """, nil)
     }
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Py_Finalize()
     }

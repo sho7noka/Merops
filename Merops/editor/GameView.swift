@@ -27,6 +27,7 @@ extension GameView {
     }
     
     // drawable
+    // SCNView layer は iOS/macOS 両方で扱える
     internal var metalLayer: CAMetalLayer {
         let metalLayer = (self.layer as? CAMetalLayer)!
         metalLayer.framebufferOnly = false
@@ -53,11 +54,6 @@ class GameView: SCNView {
     var selectedNode: SCNNode!
     var zDepth: SCNFloat!
     var pos = float2()
-    let options = [
-        SCNHitTestOption.sortResults: NSNumber(value: true),
-        SCNHitTestOption.boundingBoxOnly: NSNumber(value: true),
-        SCNHitTestOption.categoryBitMask: NSNumber(value: true),
-    ]
     var mouseBuffer: MTLBuffer!
     var outBuffer: MTLBuffer!
     var queue: MTLCommandQueue! = nil
@@ -93,10 +89,11 @@ class GameView: SCNView {
         }
     }
     
-    override func beginGesture(with event: Event) {
-        Swift.print("\(event.pressure)")
-        super.beginGesture(with: event)
-    }
+    let options = [
+        SCNHitTestOption.sortResults: NSNumber(value: true),
+        SCNHitTestOption.boundingBoxOnly: NSNumber(value: true),
+        SCNHitTestOption.categoryBitMask: NSNumber(value: true),
+    ]
     
     /*
      * MARK: Mouse Event
@@ -168,7 +165,7 @@ class GameView: SCNView {
                 Builder.Grid(scene: self.scene!)
                 
             case "NSInfo"?:
-                Builder.Torus(scene: self.scene!)
+                gitStatus(dir: "/Users/shosumioka/Documents/Merops")
                 
             case "NSComputer"?:
                 cameraName = "camera"
@@ -176,7 +173,6 @@ class GameView: SCNView {
             case "NSNetwork"?:
                 cameraName = "camera1"
                 console.isHidden = false
-//                console.setUsd(url: URL(fileURLWithPath: "/Users/shosumioka/Documents/Merops/geo.usda"))
                 
             case "NSFolder"?:
                 break
@@ -285,6 +281,9 @@ class GameView: SCNView {
         }
         
         // MARK: SCNNode
+        /*
+         * 
+         */
         if hitResults.count > 0 {
             let result: AnyObject = hitResults[0]
             if result is SCNHitTestResult {
@@ -328,15 +327,15 @@ class GameView: SCNView {
             }
             
             /// MARK: hitTest on Metal https://qiita.com/shu223/items/b9bcdbcf7b0fd410d8ab
+            /// MARK: 4.3.1.1 Vertex Function Example with Resources and Outputs to Device Memory
+            let data = outBuffer.contents().bindMemory(to: float2.self, capacity: 1)
+            Swift.print(data[0], selNode.geometry?.vertices())
             switch part {
             case .OverrideVertex:
-                let data = outBuffer.contents().bindMemory(to: float2.self, capacity: 1)
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [data[0].x, data[1].x])
             case .OverrideEdge:
-                let data = outBuffer.contents().bindMemory(to: float2.self, capacity: 1)
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [data[0].x, data[1].x])
             case .OverrideFace:
-                let data = outBuffer.contents().bindMemory(to: float2.self, capacity: 1)
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [data[0].x, data[1].x])
             default:
                 break
