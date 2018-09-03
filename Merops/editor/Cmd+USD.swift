@@ -53,17 +53,12 @@ func USDZexport(infile: String, outfile: String) {
 }
 
 func USDEdit(infile: String) {
-    do {
-        let text = try String(contentsOfFile: infile, encoding: String.Encoding.utf8)
-        print(text)
 
-    } catch {
-        //エラー処理
-    }
+//    let text = try String(contentsOfFile: infile, encoding: String.Encoding.utf8)
 
-//    let ret = stdOutOfCommand(
-//        cmd: rpath + "USD/bin/usdedit", arguments: [infile]
-//    )
+    let ret = stdOutOfCommand(
+        cmd: rpath + "USD/bin/usdedit", arguments: [infile]
+    )
 //    print(ret)
 }
 

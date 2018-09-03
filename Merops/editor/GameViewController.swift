@@ -49,22 +49,21 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         // buffer
         let commandBuffer = render.commandBuffer()
-        
         commandBuffer?.pushDebugGroup("in SCNRender Buffer")
+        
         let renderEncoder = commandBuffer?.makeRenderCommandEncoder(
-            descriptor: render.renderPassDescriptor()
-        )
-        let renderPipelineState = try! device.makeRenderPipelineState(descriptor: render.renderPipelineDescriptor())
+            descriptor: render.renderPassDescriptor())
+        let renderPipelineState = try! device.makeRenderPipelineState(
+            descriptor: render.renderPipelineDescriptor())
         renderEncoder?.setRenderPipelineState(renderPipelineState)
         renderEncoder?.endEncoding()
-
-        // MARK: scene and current point of view
+        
         render.scene = scene
         render.pointOfView = gameView.pointOfView
         render.render(atTime: 0,
                       viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
-                      commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor()
-        )
+                      commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor())
+        
         commandBuffer?.commit()
         commandBuffer?.popDebugGroup()
     }

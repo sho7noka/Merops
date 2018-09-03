@@ -165,7 +165,8 @@ class GameView: SCNView {
                 Builder.Grid(scene: self.scene!)
                 
             case "NSInfo"?:
-                gitStatus(dir: "/Users/shosumioka/Documents/Merops")
+                USDEdit(infile: "/Users/shosumioka/Documents/Merops/geo.usda")
+//                gitStatus(dir: "/Users/shosumioka/Documents/Merops")
                 
             case "NSComputer"?:
                 cameraName = "camera"
