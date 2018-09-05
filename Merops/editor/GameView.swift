@@ -8,7 +8,7 @@
 
 import SpriteKit
 import SceneKit
-import WebKit
+import AppKit
 
 extension GameView {
     
@@ -627,6 +627,8 @@ class GameView: SCNView {
             self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "\t": // TAB
             console.isHidden = !console.isHidden
+            console.textview?.setSelectedRange(NSMakeRange(0, 0))
+            console.textview?.drawFocusRingMask()
         case "q":
             self.resetView(_mode: .Object)
         case "w":
