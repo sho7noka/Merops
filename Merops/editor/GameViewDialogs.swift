@@ -159,6 +159,53 @@ final class PythonConsole: View, NSTextViewDelegate {
     }
 }
 
+protocol CurrentLineHighlighting: AnyObject {
+    
+    var needsUpdateLineHighlight: Bool { get set }
+    var lineHighLightRect: NSRect? { get set }
+    var lineHighLightColor: NSColor? { get }
+}
+
+extension CurrentLineHighlighting where Self: NSTextView {
+    func drawCurrentLine(in dirtyRect: NSRect) {
+        
+        if self.needsUpdateLineHighlight {
+            self.invalidateLineHighLightRect()
+            self.needsUpdateLineHighlight = false
+        }
+        
+        guard
+            let rect = self.lineHighLightRect,
+            let color = self.lineHighLightColor,
+            rect.intersects(dirtyRect)
+            else { return }
+        
+        // draw highlight
+        NSGraphicsContext.saveGraphicsState()
+        
+        color.setFill()
+        rect.fill()
+        
+        NSGraphicsContext.restoreGraphicsState()
+    }
+    
+    private func invalidateLineHighLightRect() {
+        
+        let lineRange = (self.string as NSString).lineRange(for: self.selectedRange)
+        guard
+            var rect = self.boundingRe
+            var rect = self.boundingRect(for: lineRange),
+            let textContainer = self.textContainer
+            else { return }
+        
+        rect.origin.x = textContainer.lineFragmentPadding
+        rect.size.width = textContainer.size.width - 2 * textContainer.lineFragmentPadding
+        
+        self.lineHighLightRect = rect
+    }
+}
+
+/*
 var LineNumberViewAssocObjKey: UInt8 = 0
 
 extension NSTextView {
@@ -290,3 +337,4 @@ class LineNumberRulerView: NSRulerView {
         }
     }
 }
+*/
