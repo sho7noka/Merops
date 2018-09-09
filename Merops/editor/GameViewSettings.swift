@@ -3,9 +3,10 @@
 // Copyright (c) 2018 sho sumioka. All rights reserved.
 //
 
+import Foundation
 import SceneKit
 
-struct Settings{
+struct Settings {
     let projectDir: String
     let bgColor: Color
     let usdDir: String
@@ -17,6 +18,16 @@ struct Settings{
         self.usdDir = usdDir
         self.pythonDir = pyDir
     }
+    
+//    public init(from decoder: Decoder) throws {
+//        let url = URL(fileURLWithPath: projectDir + "/setting.json")
+//        let data = try Data(contentsOf: url)
+//        try JSONDecoder().decode(Settings.self, from: data)
+//    }
+    
+//    public func encode(to encoder: Encoder) throws {
+//        JSONEncoder().encode(<#T##value: Encodable##Encodable#>)
+//    }
 }
 
 enum NodeOptions: Int {

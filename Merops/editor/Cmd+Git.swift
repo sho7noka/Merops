@@ -60,6 +60,10 @@ func gitCommit(url: String, msg: String = "update") {
     }
 }
 
+/**
+ # NOTE
+ - args: url String
+*/
 func gitRevert(url: String) {
     do {
         let repo = try GTRepository.init(
