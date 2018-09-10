@@ -16,6 +16,7 @@
 
 // engine
 #import "Python.h"
+#import "pyobjc-compat.h"
 #import "wrapModels.h"
 
 #endif
