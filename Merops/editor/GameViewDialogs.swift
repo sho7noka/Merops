@@ -76,6 +76,10 @@ final class PythonConsole: View, NSTextViewDelegate {
         
         textview = NSTextView(frame: frame)
         textview?.backgroundColor = Color.black.withAlphaComponent(0.5)
+        let dev = NSAttributedString(string: " Developpers")
+        let range = NSRange(location: 9, length: 0)
+        textview?.setSelectedRange(range)
+        textview?.performValidatedReplacement(in: range, with: dev)
 //        textview?.lnv_setUpLineNumberView()
         self.addSubview(textview!)
     }
@@ -114,14 +118,16 @@ final class PythonConsole: View, NSTextViewDelegate {
         */
         /// - Tag: gil
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
-//            let state = PyGILState_Ensure()
-//            PyGILState_Release(state)
+            let state = PyGILState_Ensure()
+            
             let txt = textview?.string
-            if PyRun_SimpleStringFlags(txt, nil) != 0 {
-                return true
-            }
-//            PyGILState_Release(PyGILState_LOCKED)
-//            PyGILState_Release(state)
+//            if PyRun_SimpleStringFlags(txt, nil) != 0 {
+                PyRun_SimpleStringFlags(txt, nil)
+                PyErr_Print()
+//                return true
+//            }
+            PyGILState_Release(state)
+//            PyEval_RestoreThread(thread)
         }
         
         // escape
