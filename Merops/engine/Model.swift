@@ -8,7 +8,8 @@ import SceneKit
 import Metal
 import MetalKit
 
-final class Models {
+@objcMembers
+class Models {
 
     private var models: [SCNNode] = []
 
@@ -112,7 +113,7 @@ class HalfEdgeStructure {
         (modelDescriptor3D.attributes[2] as! MDLVertexAttribute).name = MDLVertexAttributeTextureCoordinate
         
         let allocator = MTKMeshBufferAllocator(device: device)  //use only Load obj
-        let asset = MDLAsset(url: Bundle.main.url(forResource: modelName, withExtension: "usd")!,
+        let asset = MDLAsset(url: URL(string: modelName),
                              vertexDescriptor: modelDescriptor3D,
                              bufferAllocator: allocator)
         let newMesh = try! MTKMesh.newMeshes(asset: asset, device: device)

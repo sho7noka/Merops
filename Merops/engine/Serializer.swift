@@ -61,7 +61,8 @@ public func userDocument(fileName: String) -> URL {
 
 final class USDExporter {
 
-    public static func initialize(scene: SCNScene) {
+    public static func initialize(scene: SCNScene) -> URL {
+        scene.rootNode.name = "root"
         let asset = MDLAsset(scnScene: scene)
         let exportFile = userDocument(fileName: "geo.usda")
 
@@ -69,14 +70,13 @@ final class USDExporter {
         gitInit(dir: exportFile.deletingLastPathComponent().path)
         try! asset.exportWriter(to: exportFile, text: "\ndef Cube \"cy\" {\n}")
         gitCommit(url: exportFile.absoluteString, msg: "export")
+        return exportFile
     }
 
     public static func exportFromAsset(scene: SCNScene) -> MDLAsset {
 
-        USDExporter.initialize(scene: scene)
-
         // MARK: Y-Up
-        scene.rootNode.name = "root"
+        let exportFile = USDExporter.initialize(scene: scene)
         let asset = MDLAsset(scnScene: scene)
         asset.upAxis = vector_float3([0, 1, 0])
         
@@ -124,9 +124,9 @@ final class USDExporter {
         scene.rootNode.enumerateChildNodes({ child, _ in
             child.removeFromParentNode()
         })
-//        let masset = MDLAsset(url: URL(fileURLWithPath: exportFile.path))
+        let masset = MDLAsset(url: URL(fileURLWithPath: exportFile.path))
 //        let object = asset.childObjects(of: MDLMesh.self) as? [MDLMesh]
-        return MDLAsset(scnScene: scene)
+        return masset
     }
 
     public static func exportFromText(fileName: String, fileObject: String) {

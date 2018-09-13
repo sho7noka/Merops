@@ -37,10 +37,11 @@ struct ColorInOut
 	float3 transformedNormal;
 };
 
-vertex ColorInOut vertexShader(device vertex_t* vertex_array [[ buffer(0) ]],
-							   device bones*    bone_array   [[ buffer(1) ]],
-							   constant Uniforms& uniforms 	 [[ buffer(2) ]],
-							   uint   vid    	 			 [[ vertex_id ]])
+vertex
+ColorInOut vertexShader(device vertex_t* vertex_array   [[ buffer(0) ]],
+                        device bones*    bone_array     [[ buffer(1) ]],
+                        constant Uniforms& uniforms     [[ buffer(2) ]],
+                        uint   vid                      [[ vertex_id ]])
 {
     ColorInOut out;
 

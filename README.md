@@ -30,9 +30,9 @@
 
 
 ## Why
-3Dソフトの操作は難しく複雑です。OpenGL deprecate の環境下で Metal をベースにしています。
-マルチプラットフォームのアプリケーションも [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現しているとは言えません。
-出力フォーマットに標準で USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
+3Dソフトの操作は難しく複雑です。OpenGL deprecate の環境下で安定した動作を実現するために Metal をベースにしています。
+マルチプラットフォームのアプリケーションは [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現しているとは言えません。
+入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
 
 ## TODO
 他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指していません。

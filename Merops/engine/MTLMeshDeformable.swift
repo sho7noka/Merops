@@ -237,6 +237,8 @@ class MetalMeshDeformer {
         computeCommandEncoder?.setBuffer(mesh.vertexBuffer2, offset: 0, index: 1)
         computeCommandEncoder?.setBytes(&deformData, length: MemoryLayout<DeformData>.size, index: 2)
 
+        Swift.print(mesh.vertexBuffer2)
+        
         let count = mesh.vertexCount
         let threadExecutionWidth = pipelineStateVertex.threadExecutionWidth
         let threadsPerGroup = MTLSize(width: threadExecutionWidth, height: 1, depth: 1)

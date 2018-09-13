@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ModelIO
 import MetalKit
 
 protocol RenderObject {

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A86D92862E523CC392B /* Extensions.swift */; };
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E25C20E221336A7A00EE861F /* MaterialX-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E021336A7A00EE861F /* MaterialX-bind.hpp */; };
@@ -35,6 +34,7 @@
 		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
 		E2CDF1D121357B6B004D8E39 /* Python in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* Python */; };
 		E2CDF1D52135AAD9004D8E39 /* wrapModels.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CDF1D42135AAD9004D8E39 /* wrapModels.m */; };
+		E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
 		E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46114210D5D6F00C0DB39 /* Main.storyboard */; };
 		E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46119210D5D7100C0DB39 /* LaunchScreen.storyboard */; };
 		E2E46121210D5DE000C0DB39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
@@ -65,7 +65,6 @@
 
 /* Begin PBXFileReference section */
 		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		94B26A86D92862E523CC392B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Highlightr.framework; path = Carthage/Build/Mac/Highlightr.framework; sourceTree = "<group>"; };
 		E2101237211EBE08001664AD /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = USD/lib; sourceTree = "<group>"; };
 		E216B24421299C4D004D0CE8 /* interpolate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interpolate.swift; sourceTree = "<group>"; };
@@ -123,11 +122,11 @@
 		E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "pyobjc-framework-Merops"; sourceTree = "<group>"; };
 		E2BA751D2111E1FC008FF166 /* pybind11 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybind11; path = Merops/extra/pybind11; sourceTree = SOURCE_ROOT; };
-		E2BA751F2111E3CF008FF166 /* wrapPybind.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = wrapPybind.cpp; sourceTree = "<group>"; };
 		E2BA75212111E6D7008FF166 /* MaterialX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MaterialX; path = Merops/extra/MaterialX; sourceTree = SOURCE_ROOT; };
 		E2CDF1D021357B6B004D8E39 /* Python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Python; path = Merops/extra/Python; sourceTree = SOURCE_ROOT; };
 		E2CDF1D42135AAD9004D8E39 /* wrapModels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wrapModels.m; sourceTree = "<group>"; };
 		E2CDF1D62135AAF9004D8E39 /* wrapModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapModels.h; sourceTree = "<group>"; };
+		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E2E3044B210846A40068C9AD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
 		E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -202,13 +201,13 @@
 		E281B7B320B94CE700232181 /* shader */ = {
 			isa = PBXGroup;
 			children = (
-				EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */,
 				E281B7AB20B94CBB00232181 /* Shaders.metal */,
 				E281B7AD20B94CCA00232181 /* Common.metal */,
 				E281B7AE20B94CCA00232181 /* Lambert.metal */,
 				E281B7AF20B94CCA00232181 /* Tessellation.metal */,
 				ED2221822021E17C00427606 /* DeformCompute.metal */,
 				E281B79C20B94CAE00232181 /* Skinning.metal */,
+				EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */,
 			);
 			name = shader;
 			sourceTree = "<group>";
@@ -342,7 +341,7 @@
 			children = (
 				E281B7B420B950A500232181 /* MetalTessellation */,
 				EDB683412025D43200AD75EE /* scene */,
-				EDB683432025D59400AD75EE /* bind */,
+				EDB683432025D59400AD75EE /* extends */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -372,20 +371,19 @@
 			name = scene;
 			sourceTree = "<group>";
 		};
-		EDB683432025D59400AD75EE /* bind */ = {
+		EDB683432025D59400AD75EE /* extends */ = {
 			isa = PBXGroup;
 			children = (
-				E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */,
-				E2BA751F2111E3CF008FF166 /* wrapPybind.cpp */,
+				E2DD2648213A6C3D00242943 /* Extensions.swift */,
 				E2CDF1D62135AAF9004D8E39 /* wrapModels.h */,
 				E2CDF1D42135AAD9004D8E39 /* wrapModels.m */,
 				E25C20E021336A7A00EE861F /* MaterialX-bind.hpp */,
 				E25C20DF21336A7A00EE861F /* MaterialX-bind.cpp */,
 				E25C20E421336ABA00EE861F /* USD-bind.hpp */,
 				E25C20E321336ABA00EE861F /* USD-bind.cpp */,
-				94B26A86D92862E523CC392B /* Extensions.swift */,
+				E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */,
 			);
-			name = bind;
+			name = extends;
 			sourceTree = "<group>";
 		};
 		EDB683442025D7EF00AD75EE /* controller */ = {
@@ -575,7 +573,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncd Merops/engine/pyobjc-framework-Merops\npython setup.py build\ncp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\n\n#c++ -O3 -shared -std=c++11 -fPIC -I Merops/extra/pybind11/include/ `python-config --cflags --ldflags` Merops/engine/wrapPybind.cpp -o _merops.so\n#cp -r _merops.so $BUILT_PRODUCTS_DIR/Python\n";
+			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncd Merops/engine/pyobjc-framework-Merops\npython setup.py build\ncp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\n";
 		};
 		ED24CD341F266249000CC0BB /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -640,11 +638,11 @@
 				E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */,
 				E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */,
 				E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */,
+				E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */,
 				E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */,
 				E2CDF1D52135AAD9004D8E39 /* wrapModels.m in Sources */,
 				E281B7AA20B94CAE00232181 /* Model.swift in Sources */,
 				94B267081AAA6682547C87FA /* Engine.swift in Sources */,
-				94B261F23272E9388ACAEEBF /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +867,7 @@
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 					"\"$(SRCROOT)/USD/include\"",
 					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/toolkit/include/HAPI,
+					"/Users/shosumioka/pyobjc/pyobjc-core/Modules/objc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -925,6 +924,7 @@
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 					"\"$(SRCROOT)/USD/include\"",
 					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/toolkit/include/HAPI,
+					"/Users/shosumioka/pyobjc/pyobjc-core/Modules/objc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

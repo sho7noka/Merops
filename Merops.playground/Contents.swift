@@ -1,27 +1,9 @@
-///*:
-// # Merops playground
-// * Build the target "ShaderView" against "My Mac" as below. Please note that it doesn't work on iOS Simulator becase of the limitation of Metal.
-// ![Target](target.png)
-// * Progam your own shader function in `playgroundSample` in MSLPlayground.metal. You can also add your own metal file or metal function. In that case, change the name of the resource file to load the `MTLLibrary` or `funcationName` to set on the `ShaderViewRenderer`.
-// 
-// ## memo
-// - MetalEzLoader の復元
-// 
-// #### memo
-// device と MTLVertexDescriptor と MTKView
-// 
-// MTKView から取れるのは
-// - view.currentDrawable
-// - view.currentRenderPassDescriptor
-// - view.colorPixelFormat / sampleCount
-// */
-//
-//import Metal
-//import SceneKit
-//import SpriteKit
-//import PlaygroundSupport
-//
-//
+
+import Metal
+import SceneKit
+import SpriteKit
+import PlaygroundSupport
+
 //class GameScene: SCNScene {
 //    
 //    private var label : SKLabelNode!
@@ -102,8 +84,19 @@
 //
 //PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
-import CreateMLUI
-let builder = MLImageClassifierBuilder()
-builder.showInLiveView()
 
 
+
+let clone = selNode.flattenedClone()
+let program = SCNProgram()
+program.vertexFunctionName = ""
+program.fragmentFunctionName = ""
+clone.geometry?.firstMaterial?.program = program
+scene?.rootNode.addChildNode(clone)
+
+clone.geometry?.sources.forEach{
+    $0.data
+}
+clone.geometry?.firstMaterial?.program = nil
+clone.geometry?.firstMaterial? = (selNode.geometry?.firstMaterial)!
+scene?.rootNode.replaceChildNode(selNode, with: clone)

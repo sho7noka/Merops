@@ -152,3 +152,15 @@ class MetalPrimitiveHandle {
         }
     }
 }
+
+extension MTLBuffer {
+//    func drawBlockInSafeContext(block: (context: CGContext?) -> ()) {
+//        let context = UIGraphicsGetCurrentContext()
+//        CGContextSaveGState(context)
+//        block(context: context)
+//        CGContextRestoreGState(context)
+//    }
+    
+//    commandBuffer?.commit()
+//    commandBuffer?.popDebugGroup()
+}
