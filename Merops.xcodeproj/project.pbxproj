@@ -127,13 +127,13 @@
 		E2CDF1D42135AAD9004D8E39 /* wrapModels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wrapModels.m; sourceTree = "<group>"; };
 		E2CDF1D62135AAF9004D8E39 /* wrapModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapModels.h; sourceTree = "<group>"; };
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		E2E3044B210846A40068C9AD /* METAL-DOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "METAL-DOC"; sourceTree = "<group>"; };
 		E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2E46117210D5D7100C0DB39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2E4611A210D5D7100C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2E4611C210D5D7100C0DB39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E46157210DE97800C0DB39 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
+		E2E5DB52216E53C80028AA4E /* MDOC */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MDOC; sourceTree = "<group>"; };
 		E2F5171521337603005F1515 /* libboost_regex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_regex.dylib; path = USD/lib/libboost_regex.dylib; sourceTree = "<group>"; };
 		E2F5171621337603005F1515 /* libImath-2_2.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libImath-2_2.12.0.0.dylib"; path = "USD/lib/libImath-2_2.12.0.0.dylib"; sourceTree = "<group>"; };
 		E2F5171721337603005F1515 /* libusdUtils.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdUtils.dylib; path = USD/lib/libusdUtils.dylib; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 		ED32B9511EB5D298000D8823 = {
 			isa = PBXGroup;
 			children = (
-				E2E3044B210846A40068C9AD /* METAL-DOC */,
+				E2E5DB52216E53C80028AA4E /* MDOC */,
 				EDEEFF531F8A35CB00E4785F /* README.md */,
 				ED32B95C1EB5D298000D8823 /* Merops */,
 				E2E4610D210D5D6F00C0DB39 /* Merops-ios */,
