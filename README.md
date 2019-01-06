@@ -1,18 +1,24 @@
 # [Merops](https://github.com/sho7noka/Merops)
 
 [English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/sho7noka/Merops)
+
 `Pixar USD` と `libgit` をベースにした、次世代型DCCツールの実験プロジェクトです。
 
 ## Concept
 シンプル、早い、イテレーションの3軸を基本に考えています。
-- `Metal2` ベースの Viewport と Modifier
-- ウィジェットを極力排したジェスチャ(中ボタンを使わない)、ゲーム画面に近い使用感
+- Metal2 ベースの Viewport と Modifier (OpenGL deprecate)
+- 中ボタンを使わないウィジェットを極力排したジェスチャ、ゲーム画面に近い使用感
 - [Pixar USD](https://github.com/PixarAnimationStudios/USD) と [libgit2](https://github.com/libgit2/objective-git) によるパイプライン・イテレーション
 
 ### future
 - [x] geometry
-- [  ] material 
 - [x] scripting
+- [ ] shader 
+
+## Why?
+1. 3Dソフトの操作は難しく複雑です。中ボタンクリックの多用を回避してシンプルな操作感を実現したいと考えました。
+2. [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現したDCCアプリケーション。
+3. 入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
 
 ### Author
 [sho7noka](shosumioka@gmail.com)
@@ -23,21 +29,10 @@
 ### License
 [BSD](../License.md) ライセンスです。
 
-
-
 ----
 
-
-
-## Why
-3Dソフトの操作は難しく複雑です。OpenGL deprecate の環境下で安定した動作を実現するために Metal をベースにしています。
-マルチプラットフォームのアプリケーションは [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現しているとは言えません。
-入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
-
 ## TODO
-他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指していません。
-統合ソフトにできない機能を積極的に実装しています。将来的にiPad Proで動くアプリケーションも目指しています。
-
+他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指しません。
 
 ### Editor
 - [x] マウスイベントの両立
@@ -45,10 +40,9 @@
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)
-- [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装 / Mojave と carthage の相性悪い(秋以降の対応)
-- 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
+- [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
+- [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
-
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
@@ -57,13 +51,12 @@
 - [ ] Metal2 でモディファイヤ テッセレーションとリダクション + ml/noise/lattice/edit 
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更 / USD + Alembic の2枚構成 (+ json scheme)
 
-
 ### Research
+- WHLSL to MSL
 - intelligent shape (Swift for TensorFlow) 
 - [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 
-
-### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
+## [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
 
 1. [スキーマ](https://cocoaengineering.com/2018/01/01/some-useful-url-schemes-in-xcode-9/)
 - `/// - Tag: TextField (x-source-tag://TextField)`
@@ -97,13 +90,7 @@ renderCommandEncoder.pushDebugGroup("hoge")
 renderCommandEncoder.popDebugGroup()
 ```
 
-
-
-----
-
-
-
-##### snippets
+### snippets
 ```swift
 metalLayer = self.layer as? CAMetalLayer
 if let drawable = metalLayer.nextDrawable()
