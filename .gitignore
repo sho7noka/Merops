@@ -6,3 +6,4 @@ MDOC
 DerivedData
 Merops.xcodeproj/project.xcworkspace/*
 Merops.xcodeproj/xcuserdata/*
+*.pyc
