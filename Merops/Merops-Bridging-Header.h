@@ -15,8 +15,8 @@
 //#import "USD-bind.hpp"
 
 // engine
-#import "Python.h"
-#import "pyobjc-compat.h"
-#import "wrapModels.h"
+//#import "Python.h"
+//#import "pyobjc-compat.h"
+//#import "CoreModel.h"
 
 #endif

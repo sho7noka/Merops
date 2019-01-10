@@ -21,7 +21,7 @@
 3. 入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
 
 ### Author
-[sho7noka](shosumioka@gmail.com)
+[sho7noka](mailto:shosumioka@gmail.com)
 
 ### Contribute
 [Contribute](../Contribute.md) を一読ください。
@@ -32,6 +32,9 @@
 ----
 
 ## TODO
+```bash
+carthage update --verbose --no-use-binaries --use-ssh
+```
 他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指しません。
 
 ### Editor
@@ -40,7 +43,7 @@
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)
-- [ ] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
+- [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
 

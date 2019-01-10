@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/engine/Engine.swift"
-            timestampString = "557566573.801562"
+            timestampString = "568819315.748252"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "557849874.800203"
+            timestampString = "568819315.7483079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "557849874.800447"
+            timestampString = "568819315.748535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "557849874.800517"
+            timestampString = "568819315.7485811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "renderer(_:didRenderScene:atTime:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "557849874.80058"
+            timestampString = "568819315.748624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "renderer(_:didRenderScene:atTime:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -522,27 +522,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "557849874.800639"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "renderer(_:didRenderScene:atTime:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "557849874.8006999"
+            timestampString = "568819315.7486629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
+            landmarkName = "renderer(_:didRenderScene:atTime:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Merops/editor/GameViewController.swift"
+            timestampString = "568819315.748704"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "renderer(_:didRenderScene:atTime:)"
             landmarkType = "7">
          </BreakpointContent>
