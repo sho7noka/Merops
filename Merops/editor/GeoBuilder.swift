@@ -14,7 +14,7 @@ final class Builder {
         newNode.castsShadow = true
 
         var trans = SCNMatrix4Identity
-        trans = SCNMatrix4Rotate(trans, CGFloat(Float.pi / 2), 1, 0, 0)
+        trans = SCNMatrix4Rotate(trans, SCNFloat(Float.pi / 2), 1, 0, 0)
         newNode.transform = trans
 
         return newNode

@@ -46,22 +46,22 @@ class Models {
     }
 }
 
-func getMat(textureFilename: String, ureps: CGFloat = 1.0, vreps: CGFloat = 1.0, directory: String? = nil,
+func getMat(textureFilename: String, ureps: SCNFloat = 1.0, vreps: SCNFloat = 1.0, directory: String? = nil,
             normalFilename: String? = nil, specularFilename: String? = nil) -> SCNMaterial {
     let nsb = Bundle.main.path(forResource: textureFilename, ofType: nil, inDirectory: directory)
-    let im = NSImage(contentsOfFile: nsb!)
+    let im = Image(contentsOfFile: nsb!)
 
     let mat = SCNMaterial()
     mat.diffuse.contents = im
 
     if (normalFilename != nil) {
-        mat.normal.contents = NSImage(contentsOfFile: Bundle.main.path(
+        mat.normal.contents = Image(contentsOfFile: Bundle.main.path(
                 forResource: normalFilename, ofType: nil, inDirectory: directory)!
         )
     }
 
     if (specularFilename != nil) {
-        mat.specular.contents = NSImage(contentsOfFile: Bundle.main.path(
+        mat.specular.contents = Image(contentsOfFile: Bundle.main.path(
                 forResource: specularFilename, ofType: nil, inDirectory: directory)!
         )
     }
@@ -70,7 +70,7 @@ func getMat(textureFilename: String, ureps: CGFloat = 1.0, vreps: CGFloat = 1.0,
     return mat
 }
 
-func repeatMat(mat: SCNMaterial, wRepeat: CGFloat, hRepeat: CGFloat) {
+func repeatMat(mat: SCNMaterial, wRepeat: SCNFloat, hRepeat: SCNFloat) {
 
     mat.diffuse.contentsTransform = SCNMatrix4MakeScale(wRepeat, hRepeat, 1.0)
     mat.diffuse.wrapS = .repeat
@@ -133,17 +133,18 @@ class HalfEdgeStructure {
             var v1 = pOriBuffer.advanced(by: i * 3 + 1).pointee.point
             var v2 = pOriBuffer.advanced(by: i * 3 + 2).pointee.point
             let mynm = cross(
-                float3(v1.x - v0.x, v1.y - v0.y, v1.z - v0.z), float3(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z)
+                float3(mFloat(v1.x - v0.x), mFloat(v1.y - v0.y), mFloat(v1.z - v0.z)), float3(mFloat(v2.x - v0.x), mFloat(v2.y - v0.y), mFloat(v2.z - v0.z))
             )
             let ptnm = pOriBuffer.advanced(by: i * 3 + 0).pointee.normal
-            let asnm = dot(float3(ptnm.x, ptnm.y, ptnm.z), mynm)
+            let asnm = dot(float3(mFloat(ptnm.x), mFloat(ptnm.y), mFloat(ptnm.z)), mynm)
             if asnm < 0 {
                 let myv = v1
                 v1 = v2
                 v2 = myv
             }
-            model.addPolygon(vertex0: float3(v0.x, v0.y, v0.z),
-                             vertex1: float3(v1.x, v1.y, v1.z), vertex2: float3(v2.x, v2.y, v2.z))
+            model.addPolygon(vertex0: float3(mFloat(v0.x), mFloat(v0.y), mFloat(v0.z)),
+                             vertex1: float3(mFloat(v1.x), mFloat(v1.y), mFloat(v1.z)),
+                             vertex2: float3(mFloat(v2.x), mFloat(v2.y), mFloat(v2.z)))
         }
         model.updateQuadraticErrorMetricsAll()
         model.polygonReduction(count: reduction)

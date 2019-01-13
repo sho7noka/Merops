@@ -65,11 +65,12 @@ final class USDExporter {
         scene.rootNode.name = "root"
         let asset = MDLAsset(scnScene: scene)
         let exportFile = userDocument(fileName: "geo.usda")
-
+    #if os(OSX)
         // export with ascii format
         gitInit(dir: exportFile.deletingLastPathComponent().path)
         try! asset.exportWriter(to: exportFile, text: "\ndef Cube \"cy\" {\n}")
         gitCommit(url: exportFile.absoluteString, msg: "export")
+    #endif
         return exportFile
     }
 
@@ -109,7 +110,7 @@ final class USDExporter {
             if (child.geometry != nil) {
                 let scatteringFunction = MDLScatteringFunction()
                 let material = MDLMaterial(name: "baseMaterial", scatteringFunction: scatteringFunction)
-                material.setProperty(MDLMaterialProperty(name: "color", semantic: .baseColor, color: CGColor.black))
+                material.setProperty(MDLMaterialProperty(name: "color", semantic: .baseColor, color: Color.black as! CGColor))
 
                 // Apply the texture to every submesh of the asset
                 for submesh in (MDLMesh(scnGeometry: child.geometry!).submeshes!) {

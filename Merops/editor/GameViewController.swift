@@ -1,6 +1,6 @@
 //
 //  GameViewController.swift
-//  KARAS
+//  Merops
 //
 //  Created by sumioka-air on 2017/04/30.
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
@@ -11,6 +11,8 @@ import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
+
+import ImGui
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
     
@@ -70,12 +72,16 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if gameView == nil {
+            gameView = GameView()
+            self.view.addSubview(gameView)
+        }
         
         // MARK: Metal Render
         device = MTLCreateSystemDefaultDevice()
         render = MetalRender(device: device, options: nil)
         
-        // MARK: Renderer
+        // MARK: Renderert
         deform = MetalMeshDeformer(device: render.device!)
         primHandle = MetalPrimitiveHandle(render: render, view: gameView)
         sceneInit()
@@ -120,12 +126,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
             color: Color.lightGray,
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
-            pyDir: "/usr/bin/python"
-        )
-        gameView.setsView = SettingDialog(
-            frame: gameView.frame, setting: gameView.settings!)
-        gameView.setsView?.isHidden = true
-        gameView.addSubview(gameView.setsView!)
+            pyDir: "/usr/bin/python")
         
         gameView.queue = device.makeCommandQueue()
         gameView.showsStatistics = true
@@ -137,7 +138,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         Editor.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
-        gameView.subView = SCNView(frame: NSRect(x: 0, y: 0, width: 80, height: 80))
+        gameView.subView = SCNView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         gameView.subView?.scene = SCNScene()
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
@@ -154,12 +155,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         overRay = gameView.overlaySKScene as? GameViewOverlay
         overRay.isUserInteractionEnabled = false
         gameView.cameraName = (gameView.defaultCameraController.pointOfView?.name)!
-        gameView.resizeView()
-        
-        // MARK: Console
-        gameView.console = PythonConsole(frame: gameView.frame, view: gameView)
-        gameView.console.isHidden = true
-        gameView.addSubview(gameView.console)
         
         // MARK: Text Field
         gameView.numFields.append(contentsOf: [TextView(), TextView(), TextView()])
@@ -174,12 +169,27 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.frame = CGRect(x: 10, y: 10, width: 100, height: 20)
         gameView.txtField.backgroundColor = Color.white
         gameView.txtField.isHidden = true
-        gameView.txtField.placeholderString = "Name"
         gameView.addSubview(gameView.txtField!)
+        
     #if os(OSX)
+        gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
+        gameView.setsView?.isHidden = true
+        gameView.addSubview(gameView.setsView!)
+        
+        // MARK: Console
+        gameView.resizeView()
+        gameView.console = PythonConsole(frame: gameView.frame, view: gameView)
+        gameView.console.isHidden = true
+        gameView.addSubview(gameView.console)
+
+        gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
     #elseif os(iOS)
-        gameView.txtField.addTarget(self, action: "textFieldEditingChanged:", forControlEvents: .EditingChanged)
+        gameView.txtField.addTarget(self, action: "textFieldEditingChanged:", for: .editingChanged)
+        
+        // add a tap gesture recognizer
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(gameView.selection))
+//        gameView.addGestureRecognizer(tapGesture)
     #endif
         
         /// - Tag: Mouse Buffer
@@ -187,26 +197,46 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
-        /*
-         import ImGui
-         ImGui.initialize(.metal)
-         if let vc = ImGui.vc {
-         addChildViewController(vc)
-         vc.view.layer?.backgroundColor = NSColor.clear.cgColor
-         vc.view.frame = view.frame
-         view.addSubview(vc.view)
-         }
-         
-         ImGui.draw { (imgui) in
-         imgui.pushStyleVar(ImGuiStyleVar.windowRounding, value: 0.0)
-         imgui.begin("Hello ImGui")
-         if imgui.button("Click me") {
-         Swift.print("you clicked me.")
-         }
-         imgui.end()
-         imgui.popStyleVar()
-         }
-         */
+        ImGui.initialize(.metal)
+        
+        if let vc = ImGui.vc {
+            addChildViewController(vc)
+//            addChildViewController(vc)
+            view.addSubview(vc.view)
+            vc.view.frame = CGRect(x: 0, y: view.frame.height * 0.7, width: view.frame.width, height: view.frame.height * 0.3)
+        }
+        
+        ImGui.draw { (imgui) in
+            
+            // Setting Window Position and window size
+            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
+            imgui.setNextWindowSize(self.view.frame.size)
+            imgui.begin("Hello ImGui on Swift")
+            
+            // Setting the font scale
+//            imgui.setWindowFontScale(NSScreen.main.scale)
+            
+            
+            // When button is clicked...
+            if imgui.button("rotate me") {
+                // rotate me
+//                self.myView.transform = CGAffineTransform.identity
+//                UIViewPropertyAnimator(duration: 1.0, dampingRatio: 0.9, animations: {
+//                    self.myView.transform = CGAffineTransform.init(rotationAngle: 180.0)
+//                }).startAnimation()
+            }
+            
+//            imgui.sliderFloat("cornerRadius", v: &self.gameView.selectedNode.position.x, minV: 0.0, maxV: 10.0)
+//            imgui.sliderFloat2("offset", v: &self.gameView.selectedNode, minV: -100.0, maxV: 100.0)
+//            imgui.sliderFloat2("size", v: &self.myView.bounds.size, minV: 5.0, maxV: 100.0)
+            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
+            imgui.end()
+            
+//            var center = self.view.center
+//            center.x += self.viewOffset.x
+//            center.y += self.viewOffset.y
+//            self.myView.center = center
+        }
     }
 
     override func awakeFromNib() {
@@ -249,6 +279,12 @@ extension SuperViewController: NSControlTextEditingDelegate {
                 $0.position = node.position
             }
         }
+    }
+}
+#elseif os(iOS)
+extension GameViewController {
+    func addChildViewController(vc: SuperViewController) {
+        self.addChild(vc)
     }
 }
 #endif

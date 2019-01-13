@@ -48,7 +48,7 @@ class SCNLine: SCNNode {
 
         // Material
         let material = SCNMaterial()
-        material.diffuse.contents = NSColor.white.cgColor
+        material.diffuse.contents = Color.white
         self.geometry!.insertMaterial(material, at: 0)
     }
 
@@ -85,9 +85,9 @@ public class SCNPath {
     
     func addQuadCurve(to point: SCNVector3, control: SCNVector3) -> SCNPath {
         var rtn = [SCNVector3]()
-        let n = 0 //((control - current).length + (point - control).length) * 12
+        let n = 1 //((control - current).length + (point - control).length) * 12
         for i in 0..<n {
-            let t = CGFloat(i) / CGFloat(n)
+            let t = SCNFloat(i / n)
             
             let q1 = current + (control - current) * t
             let q2 = control + (point - control) * t
@@ -102,9 +102,9 @@ public class SCNPath {
     
     func addCurve(to point: SCNVector3, control1: SCNVector3, control2: SCNVector3) -> SCNPath {
         var rtn = [SCNVector3]()
-        let n = 0 //Int((control1 - current).length + (control2 - control1).length + (point - control2).length) * 12
+        let n = 1 //Int((control1 - current).length + (control2 - control1).length + (point - control2).length) * 12
         for i in 0..<n {
-            let t = CGFloat(i) / CGFloat(n)
+            let t = SCNFloat(i / n)
             
             let q1 = current + (control1 - current) * t
             let q2 = control1 + (control2 - control1) * t
@@ -216,10 +216,10 @@ class QuadBuilder {
             switch uvMode {
                     // The longest sides dictate the texture tiling, then it is stretched (if nec) across
             case .SizeToWorldUnitsX:
-                uvs.append(CGPoint(x: longestUEdgeLength, y: longestVEdgeLength))
-                uvs.append(CGPoint(x: 0, y: longestVEdgeLength))
+                uvs.append(CGPoint(x: Double(longestUEdgeLength), y: Double(longestVEdgeLength)))
+                uvs.append(CGPoint(x: 0, y: Double(longestVEdgeLength)))
                 uvs.append(CGPoint(x: 0, y: 0))
-                uvs.append(CGPoint(x: longestUEdgeLength, y: 0))
+                uvs.append(CGPoint(x: Double(longestUEdgeLength), y: 0))
 
             case .SizeToWorldUnitsXY:
                 // For this uvMode, we allign the texture to the "upper left corner" (v1) and tile
@@ -238,15 +238,15 @@ class QuadBuilder {
                 let v1angle = v2v3.angle(vector: v2v1) // angle of v2v1 edge against v2v3 edge
 
                 // now its just some simple trig - yay!
-                uvs.append(CGPoint(x: cos(v0angle) * v2v0Mag, y: sin(v0angle) * v2v0Mag)) // V0
-                uvs.append(CGPoint(x: cos(v1angle) * v2v1Mag, y: sin(v1angle) * v2v1Mag)) // V1
+                uvs.append(CGPoint(x: CGFloat(cos(v0angle) * v2v0Mag), y: CGFloat(sin(v0angle) * v2v0Mag))) // V0
+                uvs.append(CGPoint(x: CGFloat(cos(v1angle) * v2v1Mag), y: CGFloat(sin(v1angle) * v2v1Mag))) // V1
                 uvs.append(CGPoint(x: 0, y: 0)) // V2
-                uvs.append(CGPoint(x: v2v3Mag, y: 0)) // V3
-
-                print("v0 texture point is at \(CGPoint(x: cos(v0angle) * v2v0Mag, y: sin(v0angle) * v2v0Mag))")
-                print("v1 texture point is at \(CGPoint(x: cos(v1angle) * v2v1Mag, y: sin(v1angle) * v2v1Mag))")
-                print("v2 texture point is at \(CGPoint(x: 0, y: 0))")
-                print("v3 texture point is at \(CGPoint(x: v2v3Mag, y: 0))")
+                uvs.append(CGPoint(x: CGFloat(v2v3Mag), y: 0)) // V3
+                
+//                print("v0 texture point is at \(CGPoint(x: cos(v0angle) * v2v0Mag, y: sin(v0angle) * v2v0Mag))")
+//                print("v1 texture point is at \(CGPoint(x: cos(v1angle) * v2v1Mag, y: sin(v1angle) * v2v1Mag))")
+//                print("v2 texture point is at \(CGPoint(x: 0, y: 0))")
+//                print("v3 texture point is at \(CGPoint(x: v2v3Mag, y: 0))")
 
             case .StretchToFitXY:
                 uvs.append(CGPoint(x: 1, y: 1))
@@ -293,9 +293,9 @@ extension SCNGeometry {
                 for i in 0..<v.vectorCount {
                     let index = (i * v.dataStride + v.dataOffset) / 4
                     vectors.append(SCNVector3Make(
-                        CGFloat(p[index + 0]),
-                        CGFloat(p[index + 1]),
-                        CGFloat(p[index + 2])
+                        SCNFloat(p[index + 0]),
+                        SCNFloat(p[index + 1]),
+                        SCNFloat(p[index + 2])
                     ))
                 }
             }
@@ -312,9 +312,9 @@ extension SCNGeometry {
                 for i in 0..<v.vectorCount {
                     let index = (i * v.dataStride + v.dataOffset) / 4
                     vectors.append(SCNVector3Make(
-                        CGFloat(p[index + 0]),
-                        CGFloat(p[index + 1]),
-                        CGFloat(p[index + 2])
+                        SCNFloat(p[index + 0]),
+                        SCNFloat(p[index + 1]),
+                        SCNFloat(p[index + 2])
                     ))
                 }
             }

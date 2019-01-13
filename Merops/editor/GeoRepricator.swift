@@ -62,7 +62,7 @@ class SCNReplicatorNode: SCNNode, SCNNodeRendererDelegate {
     // Pivot
     func geometryPivot(_ x: Float, _ y: Float, _ z: Float) {
         for i in 0..<self.childNodes.count {
-            self.childNodes[i].pivot = SCNMatrix4MakeTranslation(CGFloat(x), CGFloat(y), CGFloat(z))
+            self.childNodes[i].pivot = SCNMatrix4MakeTranslation(SCNFloat(x), SCNFloat(y), SCNFloat(z))
         }
     }
 

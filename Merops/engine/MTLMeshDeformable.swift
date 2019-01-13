@@ -60,23 +60,23 @@ struct DeformData {
  */
 class MetalMeshDeformable {
     
-    class func normalised2dCoord(_ point: vector_float3, width: Float, length: Float) -> vector_float2 {
+    class func normalised2dCoord(_ point: vector_float3, width: mFloat, length: mFloat) -> vector_float2 {
         return vector_float2(point.x / width, point.z / length)
     }
     
-    class func buildPlane(_ device: MTLDevice, width: Float, length: Float, step: Float) -> MetalMeshData {
+    class func buildPlane(_ device: MTLDevice, width: mFloat, length: mFloat, step: mFloat) -> MetalMeshData {
         var pointsList: [vector_float3] = []
         var normalsList: [vector_float3] = []
         var uvList: [vector_float2] = []
         var indexList: [CInt] = []
         
         let normal = vector_float3(0, 1, 0)
-        var zPrevious: Float? = nil
-        var z: Float = 0
+        var zPrevious: mFloat? = nil
+        var z: mFloat = 0
         while z <= length {
             
-            var xPrevious: Float? = nil
-            var x: Float = 0
+            var xPrevious: mFloat? = nil
+            var x: mFloat = 0
             while x <= width {
                 if let xPrevious = xPrevious, let zPrevious = zPrevious {
                     

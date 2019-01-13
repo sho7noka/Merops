@@ -1,6 +1,6 @@
 //
 //  GameViewOverlay.swift
-//  KARAS
+//  Merops
 //
 //  Created by sumioka-air on 2017/05/03.
 //  Copyright © 2017年 sho sumioka. All rights reserved.
@@ -9,8 +9,8 @@
 import SpriteKit
 import SceneKit
 import QuartzCore
+import ImGui
 
-import Cocoa
 
 extension SKScene {
     /*
@@ -30,10 +30,15 @@ extension SKScene {
         return label
     }
     
-    func mButton(name : String) -> SKSpriteNode {
-        let btn = SKSpriteNode(imageNamed: name)
-        btn.name = name
-        btn.size = CGSize(width: 24, height: 24)
+    func mButton(name : Any) -> SKSpriteNode {
+        let size = CGSize(width: 24, height: 24)
+    #if os(OSX)
+        let btn = SKSpriteNode(imageNamed: name as! String)
+        btn.name = (name as! String)
+    #elseif os(iOS)
+        let btn = SKSpriteNode(color: name as! Color, size: size)
+    #endif
+        btn.size = size
         return btn
     }
 }
@@ -84,10 +89,8 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
         label_info = mLabel(name: "Info")
         label_message = mLabel(name: "")
         
-        /*
-         * iOS: https://developer.apple.com/documentation/uikit/uibarbuttonitem/systemitem
-         * macOS: https://developer.apple.com/documentation/appkit/nsimage/name
-        */
+    // macOS: https://developer.apple.com/documentation/appkit/nsimage/name
+    #if os(OSX)
         button_red = mButton(name: NSImage.Name.multipleDocuments.rawValue)
         button_green = mButton(name: NSImage.Name.colorPanel.rawValue)
         button_blue = mButton(name: NSImage.Name.info.rawValue)
@@ -96,6 +99,17 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
         button_yellow = mButton(name: NSImage.Name.folder.rawValue)
         button_black = mButton(name: NSImage.Name.advanced.rawValue)
         
+    // iOS: https://developer.apple.com/documentation/uikit/uibarbuttonitem/systemitem
+    #elseif os(iOS)
+        button_red = mButton(name: Color.red)
+        button_green = mButton(name: Color.blue)
+        button_blue = mButton(name: Color.green)
+        button_magenta = mButton(name: Color.yellow)
+        button_cyan = mButton(name: Color.magenta)
+        button_yellow = mButton(name: Color.cyan)
+        button_black = mButton(name: Color.black)
+    #endif
+
         let guis : [SKNode] = [label_name, label_position, label_rotate, label_scale, label_info, button_red, button_green, button_blue, label_message, button_magenta, button_cyan, button_yellow, button_black]
         DispatchQueue.main.async {
             guis.forEach {
@@ -132,10 +146,10 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
 internal class ManipulatorBase: SCNNode, SCNNodeRendererDelegate {
 
     // variable
-    let axisLen = SCNFloat(8.0)
+    let axisLen = CGFloat(8.0)
     let offset = SCNFloat(8.0 / 2.0)
-    let axisSide = SCNFloat(0.2)
-    let radius = SCNFloat(0.2)
+    let axisSide = CGFloat(0.2)
+    let radius = CGFloat(0.2)
     let opaque = CGFloat(0.1)
 
     required override init() {
@@ -207,9 +221,9 @@ final class PositionNode: ManipulatorBase {
         let yBoxNode = SCNNode(geometry: yBox)
         let zBoxNode = SCNNode(geometry: zBox)
 
-        xBoxNode.position = SCNVector3Make(xLine.width / 2, 0, 0)
-        yBoxNode.position = SCNVector3Make(0, yLine.height / 2, 0)
-        zBoxNode.position = SCNVector3Make(0, 0, zLine.length / 2)
+        xBoxNode.position = SCNVector3Make(SCNFloat(xLine.width) / 2, 0, 0)
+        yBoxNode.position = SCNVector3Make(0, SCNFloat(yLine.height) / 2, 0)
+        zBoxNode.position = SCNVector3Make(0, 0, SCNFloat(zLine.length) / 2)
 
         xBoxNode.pivot = SCNMatrix4MakeRotation(SCNFloat(Double.pi / 2), 0, 0, 1)
         yBoxNode.pivot = SCNMatrix4MakeRotation(SCNFloat(Double.pi / 2), 0, 0, 0)
@@ -220,7 +234,8 @@ final class PositionNode: ManipulatorBase {
         control.firstMaterial?.diffuse.contents = Color.gray
         let controlNode = SCNNode(geometry: control)
         controlNode.opacity = opaque
-        controlNode.position = SCNVector3Make(xLine.width / 2, axisLen / 2, zLine.width / 2)
+        controlNode.position = SCNVector3Make(
+            SCNFloat(xLine.width) / 2, SCNFloat(axisLen / 2), SCNFloat(zLine.width / 2))
 
         // append
         xLineNode.addChildNode(xBoxNode)
@@ -338,16 +353,17 @@ final class ScaleNode: ManipulatorBase {
         let yBoxNode = SCNNode(geometry: yBox)
         let zBoxNode = SCNNode(geometry: zBox)
 
-        xBoxNode.position = SCNVector3Make(xLine.width / 2, 0, 0)
-        yBoxNode.position = SCNVector3Make(0, yLine.height / 2, 0)
-        zBoxNode.position = SCNVector3Make(0, 0, zLine.length / 2)
+        xBoxNode.position = SCNVector3Make(SCNFloat(xLine.width / 2), 0, 0)
+        yBoxNode.position = SCNVector3Make(0, SCNFloat(yLine.height / 2), 0)
+        zBoxNode.position = SCNVector3Make(0, 0, SCNFloat(zLine.length / 2))
 
         // control
         let control = SCNBox(width: axisLen, height: axisLen, length: axisLen, chamferRadius: 0)
         control.firstMaterial?.diffuse.contents = Color.gray
         let controlNode = SCNNode(geometry: control)
         controlNode.opacity = opaque
-        controlNode.position = SCNVector3Make(xLine.width / 2, axisLen / 2, zLine.width / 2)
+        controlNode.position = SCNVector3Make(
+            SCNFloat(xLine.width / 2), SCNFloat(axisLen / 2), SCNFloat(zLine.width / 2))
 
         // append
         xLineNode.addChildNode(xBoxNode)

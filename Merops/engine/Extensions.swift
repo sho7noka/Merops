@@ -11,8 +11,8 @@ import Foundation
 import SceneKit
 
 class Matrix {
-    static func perspective(fovyRadians: Float, aspect: Float, nearZ: Float, farZ: Float) -> matrix_float4x4 {
-        let ys = 1 / tanf(fovyRadians * 0.5)
+    static func perspective(fovyRadians: mFloat, aspect: mFloat, nearZ: mFloat, farZ: mFloat) -> matrix_float4x4 {
+        let ys = 1 / tanf(mFloat(fovyRadians * 0.5))
         let xs = ys / aspect
         let zs = farZ / (nearZ - farZ)
         return matrix_float4x4(columns: (vector_float4(xs, 0, 0, 0),
@@ -32,7 +32,7 @@ class Matrix {
                 vector_float4(t.x, t.y, t.z, 1)))
     }
 
-    static func rotation(radians: Float, axis: float3) -> matrix_float4x4 {
+    static func rotation(radians: mFloat, axis: float3) -> matrix_float4x4 {
         let normalizeAxis = normalize(axis)
         let ct = cosf(radians)
         let st = sinf(radians)
@@ -47,14 +47,14 @@ class Matrix {
                 vector_float4(0, 0, 0, 1)))
     }
 
-    static func scale(x: Float, y: Float, z: Float) -> matrix_float4x4 {
+    static func scale(x: mFloat, y: mFloat, z: mFloat) -> matrix_float4x4 {
         return matrix_float4x4(columns: (vector_float4(x, 0, 0, 0),
                 vector_float4(0, y, 0, 0),
                 vector_float4(0, 0, z, 0),
                 vector_float4(0, 0, 0, 1)))
     }
 
-    static func translation(x: Float, y: Float, z: Float) -> matrix_float4x4 {
+    static func translation(x: mFloat, y: mFloat, z: mFloat) -> matrix_float4x4 {
         return matrix_float4x4(columns: (vector_float4(1, 0, 0, 0),
                 vector_float4(0, 1, 0, 0),
                 vector_float4(0, 0, 1, 0),
@@ -72,6 +72,12 @@ class Matrix {
     }
 }
 
+#if os(OSX)
+typealias mFloat = Float
+#elseif os(iOS)
+typealias mFloat = SCNFloat
+#endif
+
 /*
  * The following SCNVector3 extension comes from
  * https://github.com/devindazzle/SCNVector3Extensions - with some changes by me
@@ -85,14 +91,14 @@ extension SCNVector3: Equatable {
 
 extension SCNVector4 {
 
-    var xyzw: [CGFloat] {
+    var xyzw: [SCNFloat] {
         return [self.x, self.y, self.z, self.w].map({ round($0) })
     }
 }
 
 extension SCNVector3 {
     
-    var xyz : [CGFloat] {
+    var xyz : [SCNFloat] {
         return [self.x, self.y, self.z].map({ round($0) })
     }
     

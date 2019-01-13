@@ -1,6 +1,6 @@
 # [Merops](https://github.com/sho7noka/Merops)
 
-[English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/sho7noka/Merops)
+[English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/sho7noka/Merops)(Google Translate)
 
 `Pixar USD` と `libgit` をベースにした、次世代型DCCツールの実験プロジェクトです。
 
@@ -42,10 +42,11 @@ carthage update --verbose --no-use-binaries --use-ssh
 - [x] [libgit2 (commit以外)](x-source-tag://libgit)
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
-- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)
+- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)  動的MSL の[Scenekit 割当で出来る](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
 - [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
+- [x] [mouseEvent/TouchEvent](https://qiita.com/RichQiitaJp/items/79a52c55c9762b60f292) と Float をマルチプラットフォーム化
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
@@ -56,7 +57,7 @@ carthage update --verbose --no-use-binaries --use-ssh
 
 ### Research
 - WHLSL to MSL
-- intelligent shape (Swift for TensorFlow) 
+- intelligent shape (Chainer) 
 - [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 
 ## [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)

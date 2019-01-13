@@ -53,7 +53,7 @@ class MetalRender : SCNRenderer {
 struct MetalPrimitiveData {
     var node: SCNNode
     var type: MTLPrimitiveType
-    var vertex: [Float]
+    var vertex: [CGFloat]
 }
 
 class MetalPrimitiveHandle {

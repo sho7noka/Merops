@@ -16,6 +16,12 @@
 		E26A788721E653F800FBA0BB /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788621E653F800FBA0BB /* ImGui.framework */; };
 		E26A788921E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
 		E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
+		E26A788D21E7815900FBA0BB /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788B21E7815900FBA0BB /* ImGui.framework */; };
+		E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */; };
+		E26A789421E8C5FF00FBA0BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
+		E26A789621E8CBCD00FBA0BB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Model.swift */; };
+		E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
+		E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78C20B933B600232181 /* Cmd+REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78920B933B600232181 /* Cmd+REST.swift */; };
@@ -54,7 +60,6 @@
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
-		E2E46156210DB4CF00C0DB39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E46117210D5D7100C0DB39 /* Assets.xcassets */; };
 		ED2221842021E17C00427606 /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
 		ED32B9601EB5D298000D8823 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95F1EB5D298000D8823 /* GameView.swift */; };
@@ -95,6 +100,9 @@
 		E26A788521E6264800FBA0BB /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		E26A788621E653F800FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/Mac/ImGui.framework; sourceTree = "<group>"; };
 		E26A788821E77FEC00FBA0BB /* WHLSL */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WHLSL; path = Merops/extra/WHLSL; sourceTree = SOURCE_ROOT; };
+		E26A788B21E7815900FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/iOS/ImGui.framework; sourceTree = "<group>"; };
+		E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/iOS/ObjectiveGit.framework; sourceTree = "<group>"; };
+		E26A789021E7818E00FBA0BB /* Highlightr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Highlightr.framework; path = Carthage/Build/iOS/Highlightr.framework; sourceTree = "<group>"; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
 		E281B78920B933B600232181 /* Cmd+REST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+REST.swift"; sourceTree = "<group>"; };
@@ -133,7 +141,6 @@
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E2E46117210D5D7100C0DB39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2E4611A210D5D7100C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2E4611C210D5D7100C0DB39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E46157210DE97800C0DB39 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
@@ -185,6 +192,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E26A788D21E7815900FBA0BB /* ImGui.framework in Frameworks */,
+				E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,10 +202,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E26A788721E653F800FBA0BB /* ImGui.framework in Frameworks */,
-				E26A787A21E1814800FBA0BB /* Python.framework in Frameworks */,
+				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
 				E2CDF1CC21344812004D8E39 /* lib in Frameworks */,
 				E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */,
-				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
+				E26A787A21E1814800FBA0BB /* Python.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				E2E46114210D5D6F00C0DB39 /* Main.storyboard */,
-				E2E46117210D5D7100C0DB39 /* Assets.xcassets */,
 				E2E46119210D5D7100C0DB39 /* LaunchScreen.storyboard */,
 				E2E4611C210D5D7100C0DB39 /* Info.plist */,
 			);
@@ -244,7 +252,10 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E26A789021E7818E00FBA0BB /* Highlightr.framework */,
 				E26A788621E653F800FBA0BB /* ImGui.framework */,
+				E26A788B21E7815900FBA0BB /* ImGui.framework */,
+				E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */,
 				E2F5172A21337604005F1515 /* libar.dylib */,
 				E2F5172321337603005F1515 /* libboost_atomic.dylib */,
 				E2F5171521337603005F1515 /* libboost_regex.dylib */,
@@ -526,7 +537,6 @@
 				E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */,
 				E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */,
 				E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */,
-				E2E46156210DB4CF00C0DB39 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +565,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ImGui.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -589,7 +600,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/Highlightr.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/ImGui.framework",
 			);
 			name = "Run Script";
@@ -606,16 +616,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E26A789621E8CBCD00FBA0BB /* Model.swift in Sources */,
+				E26A789421E8C5FF00FBA0BB /* Extensions.swift in Sources */,
 				E2E46121210D5DE000C0DB39 /* AppDelegate.swift in Sources */,
 				E2E46123210D5E4100C0DB39 /* GameView.swift in Sources */,
 				E2E46122210D5E3D00C0DB39 /* GameViewController.swift in Sources */,
 				E2E46124210D5E4400C0DB39 /* GameViewOverlay.swift in Sources */,
 				E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */,
 				E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */,
+				E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */,
 				E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */,
 				E2E46128210D5E5D00C0DB39 /* GeoRepricator.swift in Sources */,
 				E2E4612C210D5E7A00C0DB39 /* Shaders.metal in Sources */,
 				E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */,
+				E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */,
 				E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */,
 				E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */,
 			);
@@ -695,16 +709,22 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7PKBR8T47;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "$(PROJECT=DIR)/Carthage/Build/iOS/ObjectiveGit.framework/Headers";
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sho.Merops-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -720,16 +740,22 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7PKBR8T47;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "$(PROJECT=DIR)/Carthage/Build/iOS/ObjectiveGit.framework/Headers";
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sho.Merops-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -786,7 +812,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
@@ -842,7 +868,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -875,7 +901,6 @@
 					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 					"\"$(SRCROOT)/USD/include\"",
-					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/toolkit/include/HAPI,
 					"/Users/shosumioka/pyobjc/pyobjc-core/Modules/objc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
@@ -932,7 +957,6 @@
 					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
 					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
 					"\"$(SRCROOT)/USD/include\"",
-					/Applications/Houdini/Houdini16.5.473/Frameworks/Houdini.framework/Versions/16.5.473/Resources/toolkit/include/HAPI,
 					"/Users/shosumioka/pyobjc/pyobjc-core/Modules/objc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";

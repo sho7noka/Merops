@@ -1,6 +1,6 @@
 //
 //  GameViewMixin.swift
-//  KARAS
+//  Merops
 //
 //  Created by sumioka-air on 2018/01/06.
 //  Copyright © 2018年 sho sumioka. All rights reserved.
@@ -14,8 +14,7 @@
 
 import SceneKit
 import ModelIO
-import Highlightr
-import AppKit
+//import Highlightr
 import Foundation
 import ObjectiveC
 
@@ -44,11 +43,11 @@ final class SettingDialog: View, NSTextViewDelegate {
     init(frame: CGRect, setting: Settings) {
         super.init(frame: frame)
         
-        txtProject.stringValue = setting.projectDir
+        txtProject.text = setting.projectDir
         btnProject.title = "..."
-        txtUsd.stringValue = setting.usdDir
+        txtUsd.text = setting.usdDir
         btnUsd.title = "..."
-        txtPython.stringValue = setting.pythonDir
+        txtPython.text = setting.pythonDir
         btnPython.title = "..."
         
         [txtProject, txtUsd, txtPython].forEach {
@@ -118,15 +117,15 @@ final class PythonConsole: View, NSTextViewDelegate {
         */
         /// - Tag: gil
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
-            let state = PyGILState_Ensure()
+//            let state = PyGILState_Ensure()
             
             let txt = textview?.string
 //            if PyRun_SimpleStringFlags(txt, nil) != 0 {
-                PyRun_SimpleStringFlags(txt, nil)
-                PyErr_Print()
+//                PyRun_SimpleStringFlags(txt, nil)
+//                PyErr_Print()
 //                return true
 //            }
-            PyGILState_Release(state)
+//            PyGILState_Release(state)
 //            PyEval_RestoreThread(thread)
         }
         
@@ -148,10 +147,10 @@ final class PythonConsole: View, NSTextViewDelegate {
     
     private func setSyntax(file: URL) {
         switch file.pathExtension {
-        case "py":
-            let hilight = Highlightr()
+        case "py": break
+//            let hilight = Highlightr()
 //            hilight?.highlight()
-            let code = hilight?.highlight("aaa", as: "python", fastRender: true)
+//            let code = hilight?.highlight("aaa", as: "python", fastRender: true)
 //            textview.attributedStringValue = code!
         case "usd": break
         case "metal": break
