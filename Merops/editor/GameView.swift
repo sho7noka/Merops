@@ -118,9 +118,8 @@ class GameView: SCNView {
         // MARK: overray
         let _p = overRay?.convertPoint(fromView: touchLocation)
         if let first = overRay?.nodes(at: _p!).first {
-            #if os(OSX)
+
             resizeView()
-            #endif
             
             switch first.name {
             case "NSMultipleDocuments"?:
@@ -521,7 +520,14 @@ class GameView: SCNView {
      */
     func resizeView() {
         let size = self.frame.size
-        subView?.frame.origin = .init(x: size.width - 88 , y: 24)
+        
+        #if os(OSX)
+        subView?.frame.origin = CGPoint(x: size.width - 88 , y: 24)
+        #elseif os(iOS)
+        subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 88)
+        #endif
+        
+        /// TODO: ノッチ幅を下げる必要がある
         overRay?.label_name.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 1))
         overRay?.label_position.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 2))
         overRay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))

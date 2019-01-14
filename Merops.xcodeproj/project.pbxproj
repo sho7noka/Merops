@@ -22,6 +22,8 @@
 		E26A789621E8CBCD00FBA0BB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Model.swift */; };
 		E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
 		E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
+		E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
+		E26ABEC221EB769600487FA4 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E26ABEC021EB769600487FA4 /* Cartfile */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78C20B933B600232181 /* Cmd+REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78920B933B600232181 /* Cmd+REST.swift */; };
@@ -60,6 +62,7 @@
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
+		E2FDEBAF21ECBEDC0024CDC1 /* Viewport.metal in Sources */ = {isa = PBXBuildFile; fileRef = E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */; };
 		ED2221842021E17C00427606 /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
 		ED32B9601EB5D298000D8823 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95F1EB5D298000D8823 /* GameView.swift */; };
@@ -97,12 +100,13 @@
 		E26A787821E17E0400FBA0BB /* Shaderc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shaderc.swift; sourceTree = "<group>"; };
 		E26A787F21E61DF900FBA0BB /* CoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreModel.m; sourceTree = "<group>"; };
 		E26A788121E61E1100FBA0BB /* CoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreModel.h; sourceTree = "<group>"; };
-		E26A788521E6264800FBA0BB /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		E26A788621E653F800FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/Mac/ImGui.framework; sourceTree = "<group>"; };
 		E26A788821E77FEC00FBA0BB /* WHLSL */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WHLSL; path = Merops/extra/WHLSL; sourceTree = SOURCE_ROOT; };
 		E26A788B21E7815900FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/iOS/ImGui.framework; sourceTree = "<group>"; };
 		E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/iOS/ObjectiveGit.framework; sourceTree = "<group>"; };
 		E26A789021E7818E00FBA0BB /* Highlightr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Highlightr.framework; path = Carthage/Build/iOS/Highlightr.framework; sourceTree = "<group>"; };
+		E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Merops-Bridging-Header.h"; path = "Merops/Merops-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		E26ABEC021EB769600487FA4 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
 		E281B78920B933B600232181 /* Cmd+REST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+REST.swift"; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 		E2F5172C21337604005F1515 /* libboost_thread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_thread.dylib; path = USD/lib/libboost_thread.dylib; sourceTree = "<group>"; };
 		E2F5172D21337604005F1515 /* libIlmThread-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIlmThread-2_2.la"; path = "USD/lib/libIlmThread-2_2.la"; sourceTree = "<group>"; };
 		E2F5172E21337604005F1515 /* libIex-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIex-2_2.la"; path = "USD/lib/libIex-2_2.la"; sourceTree = "<group>"; };
+		E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Viewport.metal; sourceTree = "<group>"; };
 		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
 		ED32B95A1EB5D298000D8823 /* Merops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED32B95D1EB5D298000D8823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -180,8 +185,6 @@
 		ED32B9681EB5D298000D8823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ED32B96A1EB5D298000D8823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewOverlay.swift; sourceTree = "<group>"; };
-		ED5CB5341F4A075400FF9CCA /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Merops-Bridging-Header.h"; sourceTree = "<group>"; };
-		EDA91BB41FF15D1D00E14B8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = extra/Assets.xcassets; sourceTree = "<group>"; };
 		EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		EDEEFF531F8A35CB00E4785F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/Mac/ObjectiveGit.framework; sourceTree = "<group>"; };
@@ -212,9 +215,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E26ABEC421EB76C200487FA4 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				EDEEFF531F8A35CB00E4785F /* README.md */,
+				ED32B9631EB5D298000D8823 /* art.scnassets */,
+				E26ABEC021EB769600487FA4 /* Cartfile */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		E281B7B320B94CE700232181 /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */,
 				E281B7AB20B94CBB00232181 /* Shaders.metal */,
 				E281B7AD20B94CCA00232181 /* Common.metal */,
 				E281B7AE20B94CCA00232181 /* Lambert.metal */,
@@ -321,7 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E5DB52216E53C80028AA4E /* MDOC */,
-				EDEEFF531F8A35CB00E4785F /* README.md */,
+				E26ABEC421EB76C200487FA4 /* Shared */,
 				ED32B95C1EB5D298000D8823 /* Merops */,
 				E2E4610D210D5D6F00C0DB39 /* Merops-ios */,
 				ED32B95B1EB5D298000D8823 /* Products */,
@@ -341,15 +355,12 @@
 		ED32B95C1EB5D298000D8823 /* Merops */ = {
 			isa = PBXGroup;
 			children = (
-				ED5CB5341F4A075400FF9CCA /* Merops-Bridging-Header.h */,
-				E26A788521E6264800FBA0BB /* Cartfile */,
+				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
 				EDA91BA51FF15A6300E14B8D /* editor */,
 				EDA91BA41FF159BD00E14B8D /* engine */,
 				EDB79581201D8C40008E79B1 /* extra */,
 				ED32B9671EB5D298000D8823 /* MainMenu.xib */,
 				ED32B96A1EB5D298000D8823 /* Info.plist */,
-				ED32B9631EB5D298000D8823 /* art.scnassets */,
-				EDA91BB41FF15D1D00E14B8D /* Assets.xcassets */,
 			);
 			path = Merops;
 			sourceTree = "<group>";
@@ -357,7 +368,7 @@
 		EDA91BA41FF159BD00E14B8D /* engine */ = {
 			isa = PBXGroup;
 			children = (
-				E281B7B420B950A500232181 /* MetalTessellation */,
+				E281B7B320B94CE700232181 /* shader */,
 				EDB683412025D43200AD75EE /* scene */,
 				EDB683432025D59400AD75EE /* extends */,
 			);
@@ -377,7 +388,6 @@
 		EDB683412025D43200AD75EE /* scene */ = {
 			isa = PBXGroup;
 			children = (
-				E281B7B320B94CE700232181 /* shader */,
 				94B26A2A79BC7112A5660547 /* Engine.swift */,
 				E21859F921036D3400653DBD /* Serializer.swift */,
 				E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */,
@@ -419,6 +429,7 @@
 		EDB79581201D8C40008E79B1 /* extra */ = {
 			isa = PBXGroup;
 			children = (
+				E281B7B420B950A500232181 /* MetalTessellation */,
 				E26A788821E77FEC00FBA0BB /* WHLSL */,
 				E2CDF1D021357B6B004D8E39 /* Python */,
 				E2BA75212111E6D7008FF166 /* MaterialX */,
@@ -435,6 +446,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */,
 				E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */,
 				EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */,
 			);
@@ -545,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2CDF1D121357B6B004D8E39 /* Python in Resources */,
+				E26ABEC221EB769600487FA4 /* Cartfile in Resources */,
 				E2BA751E2111E1FC008FF166 /* pybind11 in Resources */,
 				E2BA75222111E6D7008FF166 /* MaterialX in Resources */,
 				E26A788921E77FEC00FBA0BB /* WHLSL in Resources */,
@@ -658,6 +671,7 @@
 				E281B78C20B933B600232181 /* Cmd+REST.swift in Sources */,
 				E281B7A620B94CAE00232181 /* Skinning.metal in Sources */,
 				ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */,
+				E2FDEBAF21ECBEDC0024CDC1 /* Viewport.metal in Sources */,
 				E26A787921E17E0400FBA0BB /* Shaderc.swift in Sources */,
 				E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */,
 				E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */,

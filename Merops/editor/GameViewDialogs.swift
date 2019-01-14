@@ -78,7 +78,7 @@ final class PythonConsole: View, NSTextViewDelegate {
         let dev = NSAttributedString(string: " Developpers")
         let range = NSRange(location: 9, length: 0)
         textview?.setSelectedRange(range)
-        textview?.performValidatedReplacement(in: range, with: dev)
+//        textview?.performValidatedReplacement(in: range, with: dev)
 //        textview?.lnv_setUpLineNumberView()
         self.addSubview(textview!)
     }

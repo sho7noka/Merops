@@ -74,7 +74,9 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         super.viewDidLoad()
         if gameView == nil {
             gameView = GameView()
-            self.view.addSubview(gameView)
+            view.addSubview(gameView)
+            gameView.frame = CGRect(x: 0, y: 0, width: view.frame.width,
+                                    height: view.frame.height)
         }
         
         // MARK: Metal Render
@@ -129,7 +131,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             pyDir: "/usr/bin/python")
         
         gameView.queue = device.makeCommandQueue()
-        gameView.showsStatistics = true
+//        gameView.showsStatistics = true
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
         gameView.backgroundColor = (gameView.settings?.bgColor)!
@@ -142,7 +144,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.subView?.scene = SCNScene()
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
-//        gameView.subView?.defaultCameraController
         gameView.subView?.isPlaying = true
         
         let pos = PositionNode()
@@ -171,13 +172,15 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.isHidden = true
         gameView.addSubview(gameView.txtField!)
         
+        gameView.resizeView()
+        
     #if os(OSX)
+        // MARK: Setting Dialog
         gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
         gameView.setsView?.isHidden = true
         gameView.addSubview(gameView.setsView!)
         
         // MARK: Console
-        gameView.resizeView()
         gameView.console = PythonConsole(frame: gameView.frame, view: gameView)
         gameView.console.isHidden = true
         gameView.addSubview(gameView.console)
@@ -186,10 +189,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.delegate = self
     #elseif os(iOS)
         gameView.txtField.addTarget(self, action: "textFieldEditingChanged:", for: .editingChanged)
-        
-        // add a tap gesture recognizer
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(gameView.selection))
-//        gameView.addGestureRecognizer(tapGesture)
     #endif
         
         /// - Tag: Mouse Buffer
@@ -197,45 +196,39 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
+        /// - Tag: ImGui
         ImGui.initialize(.metal)
         
         if let vc = ImGui.vc {
-            addChildViewController(vc)
-//            addChildViewController(vc)
+            self.addChildViewController(vc)
             view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: 0, y: view.frame.height * 0.7, width: view.frame.width, height: view.frame.height * 0.3)
+            vc.view.frame = CGRect(x: view.frame.width * 0.5, y: view.frame.height * 0.7, width: view.frame.width, height: view.frame.height)
         }
-        
+        struct Attribute {
+            var name : String
+            var index : Int
+        }
         ImGui.draw { (imgui) in
-            
-            // Setting Window Position and window size
+//            imgui.loadFont(fontName: )
             imgui.setNextWindowPos(CGPoint.zero, cond: .always)
             imgui.setNextWindowSize(self.view.frame.size)
-            imgui.begin("Hello ImGui on Swift")
-            
-            // Setting the font scale
-//            imgui.setWindowFontScale(NSScreen.main.scale)
-            
+            imgui.pushStyleVar(.windowRounding, value: 0)
+            imgui.pushStyleColor(.frameBg, color: Color.blue)
+            imgui.begin("Object Attrs")
             
             // When button is clicked...
             if imgui.button("rotate me") {
-                // rotate me
 //                self.myView.transform = CGAffineTransform.identity
 //                UIViewPropertyAnimator(duration: 1.0, dampingRatio: 0.9, animations: {
 //                    self.myView.transform = CGAffineTransform.init(rotationAngle: 180.0)
 //                }).startAnimation()
             }
-            
-//            imgui.sliderFloat("cornerRadius", v: &self.gameView.selectedNode.position.x, minV: 0.0, maxV: 10.0)
+//            imgui.sliderFloat("index", v: &Attribute.index, minV: 0.0, maxV: 10.0)
 //            imgui.sliderFloat2("offset", v: &self.gameView.selectedNode, minV: -100.0, maxV: 100.0)
-//            imgui.sliderFloat2("size", v: &self.myView.bounds.size, minV: 5.0, maxV: 100.0)
             imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
             imgui.end()
-            
-//            var center = self.view.center
-//            center.x += self.viewOffset.x
-//            center.y += self.viewOffset.y
-//            self.myView.center = center
+            imgui.popStyleColor()
+            imgui.popStyleVar()
         }
     }
 
