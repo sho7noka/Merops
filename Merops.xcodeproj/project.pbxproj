@@ -58,6 +58,8 @@
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
+		E2FBFD2F21EDFA0C00BDB646 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
+		E2FBFD3221EE035F00BDB646 /* Shaderc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A787821E17E0400FBA0BB /* Shaderc.swift */; };
 		E2FDEBAF21ECBEDC0024CDC1 /* Viewport.metal in Sources */ = {isa = PBXBuildFile; fileRef = E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */; };
 		E2FDEBB021ECCB110024CDC1 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E46157210DE97800C0DB39 /* Python.framework */; };
 		E2FDEBB221ECCE690024CDC1 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */; };
@@ -71,6 +73,18 @@
 		EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */; };
 		EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2FBFD3821EE119E00BDB646 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
@@ -123,7 +137,6 @@
 		E281B7AD20B94CCA00232181 /* Common.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Common.metal; sourceTree = "<group>"; };
 		E281B7AE20B94CCA00232181 /* Lambert.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lambert.metal; sourceTree = "<group>"; };
 		E281B7AF20B94CCA00232181 /* Tessellation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Tessellation.metal; sourceTree = "<group>"; };
-		E281B7B420B950A500232181 /* MetalTessellation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalTessellation; sourceTree = "<group>"; };
 		E294EFDA2133757D00E582CB /* libAlembic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libAlembic.dylib; path = USD/lib/libAlembic.dylib; sourceTree = "<group>"; };
 		E294EFDB2133757D00E582CB /* libvt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvt.dylib; path = USD/lib/libvt.dylib; sourceTree = "<group>"; };
 		E294EFDC2133757D00E582CB /* libndr.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libndr.dylib; path = USD/lib/libndr.dylib; sourceTree = "<group>"; };
@@ -138,10 +151,9 @@
 		E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "pyobjc-framework-Merops"; sourceTree = "<group>"; };
 		E2BA751D2111E1FC008FF166 /* pybind11 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybind11; path = Merops/extra/pybind11; sourceTree = SOURCE_ROOT; };
-		E2BA75212111E6D7008FF166 /* MaterialX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MaterialX; path = Merops/extra/MaterialX; sourceTree = SOURCE_ROOT; };
 		E2CDF1D021357B6B004D8E39 /* Python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Python; path = Merops/extra/Python; sourceTree = SOURCE_ROOT; };
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2E4610C210D5D6F00C0DB39 /* Merops-lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2E4611A210D5D7100C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2E4611C210D5D7100C0DB39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,6 +185,8 @@
 		E2F5172C21337604005F1515 /* libboost_thread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_thread.dylib; path = USD/lib/libboost_thread.dylib; sourceTree = "<group>"; };
 		E2F5172D21337604005F1515 /* libIlmThread-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIlmThread-2_2.la"; path = "USD/lib/libIlmThread-2_2.la"; sourceTree = "<group>"; };
 		E2F5172E21337604005F1515 /* libIex-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIex-2_2.la"; path = "USD/lib/libIex-2_2.la"; sourceTree = "<group>"; };
+		E2FBFD3A21EE119E00BDB646 /* merops */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = merops; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2FBFD4121EE14F300BDB646 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bin; path = Merops/bin; sourceTree = SOURCE_ROOT; };
 		E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Viewport.metal; sourceTree = "<group>"; };
 		E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/ModelIO.framework; sourceTree = DEVELOPER_DIR; };
 		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
@@ -200,6 +214,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2FBFD3721EE119E00BDB646 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ED32B9571EB5D298000D8823 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,10 +239,10 @@
 		E26ABEC421EB76C200487FA4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				EDEEFF531F8A35CB00E4785F /* README.md */,
 				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
-				E26ABEC021EB769600487FA4 /* Cartfile */,
+				EDEEFF531F8A35CB00E4785F /* README.md */,
 				ED32B9631EB5D298000D8823 /* art.scnassets */,
+				E26ABEC021EB769600487FA4 /* Cartfile */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -263,13 +284,25 @@
 			path = "Merops-ios";
 			sourceTree = "<group>";
 		};
+		E2FBFD3B21EE119E00BDB646 /* merops */ = {
+			isa = PBXGroup;
+			children = (
+				E2FBFD4121EE14F300BDB646 /* bin */,
+			);
+			path = merops;
+			sourceTree = "<group>";
+		};
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
 				E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */,
 				E26A789021E7818E00FBA0BB /* Highlightr.framework */,
 				E26A788621E653F800FBA0BB /* ImGui.framework */,
 				E26A788B21E7815900FBA0BB /* ImGui.framework */,
+				E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */,
+				E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */,
+				E2E46157210DE97800C0DB39 /* Python.framework */,
 				E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */,
 				E2F5172A21337604005F1515 /* libar.dylib */,
 				E2F5172321337603005F1515 /* libboost_atomic.dylib */,
@@ -323,10 +356,6 @@
 				E25C20EF2133750500EE861F /* libMaterialXCore.a */,
 				E25C20EB2133750400EE861F /* libusd.dylib */,
 				E25C20F02133750500EE861F /* libusdLux.dylib */,
-				E20E1AA3212B0D4200EE5B91 /* Highlightr.framework */,
-				E2E46157210DE97800C0DB39 /* Python.framework */,
-				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
-				E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */,
 				E2101237211EBE08001664AD /* lib */,
 			);
 			name = Frameworks;
@@ -337,6 +366,7 @@
 			children = (
 				E2E5DB52216E53C80028AA4E /* MDOC */,
 				E26ABEC421EB76C200487FA4 /* Shared */,
+				E2FBFD3B21EE119E00BDB646 /* merops */,
 				ED32B95C1EB5D298000D8823 /* Merops */,
 				E2E4610D210D5D6F00C0DB39 /* Merops-ios */,
 				ED32B95B1EB5D298000D8823 /* Products */,
@@ -348,7 +378,8 @@
 			isa = PBXGroup;
 			children = (
 				ED32B95A1EB5D298000D8823 /* Merops.app */,
-				E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */,
+				E2E4610C210D5D6F00C0DB39 /* Merops-lite.app */,
+				E2FBFD3A21EE119E00BDB646 /* merops */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -402,12 +433,12 @@
 		EDB683432025D59400AD75EE /* extends */ = {
 			isa = PBXGroup;
 			children = (
+				E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */,
+				E281B7A020B94CAE00232181 /* Model.swift */,
 				E26A788121E61E1100FBA0BB /* CoreModel.h */,
 				E26A787F21E61DF900FBA0BB /* CoreModel.m */,
-				E281B7A020B94CAE00232181 /* Model.swift */,
 				E25C20E421336ABA00EE861F /* USD-bind.hpp */,
 				E25C20E321336ABA00EE861F /* USD-bind.cpp */,
-				E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */,
 			);
 			name = extends;
 			sourceTree = "<group>";
@@ -430,10 +461,8 @@
 		EDB79581201D8C40008E79B1 /* extra */ = {
 			isa = PBXGroup;
 			children = (
-				E281B7B420B950A500232181 /* MetalTessellation */,
 				E26A788821E77FEC00FBA0BB /* WHLSL */,
 				E2CDF1D021357B6B004D8E39 /* Python */,
-				E2BA75212111E6D7008FF166 /* MaterialX */,
 				E2BA751D2111E1FC008FF166 /* pybind11 */,
 			);
 			name = extra;
@@ -443,6 +472,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		E2FBFD2E21EDFA0200BDB646 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2FBFD2F21EDFA0C00BDB646 /* Merops-Bridging-Header.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ED32B9841EB5DD02000D8823 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,12 +493,13 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E2E4610B210D5D6F00C0DB39 /* Merops-ios */ = {
+		E2E4610B210D5D6F00C0DB39 /* Merops-lite */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E2E4611F210D5D7100C0DB39 /* Build configuration list for PBXNativeTarget "Merops-ios" */;
+			buildConfigurationList = E2E4611F210D5D7100C0DB39 /* Build configuration list for PBXNativeTarget "Merops-lite" */;
 			buildPhases = (
 				E2E46108210D5D6F00C0DB39 /* Sources */,
 				E2E46109210D5D6F00C0DB39 /* Frameworks */,
+				E2FBFD2E21EDFA0200BDB646 /* Headers */,
 				E2E4610A210D5D6F00C0DB39 /* Resources */,
 				E2AD5D9B212727FD0080F3F2 /* Carthage copy */,
 			);
@@ -469,10 +507,27 @@
 			);
 			dependencies = (
 			);
-			name = "Merops-ios";
+			name = "Merops-lite";
 			productName = "Merops-ios";
-			productReference = E2E4610C210D5D6F00C0DB39 /* Merops-ios.app */;
+			productReference = E2E4610C210D5D6F00C0DB39 /* Merops-lite.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E2FBFD3921EE119E00BDB646 /* merops */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2FBFD3E21EE119E00BDB646 /* Build configuration list for PBXNativeTarget "merops" */;
+			buildPhases = (
+				E2FBFD3621EE119E00BDB646 /* Sources */,
+				E2FBFD3721EE119E00BDB646 /* Frameworks */,
+				E2FBFD3821EE119E00BDB646 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = merops;
+			productName = merops;
+			productReference = E2FBFD3A21EE119E00BDB646 /* merops */;
+			productType = "com.apple.product-type.tool";
 		};
 		ED32B9591EB5D298000D8823 /* Merops */ = {
 			isa = PBXNativeTarget;
@@ -500,7 +555,7 @@
 		ED32B9521EB5D298000D8823 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "sho sumioka";
 				TargetAttributes = {
@@ -508,6 +563,9 @@
 						CreatedOnToolsVersion = 10.0;
 						DevelopmentTeam = T7PKBR8T47;
 						ProvisioningStyle = Automatic;
+					};
+					E2FBFD3921EE119E00BDB646 = {
+						CreatedOnToolsVersion = 10.1;
 					};
 					ED32B9591EB5D298000D8823 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -536,7 +594,8 @@
 			projectRoot = "";
 			targets = (
 				ED32B9591EB5D298000D8823 /* Merops */,
-				E2E4610B210D5D6F00C0DB39 /* Merops-ios */,
+				E2E4610B210D5D6F00C0DB39 /* Merops-lite */,
+				E2FBFD3921EE119E00BDB646 /* merops */,
 			);
 		};
 /* End PBXProject section */
@@ -639,11 +698,19 @@
 				E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */,
 				E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */,
 				E2E46128210D5E5D00C0DB39 /* GeoRepricator.swift in Sources */,
+				E2FBFD3221EE035F00BDB646 /* Shaderc.swift in Sources */,
 				E2E4612C210D5E7A00C0DB39 /* Shaders.metal in Sources */,
 				E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */,
 				E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */,
 				E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */,
 				E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FBFD3621EE119E00BDB646 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,9 +794,9 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = "$(PROJECT=DIR)/Carthage/Build/iOS/ObjectiveGit.framework/Headers";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/";
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -737,7 +804,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -758,9 +826,9 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = "$(PROJECT=DIR)/Carthage/Build/iOS/ObjectiveGit.framework/Headers";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/";
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -768,10 +836,43 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E2FBFD3F21EE119E00BDB646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7PKBR8T47;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		E2FBFD4021EE119E00BDB646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7PKBR8T47;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -936,7 +1037,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -989,7 +1090,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sumioka.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -1001,11 +1102,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E2E4611F210D5D7100C0DB39 /* Build configuration list for PBXNativeTarget "Merops-ios" */ = {
+		E2E4611F210D5D7100C0DB39 /* Build configuration list for PBXNativeTarget "Merops-lite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E2E4611D210D5D7100C0DB39 /* Debug */,
 				E2E4611E210D5D7100C0DB39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2FBFD3E21EE119E00BDB646 /* Build configuration list for PBXNativeTarget "merops" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2FBFD3F21EE119E00BDB646 /* Debug */,
+				E2FBFD4021EE119E00BDB646 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

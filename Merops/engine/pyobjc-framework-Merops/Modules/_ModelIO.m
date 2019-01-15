@@ -3,7 +3,7 @@
 #include "pyobjc-api.h"
 
 #import <Foundation/Foundation.h>
-#import "wrapModels.h"
+#import "CoreModels"
 
 /* We include the source code here instead of
  * using the linker due to limitations in pyobjc-api.h

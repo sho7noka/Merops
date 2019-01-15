@@ -102,7 +102,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         let newNode = Builder.Plane(meshData: meshData)
         let (min, max) = newNode.boundingBox
         let x = CGFloat(max.x - min.x)
-        let y = CGFloat(max.y - min.y)
+        _ = CGFloat(max.y - min.y)
         newNode.position = SCNVector3(-(x/2), -1, -2)
         
         if let existingNode = baseNode {
@@ -184,7 +184,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.delegate = self
         
     #elseif os(iOS)
-        gameView.txtField.addTarget(self, action: "textFieldEditingChanged:", for: .editingChanged)
+        gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
     #endif
         /// - Tag: Mouse Buffer
         gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
@@ -194,7 +194,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         /// - Tag: ImGui
         ImGui.initialize(.metal)
         if let vc = ImGui.vc {
+            #if os(OSX)
             self.addChildViewController(vc)
+            #elseif os(iOS)
+            self.addChild(vc)
+            #endif
             view.addSubview(vc.view)
             vc.view.frame = CGRect(x: view.frame.width * 0.5,
                                    y: view.frame.height * 0.7,
@@ -213,7 +217,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 
             }
 //            imgui.sliderFloat("index", v: &Attribute.index, minV: 0.0, maxV: 10.0)
-//            imgui.sliderFloat2("offset", v: &self.gameView.selectedNode, minV: -100.0, maxV: 100.0)
+
             imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
             
             imgui.end()
@@ -228,6 +232,14 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+
+#if os(iOS)
+//    http://chicketen.blog.jp/archives/76071441.html
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+#endif
+    
 }
 
 #if os(OSX)
@@ -264,12 +276,6 @@ extension SuperViewController: NSControlTextEditingDelegate {
                 $0.position = node.position
             }
         }
-    }
-}
-#elseif os(iOS)
-extension GameViewController {
-    func addChildViewController(vc: SuperViewController) {
-        self.addChild(vc)
     }
 }
 #endif

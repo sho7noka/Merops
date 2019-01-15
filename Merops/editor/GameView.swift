@@ -567,12 +567,14 @@ class GameView: SCNView {
         switch event.characters! {
         case "\u{1B}": //ESC
             clearView()
+            isDeforming = true
         case "1", "2", "3", "4":
             self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "\t": // TAB
             console.isHidden = !console.isHidden
             console.textview?.setSelectedRange(NSMakeRange(0, 0))
             console.textview?.drawFocusRingMask()
+            isDeforming = false
         case "q":
             self.resetView(_mode: .Object)
         case "w":

@@ -9,6 +9,7 @@
 import Foundation
 #if os(OSX)
     import Cocoa
+import Python
     import ObjectiveGit
 #elseif os(iOS)
     import UIKit
@@ -16,7 +17,7 @@ import Foundation
 
 import SceneKit
 import ModelIO
-//import Highlightr
+import Highlightr
 
 
 final class OutLiner: View {
@@ -118,15 +119,14 @@ final class PythonConsole: View, NSTextViewDelegate {
         */
         /// - Tag: gil
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
-//            let state = PyGILState_Ensure()
-            
+            let state = PyGILState_Ensure()
             let txt = textview?.string
-//            if PyRun_SimpleStringFlags(txt, nil) != 0 {
-//                PyRun_SimpleStringFlags(txt, nil)
-//                PyErr_Print()
-//                return true
-//            }
-//            PyGILState_Release(state)
+            if PyRun_SimpleStringFlags(txt, nil) != 0 {
+                PyRun_SimpleStringFlags(txt, nil)
+                PyErr_Print()
+                return true
+            }
+            PyGILState_Release(state)
 //            PyEval_RestoreThread(thread)
         }
         

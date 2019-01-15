@@ -9,6 +9,8 @@
 import Foundation
 import JavaScriptCore
 
+// https://stackoverflow.com/questions/48354804/how-to-import-modules-in-swifts-javascriptcore
 func jsc(){
-    JSContext.init()
+    var context = JSContext()
+//    context?.evaluateScript(<#T##script: String!##String!#>, withSourceURL: <#T##URL!#>)
 }
