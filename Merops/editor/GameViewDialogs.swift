@@ -17,7 +17,7 @@ import Python
 
 import SceneKit
 import ModelIO
-import Highlightr
+//import Highlightr
 
 
 final class OutLiner: View {

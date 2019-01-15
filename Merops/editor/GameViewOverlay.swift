@@ -31,7 +31,7 @@ extension SKScene {
     }
     
     func mButton(name : Any) -> SKSpriteNode {
-        let size = CGSize(width: 24, height: 24)
+        let size = CGSize(width: 32, height: 32)
     #if os(OSX)
         let btn = SKSpriteNode(imageNamed: name as! String)
         btn.name = (name as! String)

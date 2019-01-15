@@ -53,7 +53,7 @@ carthage update --verbose --no-use-binaries --use-ssh
 - [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D) / [USDKit](https://github.com/superfunc/USDKit)
 - [ ] interpolation を [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でモディファイヤ テッセレーションとリダクション + ml/noise/lattice/edit 
-- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更 / USD + Alembic の2枚構成 (+ json scheme)
+- [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
 
 ### Research
 - WHLSL to MSL

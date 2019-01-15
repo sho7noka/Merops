@@ -91,7 +91,7 @@ class GameView: SCNView {
             self.gestureRecognizers.forEach {
                 $0.isEnabled = !isDeforming
             }
-            self.allowsCameraControl = !isDeforming
+//            self.allowsCameraControl = !isDeforming
         }
     }
     

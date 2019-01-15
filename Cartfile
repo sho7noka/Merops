@@ -1,3 +1,3 @@
-#github "mnmly/Swift-imgui" "master"
-#github "libgit2/objective-git"
-github "raspu/Highlightr"
+github "mnmly/Swift-imgui" "master"
+github "libgit2/objective-git"
+#github "raspu/Highlightr"
