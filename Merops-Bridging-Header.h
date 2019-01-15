@@ -11,7 +11,7 @@
 #import "ObjectiveGit/ObjectiveGit.h"
 
 // lib
-//#import "USD-bind.hpp"
-//#import "CoreModel.h"
+#import "CoreModel.h"
+#import "USD-bind.hpp"
 
 #endif

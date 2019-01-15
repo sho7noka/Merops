@@ -20,7 +20,6 @@ class Models {
 
     func copyModels() {
         models.removeAll()
-        
 //        var tmp: [SCNNode] = []
 //        gameView.scene?.rootNode.enumerateChildNodes({ child, _ in
 //            if child.geometry != nil && child.categoryBitMask != 2 {

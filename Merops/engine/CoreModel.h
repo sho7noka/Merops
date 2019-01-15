@@ -9,16 +9,36 @@
 #ifndef CoreModel_h
 #define CoreModel_h
 
-@implementation CoreModel : NSObject
-int Id;
-id Geometry;
+#import <Foundation/Foundation.h>
+
+@interface CoreModel : NSObject
+
+// scene
+@property id root;
+@property id current;
+
+// model
+@property NSString* name;
+@property id attr;
+@property int Id;
+@property id geometry;
+@property id shader;
+@property id transform;
+
+// CRUD
+- (id)Create:(NSString *)name;
+- (void)Delete;
+- (id)Select:(NSString *)name;
+- (id)Copy;
+- (void)SetName:(NSString *)name;
+- (void)SetAttr:(id)attr;
+- (id)Import;
+- (NSString *)Export;
+- (void)Hide;
+- (void)Lock;
+
+- (void)Update;
 
 @end
-
--(void) name(NSObject*)
-// Model getter / setter
-    // name transform attr attrs id _update
-        // geometry shader
-    // create delete select copy hide lock
 
 #endif /* CoreModel_h */

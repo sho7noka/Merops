@@ -7,3 +7,73 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CoreModel.h"
+
+@implementation CoreModel
+
+-(id)init
+{
+    self = [super init];
+    self.Id = 12345;
+    self.transform = 0;
+    return self;
+}
+
+- (void)SetAttr:(id)attr
+{
+    self.attr = attr;
+    [self Update];
+}
+
+- (void)SetName:(NSString *)name
+{
+    self.name = name;
+    [self Update];
+}
+
+-(id)Create:(NSString *)name
+{
+    return self;
+}
+
+-(void)Delete
+{
+    
+}
+
+-(id)Copy
+{
+    return self;
+}
+
+-(id)Select:(NSString *)name
+{
+    return [self Copy];
+}
+
+- (void)Update
+{
+
+}
+
+-(id)Import
+{
+    return self;
+}
+
+-(NSString *)Export
+{
+    return self.name;
+}
+
+-(void)Hide
+{
+    
+}
+
+-(void)Lock
+{
+    
+}
+
+@end

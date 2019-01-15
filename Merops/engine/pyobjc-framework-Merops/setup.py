@@ -19,7 +19,7 @@ setup(
     packages = [ "ModelIO" ],
     ext_modules = [
         Extension("ModelIO._ModelIO",
-            [ "Modules/_ModelIO.m" ],
+            [ "Modules/_ModelIO.m", "../CoreModel.h" ],
             extra_link_args=["-framework", "ModelIO"],
             depends=[
                 os.path.join('Modules', fn)
