@@ -210,6 +210,8 @@ final class Editor {
         node.name = "grid"
         node.categoryBitMask = NodeOptions.noSelect.rawValue
         scene.rootNode.addChildNode(node)
+        
+        EditorDome(scene: scene)
     }
 }
 

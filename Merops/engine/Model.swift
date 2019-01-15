@@ -8,6 +8,11 @@ import SceneKit
 import Metal
 import MetalKit
 
+struct Attribute {
+    var name : String
+    var index : Int
+}
+
 @objcMembers
 class Models {
 

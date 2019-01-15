@@ -12,10 +12,6 @@
 
 // lib
 //#import "USD-bind.hpp"
-
-// engine
-//#import "Python.h"
-//#import "pyobjc-compat.h"
 //#import "CoreModel.h"
 
 #endif

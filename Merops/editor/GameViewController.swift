@@ -75,7 +75,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         if gameView == nil {
             gameView = GameView()
             view.addSubview(gameView)
-            gameView.frame = CGRect(x: 0, y: 0, width: view.frame.width,
+            gameView.frame = CGRect(x: 0, y: 0,
+                                    width: view.frame.width,
                                     height: view.frame.height)
         }
         
@@ -130,14 +131,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
             pyDir: "/usr/bin/python")
         
+        //gameView.showsStatistics = true
         gameView.queue = device.makeCommandQueue()
-//        gameView.showsStatistics = true
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
         gameView.backgroundColor = (gameView.settings?.bgColor)!
-        
-//        Editor.EditorDome(scene: scene)
-        Editor.EditorGrid(scene: scene)
         
         /// - Tag: addSubView
         gameView.subView = SCNView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
@@ -145,7 +143,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
         gameView.subView?.isPlaying = true
-        
         let pos = PositionNode()
         pos.isHidden = false
         gameView.subView?.scene?.rootNode.addChildNode(pos)
@@ -172,8 +169,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.isHidden = true
         gameView.addSubview(gameView.txtField!)
         
-        gameView.resizeView()
-        
     #if os(OSX)
         // MARK: Setting Dialog
         gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
@@ -187,10 +182,10 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
+        
     #elseif os(iOS)
         gameView.txtField.addTarget(self, action: "textFieldEditingChanged:", for: .editingChanged)
     #endif
-        
         /// - Tag: Mouse Buffer
         gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
@@ -198,38 +193,36 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         /// - Tag: ImGui
         ImGui.initialize(.metal)
-        
         if let vc = ImGui.vc {
             self.addChildViewController(vc)
             view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: view.frame.width * 0.5, y: view.frame.height * 0.7, width: view.frame.width, height: view.frame.height)
+            vc.view.frame = CGRect(x: view.frame.width * 0.5,
+                                   y: view.frame.height * 0.7,
+                                   width: view.frame.width,
+                                   height: view.frame.height)
         }
-        struct Attribute {
-            var name : String
-            var index : Int
-        }
+        
         ImGui.draw { (imgui) in
-//            imgui.loadFont(fontName: )
             imgui.setNextWindowPos(CGPoint.zero, cond: .always)
             imgui.setNextWindowSize(self.view.frame.size)
             imgui.pushStyleVar(.windowRounding, value: 0)
             imgui.pushStyleColor(.frameBg, color: Color.blue)
             imgui.begin("Object Attrs")
             
-            // When button is clicked...
             if imgui.button("rotate me") {
-//                self.myView.transform = CGAffineTransform.identity
-//                UIViewPropertyAnimator(duration: 1.0, dampingRatio: 0.9, animations: {
-//                    self.myView.transform = CGAffineTransform.init(rotationAngle: 180.0)
-//                }).startAnimation()
+
             }
 //            imgui.sliderFloat("index", v: &Attribute.index, minV: 0.0, maxV: 10.0)
 //            imgui.sliderFloat2("offset", v: &self.gameView.selectedNode, minV: -100.0, maxV: 100.0)
             imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
+            
             imgui.end()
             imgui.popStyleColor()
             imgui.popStyleVar()
         }
+        
+        Editor.EditorGrid(scene: scene)
+        gameView.resizeView()
     }
 
     override func awakeFromNib() {
@@ -243,9 +236,9 @@ extension SuperViewController: NSControlTextEditingDelegate {
         if let textField = notification.object as? TextView {
             guard let node = (self as! GameViewController).gameView.selection?.node else { return }
             
-            switch textField.placeholderString {
+            switch textField.placeholder {
             case "Name":
-                node.name = textField.stringValue
+                node.name = textField.text
             case "positionX":
                 node.position.x = CGFloat(textField.doubleValue)
             case "positionY":
@@ -267,7 +260,6 @@ extension SuperViewController: NSControlTextEditingDelegate {
             default:
                 break
             }
-            
             (self as! GameViewController).gameView.gizmos.forEach {
                 $0.position = node.position
             }

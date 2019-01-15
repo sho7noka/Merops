@@ -6,8 +6,8 @@
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
 //
 #if os(OSX)
-
 import Cocoa
+
 public typealias View = NSView
 public typealias Color = NSColor
 public typealias Event = NSEvent
@@ -37,6 +37,7 @@ extension TextView {
         }
     }
 }
+import Python
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -45,23 +46,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidBecomeActive(_ notification: Notification) {
 //        Py_SetProgramName(UnsafeMutablePointer.allocate(capacity: "/usr/bin/python"))
-//        Py_Initialize()
+        Py_Initialize()
         
-//        PyRun_SimpleStringFlags("""
-//import sys, os
-//pwd = os.environ[\"PWD\"]
-//
-//os.environ[\"PATH\"] = pwd + \"/USD/bin\"
-//os.environ[\"PATH\"] = pwd + \"/USD/lib\"
-//os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
-//sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
-//sys.path.append(os.path.join(pwd, \"Python\"))
-//os.chdir(os.path.join(pwd, \"USD/lib/python\"))
-//""", nil)
+        PyRun_SimpleStringFlags("""
+import sys, os
+pwd = os.environ[\"PWD\"]
+
+os.environ[\"PATH\"] = pwd + \"/USD/bin\"
+os.environ[\"PATH\"] = pwd + \"/USD/lib\"
+os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
+sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
+sys.path.append(os.path.join(pwd, \"Python\"))
+os.chdir(os.path.join(pwd, \"USD/lib/python\"))
+""", nil)
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-//        Py_Finalize()
+        Py_Finalize()
     }
 }
     

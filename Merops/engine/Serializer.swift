@@ -110,7 +110,7 @@ final class USDExporter {
             if (child.geometry != nil) {
                 let scatteringFunction = MDLScatteringFunction()
                 let material = MDLMaterial(name: "baseMaterial", scatteringFunction: scatteringFunction)
-                material.setProperty(MDLMaterialProperty(name: "color", semantic: .baseColor, color: Color.black as! CGColor))
+//                material.setProperty(MDLMaterialProperty(name: "color", semantic: .baseColor, color: Color.black as! CGColor))
 
                 // Apply the texture to every submesh of the asset
                 for submesh in (MDLMesh(scnGeometry: child.geometry!).submeshes!) {

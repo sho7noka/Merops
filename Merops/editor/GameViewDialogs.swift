@@ -6,8 +6,10 @@
 //  Copyright © 2018年 sho sumioka. All rights reserved.
 //
 
+import Foundation
 #if os(OSX)
     import Cocoa
+    import ObjectiveGit
 #elseif os(iOS)
     import UIKit
 #endif
@@ -15,8 +17,7 @@
 import SceneKit
 import ModelIO
 //import Highlightr
-import Foundation
-import ObjectiveC
+
 
 final class OutLiner: View {
     let treeview = NSTreeNode()

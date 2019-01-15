@@ -10,6 +10,12 @@
 import Foundation
 import SceneKit
 
+#if os(OSX)
+typealias mFloat = Float
+#elseif os(iOS)
+typealias mFloat = SCNFloat
+#endif
+
 class Matrix {
     static func perspective(fovyRadians: mFloat, aspect: mFloat, nearZ: mFloat, farZ: mFloat) -> matrix_float4x4 {
         let ys = 1 / tanf(mFloat(fovyRadians * 0.5))
@@ -71,12 +77,6 @@ class Matrix {
                 vector_float3(z.x, z.y, z.z)))
     }
 }
-
-#if os(OSX)
-typealias mFloat = Float
-#elseif os(iOS)
-typealias mFloat = SCNFloat
-#endif
 
 /*
  * The following SCNVector3 extension comes from

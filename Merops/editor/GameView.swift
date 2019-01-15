@@ -293,7 +293,6 @@ class GameView: SCNView {
             /// MARK: hitTest on Metal https://qiita.com/shu223/items/b9bcdbcf7b0fd410d8ab
             /// MARK: 4.3.1.1 Vertex Function Example with Resources and Outputs to Device Memory
             let data = outBuffer.contents().bindMemory(to: float2.self, capacity: 1)
-            //            Swift.print(data[0], selNode.geometry?.vertices())
             switch part {
             case .OverrideVertex:
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])

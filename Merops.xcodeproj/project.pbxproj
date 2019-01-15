@@ -11,7 +11,6 @@
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E421336ABA00EE861F /* USD-bind.hpp */; };
 		E26A787921E17E0400FBA0BB /* Shaderc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A787821E17E0400FBA0BB /* Shaderc.swift */; };
-		E26A787A21E1814800FBA0BB /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E46157210DE97800C0DB39 /* Python.framework */; };
 		E26A788021E61DF900FBA0BB /* CoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26A787F21E61DF900FBA0BB /* CoreModel.m */; };
 		E26A788721E653F800FBA0BB /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788621E653F800FBA0BB /* ImGui.framework */; };
 		E26A788921E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
@@ -23,7 +22,6 @@
 		E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
 		E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
-		E26ABEC221EB769600487FA4 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E26ABEC021EB769600487FA4 /* Cartfile */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78C20B933B600232181 /* Cmd+REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78920B933B600232181 /* Cmd+REST.swift */; };
@@ -42,8 +40,6 @@
 		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
 		E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */; };
-		E2BA751E2111E1FC008FF166 /* pybind11 in Resources */ = {isa = PBXBuildFile; fileRef = E2BA751D2111E1FC008FF166 /* pybind11 */; };
-		E2BA75222111E6D7008FF166 /* MaterialX in Resources */ = {isa = PBXBuildFile; fileRef = E2BA75212111E6D7008FF166 /* MaterialX */; };
 		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
 		E2CDF1D121357B6B004D8E39 /* Python in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* Python */; };
 		E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
@@ -63,6 +59,8 @@
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
 		E2FDEBAF21ECBEDC0024CDC1 /* Viewport.metal in Sources */ = {isa = PBXBuildFile; fileRef = E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */; };
+		E2FDEBB021ECCB110024CDC1 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E46157210DE97800C0DB39 /* Python.framework */; };
+		E2FDEBB221ECCE690024CDC1 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */; };
 		ED2221842021E17C00427606 /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
 		ED32B9601EB5D298000D8823 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95F1EB5D298000D8823 /* GameView.swift */; };
@@ -105,7 +103,7 @@
 		E26A788B21E7815900FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/iOS/ImGui.framework; sourceTree = "<group>"; };
 		E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/iOS/ObjectiveGit.framework; sourceTree = "<group>"; };
 		E26A789021E7818E00FBA0BB /* Highlightr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Highlightr.framework; path = Carthage/Build/iOS/Highlightr.framework; sourceTree = "<group>"; };
-		E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Merops-Bridging-Header.h"; path = "Merops/Merops-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Merops-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		E26ABEC021EB769600487FA4 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
@@ -176,6 +174,7 @@
 		E2F5172D21337604005F1515 /* libIlmThread-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIlmThread-2_2.la"; path = "USD/lib/libIlmThread-2_2.la"; sourceTree = "<group>"; };
 		E2F5172E21337604005F1515 /* libIex-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIex-2_2.la"; path = "USD/lib/libIex-2_2.la"; sourceTree = "<group>"; };
 		E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Viewport.metal; sourceTree = "<group>"; };
+		E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/ModelIO.framework; sourceTree = DEVELOPER_DIR; };
 		ED2221822021E17C00427606 /* DeformCompute.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DeformCompute.metal; sourceTree = "<group>"; };
 		ED32B95A1EB5D298000D8823 /* Merops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merops.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED32B95D1EB5D298000D8823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +196,7 @@
 			files = (
 				E26A788D21E7815900FBA0BB /* ImGui.framework in Frameworks */,
 				E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */,
+				E2FDEBB221ECCE690024CDC1 /* ModelIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,11 +204,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2CDF1CC21344812004D8E39 /* lib in Frameworks */,
+				E2FDEBB021ECCB110024CDC1 /* Python.framework in Frameworks */,
 				E26A788721E653F800FBA0BB /* ImGui.framework in Frameworks */,
 				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
-				E2CDF1CC21344812004D8E39 /* lib in Frameworks */,
 				E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */,
-				E26A787A21E1814800FBA0BB /* Python.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,8 +219,9 @@
 			isa = PBXGroup;
 			children = (
 				EDEEFF531F8A35CB00E4785F /* README.md */,
-				ED32B9631EB5D298000D8823 /* art.scnassets */,
+				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
 				E26ABEC021EB769600487FA4 /* Cartfile */,
+				ED32B9631EB5D298000D8823 /* art.scnassets */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -248,7 +249,6 @@
 				ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */,
 				E281B78D20B933D000232181 /* GameViewSettings.swift */,
 				E281B78E20B933D000232181 /* GameViewDialogs.swift */,
-				E216B24421299C4D004D0CE8 /* interpolate.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -266,6 +266,7 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */,
 				E26A789021E7818E00FBA0BB /* Highlightr.framework */,
 				E26A788621E653F800FBA0BB /* ImGui.framework */,
 				E26A788B21E7815900FBA0BB /* ImGui.framework */,
@@ -355,11 +356,10 @@
 		ED32B95C1EB5D298000D8823 /* Merops */ = {
 			isa = PBXGroup;
 			children = (
-				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
+				ED32B9671EB5D298000D8823 /* MainMenu.xib */,
 				EDA91BA51FF15A6300E14B8D /* editor */,
 				EDA91BA41FF159BD00E14B8D /* engine */,
 				EDB79581201D8C40008E79B1 /* extra */,
-				ED32B9671EB5D298000D8823 /* MainMenu.xib */,
 				ED32B96A1EB5D298000D8823 /* Info.plist */,
 			);
 			path = Merops;
@@ -368,6 +368,7 @@
 		EDA91BA41FF159BD00E14B8D /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				E2DD2648213A6C3D00242943 /* Extensions.swift */,
 				E281B7B320B94CE700232181 /* shader */,
 				EDB683412025D43200AD75EE /* scene */,
 				EDB683432025D59400AD75EE /* extends */,
@@ -389,11 +390,11 @@
 			isa = PBXGroup;
 			children = (
 				94B26A2A79BC7112A5660547 /* Engine.swift */,
-				E21859F921036D3400653DBD /* Serializer.swift */,
 				E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */,
 				E281B79B20B94CAE00232181 /* MTLTessellator.swift */,
 				E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */,
 				E281B79720B94CAD00232181 /* MTLSkinningMesh.swift */,
+				E21859F921036D3400653DBD /* Serializer.swift */,
 			);
 			name = scene;
 			sourceTree = "<group>";
@@ -401,7 +402,6 @@
 		EDB683432025D59400AD75EE /* extends */ = {
 			isa = PBXGroup;
 			children = (
-				E2DD2648213A6C3D00242943 /* Extensions.swift */,
 				E26A788121E61E1100FBA0BB /* CoreModel.h */,
 				E26A787F21E61DF900FBA0BB /* CoreModel.m */,
 				E281B7A020B94CAE00232181 /* Model.swift */,
@@ -422,6 +422,7 @@
 				E281B78720B933B600232181 /* Cmd+USD.swift */,
 				E281B78920B933B600232181 /* Cmd+REST.swift */,
 				E26A787821E17E0400FBA0BB /* Shaderc.swift */,
+				E216B24421299C4D004D0CE8 /* interpolate.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -462,7 +463,7 @@
 				E2E46108210D5D6F00C0DB39 /* Sources */,
 				E2E46109210D5D6F00C0DB39 /* Frameworks */,
 				E2E4610A210D5D6F00C0DB39 /* Resources */,
-				E2AD5D9B212727FD0080F3F2 /* ShellScript */,
+				E2AD5D9B212727FD0080F3F2 /* Carthage copy */,
 			);
 			buildRules = (
 			);
@@ -481,8 +482,8 @@
 				ED32B9571EB5D298000D8823 /* Frameworks */,
 				ED32B9581EB5D298000D8823 /* Resources */,
 				ED32B9841EB5DD02000D8823 /* Headers */,
-				E2CDF1CF21356BE6004D8E39 /* Run Script */,
-				ED24CD341F266249000CC0BB /* Run Script */,
+				E2CDF1CF21356BE6004D8E39 /* Copy Python lib  */,
+				ED24CD341F266249000CC0BB /* Carthage copy */,
 			);
 			buildRules = (
 			);
@@ -557,9 +558,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2CDF1D121357B6B004D8E39 /* Python in Resources */,
-				E26ABEC221EB769600487FA4 /* Cartfile in Resources */,
-				E2BA751E2111E1FC008FF166 /* pybind11 in Resources */,
-				E2BA75222111E6D7008FF166 /* MaterialX in Resources */,
 				E26A788921E77FEC00FBA0BB /* WHLSL in Resources */,
 				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
@@ -569,7 +567,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E2AD5D9B212727FD0080F3F2 /* ShellScript */ = {
+		E2AD5D9B212727FD0080F3F2 /* Carthage copy */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -580,6 +578,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ImGui.framework",
 			);
+			name = "Carthage copy";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -588,7 +587,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		E2CDF1CF21356BE6004D8E39 /* Run Script */ = {
+		E2CDF1CF21356BE6004D8E39 /* Copy Python lib  */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
 			files = (
@@ -597,7 +596,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = "Copy Python lib ";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -606,7 +605,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncd Merops/engine/pyobjc-framework-Merops\npython setup.py build\ncp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\n";
 		};
-		ED24CD341F266249000CC0BB /* Run Script */ = {
+		ED24CD341F266249000CC0BB /* Carthage copy */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
@@ -615,7 +614,7 @@
 				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/ImGui.framework",
 			);
-			name = "Run Script";
+			name = "Carthage copy";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -939,7 +938,7 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
@@ -991,7 +990,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops/Merops-Bridging-Header.h";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
