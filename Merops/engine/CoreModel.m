@@ -22,13 +22,13 @@
 - (void)SetAttr:(id)attr
 {
     self.attr = attr;
-    [self Update];
+    [self _Update];
 }
 
 - (void)SetName:(NSString *)name
 {
     self.name = name;
-    [self Update];
+    [self _Update];
 }
 
 -(id)Create:(NSString *)name
@@ -51,7 +51,7 @@
     return [self Copy];
 }
 
-- (void)Update
+- (void)_Update
 {
 
 }
@@ -71,8 +71,7 @@
     
 }
 
--(void)Lock
-{
+-(void)Lock{
     
 }
 

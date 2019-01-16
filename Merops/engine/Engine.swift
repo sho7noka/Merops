@@ -160,7 +160,4 @@ extension MTLBuffer {
 //        block(context: context)
 //        CGContextRestoreGState(context)
 //    }
-    
-//    commandBuffer?.commit()
-//    commandBuffer?.popDebugGroup()
 }

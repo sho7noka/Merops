@@ -8,8 +8,6 @@
 import ModelIO
 import SceneKit
 import SceneKit.ModelIO
-
-
 /*
  root __
         |___ master.usd
@@ -19,46 +17,7 @@ import SceneKit.ModelIO
         |___ light.usd
         |___ skin.usd
         |___ tex.png
- 
  */
-
-
-public func write(url: URL, text: String) -> Bool {
-    guard let stream = OutputStream(url: url, append: true) else {
-        return false
-    }
-    stream.open()
-
-    defer {
-        stream.close()
-    }
-
-    guard let data = text.data(using: .utf8) else {
-        return false
-    }
-
-    let result = data.withUnsafeBytes {
-        stream.write($0, maxLength: data.count)
-    }
-    return (result > 0)
-}
-
-public func userDocument(fileName: String) -> URL {
-    let documentsPath = NSURL(fileURLWithPath:
-    NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
-
-    let path = documentsPath.appendingPathComponent("Merops")
-    do {
-        try FileManager.default.createDirectory(at: path!, withIntermediateDirectories: true, attributes: nil)
-    } catch let error as NSError {
-        NSLog("Unable to create directory \(error.debugDescription)")
-    }
-
-    let exportFile = path?.appendingPathComponent(fileName)
-    return exportFile!
-}
-
-
 final class USDExporter {
 
     public static func initialize(scene: SCNScene) -> URL {
@@ -110,7 +69,6 @@ final class USDExporter {
             if (child.geometry != nil) {
                 let scatteringFunction = MDLScatteringFunction()
                 let material = MDLMaterial(name: "baseMaterial", scatteringFunction: scatteringFunction)
-//                material.setProperty(MDLMaterialProperty(name: "color", semantic: .baseColor, color: Color.black as! CGColor))
 
                 // Apply the texture to every submesh of the asset
                 for submesh in (MDLMesh(scnGeometry: child.geometry!).submeshes!) {
@@ -139,11 +97,41 @@ final class USDExporter {
             // Failed to write file
         }
     }
+}
 
-    public static func finalize() {
-
+public func write(url: URL, text: String) -> Bool {
+    guard let stream = OutputStream(url: url, append: true) else {
+        return false
     }
+    stream.open()
+    
+    defer {
+        stream.close()
+    }
+    
+    guard let data = text.data(using: .utf8) else {
+        return false
+    }
+    
+    let result = data.withUnsafeBytes {
+        stream.write($0, maxLength: data.count)
+    }
+    return (result > 0)
+}
 
+public func userDocument(fileName: String) -> URL {
+    let documentsPath = NSURL(fileURLWithPath:
+        NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
+    
+    let path = documentsPath.appendingPathComponent("Merops")
+    do {
+        try FileManager.default.createDirectory(at: path!, withIntermediateDirectories: true, attributes: nil)
+    } catch let error as NSError {
+        NSLog("Unable to create directory \(error.debugDescription)")
+    }
+    
+    let exportFile = path?.appendingPathComponent(fileName)
+    return exportFile!
 }
 
 extension MDLAsset {

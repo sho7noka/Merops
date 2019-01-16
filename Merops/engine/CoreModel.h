@@ -32,12 +32,14 @@
 - (id)Copy;
 - (void)SetName:(NSString *)name;
 - (void)SetAttr:(id)attr;
-- (id)Import;
-- (NSString *)Export;
 - (void)Hide;
 - (void)Lock;
 
-- (void)Update;
+- (id)Import;
+- (NSString *)Export;
+
+// private
+- (void)_Update;
 
 @end
 
