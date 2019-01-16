@@ -97,6 +97,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     }
     
     private func sceneInit() {
+        gameView.model = Models()
         // MARK: replace object
         meshData = MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
         let newNode = Builder.Plane(meshData: meshData)
@@ -138,7 +139,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.backgroundColor = (gameView.settings?.bgColor)!
         
         /// - Tag: addSubView
-        gameView.subView = SCNView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        gameView.subView = SCNView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         gameView.subView?.scene = SCNScene()
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
@@ -193,6 +194,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         /// - Tag: ImGui
         ImGui.initialize(.metal)
+
         if let vc = ImGui.vc {
             #if os(OSX)
             self.addChildViewController(vc)
@@ -200,27 +202,24 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             self.addChild(vc)
             #endif
             view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: view.frame.width * 0.5,
-                                   y: view.frame.height * 0.7,
+            vc.view.frame = CGRect(x: view.frame.width * 0.2,
+                                   y: view.frame.height * 0.3,
                                    width: view.frame.width,
                                    height: view.frame.height)
         }
         
         ImGui.draw { (imgui) in
+            imgui.setWindowFontScale(2.0)
             imgui.setNextWindowPos(CGPoint.zero, cond: .always)
             imgui.setNextWindowSize(self.view.frame.size)
             imgui.pushStyleVar(.windowRounding, value: 0)
             imgui.pushStyleColor(.frameBg, color: Color.blue)
-            imgui.begin("Object Attrs")
             
-            if imgui.button("rotate me") {
-
-            }
-//            imgui.sliderFloat("index", v: &Attribute.index, minV: 0.0, maxV: 10.0)
-
+            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
             imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
-            
-            imgui.end()
+            if imgui.button("Edit") {
+                
+            }
             imgui.popStyleColor()
             imgui.popStyleVar()
         }

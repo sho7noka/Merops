@@ -93,6 +93,10 @@ final class PythonConsole: View, NSTextViewDelegate {
             self.isHidden = true
         }
         
+        if keybind(modify: Event.ModifierFlags.command, k: "q", e: event) {
+//            NSApplication
+        }
+        
         // Command + o
         if keybind(modify: Event.ModifierFlags.command, k: "o", e: event) {
             let op = NSOpenPanel()

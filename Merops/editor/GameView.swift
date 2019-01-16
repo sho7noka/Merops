@@ -62,6 +62,14 @@ class GameView: SCNView {
      * MARK: Mouse Event
      */
     
+    var model: Models?
+    
+    var val = 1.0 {
+        didSet {
+            Swift.print(val)
+        }
+    }
+    
     var isEdit = false {
         didSet {
             if isEdit {
@@ -519,11 +527,17 @@ class GameView: SCNView {
      */
     func resizeView() {
         let size = self.frame.size
-        
+        let frame = self.frame
         #if os(OSX)
-        subView?.frame.origin = CGPoint(x: size.width - 88 , y: 24)
+        console.frame.origin = CGPoint(x: size.width - console.frame.size.width,
+                                       y: size.height - console.frame.size.height)
+        console.frame = frame
+        Swift.print(console.frame.origin)
+        
+        
+        subView?.frame.origin = CGPoint(x: size.width - 88 , y: 16)
         #elseif os(iOS)
-        subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 88)
+        subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 80)
         #endif
         
         /// TODO: ノッチ幅を下げる必要がある
@@ -539,7 +553,7 @@ class GameView: SCNView {
         overRay?.button_cyan.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 176)
         overRay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 152)
         overRay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 128)
-        overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 22), y: -size.height / 2 + 28)
+        overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 22), y: -size.height / 2 + 20)
     }
     
 #if os(OSX)
@@ -622,13 +636,7 @@ class GameView: SCNView {
     }
 #endif
     
-    private func clearView() {
-        #if os(OSX)
-        if console != nil {
-            console.isHidden = true
-        }
-        #endif
-        
+    private func clearView() {        
         if txtField != nil {
             txtField.isHidden = true
         }

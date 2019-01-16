@@ -651,7 +651,7 @@
 		};
 		E2CDF1CF21356BE6004D8E39 /* Copy Python lib  */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -663,7 +663,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncd Merops/engine/pyobjc-framework-Merops\npython setup.py build\ncp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\n";
 		};
