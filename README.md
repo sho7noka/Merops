@@ -17,7 +17,7 @@ Merops は `Pixar USD` と `libgit` をベースにした次世代DCCツール�
 
 ## Why?
 1. 3Dソフトの操作は難しく複雑です。中ボタンクリックの多用を回避してシンプルな操作感を実現したいと考えました。
-2. [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現したDCCアプリケーション。
+2. [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現したDCCアプリケーションは数少ないので重点的につくります。
 3. 入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
 
 ### Author
@@ -32,9 +32,6 @@ Merops は `Pixar USD` と `libgit` をベースにした次世代DCCツール�
 ----
 
 ## TODO
-```bash
-carthage update --verbose --no-use-binaries --use-ssh
-```
 他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指しません。
 
 ### Editor
@@ -57,10 +54,24 @@ carthage update --verbose --no-use-binaries --use-ssh
 
 ### Research
 - WHLSL to MSL
-- intelligent shape (Chainer) 
+- intelligent shape (Chainer)
+- [tensorflow lite](https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7)
 - [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 
-## [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
+## Developper 向け
+
+```bash
+python build.py
+```
+
+```bash
+carthage update --verbose --no-use-binaries --use-ssh
+```
+
+https://github.com/libgit2/objective-git/blob/master/README.md
+
+
+### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
 
 1. [スキーマ](https://cocoaengineering.com/2018/01/01/some-useful-url-schemes-in-xcode-9/)
 - `/// - Tag: TextField (x-source-tag://TextField)`
