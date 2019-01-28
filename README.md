@@ -29,7 +29,6 @@ Merops は `Pixar USD` と `libgit` をベースにした次世代DCCツール�
 ### License
 [BSD](../License.md) ライセンスです。
 
-----
 
 ## TODO
 他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指しません。
@@ -44,6 +43,7 @@ Merops は `Pixar USD` と `libgit` をベースにした次世代DCCツール�
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)   [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring) [2](https://www.hardcoded.net/articles/)
 - [x] [mouseEvent/TouchEvent](https://qiita.com/RichQiitaJp/items/79a52c55c9762b60f292) と Float をマルチプラットフォーム化
+- []WebKit View への書き込みと読み込み
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)

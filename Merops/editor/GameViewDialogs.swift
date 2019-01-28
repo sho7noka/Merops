@@ -14,6 +14,7 @@ import Foundation
     import UIKit
 #endif
 
+import WebKit
 import SceneKit
 import ModelIO
 import ObjectiveGit
@@ -61,7 +62,9 @@ final class SettingDialog: View, TextFieldDelegate {
     }
 }
 
-final class PythonConsole: View, NSTextViewDelegate {
+final class PythonConsole: View {
+    
+    var wkview: WKWebView?
     var textview: NSTextView?
     var url: URL?
     var view: GameView?
@@ -70,11 +73,12 @@ final class PythonConsole: View, NSTextViewDelegate {
         super.init(frame: frame)
         self.view = view
         
-        textview = NSTextView(frame: frame)
+        let config = WKWebViewConfiguration()
+        wkview = WKWebView(frame: frame, configuration: config)
+        wkview?.loadHTMLString("", baseURL: URL(fileURLWithPath: "WKView/index.html"))
+        
         textview?.backgroundColor = Color.black.withAlphaComponent(0.5)
-        let range = NSRange(location: 9, length: 0)
-        textview?.setSelectedRange(range)
-        self.addSubview(textview!)
+        self.addSubview(wkview!)
     }
     
     func setText(url: URL) -> String {
@@ -93,8 +97,8 @@ final class PythonConsole: View, NSTextViewDelegate {
             self.isHidden = true
         }
         
-        if keybind(modify: Event.ModifierFlags.command, k: "q", e: event) {
-//            NSApplication
+        if keybind(modify: Event.ModifierFlags.command, k: "q", e: event) || keybind(modify: Event.ModifierFlags.command, k: "w", e: event) {
+            self.isHidden = true
         }
         
         // Command + o
@@ -119,10 +123,13 @@ final class PythonConsole: View, NSTextViewDelegate {
         
         /// - Tag: gil / Command + Enter
         if keybind(modify: Event.ModifierFlags.command, k: "\r", e: event) {
+            PyEval_InitThreads()
+            PyEval_AcquireLock()
             let state = PyGILState_Ensure()
             let txt = textview?.string
             PyRun_SimpleStringFlags(txt, nil)
             PyGILState_Release(state)
+            PyEval_ReleaseLock()
             return true
         }
         return true

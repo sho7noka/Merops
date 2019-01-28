@@ -14,7 +14,7 @@ struct Attribute {
 }
 
 @objcMembers
-class Models : CoreModel {
+class Models {
 
     private var models: [SCNNode] = []
 

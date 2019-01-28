@@ -378,7 +378,7 @@
                   moduleName = "Merops"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/shosumioka/Merops/Merops/editor/Cmd+Git.swift"
-                  timestampString = "569354342.727158"
+                  timestampString = "570173581.3914289"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "73"
@@ -393,7 +393,7 @@
                   moduleName = "Merops"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/shosumioka/Merops/Merops/editor/Cmd+Git.swift"
-                  timestampString = "569354342.7291189"
+                  timestampString = "570173581.395793"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "74"
@@ -543,8 +543,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
             endingLineNumber = "110"
-            landmarkName = "GameView"
-            landmarkType = "3">
+            landmarkName = "ctouchesBegan(touchLocation:previousLocation:event:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

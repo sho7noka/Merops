@@ -39,7 +39,12 @@
 		E281B7B020B94CCB00232181 /* Common.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AD20B94CCA00232181 /* Common.metal */; };
 		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
+		E2A03BAB21FC2B2300FE5681 /* GameViewDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewDialogs.swift */; };
 		E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */; };
+		E2B76B2221FB566F00E6EA59 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E2B76B2121FB566F00E6EA59 /* index.html */; };
+		E2B76B2321FB566F00E6EA59 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E2B76B2121FB566F00E6EA59 /* index.html */; };
+		E2B76B2521FB57A000E6EA59 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = E2B76B2421FB579F00E6EA59 /* package.json */; };
+		E2B76B2621FB57A000E6EA59 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = E2B76B2421FB579F00E6EA59 /* package.json */; };
 		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
 		E2CDF1D121357B6B004D8E39 /* Python in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* Python */; };
 		E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
@@ -151,6 +156,8 @@
 		E294EFE42133757E00E582CB /* libusdSkel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdSkel.dylib; path = USD/lib/libusdSkel.dylib; sourceTree = "<group>"; };
 		E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "pyobjc-framework-Merops"; sourceTree = "<group>"; };
+		E2B76B2121FB566F00E6EA59 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		E2B76B2421FB579F00E6EA59 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		E2BA751D2111E1FC008FF166 /* pybind11 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybind11; path = Merops/extra/pybind11; sourceTree = SOURCE_ROOT; };
 		E2CDF1D021357B6B004D8E39 /* Python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Python; path = Merops/extra/Python; sourceTree = SOURCE_ROOT; };
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -267,6 +274,7 @@
 		E2A3409720B98C3600C4DF6C /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E2B76B2021FB55C900E6EA59 /* WKView */,
 				ED32B95F1EB5D298000D8823 /* GameView.swift */,
 				ED32B9611EB5D298000D8823 /* GameViewController.swift */,
 				ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */,
@@ -274,6 +282,15 @@
 				E281B78E20B933D000232181 /* GameViewDialogs.swift */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		E2B76B2021FB55C900E6EA59 /* WKView */ = {
+			isa = PBXGroup;
+			children = (
+				E2B76B2421FB579F00E6EA59 /* package.json */,
+				E2B76B2121FB566F00E6EA59 /* index.html */,
+			);
+			path = WKView;
 			sourceTree = "<group>";
 		};
 		E2E4610D210D5D6F00C0DB39 /* Merops-ios */ = {
@@ -608,7 +625,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B76B2321FB566F00E6EA59 /* index.html in Resources */,
 				E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */,
+				E2B76B2621FB57A000E6EA59 /* package.json in Resources */,
 				E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */,
 				E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */,
 				E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */,
@@ -619,7 +638,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B76B2221FB566F00E6EA59 /* index.html in Resources */,
 				E2CDF1D121357B6B004D8E39 /* Python in Resources */,
+				E2B76B2521FB57A000E6EA59 /* package.json in Resources */,
 				E26A788921E77FEC00FBA0BB /* WHLSL in Resources */,
 				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
@@ -696,6 +717,7 @@
 				E2E46123210D5E4100C0DB39 /* GameView.swift in Sources */,
 				E2E46122210D5E3D00C0DB39 /* GameViewController.swift in Sources */,
 				E2E46124210D5E4400C0DB39 /* GameViewOverlay.swift in Sources */,
+				E2A03BAB21FC2B2300FE5681 /* GameViewDialogs.swift in Sources */,
 				E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */,
 				E2FBFD4621EE241B00BDB646 /* DocumentView.swift in Sources */,
 				E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */,
@@ -800,7 +822,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/";
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -832,7 +854,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/";
 				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
