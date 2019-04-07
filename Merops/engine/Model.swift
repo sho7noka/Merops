@@ -50,6 +50,25 @@ class Models {
     }
 }
 
+func duplicateNode(_ node: SCNNode) -> SCNNode {
+    let nodeCopy = node.copy() as? SCNNode ?? SCNNode()
+    if let geometry = node.geometry?.copy() as? SCNGeometry {
+        nodeCopy.geometry = geometry
+        if let material = geometry.firstMaterial?.copy() as? SCNMaterial {
+            nodeCopy.geometry?.firstMaterial = material
+        }
+    }
+    return nodeCopy
+}
+
+func setOutline (outlineNode : SCNNode) {
+    let outlineProgram = SCNProgram()
+    outlineProgram.vertexFunctionName = "outline_vertex"
+    outlineProgram.fragmentFunctionName = "outline_fragment"
+    outlineNode.geometry?.firstMaterial?.program = outlineProgram
+    outlineNode.geometry?.firstMaterial?.cullMode = .front
+}
+
 func getMat(textureFilename: String, ureps: SCNFloat = 1.0, vreps: SCNFloat = 1.0, directory: String? = nil,
             normalFilename: String? = nil, specularFilename: String? = nil) -> SCNMaterial {
     let nsb = Bundle.main.path(forResource: textureFilename, ofType: nil, inDirectory: directory)

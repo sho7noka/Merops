@@ -1,6 +1,0 @@
-[submodule "Merops/extra/pybind11"]
-	path = Merops/extra/pybind11
-	url = https://github.com/pybind/pybind11.git
-[submodule "Merops/extra/gltf2usd"]
-	path = Merops/extra/gltf2usd
-	url = https://github.com/kcoley/gltf2usd.git

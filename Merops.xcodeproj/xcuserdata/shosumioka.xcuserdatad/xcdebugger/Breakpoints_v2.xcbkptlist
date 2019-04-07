@@ -369,38 +369,6 @@
             endingLineNumber = "73"
             landmarkName = "gitRevert(url:)"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Merops.gitRevert(url: Swift.String) -&gt; ()"
-                  moduleName = "Merops"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shosumioka/Merops/Merops/editor/Cmd+Git.swift"
-                  timestampString = "570173581.3914289"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "736">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.GTCommit) -&gt; () in Merops.gitRevert(url: Swift.String) -&gt; ()"
-                  moduleName = "Merops"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shosumioka/Merops/Merops/editor/Cmd+Git.swift"
-                  timestampString = "570173581.395793"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -458,13 +426,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "569354342.1019911"
+            timestampString = "570987048.853475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
-            landmarkName = "renderer(_:didRenderScene:atTime:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -474,13 +442,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "569354342.102474"
+            timestampString = "570987048.853619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
-            landmarkName = "renderer(_:didRenderScene:atTime:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -490,13 +458,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameViewController.swift"
-            timestampString = "569354342.102864"
+            timestampString = "570987048.853671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "renderer(_:didRenderScene:atTime:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -538,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.103256"
+            timestampString = "570987048.853744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -554,7 +522,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.103334"
+            timestampString = "570987048.853793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -570,7 +538,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.103403"
+            timestampString = "570987048.853838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"
@@ -586,7 +554,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.10347"
+            timestampString = "570987048.853881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
@@ -602,7 +570,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.103533"
+            timestampString = "570987048.853923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "116"
@@ -618,7 +586,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.1036"
+            timestampString = "570987048.853973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
@@ -634,29 +602,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.103665"
+            timestampString = "570987048.8540159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
             landmarkName = "ctouchesBegan(touchLocation:previousLocation:event:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Merops/editor/GameView.swift"
-            timestampString = "569354342.1037281"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "821"
-            endingLineNumber = "821"
-            landmarkName = "layer"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

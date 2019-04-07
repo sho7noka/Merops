@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E2E4610B210D5D6F00C0DB39"
-               BuildableName = "Merops-lite.app"
-               BlueprintName = "Merops-lite"
+               BuildableName = "Merops-touch.app"
+               BlueprintName = "Merops-touch"
                ReferencedContainer = "container:Merops.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2E4610B210D5D6F00C0DB39"
-            BuildableName = "Merops-lite.app"
-            BlueprintName = "Merops-lite"
+            BuildableName = "Merops-touch.app"
+            BlueprintName = "Merops-touch"
             ReferencedContainer = "container:Merops.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2E4610B210D5D6F00C0DB39"
-            BuildableName = "Merops-lite.app"
-            BlueprintName = "Merops-lite"
+            BuildableName = "Merops-touch.app"
+            BlueprintName = "Merops-touch"
             ReferencedContainer = "container:Merops.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2E4610B210D5D6F00C0DB39"
-            BuildableName = "Merops-lite.app"
-            BlueprintName = "Merops-lite"
+            BuildableName = "Merops-touch.app"
+            BlueprintName = "Merops-touch"
             ReferencedContainer = "container:Merops.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -9,12 +9,22 @@
 
 import Foundation
 import SceneKit
+import ModelIO
 
 #if os(OSX)
 typealias mFloat = Float
 #elseif os(iOS)
 typealias mFloat = SCNFloat
 #endif
+
+extension MDLVertexDescriptor {
+    var vertexAttributes: [MDLVertexAttribute] {
+        return attributes as! [MDLVertexAttribute]
+    }
+    var bufferLayouts: [MDLVertexBufferLayout] {
+        return layouts as! [MDLVertexBufferLayout]
+    }
+}
 
 class Matrix {
     static func perspective(fovyRadians: mFloat, aspect: mFloat, nearZ: mFloat, farZ: mFloat) -> matrix_float4x4 {

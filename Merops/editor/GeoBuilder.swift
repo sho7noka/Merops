@@ -190,6 +190,24 @@ final class Editor {
     }
     
     class func EditorDome(scene: SCNScene) {
+        
+        let skyGeometry = SCNSphere(radius: 70)
+        
+        let skyMaterial = skyGeometry.firstMaterial!
+        let skyProgram = SCNProgram()
+        skyProgram.library = scnView.device?.makeDefaultLibrary()
+        skyProgram.vertexFunctionName = "sky_vertex"
+        skyProgram.fragmentFunctionName = "sky_fragment"
+        skyMaterial.program = skyProgram
+        skyMaterial.isDoubleSided = true
+                
+        let skyImage = Image(named: "sky")!
+        let skyTexture = SCNMaterialProperty(contents: skyImage)
+        skyMaterial.setValue(skyTexture, forKey: "skyTexture")
+                
+        let skyNode = SCNNode(geometry: skyGeometry)
+        scene.rootNode.addChildNode(skyNode)
+        
         let sphere = SCNSphere()
         sphere.firstMaterial?.isDoubleSided = true
         

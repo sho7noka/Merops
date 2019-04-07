@@ -816,10 +816,7 @@ extension View {
     }
     
     #elseif os(iOS)
-    
-    var layer: CALayer? {
-        return self.layer
-    }
+
     
     var gestureRecognizers: [UIGestureRecognizer] {
         return self.gestureRecognizers

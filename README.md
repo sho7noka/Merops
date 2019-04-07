@@ -136,3 +136,7 @@ let vector2:[Float] = [10,20,30,40,50,60,70,80,90]
 
 buffer.contents().copyBytes(from: vector2, count: vector2.count * MemoryLayout<Float>.stride)
 ```
+
+https://qiita.com/lumis/items/311b8c39d61312957195
+https://qiita.com/mss634/items/170d3cb401eee4ec1253
+https://stackoverflow.com/questions/15470367/pyeval-initthreads-in-python-3-how-when-to-call-it-the-saga-continues-ad-naus]

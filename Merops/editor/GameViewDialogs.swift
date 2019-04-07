@@ -62,7 +62,31 @@ final class SettingDialog: View, TextFieldDelegate {
     }
 }
 
-final class PythonConsole: View {
+final class PythonConsole: View, WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        switch message.name {
+        case "startRecording":
+            print("startRecordingが呼ばれる")
+        case "toggleMicInput":
+            print("toggleMicInputが呼ばれる") //<--が呼ばれる
+            guard let contentBody = message.body as? String,
+                let data = contentBody.data(using: String.Encoding.utf8) else { return }
+            if let json = try! JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.allowFragments) as? Dictionary<String, Bool>, let isUsingMic = json["usingMic"] {
+                if isUsingMic {
+                    print("micを使っている")
+                } else {
+                    print("micを使っていない")
+                }
+            }
+        case "youtubeStart":
+            print("youtubeStartが呼ばれる")
+        case "youtubeEnd":
+            print("youtubeStoppedが呼ばれる")
+        default:
+            print("default")
+        }
+    }
     
     var wkview: WKWebView?
     var textview: NSTextView?
@@ -82,13 +106,18 @@ final class PythonConsole: View {
     }
     
     func setText(url: URL) -> String {
+        
         let text = try! String(contentsOf: url, encoding: String.Encoding.utf8)
         self.url = url
-        setSyntax(file: url)
+
+        let script = String(format: "document.getElementById('iPadVolumeData').value = \"%@\";", text)
+        wkview.evaluateJavaScript(script, completionHandler: nil)
+
         self.textview?.string = text
         return text
     }
-    
+
+    #if os(OSX)
     override func performKeyEquivalent(with event: Event) -> Bool {
         super.keyDown(with: event)
         
@@ -134,6 +163,7 @@ final class PythonConsole: View {
         }
         return true
     }
+    #endif
     
     private func setSyntax(file: URL) {
         switch file.pathExtension {

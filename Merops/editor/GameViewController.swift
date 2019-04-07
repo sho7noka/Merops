@@ -11,8 +11,11 @@ import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
-
 import ImGui
+
+#if os(iOS)
+import UIKit
+#endif
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
     
@@ -236,6 +239,39 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 //    http://chicketen.blog.jp/archives/76071441.html
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: InputKey.Key_W.rawValue,
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:))),
+            
+            UIKeyCommand(input: InputKey.Key_Q.rawValue,
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:))),
+            
+            UIKeyCommand(input: InputKey.KEY_E.rawValue,
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:)))
+        ]
+    }
+    
+    func performCommand(sender: UIKeyCommand) {
+        guard let key = InputKey(rawValue: sender.input) else {
+            return
+        }
+        switch key {
+        case .Key_Q:
+            print ("Q")
+            return
+        case .Key_W:
+            print ("W")
+            return
+        case .KEY_E:
+            print ("E")
+            return
+        }
     }
 #endif
     
