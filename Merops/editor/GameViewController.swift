@@ -11,7 +11,7 @@ import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
-import ImGui
+//import ImGui
 
 #if os(iOS)
 import UIKit
@@ -196,36 +196,37 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
         /// - Tag: ImGui
-        ImGui.initialize(.metal)
-
-        if let vc = ImGui.vc {
-            #if os(OSX)
-            self.addChildViewController(vc)
-            #elseif os(iOS)
-            self.addChild(vc)
-            #endif
-            view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: view.frame.width * 0.2,
-                                   y: view.frame.height * 0.3,
-                                   width: view.frame.width,
-                                   height: view.frame.height)
-        }
-        
-        ImGui.draw { (imgui) in
-            imgui.setWindowFontScale(2.0)
-            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
-            imgui.setNextWindowSize(self.view.frame.size)
-            imgui.pushStyleVar(.windowRounding, value: 0)
-            imgui.pushStyleColor(.frameBg, color: Color.blue)
-            
-            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
-            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
-            if imgui.button("Edit") {
-                
-            }
-            imgui.popStyleColor()
-            imgui.popStyleVar()
-        }
+//
+//        ImGui.initialize(.metal)
+//
+//        if let vc = ImGui.vc {
+//            #if os(OSX)
+//            self.addChildViewController(vc)
+//            #elseif os(iOS)
+//            self.addChild(vc)
+//            #endif
+//            view.addSubview(vc.view)
+//            vc.view.frame = CGRect(x: view.frame.width * 0.2,
+//                                   y: view.frame.height * 0.3,
+//                                   width: view.frame.width,
+//                                   height: view.frame.height)
+//        }
+//
+//        ImGui.draw { (imgui) in
+//            imgui.setWindowFontScale(2.0)
+//            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
+//            imgui.setNextWindowSize(self.view.frame.size)
+//            imgui.pushStyleVar(.windowRounding, value: 0)
+//            imgui.pushStyleColor(.frameBg, color: Color.blue)
+//
+//            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
+//            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
+//            if imgui.button("Edit") {
+//
+//            }
+//            imgui.popStyleColor()
+//            imgui.popStyleVar()
+//        }
         
         Editor.EditorGrid(scene: scene)
         gameView.resizeView()
@@ -279,7 +280,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 
 #if os(OSX)
 extension SuperViewController: NSControlTextEditingDelegate {
-    open override func controlTextDidEndEditing(_ notification: Notification) {
+    open func controlTextDidChange(_ notification: Notification) {
         if let textField = notification.object as? TextView {
             guard let node = (self as! GameViewController).gameView.selection?.node else { return }
             

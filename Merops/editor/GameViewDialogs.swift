@@ -111,7 +111,7 @@ final class PythonConsole: View, WKScriptMessageHandler {
         self.url = url
 
         let script = String(format: "document.getElementById('iPadVolumeData').value = \"%@\";", text)
-        wkview.evaluateJavaScript(script, completionHandler: nil)
+        wkview?.evaluateJavaScript(script, completionHandler: nil)
 
         self.textview?.string = text
         return text

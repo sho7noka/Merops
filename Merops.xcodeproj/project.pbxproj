@@ -12,10 +12,8 @@
 		E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E421336ABA00EE861F /* USD-bind.hpp */; };
 		E26A787921E17E0400FBA0BB /* Shaderc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A787821E17E0400FBA0BB /* Shaderc.swift */; };
 		E26A788021E61DF900FBA0BB /* CoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26A787F21E61DF900FBA0BB /* CoreModel.m */; };
-		E26A788721E653F800FBA0BB /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788621E653F800FBA0BB /* ImGui.framework */; };
 		E26A788921E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
 		E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
-		E26A788D21E7815900FBA0BB /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788B21E7815900FBA0BB /* ImGui.framework */; };
 		E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */; };
 		E26A789421E8C5FF00FBA0BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
 		E26A789621E8CBCD00FBA0BB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Model.swift */; };
@@ -62,6 +60,7 @@
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
+		E2FB3998225A1808000C4064 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3997225A1808000C4064 /* Default-568h@2x.png */; };
 		E2FBFD2F21EDFA0C00BDB646 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
 		E2FBFD3221EE035F00BDB646 /* Shaderc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A787821E17E0400FBA0BB /* Shaderc.swift */; };
 		E2FBFD4621EE241B00BDB646 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FBFD4521EE241B00BDB646 /* DocumentView.swift */; };
@@ -191,6 +190,7 @@
 		E2F5172C21337604005F1515 /* libboost_thread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_thread.dylib; path = USD/lib/libboost_thread.dylib; sourceTree = "<group>"; };
 		E2F5172D21337604005F1515 /* libIlmThread-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIlmThread-2_2.la"; path = "USD/lib/libIlmThread-2_2.la"; sourceTree = "<group>"; };
 		E2F5172E21337604005F1515 /* libIex-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIex-2_2.la"; path = "USD/lib/libIex-2_2.la"; sourceTree = "<group>"; };
+		E2FB3997225A1808000C4064 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E2FBFD3A21EE119E00BDB646 /* merops */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = merops; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FBFD4121EE14F300BDB646 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bin; path = Merops/bin; sourceTree = SOURCE_ROOT; };
 		E2FBFD4521EE241B00BDB646 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -215,7 +215,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E26A788D21E7815900FBA0BB /* ImGui.framework in Frameworks */,
 				E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */,
 				E2FDEBB221ECCE690024CDC1 /* ModelIO.framework in Frameworks */,
 			);
@@ -234,7 +233,6 @@
 			files = (
 				E2CDF1CC21344812004D8E39 /* lib in Frameworks */,
 				E2FDEBB021ECCB110024CDC1 /* Python.framework in Frameworks */,
-				E26A788721E653F800FBA0BB /* ImGui.framework in Frameworks */,
 				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
 				E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */,
 			);
@@ -382,6 +380,7 @@
 		ED32B9511EB5D298000D8823 = {
 			isa = PBXGroup;
 			children = (
+				E2FB3997225A1808000C4064 /* Default-568h@2x.png */,
 				E2E5DB52216E53C80028AA4E /* MDOC */,
 				E26ABEC421EB76C200487FA4 /* Shared */,
 				E2FBFD3B21EE119E00BDB646 /* merops */,
@@ -573,7 +572,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "sho sumioka";
 				TargetAttributes = {
 					E2E4610B210D5D6F00C0DB39 = {
@@ -587,7 +586,7 @@
 					ED32B9591EB5D298000D8823 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = T7PKBR8T47;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -599,7 +598,7 @@
 			};
 			buildConfigurationList = ED32B9551EB5D298000D8823 /* Build configuration list for PBXProject "Merops" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -627,6 +626,7 @@
 				E2B76B2621FB57A000E6EA59 /* package.json in Resources */,
 				E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */,
 				E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */,
+				E2FB3998225A1808000C4064 /* Default-568h@2x.png in Resources */,
 				E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,7 +656,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ImGui.framework",
 			);
 			name = "Carthage copy";
 			outputFileListPaths = (
@@ -692,7 +691,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/ObjectiveGit.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/ImGui.framework",
 			);
 			name = "Carthage copy";
 			outputPaths = (
@@ -1016,7 +1014,6 @@
 		ED32B96E1EB5D298000D8823 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1062,8 +1059,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1072,7 +1068,6 @@
 		ED32B96F1EB5D298000D8823 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1114,8 +1109,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
