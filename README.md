@@ -41,7 +41,7 @@ Merops は `Pixar USD` と `libgit` をベースにした次世代DCCツール�
 - [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)  動的MSL の[Scenekit 割当で出来る](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
 - [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
-- [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)   [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring) [2](https://www.hardcoded.net/articles/)
+- [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)   [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring) [2](https://www.hardcoded.net/articles/) [3](https://www.hardcoded.net/articles/embedding-python-in-objc)
 - [x] [mouseEvent/TouchEvent](https://qiita.com/RichQiitaJp/items/79a52c55c9762b60f292) と Float をマルチプラットフォーム化
 - []WebKit View への書き込みと読み込み
 
