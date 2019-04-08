@@ -128,14 +128,15 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     }
     
     private func uiInit() {
+
         // MARK: Settings
         gameView.settings = Settings(
             dir: userDocument(fileName: "model.usd").deletingPathExtension().path,
             color: Color.lightGray,
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
-            pyDir: "/usr/bin/python")
-        
-        //gameView.showsStatistics = true
+            pyDir: "/usr/bin/python",
+            editor: ""
+        )
         gameView.queue = device.makeCommandQueue()
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
@@ -179,11 +180,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.setsView?.isHidden = true
         gameView.addSubview(gameView.setsView!)
         
-        // MARK: Console
-        gameView.console = PythonConsole(frame: gameView.frame, view: gameView)
-        gameView.console.isHidden = true
-        gameView.addSubview(gameView.console)
-
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
         
@@ -195,6 +191,9 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
+    #if DEBUG
+        gameView.showsStatistics = true
+    #endif
         /// - Tag: ImGui
 //
 //        ImGui.initialize(.metal)

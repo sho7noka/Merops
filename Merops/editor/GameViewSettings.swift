@@ -11,12 +11,14 @@ struct Settings {
     let bgColor: Color
     let usdDir: String
     let pythonDir: String
+    let editor: String
     
-    init(dir: String, color: Color, usdDir: String, pyDir: String) {
+    init(dir: String, color: Color, usdDir: String, pyDir: String, editor: String) {
         self.projectDir = dir
         self.bgColor = color
         self.usdDir = usdDir
         self.pythonDir = pyDir
+        self.editor = editor
     }
     
 //    public init(from decoder: Decoder) throws {

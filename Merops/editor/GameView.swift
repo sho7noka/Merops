@@ -64,12 +64,6 @@ class GameView: SCNView {
     
     var model: Models?
     
-    var val = 1.0 {
-        didSet {
-            Swift.print(val)
-        }
-    }
-    
     var isEdit = false {
         didSet {
             if isEdit {
@@ -112,8 +106,8 @@ class GameView: SCNView {
         
         // point to MTLBuffer
         let hitResults = self.hitTest(p, options: options)
-        let position = self.convertToLayer(p)
-        let scale = self.layer?.contentsScale
+//        let position = self.convertToLayer(p)
+//        let scale = self.layer?.contentsScale
 //        pos.x = (position.x) * scale
 //        pos.y = (bounds.height - position.y) * scale
         
@@ -138,18 +132,24 @@ class GameView: SCNView {
                 
             case "NSComputer"?:
                 cameraName = "camera"
-                #if os(OSX)
+
+        #if os(OSX)
             case "NSInfo"?:
-                USDEdit(infile: "/Users/shosumioka/Documents/Merops/geo.usda")
-                //                gitStatus(dir: "/Users/shosumioka/Documents/Merops")
                 
+                // vscode: https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
+                if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
+                    NSWorkspace.shared.open((URL(string: "vscode://file/Users/shosumioka/Documents/Merops/geo.usda") ?? nil)!)
+                    NSWorkspace.shared.open((URL(string: "mvim://open?url=file:///Users/shosumioka/Documents/Merops/geo.usda") ?? nil)!)
+                }
+
+                // USDEdit(infile: "/Users/shosumioka/Documents/Merops/geo.usda")
+                //                gitStatus(dir: "/Users/shosumioka/Documents/Merops")
             case "NSNetwork"?:
                 cameraName = "camera1"
-                console.isHidden = false
-                
             case "NSAdvanced"?:
                 setsView?.isHidden = false
-                #endif
+        #endif
+
             case "NSFolder"?:
                 break
                 
@@ -157,11 +157,13 @@ class GameView: SCNView {
             case "Name":
                 if let selNode = self.selection?.node {
                     clearView()
-                    #if os(OSX)
+                    
+                #if os(OSX)
                     txtField.stringValue = selNode.name!
-                    #elseif os(iOS)
+                #elseif os(iOS)
                     txtField.text = selNode.name!
-                    #endif
+                #endif
+
                     txtField.isHidden = false
                     txtField.frame.origin = CGPoint(x: 56, y: first.position.y * 2 + 16)
                     overRay?.label_name.text = "Name"
@@ -251,7 +253,7 @@ class GameView: SCNView {
                 break
             }
 
-            ctouchesBegan(touchLocation: touchLocation, previousLocation: previousLocation, event: event)
+//            ctouchesBegan(touchLocation: touchLocation, previousLocation: previousLocation, event: event)
             return
         }
         
@@ -527,19 +529,12 @@ class GameView: SCNView {
      */
     func resizeView() {
         let size = self.frame.size
-        let frame = self.frame
-        #if os(OSX)
-        console.frame.origin = CGPoint(x: size.width - console.frame.size.width,
-                                       y: size.height - console.frame.size.height)
-        console.frame = frame
-        Swift.print(console.frame.origin)
-        
-        
+
+    #if os(OSX)
         subView?.frame.origin = CGPoint(x: size.width - 88 , y: 16)
-        #elseif os(iOS)
+    #elseif os(iOS)
         subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 80)
-        #endif
-        
+    #endif        
         /// TODO: ノッチ幅を下げる必要がある
         overRay?.label_name.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 1))
         overRay?.label_position.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 2))
@@ -570,7 +565,6 @@ class GameView: SCNView {
         resizeView()
     }
     
-    var console: PythonConsole!
     var setsView: SettingDialog!
     
     /*
@@ -585,9 +579,6 @@ class GameView: SCNView {
         case "1", "2", "3", "4":
             self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "\t": // TAB
-            console.isHidden = !console.isHidden
-            console.textview?.setSelectedRange(NSMakeRange(0, 0))
-            console.textview?.drawFocusRingMask()
             isDeforming = false
         case "q":
             self.resetView(_mode: .Object)

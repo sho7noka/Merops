@@ -1,6 +1,6 @@
 //
 //  GeoPrimitives.swift
-//  KARAS
+//  Merops
 //
 //  Created by sumioka-air on 2018/02/04.
 //  Copyright © 2018年 sho sumioka. All rights reserved.
@@ -17,7 +17,7 @@ class SCNLine: SCNNode {
 
         let source = SCNGeometrySource.init(vertices: [from, to])
         let indices: [UInt8] = [0, 1]
-        let data = Data.init(bytes: indices)
+        let data = Data(bytes: indices)
         let element = SCNGeometryElement.init(data: data, primitiveType: .line,
                 primitiveCount: 1, bytesPerIndex: 1)
         let geometry = SCNGeometry.init(sources: [source], elements: [element])

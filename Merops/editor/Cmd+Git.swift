@@ -51,10 +51,9 @@ func gitCommit(url: String, msg: String = "update") {
             }
         }
         let tree = try index.writeTree(to: repo)
-        
         try repo.createCommit(with: tree,
                               message: msg,
-                              parents: nil, updatingReferenceNamed: "HEAD")
+                              parents: [try repo.currentBranch().targetCommit()], updatingReferenceNamed: "HEAD")
     } catch {
         print(error)
     }

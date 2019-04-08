@@ -2,7 +2,7 @@
 
 [English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/sho7noka/Merops)(Google Translate)
 
-Merops は `Pixar USD` と `libgit` をベースにした次世代DCCツールの実験プロジェクトです。
+Merops は `Apple Metal` と `Git`、`PixarUSD` をベースにした次世代DCCツールの実験プロジェクトです。
 
 ## Concept
 シンプル、早い、イテレーションの3軸を基本に考えています。

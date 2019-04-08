@@ -91,6 +91,7 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
         
     // macOS: https://developer.apple.com/documentation/appkit/nsimage/name
     #if os(OSX)
+        // "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns"
         button_red = mButton(name: NSImage.multipleDocumentsName)
         button_green = mButton(name: NSImage.colorPanelName)
         button_blue = mButton(name: NSImage.infoName)
@@ -157,22 +158,6 @@ internal class ManipulatorBase: SCNNode, SCNNodeRendererDelegate {
         super.isHidden = true
         super.renderingOrder = 1
         super.categoryBitMask = NodeOptions.noExport.rawValue | NodeOptions.noDelete.rawValue
-    }
-    
-    func renderNode(_ node: SCNNode, renderer: SCNRenderer, arguments: [String: Any]) {
-        if let commandQueue = renderer.commandQueue {
-            if let encoder = renderer.currentRenderCommandEncoder {
-                
-//                let projMat = float4x4.init((self.sceneView.pointOfView?.camera?.projectionTransform)!)
-//                let modelViewMat = float4x4.init((self.sceneView.pointOfView?.worldTransform)!).inverse
-//                
-//                self.metalScene.render(commandQueue: commandQueue,
-//                                       renderEncoder: encoder,
-//                                       parentModelViewMatrix: modelViewMat,
-//                                       projectionMatrix: projMat)
-                
-            }
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {

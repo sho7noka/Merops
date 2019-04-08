@@ -59,7 +59,7 @@ func USDEdit(infile: String) {
     let ret = stdOutOfCommand(
         cmd: rpath + "USD/bin/usdedit", arguments: [infile]
     )
-//    print(ret)
+    print(ret)
 }
 
 //private USDZconverter(String ...){
