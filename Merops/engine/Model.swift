@@ -17,6 +17,8 @@ struct Attribute {
 class Models {
 
     private var models: [SCNNode] = []
+    
+    var file: String?
 
     func copyModels() {
         models.removeAll()

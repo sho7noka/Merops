@@ -11,9 +11,10 @@ import Cocoa
 #elseif os(iOS)
 import UIKit
 #endif
-import ObjectiveGit
 
 /// - Tag: libgit
+import ObjectiveGit
+
 func gitInit(dir: String) {
     do {
         try GTRepository.initializeEmpty(

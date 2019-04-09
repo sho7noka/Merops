@@ -101,6 +101,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     
     private func sceneInit() {
         gameView.model = Models()
+        
         // MARK: replace object
         meshData = MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
         let newNode = Builder.Plane(meshData: meshData)
@@ -135,7 +136,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             color: Color.lightGray,
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
             pyDir: "/usr/bin/python",
-            editor: ""
+            editor: "Visual Studio Code"
         )
         gameView.queue = device.makeCommandQueue()
         gameView.allowsCameraControl = true
@@ -175,17 +176,16 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.addSubview(gameView.txtField!)
         
     #if os(OSX)
-        // MARK: Setting Dialog
         gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
         gameView.setsView?.isHidden = true
         gameView.addSubview(gameView.setsView!)
         
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
-        
     #elseif os(iOS)
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
     #endif
+        
         /// - Tag: Mouse Buffer
         gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])

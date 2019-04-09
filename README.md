@@ -2,23 +2,18 @@
 
 [English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/sho7noka/Merops)(Google Translate)
 
-Merops は `Apple Metal` と `Git`、`PixarUSD` をベースにした次世代DCCツールの実験プロジェクトです。
+Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次世代DCCツールの実験プロジェクトです。
 
 ## Concept
-シンプル、早い、イテレーションの3軸を基本に考えています。
+シンプル、早い、イテレーションの3軸が基本です。
 - Metal2 ベースの Viewport と Modifier (OpenGL deprecate)
 - 中ボタンを使わないウィジェットを極力排したジェスチャ、ゲーム画面に近い使用感
-- [Pixar USD](https://github.com/PixarAnimationStudios/USD) と [libgit2](https://github.com/libgit2/objective-git) によるパイプライン・イテレーション
-
-### future
-- [x] geometry
-- [x] scripting
-- [ ] shader 
+- [Pixar USD](https://github.com/PixarAnimationStudios/USD) と [libgit2](https://github.com/libgit2/objective-git) によるアセットパイプラインとイテレーションを重視
 
 ## Why?
-1. 3Dソフトの操作は難しく複雑です。中ボタンクリックの多用を回避してシンプルな操作感を実現したいと考えました。
-2. [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化された操作を実現したDCCアプリケーションは数少ないので重点的につくります。
-3. 入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作に特化したツールを目標に開発を進めています。
+1. 3Dソフトの操作は難しく複雑です。中ボタンクリックの多用を回避してシンプルな操作感を実現します。
+2. [macOS design](https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/) や iOS に最適化されたDCCアプリケーションは数少ないのでそこを中心に据えます。
+3. 入出力フォーマットで USDZ に対応します。XR、モバイルのコンテンツ制作連携に特化したツールを目標に開発を進めます。
 
 ### Author
 [sho7noka](mailto:shosumioka@gmail.com)
@@ -31,19 +26,19 @@ Merops は `Apple Metal` と `Git`、`PixarUSD` をベースにした次世代DC
 
 
 ## TODO
-他のソフトのコンテクストを参考に実装を進めますが、Mayaのような統合ソフトを目指しません。
+他のソフトのコンテクストを参考に実装を進めていますが統合ソフトは目指しません。
 
 ### Editor
 - [x] マウスイベントの両立
-- [x] [libgit2 (commit以外)](x-source-tag://libgit)
+- [x] [libgit2でcommitとrevert](x-source-tag://libgit)
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
-- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)  動的MSL の[Scenekit 割当で出来る](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
 - [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
+- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)  動的MSL の[Scenekit 割当で出来る](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)   [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring) [2](https://www.hardcoded.net/articles/) [3](https://www.hardcoded.net/articles/embedding-python-in-objc)
 - [x] [mouseEvent/TouchEvent](https://qiita.com/RichQiitaJp/items/79a52c55c9762b60f292) と Float をマルチプラットフォーム化
-- []WebKit View への書き込みと読み込み
+- [x] ~~WebKit View への書き込みと読み込み~~ vscode や vim に外部化
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
@@ -53,8 +48,6 @@ Merops は `Apple Metal` と `Git`、`PixarUSD` をベースにした次世代DC
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
 
 ### Research
-- WHLSL to MSL
-- intelligent shape (Chainer)
 - [tensorflow lite](https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7)
 - [iPadPro compatible with pencil](https://developer.apple.com/videos/play/wwdc2016/220/)
 

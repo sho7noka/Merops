@@ -189,7 +189,10 @@ final class Editor {
         }
     }
     
-//    class func EditorDome(scene: SCNScene) {
+//    https://github.com/warrenm/SCNOutline
+//    https://github.com/warrenm/SCNShadableSky
+    class func EditorDome(scene: SCNScene) {
+        
 //
 //        let skyGeometry = SCNSphere(radius: 70)
 //
@@ -216,7 +219,7 @@ final class Editor {
 //        node.scale = SCNVector3(100000, 100000, 100000)
 //        node.categoryBitMask = NodeOptions.noSelect.rawValue
 //        scene.rootNode.addChildNode(node)
-//    }
+    }
     
     class func EditorGrid(scene: SCNScene) {
         let grid = SCNFloor()

@@ -138,12 +138,9 @@ class GameView: SCNView {
                 
                 // vscode: https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
                 if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
-                    NSWorkspace.shared.open((URL(string: "vscode://file/Users/shosumioka/Documents/Merops/geo.usda") ?? nil)!)
-                    NSWorkspace.shared.open((URL(string: "mvim://open?url=file:///Users/shosumioka/Documents/Merops/geo.usda") ?? nil)!)
+                    NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
+                    NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
                 }
-
-                // USDEdit(infile: "/Users/shosumioka/Documents/Merops/geo.usda")
-                //                gitStatus(dir: "/Users/shosumioka/Documents/Merops")
             case "NSNetwork"?:
                 cameraName = "camera1"
             case "NSAdvanced"?:
@@ -501,7 +498,7 @@ class GameView: SCNView {
         }
         
         // set nil
-        isEdit = true
+//        isEdit = true
         selection = nil
         marken = nil
         
