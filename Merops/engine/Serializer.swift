@@ -24,14 +24,16 @@ final class USDExporter {
         scene.rootNode.name = "root"
         let asset = MDLAsset(scnScene: scene)
         let exportFile = userDocument(fileName: "geo.usda")
-        gitInit(dir: exportFile.deletingLastPathComponent().path)
+
         
     #if os(OSX)
+        gitInit(dir: exportFile.deletingLastPathComponent().path)
         // export with ascii format
         try! asset.exportWriter(to: exportFile, text: "\ndef Cube \"cy\" {\n}")
+        gitCommit(url: exportFile.absoluteString, msg: "export")
     #endif
         
-        gitCommit(url: exportFile.absoluteString, msg: "export")
+        
         return exportFile
     }
 

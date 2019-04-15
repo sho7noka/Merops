@@ -227,7 +227,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 //            imgui.popStyleVar()
 //        }
         
-        Editor.EditorGrid(scene: scene)
+        Editor.EditorGrid(view: gameView)
         gameView.resizeView()
     }
 
@@ -241,38 +241,38 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         super.viewWillLayoutSubviews()
     }
     
-    override var keyCommands: [UIKeyCommand]? {
-        return [
-            UIKeyCommand(input: InputKey.Key_W.rawValue,
-                         modifierFlags: .init(rawValue: 0),
-                         action: #selector(self.performCommand(sender:))),
-            
-            UIKeyCommand(input: InputKey.Key_Q.rawValue,
-                         modifierFlags: .init(rawValue: 0),
-                         action: #selector(self.performCommand(sender:))),
-            
-            UIKeyCommand(input: InputKey.KEY_E.rawValue,
-                         modifierFlags: .init(rawValue: 0),
-                         action: #selector(self.performCommand(sender:)))
-        ]
-    }
+//    override var keyCommands: [UIKeyCommand]? {
+//        return [
+//            UIKeyCommand(input: InputKey.Key_W.rawValue,
+//                         modifierFlags: .init(rawValue: 0),
+//                         action: #selector(self.performCommand(sender:))),
+//
+//            UIKeyCommand(input: InputKey.Key_Q.rawValue,
+//                         modifierFlags: .init(rawValue: 0),
+//                         action: #selector(self.performCommand(sender:))),
+//
+//            UIKeyCommand(input: InputKey.KEY_E.rawValue,
+//                         modifierFlags: .init(rawValue: 0),
+//                         action: #selector(self.performCommand(sender:)))
+//        ]
+//    }
     
-    func performCommand(sender: UIKeyCommand) {
-        guard let key = InputKey(rawValue: sender.input) else {
-            return
-        }
-        switch key {
-        case .Key_Q:
-            print ("Q")
-            return
-        case .Key_W:
-            print ("W")
-            return
-        case .KEY_E:
-            print ("E")
-            return
-        }
-    }
+//    func performCommand(sender: UIKeyCommand) {
+//        guard let key = InputKey(rawValue: sender.input) else {
+//            return
+//        }
+//        switch key {
+//        case .Key_Q:
+//            print ("Q")
+//            return
+//        case .Key_W:
+//            print ("W")
+//            return
+//        case .KEY_E:
+//            print ("E")
+//            return
+//        }
+//    }
 #endif
     
 }

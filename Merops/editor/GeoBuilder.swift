@@ -191,48 +191,38 @@ final class Editor {
     
 //    https://github.com/warrenm/SCNOutline
 //    https://github.com/warrenm/SCNShadableSky
-    class func EditorDome(scene: SCNScene) {
+    class func EditorDome(view: GameView) {
         
-//
-//        let skyGeometry = SCNSphere(radius: 70)
-//
-//        let skyMaterial = skyGeometry.firstMaterial!
-//        let skyProgram = SCNProgram()
-////        skyProgram.library = device?.makeDefaultLibrary()
-//        skyProgram.vertexFunctionName = "sky_vertex"
-//        skyProgram.fragmentFunctionName = "sky_fragment"
-//        skyMaterial.program = skyProgram
-//        skyMaterial.isDoubleSided = true
-//
-//        let skyImage = Image(named: "sky")!
+        let skyGeometry = SCNSphere(radius: 700)
+        let skyMaterial = skyGeometry.firstMaterial!
+        let skyProgram = SCNProgram()
+        skyProgram.library = view.device!.makeDefaultLibrary()
+        skyProgram.vertexFunctionName = "sky_vertex"
+        skyProgram.fragmentFunctionName = "sky_fragment"
+        skyMaterial.program = skyProgram
+        skyMaterial.isDoubleSided = true
+
+//        let skyImage = Image(color: view.settings!.bgColor, size: .init(width: 1024, height: 1024))
 //        let skyTexture = SCNMaterialProperty(contents: skyImage)
 //        skyMaterial.setValue(skyTexture, forKey: "skyTexture")
-//
-//        let skyNode = SCNNode(geometry: skyGeometry)
-//        scene.rootNode.addChildNode(skyNode)
-//
-//        let sphere = SCNSphere()
-//        sphere.firstMaterial?.isDoubleSided = true
-//
-//        let node = SCNNode(geometry: sphere)
-//        node.name = "Dome"
-//        node.scale = SCNVector3(100000, 100000, 100000)
-//        node.categoryBitMask = NodeOptions.noSelect.rawValue
-//        scene.rootNode.addChildNode(node)
+
+        let node = SCNNode(geometry: skyGeometry)
+        node.name = "sky"
+        view.scene!.rootNode.addChildNode(node)
     }
     
-    class func EditorGrid(scene: SCNScene) {
-        let grid = SCNFloor()
-        grid.firstMaterial?.isDoubleSided = true
-        grid.width = 100000
-        grid.length = 100000
+    class func EditorGrid(view: GameView) {
+//        let grid = SCNFloor()
+//        grid.firstMaterial?.isDoubleSided = true
+//        grid.width = 100000
+//        grid.length = 100000
+//
+//        let node = SCNNode(geometry: grid)
+//        node.name = "grid"
+//        node.categoryBitMask = NodeOptions.noSelect.rawValue
+//        scene.rootNode.addChildNode(node)
         
-        let node = SCNNode(geometry: grid)
-        node.name = "grid"
-        node.categoryBitMask = NodeOptions.noSelect.rawValue
-        scene.rootNode.addChildNode(node)
-        
-//        EditorDome(scene: scene)
+        EditorDome(view: view)
     }
 }
 
@@ -244,3 +234,12 @@ final class MyApplication {
     private init() {
     }
 }
+
+//extension NSImage {
+//    convenience init(color: NSColor, size: NSSize) {
+//        self.init(size: size)
+//        lockFocus()
+//        color.drawSwatch(in: NSRect(origin: .zero, size: size))
+//        unlockFocus()
+//    }
+//}

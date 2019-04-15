@@ -49,7 +49,6 @@ class MetalRender : SCNRenderer {
     }
 }
 
-
 struct MetalPrimitiveData {
     var node: SCNNode
     var type: MTLPrimitiveType

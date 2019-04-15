@@ -132,15 +132,29 @@ class GameView: SCNView {
                 
             case "NSComputer"?:
                 cameraName = "camera"
-
-        #if os(OSX)
-            case "NSInfo"?:
                 
+            case "NSInfo"?:
+                #if os(iOS)
+                
+                let pythonista = URL(string: "pythonista://")!
+                UIApplication.shared.open(pythonista)
+                
+                #elseif os(OSX)
                 // vscode: https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
                 if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
                     NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
                     NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
+                    
+                    let config = GTConfiguration.default()
+                    config?.setString("vim", forKey: "core.editor")
+                    config?.setString("vimdiff", forKey: "merge.tool")
+                    
+                    "code --wait"
+                    "code --wait --diff $LOCAL $REMOTE"
                 }
+                #endif
+        
+        #if os(OSX)
             case "NSNetwork"?:
                 cameraName = "camera1"
             case "NSAdvanced"?:
@@ -304,7 +318,17 @@ class GameView: SCNView {
             case .OverrideVertex:
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             case .OverrideEdge:
-                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
+                let outlineNode = duplicateNode(selectedNode)
+                root.addChildNode(outlineNode)
+                outlineNode.removeFromParentNode()
+                
+                let outlineProgram = SCNProgram()
+                outlineProgram.vertexFunctionName = "outline_vertex"
+                outlineProgram.fragmentFunctionName = "outline_fragment"
+                outlineNode.geometry?.firstMaterial?.program = outlineProgram
+                outlineNode.geometry?.firstMaterial?.cullMode = .front
+                
+//                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             case .OverrideFace:
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             default:
@@ -331,6 +355,17 @@ class GameView: SCNView {
         #if os(OSX)
         super.mouseDown(with: event)
         #endif
+    }
+    
+    func duplicateNode(_ node: SCNNode) -> SCNNode {
+        let nodeCopy = node.copy() as? SCNNode ?? SCNNode()
+        if let geometry = node.geometry?.copy() as? SCNGeometry {
+            nodeCopy.geometry = geometry
+            if let material = geometry.firstMaterial?.copy() as? SCNMaterial {
+                nodeCopy.geometry?.firstMaterial = material
+            }
+        }
+        return nodeCopy
     }
     
     func ctouchesMoved(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {

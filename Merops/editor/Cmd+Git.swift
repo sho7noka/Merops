@@ -95,7 +95,7 @@ func gitStatus(dir: String) {
 }
 
 func gitDiff(url: String) {
-    do {
+    do {        
         let repo = try GTRepository(url: URL(fileURLWithPath: url))
         let diff = try GTDiff(workingDirectoryToHEADIn: repo, options: nil)
         diff.enumerateDeltas({ delta, _ in

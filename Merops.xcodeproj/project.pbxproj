@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
+		E23D355D22636A2A009D6DBB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D355A22636A2A009D6DBB /* libsqlite3.tbd */; };
+		E23D355E22636A2A009D6DBB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D355B22636A2A009D6DBB /* libz.tbd */; };
+		E23D355F22636A2A009D6DBB /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D355C22636A2A009D6DBB /* libbz2.tbd */; };
+		E23D363122637808009D6DBB /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D356022636A5F009D6DBB /* libffi.a */; };
+		E23D363522637808009D6DBB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D363222637808009D6DBB /* libssl.a */; };
+		E23D363622637808009D6DBB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D363322637808009D6DBB /* libcrypto.a */; };
+		E23D363722637808009D6DBB /* libpython3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D363422637808009D6DBB /* libpython3.a */; };
+		E23D363B22637F6A009D6DBB /* python3 in Resources */ = {isa = PBXBuildFile; fileRef = E23D363A22637F6A009D6DBB /* python3 */; };
+		E23D363D2264C13C009D6DBB /* spy.py in Resources */ = {isa = PBXBuildFile; fileRef = E23D363C2264C13C009D6DBB /* spy.py */; };
+		E23D363E2264C13C009D6DBB /* spy.py in Resources */ = {isa = PBXBuildFile; fileRef = E23D363C2264C13C009D6DBB /* spy.py */; };
+		E23D36402264C56C009D6DBB /* spy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D363F2264C56C009D6DBB /* spy.swift */; };
+		E23D36412264C56C009D6DBB /* spy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D363F2264C56C009D6DBB /* spy.swift */; };
 		E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E421336ABA00EE861F /* USD-bind.hpp */; };
 		E26A787921E17E0400FBA0BB /* Shaderc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A787821E17E0400FBA0BB /* Shaderc.swift */; };
 		E26A788021E61DF900FBA0BB /* CoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26A787F21E61DF900FBA0BB /* CoreModel.m */; };
@@ -39,7 +51,7 @@
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
 		E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */; };
 		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
-		E2CDF1D121357B6B004D8E39 /* Python in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* Python */; };
+		E2CDF1D121357B6B004D8E39 /* py_module in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* py_module */; };
 		E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
 		E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46114210D5D6F00C0DB39 /* Main.storyboard */; };
 		E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E46119210D5D7100C0DB39 /* LaunchScreen.storyboard */; };
@@ -57,6 +69,8 @@
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
 		E2FB3998225A1808000C4064 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3997225A1808000C4064 /* Default-568h@2x.png */; };
+		E2FB399A225D09A1000C4064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3999225D09A0000C4064 /* Assets.xcassets */; };
+		E2FB399B225D09A1000C4064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3999225D09A0000C4064 /* Assets.xcassets */; };
 		E2FBFD2F21EDFA0C00BDB646 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
 		E2FBFD3221EE035F00BDB646 /* Shaderc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A787821E17E0400FBA0BB /* Shaderc.swift */; };
 		E2FBFD4621EE241B00BDB646 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FBFD4521EE241B00BDB646 /* DocumentView.swift */; };
@@ -92,6 +106,17 @@
 		E2101237211EBE08001664AD /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = USD/lib; sourceTree = "<group>"; };
 		E216B24421299C4D004D0CE8 /* interpolate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interpolate.swift; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Serializer.swift; path = ../engine/Serializer.swift; sourceTree = "<group>"; };
+		E23D355A22636A2A009D6DBB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		E23D355B22636A2A009D6DBB /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		E23D355C22636A2A009D6DBB /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
+		E23D356022636A5F009D6DBB /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffi.a; path = "kivy-ios/dist/lib/libffi.a"; sourceTree = "<group>"; };
+		E23D356122636A5F009D6DBB /* libpython2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpython2.a; path = "kivy-ios/dist/lib/libpython2.a"; sourceTree = "<group>"; };
+		E23D363222637808009D6DBB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "kivy-ios/dist/lib/libssl.a"; sourceTree = "<group>"; };
+		E23D363322637808009D6DBB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "kivy-ios/dist/lib/libcrypto.a"; sourceTree = "<group>"; };
+		E23D363422637808009D6DBB /* libpython3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpython3.a; path = "kivy-ios/dist/lib/libpython3.a"; sourceTree = "<group>"; };
+		E23D363A22637F6A009D6DBB /* python3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = python3; sourceTree = "<group>"; };
+		E23D363C2264C13C009D6DBB /* spy.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = spy.py; sourceTree = "<group>"; };
+		E23D363F2264C56C009D6DBB /* spy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spy.swift; sourceTree = "<group>"; };
 		E24FC7DD21337549006860D9 /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = USD/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
 		E24FC7DE21337549006860D9 /* libusdGeom.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdGeom.dylib; path = USD/lib/libusdGeom.dylib; sourceTree = "<group>"; };
 		E24FC7DF21337549006860D9 /* libIlmThread-2_2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmThread-2_2.dylib"; path = "USD/lib/libIlmThread-2_2.dylib"; sourceTree = "<group>"; };
@@ -150,7 +175,7 @@
 		E294EFE42133757E00E582CB /* libusdSkel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdSkel.dylib; path = USD/lib/libusdSkel.dylib; sourceTree = "<group>"; };
 		E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		E2B5E4CD2136C90100C422CE /* pyobjc-framework-Merops */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "pyobjc-framework-Merops"; sourceTree = "<group>"; };
-		E2CDF1D021357B6B004D8E39 /* Python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Python; path = Merops/extra/Python; sourceTree = SOURCE_ROOT; };
+		E2CDF1D021357B6B004D8E39 /* py_module */ = {isa = PBXFileReference; lastKnownFileType = folder; name = py_module; path = Merops/extra/py_module; sourceTree = SOURCE_ROOT; };
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E2E4610C210D5D6F00C0DB39 /* Merops-touch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Merops-touch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E46115210D5D6F00C0DB39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -185,6 +210,7 @@
 		E2F5172D21337604005F1515 /* libIlmThread-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIlmThread-2_2.la"; path = "USD/lib/libIlmThread-2_2.la"; sourceTree = "<group>"; };
 		E2F5172E21337604005F1515 /* libIex-2_2.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libIex-2_2.la"; path = "USD/lib/libIex-2_2.la"; sourceTree = "<group>"; };
 		E2FB3997225A1808000C4064 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E2FB3999225D09A0000C4064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2FBFD3A21EE119E00BDB646 /* merops */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = merops; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FBFD4121EE14F300BDB646 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bin; path = Merops/bin; sourceTree = SOURCE_ROOT; };
 		E2FBFD4521EE241B00BDB646 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -209,8 +235,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E23D355D22636A2A009D6DBB /* libsqlite3.tbd in Frameworks */,
+				E23D355E22636A2A009D6DBB /* libz.tbd in Frameworks */,
+				E23D355F22636A2A009D6DBB /* libbz2.tbd in Frameworks */,
 				E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */,
 				E2FDEBB221ECCE690024CDC1 /* ModelIO.framework in Frameworks */,
+				E23D363522637808009D6DBB /* libssl.a in Frameworks */,
+				E23D363622637808009D6DBB /* libcrypto.a in Frameworks */,
+				E23D363722637808009D6DBB /* libpython3.a in Frameworks */,
+				E23D363122637808009D6DBB /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,9 +272,11 @@
 			isa = PBXGroup;
 			children = (
 				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
-				EDEEFF531F8A35CB00E4785F /* README.md */,
-				ED32B9631EB5D298000D8823 /* art.scnassets */,
 				E26ABEC021EB769600487FA4 /* Cartfile */,
+				EDEEFF531F8A35CB00E4785F /* README.md */,
+				E23D363A22637F6A009D6DBB /* python3 */,
+				E2FB3999225D09A0000C4064 /* Assets.xcassets */,
+				ED32B9631EB5D298000D8823 /* art.scnassets */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -295,6 +330,14 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E23D363322637808009D6DBB /* libcrypto.a */,
+				E23D363422637808009D6DBB /* libpython3.a */,
+				E23D363222637808009D6DBB /* libssl.a */,
+				E23D356022636A5F009D6DBB /* libffi.a */,
+				E23D356122636A5F009D6DBB /* libpython2.a */,
+				E23D355C22636A2A009D6DBB /* libbz2.tbd */,
+				E23D355A22636A2A009D6DBB /* libsqlite3.tbd */,
+				E23D355B22636A2A009D6DBB /* libz.tbd */,
 				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
 				E2FDEBB121ECCE690024CDC1 /* ModelIO.framework */,
 				E26A789021E7818E00FBA0BB /* Highlightr.framework */,
@@ -401,6 +444,8 @@
 			isa = PBXGroup;
 			children = (
 				E2DD2648213A6C3D00242943 /* Extensions.swift */,
+				E23D363F2264C56C009D6DBB /* spy.swift */,
+				E23D363C2264C13C009D6DBB /* spy.py */,
 				EDB683412025D43200AD75EE /* scene */,
 				E281B7B320B94CE700232181 /* shader */,
 				EDB683432025D59400AD75EE /* extends */,
@@ -463,7 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				E26A788821E77FEC00FBA0BB /* WHLSL */,
-				E2CDF1D021357B6B004D8E39 /* Python */,
+				E2CDF1D021357B6B004D8E39 /* py_module */,
 			);
 			name = extra;
 			path = KARAS/extra;
@@ -562,6 +607,7 @@
 					E2E4610B210D5D6F00C0DB39 = {
 						CreatedOnToolsVersion = 10.0;
 						DevelopmentTeam = T7PKBR8T47;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					E2FBFD3921EE119E00BDB646 = {
@@ -606,9 +652,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */,
+				E23D363E2264C13C009D6DBB /* spy.py in Resources */,
 				E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */,
+				E23D363B22637F6A009D6DBB /* python3 in Resources */,
 				E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */,
 				E2FB3998225A1808000C4064 /* Default-568h@2x.png in Resources */,
+				E2FB399B225D09A1000C4064 /* Assets.xcassets in Resources */,
 				E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,10 +666,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2CDF1D121357B6B004D8E39 /* Python in Resources */,
+				E2CDF1D121357B6B004D8E39 /* py_module in Resources */,
 				E26A788921E77FEC00FBA0BB /* WHLSL in Resources */,
 				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
+				E23D363D2264C13C009D6DBB /* spy.py in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
+				E2FB399A225D09A1000C4064 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +743,7 @@
 				E2E46123210D5E4100C0DB39 /* GameView.swift in Sources */,
 				E2E46122210D5E3D00C0DB39 /* GameViewController.swift in Sources */,
 				E2E46124210D5E4400C0DB39 /* GameViewOverlay.swift in Sources */,
+				E23D36412264C56C009D6DBB /* spy.swift in Sources */,
 				E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */,
 				E2FBFD4621EE241B00BDB646 /* DocumentView.swift in Sources */,
 				E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */,
@@ -746,6 +798,7 @@
 				E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */,
 				E281B7AA20B94CAE00232181 /* Model.swift in Sources */,
 				94B267081AAA6682547C87FA /* Engine.swift in Sources */,
+				E23D36402264C56C009D6DBB /* spy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -789,24 +842,32 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7PKBR8T47;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/";
-				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/",
+					"python3/**",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Merops-touch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/kivy-ios/dist/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -821,24 +882,29 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7PKBR8T47;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/ObjectiveGit.framework/Headers/";
-				INFOPLIST_FILE = "Merops-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				INFOPLIST_FILE = "$(SRCROOT)/Merops-touch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/kivy-ios/dist/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Merops-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
