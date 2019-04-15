@@ -241,38 +241,47 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         super.viewWillLayoutSubviews()
     }
     
-//    override var keyCommands: [UIKeyCommand]? {
-//        return [
-//            UIKeyCommand(input: InputKey.Key_W.rawValue,
-//                         modifierFlags: .init(rawValue: 0),
-//                         action: #selector(self.performCommand(sender:))),
-//
-//            UIKeyCommand(input: InputKey.Key_Q.rawValue,
-//                         modifierFlags: .init(rawValue: 0),
-//                         action: #selector(self.performCommand(sender:))),
-//
-//            UIKeyCommand(input: InputKey.KEY_E.rawValue,
-//                         modifierFlags: .init(rawValue: 0),
-//                         action: #selector(self.performCommand(sender:)))
-//        ]
-//    }
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "Q",
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:))),
+
+            UIKeyCommand(input: "W",
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:))),
+
+            UIKeyCommand(input: "E",
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:))),
+            
+            UIKeyCommand(input: "R",
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:)))
+        ]
+    }
     
-//    func performCommand(sender: UIKeyCommand) {
-//        guard let key = InputKey(rawValue: sender.input) else {
-//            return
-//        }
-//        switch key {
-//        case .Key_Q:
-//            print ("Q")
-//            return
-//        case .Key_W:
-//            print ("W")
-//            return
-//        case .KEY_E:
-//            print ("E")
-//            return
-//        }
-//    }
+    @objc func performCommand(sender: UIKeyCommand) {
+        
+        switch sender.input {
+        case "Q":
+            gameView.resetView(_mode: .Object)
+            return
+        case "W":
+            gameView.resetView(_mode: .PositionMode)
+            return
+        case "E":
+            gameView.resetView(_mode: .ScaleMode)
+            return
+        case "R":
+            gameView.resetView(_mode: .RotateMode)
+            return
+        case .none:
+            break
+        case .some(_):
+            break
+        }
+    }
 #endif
     
 }

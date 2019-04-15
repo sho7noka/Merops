@@ -49,6 +49,25 @@ class MetalRender : SCNRenderer {
     }
 }
 
+func duplicateNode(_ node: SCNNode) -> SCNNode {
+    let nodeCopy = node.copy() as? SCNNode ?? SCNNode()
+    if let geometry = node.geometry?.copy() as? SCNGeometry {
+        nodeCopy.geometry = geometry
+        if let material = geometry.firstMaterial?.copy() as? SCNMaterial {
+            nodeCopy.geometry?.firstMaterial = material
+        }
+    }
+    return nodeCopy
+}
+
+func setOutline (outlineNode : SCNNode) {
+    let outlineProgram = SCNProgram()
+    outlineProgram.vertexFunctionName = "outline_vertex"
+    outlineProgram.fragmentFunctionName = "outline_fragment"
+    outlineNode.geometry?.firstMaterial?.program = outlineProgram
+    outlineNode.geometry?.firstMaterial?.cullMode = .front
+}
+
 struct MetalPrimitiveData {
     var node: SCNNode
     var type: MTLPrimitiveType
