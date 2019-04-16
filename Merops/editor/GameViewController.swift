@@ -191,9 +191,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
-    #if DEBUG
-        gameView.showsStatistics = true
-    #endif
         /// - Tag: ImGui
 //
 //        ImGui.initialize(.metal)
@@ -227,6 +224,9 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 //            imgui.popStyleVar()
 //        }
         
+        #if DEBUG
+        gameView.showsStatistics = true
+        #endif
         Editor.EditorGrid(view: gameView)
         gameView.resizeView()
     }

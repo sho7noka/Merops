@@ -34,7 +34,7 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
-- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://cedil.cesa.or.jp/cedil_sessions/view/1828)  動的MSL の[Scenekit 割当](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
+- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://github.com/metal-by-example/metal-picking)  動的MSL の[Scenekit 割当](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
     - [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring)

@@ -45,9 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     
     func applicationDidBecomeActive(_ notification: Notification) {
-        let resourcePath = Bundle.main.resourcePath! + "/python2"
-        let python_home = "PYTHONHOME=\(resourcePath)" as NSString
-        putenv(UnsafeMutablePointer(mutating: python_home.utf8String))
+
         Py_Initialize()
         
         PyRun_SimpleStringFlags("""

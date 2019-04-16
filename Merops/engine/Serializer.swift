@@ -1,5 +1,4 @@
 //
-//  USDObject.swift
 //
 //  Created by sumioka-air on 2017/03/28.
 //  Copyright © 2017年 sho sumioka. All rights reserved.
@@ -24,15 +23,11 @@ final class USDExporter {
         scene.rootNode.name = "root"
         let asset = MDLAsset(scnScene: scene)
         let exportFile = userDocument(fileName: "geo.usda")
-
         
-    #if os(OSX)
-        gitInit(dir: exportFile.deletingLastPathComponent().path)
         // export with ascii format
+        gitInit(dir: exportFile.deletingLastPathComponent().path)
         try! asset.exportWriter(to: exportFile, text: "\ndef Cube \"cy\" {\n}")
         gitCommit(url: exportFile.absoluteString, msg: "export")
-    #endif
-        
         
         return exportFile
     }

@@ -6,7 +6,6 @@
 //  Copyright © 2017年 sho sumioka. All rights reserved.
 //
 
-import Cocoa
 import Foundation
 
 private let rpath = Bundle.main.bundleURL.deletingLastPathComponent().path

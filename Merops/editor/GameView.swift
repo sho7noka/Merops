@@ -357,17 +357,6 @@ class GameView: SCNView {
         #endif
     }
     
-    func duplicateNode(_ node: SCNNode) -> SCNNode {
-        let nodeCopy = node.copy() as? SCNNode ?? SCNNode()
-        if let geometry = node.geometry?.copy() as? SCNGeometry {
-            nodeCopy.geometry = geometry
-            if let material = geometry.firstMaterial?.copy() as? SCNMaterial {
-                nodeCopy.geometry?.firstMaterial = material
-            }
-        }
-        return nodeCopy
-    }
-    
     func ctouchesMoved(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {
         let mouse = self.convert(touchLocation, from: self)
         var hitTests = self.hitTest(mouse, options: nil)
@@ -573,14 +562,16 @@ class GameView: SCNView {
         overRay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))
         overRay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 4))
         overRay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
-        overRay?.button_red.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 272)
-        overRay?.button_green.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 248)
-        overRay?.button_blue.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 224)
-        overRay?.button_magenta.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 200)
-        overRay?.button_cyan.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 176)
-        overRay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 152)
-        overRay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 128)
-        overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 22), y: -size.height / 2 + 20)
+        
+        overRay?.button_red.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 300)
+        overRay?.button_green.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 268)
+        overRay?.button_blue.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 236)
+        overRay?.button_magenta.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 212)
+        overRay?.button_cyan.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 184)
+        overRay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 156)
+        overRay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 120)
+        
+        overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 14), y: -size.height / 2 + 20)
     }
     
 #if os(OSX)

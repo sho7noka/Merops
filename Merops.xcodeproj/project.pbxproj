@@ -46,6 +46,7 @@
 		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
 		E2AD5D9D212817AC0080F3F2 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */; };
+		E2C58D08226542BD00807EF0 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E2CDF1CC21344812004D8E39 /* lib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2101237211EBE08001664AD /* lib */; };
 		E2CDF1D121357B6B004D8E39 /* py_module in Resources */ = {isa = PBXBuildFile; fileRef = E2CDF1D021357B6B004D8E39 /* py_module */; };
 		E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
@@ -265,6 +266,7 @@
 		E26ABEC421EB76C200487FA4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E2FB3997225A1808000C4064 /* Default-568h@2x.png */,
 				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
 				E26ABEC021EB769600487FA4 /* Cartfile */,
 				EDEEFF531F8A35CB00E4785F /* README.md */,
@@ -401,7 +403,6 @@
 		ED32B9511EB5D298000D8823 = {
 			isa = PBXGroup;
 			children = (
-				E2FB3997225A1808000C4064 /* Default-568h@2x.png */,
 				E2E5DB52216E53C80028AA4E /* MDOC */,
 				E26ABEC421EB76C200487FA4 /* Shared */,
 				E2FBFD3B21EE119E00BDB646 /* merops */,
@@ -689,7 +690,7 @@
 		};
 		E2CDF1CF21356BE6004D8E39 /* Copy Python lib  */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -701,9 +702,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\ncd Merops/engine/pyobjc-framework-Merops\npython setup.py build\ncp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\n";
+			shellScript = "cp -r $SRCROOT/Merops/extra/Python $BUILT_PRODUCTS_DIR/\n#cd Merops/engine/pyobjc-framework-Merops\n#python setup.py build\n#cp -r build/lib.macosx-10.14-intel-2.7/ModelIO $BUILT_PRODUCTS_DIR/Python/\ncp -r $SRCROOT/USD $BUILT_PRODUCTS_DIR/USD\n";
 		};
 		ED24CD341F266249000CC0BB /* Carthage copy */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -734,6 +735,7 @@
 				E2E46122210D5E3D00C0DB39 /* GameViewController.swift in Sources */,
 				E2E46124210D5E4400C0DB39 /* GameViewOverlay.swift in Sources */,
 				E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */,
+				E2C58D08226542BD00807EF0 /* Cmd+Git.swift in Sources */,
 				E2FBFD4621EE241B00BDB646 /* DocumentView.swift in Sources */,
 				E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */,
 				E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */,

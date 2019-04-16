@@ -20,16 +20,6 @@ struct Settings {
         self.pythonDir = pyDir
         self.editor = editor
     }
-    
-//    public init(from decoder: Decoder) throws {
-//        let url = URL(fileURLWithPath: projectDir + "/setting.json")
-//        let data = try Data(contentsOf: url)
-//        try JSONDecoder().decode(Settings.self, from: data)
-//    }
-    
-//    public func encode(to encoder: Encoder) throws {
-//        JSONEncoder().encode(<#T##value: Encodable##Encodable#>)
-//    }
 }
 
 enum NodeOptions: Int {
