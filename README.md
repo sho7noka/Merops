@@ -46,7 +46,7 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
-- [x] [USD 0.85 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D) / [USDKit](https://github.com/superfunc/USDKit)
+- [ ] [arm 64 USD 19 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D) / [USDKit](https://github.com/superfunc/USDKit)
 - [ ] interpolation を [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でモディファイヤ テッセレーションとリダクション + ml/noise/lattice/edit 
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
@@ -137,3 +137,5 @@ buffer.contents().copyBytes(from: vector2, count: vector2.count * MemoryLayout<F
 https://qiita.com/lumis/items/311b8c39d61312957195
 https://qiita.com/mss634/items/170d3cb401eee4ec1253
 https://stackoverflow.com/questions/15470367/pyeval-initthreads-in-python-3-how-when-to-call-it-the-saga-continues-ad-naus]
+
+https://medium.com/if-let-swift-programming/managing-files-in-ios-dfcdfdc1f426
