@@ -5,13 +5,6 @@
 //  Copyright © 2017年 sho sumioka. All rights reserved.
 //
 
-
-#if os(OSX)
-import Cocoa
-#elseif os(iOS)
-import UIKit
-#endif
-
 /// - Tag: libgit
 import ObjectiveGit
 
@@ -127,10 +120,11 @@ func gitBranch(url: String) {
     }
 }
 
+func gitRemove(url: String) {
 //        let parents = [targetCommit, fromCommit].flatMap{
 //            GTCommit(obj: $0.commit, in: repo)
 //        }
 //        index.read_tree(repo.head.target.tree)
 //        index.removeFile(<#T##file: String##Swift.String#>)
 //try repo.currentBranch().targetCommit().commitDate!
-
+}

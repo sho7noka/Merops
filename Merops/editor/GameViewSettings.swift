@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import SceneKit
 
 struct Settings {
     let projectDir: String
@@ -48,33 +47,3 @@ enum EditContext {
         }
     }
 }
-
-enum CameraPosition {
-    case top, right, left, back, bottom, front
-    
-    var vec : SCNVector3 {
-        switch self {
-        case .top:
-            return SCNVector3(0, 1, 0)
-        case .right:
-            return SCNVector3(1, 0, 0)
-        case .left:
-            return SCNVector3(-1, 0, 0)
-        case .front:
-            return SCNVector3(0, 0, 1)
-        case .back:
-            return SCNVector3(0, 0, -1)
-        case .bottom:
-            return SCNVector3(0, -1, 0)
-        }
-    }
-}
-
-let SCNOptions: [SCNDebugOptions] = [
-    .showPhysicsShapes,
-    .showBoundingBoxes,
-    .showLightInfluences,
-    .showLightExtents,
-    .showPhysicsFields,
-    .showWireframe,
-]

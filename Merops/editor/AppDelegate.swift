@@ -7,6 +7,7 @@
 //
 #if os(OSX)
 import Cocoa
+import Python
 
 public typealias View = NSView
 public typealias Color = NSColor
@@ -17,27 +18,6 @@ public typealias SuperViewController = NSViewController
 public typealias GestureRecognizer = NSPanGestureRecognizer
 public typealias TextFieldDelegate = NSTextFieldDelegate
 
-extension TextView {
-    var text: String {
-        get {
-            return self.stringValue
-        }
-        set (text) {
-            self.stringValue = text
-        }
-    }
-    
-    var placeholder: String {
-        get {
-            return self.placeholderString ?? ""
-        }
-        
-        set (text) {
-            self.placeholderString = text
-        }
-    }
-}
-import Python
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -67,8 +47,8 @@ os.chdir(os.path.join(pwd, \"USD/lib/python\"))
 }
     
 #elseif os(iOS)
-    
 import UIKit
+
 public typealias View = UIView
 public typealias Color = UIColor
 public typealias Event = UIEvent

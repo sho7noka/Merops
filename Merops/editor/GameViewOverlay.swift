@@ -9,7 +9,6 @@
 import SpriteKit
 import SceneKit
 import QuartzCore
-//import ImGui
 
 
 extension SKScene {
@@ -92,13 +91,13 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
     // macOS: https://developer.apple.com/documentation/appkit/nsimage/name
     #if os(OSX)
         // "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns"
-        button_red = mButton(name: NSImage.multipleDocumentsName)
-        button_green = mButton(name: NSImage.colorPanelName)
-        button_blue = mButton(name: NSImage.infoName)
-        button_magenta = mButton(name: NSImage.computerName)
-        button_cyan = mButton(name: NSImage.networkName)
-        button_yellow = mButton(name: NSImage.folderName)
-        button_black = mButton(name: NSImage.advancedName)
+        button_red = mButton(name: Image.multipleDocumentsName)
+        button_green = mButton(name: Image.colorPanelName)
+        button_blue = mButton(name: Image.infoName)
+        button_magenta = mButton(name: Image.computerName)
+        button_cyan = mButton(name: Image.networkName)
+        button_yellow = mButton(name: Image.folderName)
+        button_black = mButton(name: Image.advancedName)
         
     // iOS: https://developer.apple.com/documentation/uikit/uibarbuttonitem/systemitem
     #elseif os(iOS)

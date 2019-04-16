@@ -184,6 +184,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.delegate = self
     #elseif os(iOS)
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
+        gameView.documentInteractionController.delegate = (self as! UIDocumentInteractionControllerDelegate)
     #endif
         
         /// - Tag: Mouse Buffer
@@ -224,9 +225,9 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 //            imgui.popStyleVar()
 //        }
         
-        #if DEBUG
+    #if DEBUG
         gameView.showsStatistics = true
-        #endif
+    #endif
         Editor.EditorGrid(view: gameView)
         gameView.resizeView()
     }
@@ -238,6 +239,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 #if os(iOS)
 //    http://chicketen.blog.jp/archives/76071441.html
     override func viewWillLayoutSubviews() {
+        self.gameView.resizeView()
         super.viewWillLayoutSubviews()
     }
     
@@ -256,6 +258,10 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                          action: #selector(self.performCommand(sender:))),
             
             UIKeyCommand(input: "R",
+                         modifierFlags: .init(rawValue: 0),
+                         action: #selector(self.performCommand(sender:))),
+            
+            UIKeyCommand(input: "O",
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:)))
         ]
@@ -276,6 +282,10 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         case "R":
             gameView.resetView(_mode: .RotateMode)
             return
+        case "O":
+            storeAndShare(withURLString: (gameView.model!.file ?? nil)!)
+//            storeAndShare(withURLString: "https://images5.alphacoders.com/581/581655.jpg")
+            return
         case .none:
             break
         case .some(_):
@@ -287,7 +297,28 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 }
 
 #if os(OSX)
-extension SuperViewController: NSControlTextEditingDelegate {
+extension TextView {
+    var text: String {
+        get {
+            return self.stringValue
+        }
+        set (text) {
+            self.stringValue = text
+        }
+    }
+    
+    var placeholder: String {
+        get {
+            return self.placeholderString ?? ""
+        }
+        
+        set (text) {
+            self.placeholderString = text
+        }
+    }
+}
+
+extension GameViewController: NSControlTextEditingDelegate {
     open func controlTextDidChange(_ notification: Notification) {
         if let textField = notification.object as? TextView {
             guard let node = (self as! GameViewController).gameView.selection?.node else { return }
@@ -323,3 +354,55 @@ extension SuperViewController: NSControlTextEditingDelegate {
     }
 }
 #endif
+
+#if os(iOS)
+extension GameViewController {
+    /// This function will set all the required properties, and then provide a preview for the document
+    func share(url: URL) {
+        self.gameView.documentInteractionController.url = url
+        self.gameView.documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
+        self.gameView.documentInteractionController.name = url.localizedName ?? url.lastPathComponent
+        self.gameView.documentInteractionController.presentPreview(animated: true)
+    }
+    
+    /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
+    func storeAndShare(withURLString: String) {
+        guard let url = URL(string: withURLString) else { return }
+        /// START YOUR ACTIVITY INDICATOR HERE
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            let tmpURL = FileManager.default.temporaryDirectory
+                .appendingPathComponent(response?.suggestedFilename ?? "fileName.png")
+            do {
+                try data.write(to: tmpURL)
+            } catch {
+                print(error)
+            }
+            DispatchQueue.main.async {
+                /// STOP YOUR ACTIVITY INDICATOR HERE
+                self.share(url: tmpURL)
+            }
+        }.resume()
+    }
+}
+
+extension GameViewController: UIDocumentInteractionControllerDelegate {
+    /// If presenting atop a navigation stack, provide the navigation controller in order to animate in a manner consistent with the rest of the platform
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        guard let navVC = self.navigationController else {
+            return self
+        }
+        return navVC
+    }
+}
+
+extension URL {
+    var typeIdentifier: String? {
+        return (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+    }
+    var localizedName: String? {
+        return (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
+    }
+}
+#endif
+

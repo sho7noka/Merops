@@ -9,6 +9,36 @@
 import SpriteKit
 import SceneKit
 
+enum CameraPosition {
+    case top, right, left, back, bottom, front
+    
+    var vec : SCNVector3 {
+        switch self {
+        case .top:
+            return SCNVector3(0, 1, 0)
+        case .right:
+            return SCNVector3(1, 0, 0)
+        case .left:
+            return SCNVector3(-1, 0, 0)
+        case .front:
+            return SCNVector3(0, 0, 1)
+        case .back:
+            return SCNVector3(0, 0, -1)
+        case .bottom:
+            return SCNVector3(0, -1, 0)
+        }
+    }
+}
+
+let SCNOptions: [SCNDebugOptions] = [
+    .showPhysicsShapes,
+    .showBoundingBoxes,
+    .showLightInfluences,
+    .showLightExtents,
+    .showPhysicsFields,
+    .showWireframe,
+]
+
 class GameView: SCNView {
     
     // Mark: Mouse hit point
@@ -650,7 +680,7 @@ class GameView: SCNView {
     }
 #endif
     
-    private func clearView() {        
+    func clearView() {        
         if txtField != nil {
             txtField.isHidden = true
         }
@@ -659,6 +689,7 @@ class GameView: SCNView {
             $0.isHidden = true
         }
     }
+    
     var subView: SCNView?
     
     func resetView(_mode: EditContext = EditContext.Object, _part: DrawOverride = DrawOverride.Object) {
@@ -730,6 +761,7 @@ class GameView: SCNView {
     var settings: Settings?
     
     #if os(iOS) // iOS SKSceneオーバーライド
+    let documentInteractionController = UIDocumentInteractionController()
     
     // [ iOS ] : Touches Began
     override func touchesBegan(_ touches: Set<UITouch>, with event: Event?) {
@@ -828,9 +860,8 @@ extension View {
     func setNeedsDisplay() {
         self.needsDisplay = true
     }
-    
-    #elseif os(iOS)
 
+    #elseif os(iOS)
     
     var gestureRecognizers: [UIGestureRecognizer] {
         return self.gestureRecognizers

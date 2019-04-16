@@ -7,16 +7,14 @@
 import ModelIO
 import SceneKit
 import SceneKit.ModelIO
-/*
- root __
-        |___ master.usd
-        |___ geo.abc
-        |___ mtl.mtlx
-        |___ cam.usd
-        |___ light.usd
-        |___ skin.usd
-        |___ tex.png
- */
+import JavaScriptCore
+
+// https://stackoverflow.com/questions/48354804/how-to-import-modules-in-swifts-javascriptcore
+func jsc () {
+    //    var context = JSContext()
+    //    context?.evaluateScript(<#T##script: String!##String!#>, withSourceURL: <#T##URL!#>)
+}
+
 final class USDExporter {
 
     public static func initialize(scene: SCNScene) -> URL {
