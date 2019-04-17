@@ -137,3 +137,5 @@ buffer.contents().copyBytes(from: vector2, count: vector2.count * MemoryLayout<F
 https://qiita.com/lumis/items/311b8c39d61312957195
 https://qiita.com/mss634/items/170d3cb401eee4ec1253
 https://stackoverflow.com/questions/15470367/pyeval-initthreads-in-python-3-how-when-to-call-it-the-saga-continues-ad-naus]
+
+https://gist.github.com/rikner/2f2677c56d1adef277d03bdb322eca80
