@@ -65,14 +65,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         let resourcePath = Bundle.main.resourcePath! + "/python3"
         let python_home = "PYTHONHOME=\(resourcePath)" as NSString
+        unsetenv("PYTHONHOME")
+        unsetenv("PYTHONPATH")
         putenv(UnsafeMutablePointer(mutating: python_home.utf8String))
         
-        Py_Initialize()
-        PyRun_SimpleStringFlags("import sys\nprint (sys.executable)", nil)
-        PyRun_SimpleStringFlags("import sys\nprint (sys.path)", nil)
-        Py_Finalize()
+//        Py_Initialize()
+//        PyRun_SimpleStringFlags("import sys\nprint (sys.executable)", nil)
+//        Py_Finalize()
         
         return true
     }

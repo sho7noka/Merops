@@ -67,7 +67,7 @@ class Renderer {
         renderbufferAttachment?.destinationAlphaBlendFactor = .oneMinusSourceAlpha
     }
 
-    func loadModel (model: Models) {
+    func loadModel (model: Model) {
 //    func loadModel (model : RoxigaModel) -> RoxigaModel {
 //        RoxigaModel instance = [model initWithDevice:_device
 

@@ -11,7 +11,7 @@ import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
-//import ImGui
+import ImGui
 
 #if os(iOS)
 import UIKit
@@ -40,6 +40,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
      */
     @objc
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        
         /// - Tag: DrawOverride
         if let primData = gameView.prim {
             primHandle.typeRender(prim: primData)
@@ -97,10 +98,13 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.delegate = self
         gameView.isPlaying = true
         uiInit()
+        
+        executeCallback()
+        start()
     }
     
     private func sceneInit() {
-        gameView.model = Models()
+        gameView.model = Model()
         
         // MARK: replace object
         meshData = MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
@@ -179,12 +183,13 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
         gameView.setsView?.isHidden = true
         gameView.addSubview(gameView.setsView!)
-        
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
+        
     #elseif os(iOS)
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
         gameView.documentInteractionController.delegate = (self as! UIDocumentInteractionControllerDelegate)
+        
     #endif
         
         /// - Tag: Mouse Buffer
@@ -193,38 +198,44 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
         /// - Tag: ImGui
-//
-//        ImGui.initialize(.metal)
-//
-//        if let vc = ImGui.vc {
-//            #if os(OSX)
-//            self.addChildViewController(vc)
-//            #elseif os(iOS)
-//            self.addChild(vc)
-//            #endif
-//            view.addSubview(vc.view)
-//            vc.view.frame = CGRect(x: view.frame.width * 0.2,
-//                                   y: view.frame.height * 0.3,
-//                                   width: view.frame.width,
-//                                   height: view.frame.height)
-//        }
-//
-//        ImGui.draw { (imgui) in
-//            imgui.setWindowFontScale(2.0)
-//            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
-//            imgui.setNextWindowSize(self.view.frame.size)
-//            imgui.pushStyleVar(.windowRounding, value: 0)
-//            imgui.pushStyleColor(.frameBg, color: Color.blue)
-//
-//            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
-//            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
-//            if imgui.button("Edit") {
-//
-//            }
-//            imgui.popStyleColor()
-//            imgui.popStyleVar()
-//        }
+        ImGui.initialize(.metal)
+        if let vc = ImGui.vc {
+            self.addChild(vc)
+            view.addSubview(vc.view)
+            vc.view.frame = CGRect(x: view.frame.width * 0.2,
+                                   y: view.frame.height * 0.3,
+                                   width: view.frame.width,
+                                   height: view.frame.height * 0.5)
+            self.removeChild(at: 0)
+        }
         
+        ImGui.draw { (imgui) in
+            let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
+            f[0] = true
+            imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
+            // style
+            imgui.setWindowFontScale(2.0)
+            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
+            imgui.setNextWindowSize(self.view.frame.size)
+            
+            // items
+            imgui.pushStyleVar(.windowRounding, value: 0)
+            imgui.pushStyleColor(.frameBg, color: Color.blue)
+            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
+            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
+            
+            imgui.beginGroup()
+            if imgui.button("Edit") {
+                dump(imgui)
+            }
+            if imgui.button("Script") {
+                self.gameView.openScript()
+            }
+            imgui.endGroup()
+            imgui.popStyleColor()
+            imgui.popStyleVar()
+            imgui.end()
+        }
     #if DEBUG
         gameView.showsStatistics = true
     #endif
@@ -347,7 +358,7 @@ extension GameViewController: NSControlTextEditingDelegate {
             default:
                 break
             }
-            (self as! GameViewController).gameView.gizmos.forEach {
+            gameView.gizmos.forEach {
                 $0.position = node.position
             }
         }

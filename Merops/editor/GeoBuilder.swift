@@ -202,9 +202,10 @@ final class Editor {
         skyMaterial.program = skyProgram
         skyMaterial.isDoubleSided = true
 
-//        let skyImage = Image(color: view.settings!.bgColor, size: .init(width: 1024, height: 1024))
-//        let skyTexture = SCNMaterialProperty(contents: skyImage)
-//        skyMaterial.setValue(skyTexture, forKey: "skyTexture")
+//        let skyImage = NSImage(color: view.settings!.bgColor, size: .init(width: 1024, height: 1024))
+        let skyImage = Image(named: "sky")
+        let skyTexture = SCNMaterialProperty(contents: skyImage as Any)
+        skyMaterial.setValue(skyTexture, forKey: "timeOfDay")
 
         let node = SCNNode(geometry: skyGeometry)
         node.name = "sky"

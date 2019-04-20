@@ -8,6 +8,7 @@
 
 import SpriteKit
 import SceneKit
+import ImGui
 
 enum CameraPosition {
     case top, right, left, back, bottom, front
@@ -92,7 +93,14 @@ class GameView: SCNView {
      * MARK: Mouse Event
      */
     
-    var model: Models?
+    var model: Model?
+    
+    var val = 0.0 {
+        didSet {
+            dump(val)
+//            self.pointOfView?.position.z = CGFloat(val)
+        }
+    }
     
     var isEdit = false {
         didSet {
@@ -164,25 +172,7 @@ class GameView: SCNView {
                 cameraName = "camera"
                 
             case "NSInfo"?:
-                #if os(iOS)
-                
-                let pythonista = URL(string: "pythonista://")!
-                UIApplication.shared.open(pythonista)
-                
-                #elseif os(OSX)
-                // vscode: https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
-                if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
-                    NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
-                    NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
-                    
-                    let config = GTConfiguration.default()
-                    config?.setString("vim", forKey: "core.editor")
-                    config?.setString("vimdiff", forKey: "merge.tool")
-                    
-                    "code --wait"
-                    "code --wait --diff $LOCAL $REMOTE"
-                }
-                #endif
+                openScript()
         
         #if os(OSX)
             case "NSNetwork"?:
@@ -315,7 +305,7 @@ class GameView: SCNView {
             
             // Show Gizmo
             gizmos.forEach {
-                root.addChildNode($0)
+                root?.addChildNode($0)
                 $0.position = selNode.position
                 $0.isHidden = true
             }
@@ -349,7 +339,7 @@ class GameView: SCNView {
                 prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             case .OverrideEdge:
                 let outlineNode = duplicateNode(selectedNode)
-                root.addChildNode(outlineNode)
+                root?.addChildNode(outlineNode)
                 outlineNode.removeFromParentNode()
                 
                 let outlineProgram = SCNProgram()
@@ -367,7 +357,7 @@ class GameView: SCNView {
             
         } else {
             queue.addOperation {
-                self.root.enumerateChildNodes({ child, _ in
+                self.root?.enumerateChildNodes({ child, _ in
                     if let geo = child.geometry {
                         geo.firstMaterial?.emission.contents = Color.black
                     }
@@ -618,6 +608,31 @@ class GameView: SCNView {
         resizeView()
     }
     
+    func openScript() {
+        #if os(iOS)
+        let pythonista = URL(string: "pythonista://\(model?.file)")!
+        UIApplication.shared.open(pythonista)
+        
+        #elseif os(OSX)
+        if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
+            let config = GTConfiguration.default()
+            
+            if ((self.settings?.editor.hasSuffix("Code"))!) {
+                config?.setString("vim", forKey: "core.editor")
+                config?.setString("vimdiff", forKey: "merge.tool")
+                NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
+            }
+            
+            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
+            if ((self.settings?.editor.hasSuffix("Vim"))!) {
+                config?.setString("code --wait", forKey: "core.editor")
+                config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
+                NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
+            }
+        }
+        #endif
+    }
+    
     var setsView: SettingDialog!
     
     /*
@@ -629,6 +644,9 @@ class GameView: SCNView {
         case "\u{1B}": //ESC
             clearView()
             isDeforming = true
+            ImGui.draw { (imgui) in
+                imgui.end()
+            }
         case "1", "2", "3", "4":
             self.debugOptions = SCNOptions[Int(event.characters!)!]
         case "\t": // TAB
@@ -714,7 +732,7 @@ class GameView: SCNView {
         
         // track gizmo position
         gizmos.forEach {
-            root.addChildNode($0)
+            root?.addChildNode($0)
             if let selNode = selection?.node {
                 $0.position = selNode.position
             }
@@ -751,7 +769,7 @@ class GameView: SCNView {
         }
         
         // reset color
-        root.enumerateChildNodes({ child, _ in
+        root?.enumerateChildNodes({ child, _ in
             if let geo = child.geometry {
                 geo.firstMaterial?.emission.contents = Color.black
             }
@@ -831,8 +849,9 @@ extension GameView {
     }
     
     // root
-    internal var root: SCNNode {
-        return self.scene!.rootNode
+    internal var root: SCNNode? {
+        return self.scene?.rootNode
+//        return self.scene!.rootNode
     }
     
     // node
