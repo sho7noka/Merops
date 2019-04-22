@@ -76,12 +76,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if gameView == nil {
             gameView = GameView()
             view.addSubview(gameView)
-            gameView.frame = CGRect(x: 0, y: 0,
-                                    width: view.frame.width,
-                                    height: view.frame.height)
+            gameView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         }
         
         // MARK: Metal Render
@@ -180,6 +179,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.addSubview(gameView.txtField!)
         
     #if os(OSX)
+        
         gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
         gameView.setsView?.isHidden = true
         gameView.addSubview(gameView.setsView!)
@@ -187,6 +187,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.delegate = self
         
     #elseif os(iOS)
+        
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
         gameView.documentInteractionController.delegate = (self as! UIDocumentInteractionControllerDelegate)
         
@@ -199,6 +200,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         /// - Tag: ImGui
         ImGui.initialize(.metal)
+//        ImGuiMetal.init(view: gameView)
+        
         if let vc = ImGui.vc {
             self.addChild(vc)
             view.addSubview(vc.view)
@@ -206,25 +209,26 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                                    y: view.frame.height * 0.3,
                                    width: view.frame.width,
                                    height: view.frame.height * 0.5)
-            self.removeChild(at: 0)
         }
-        
+
         ImGui.draw { (imgui) in
+            imgui.pushStyleVar(.windowRounding, value: 0)
+            imgui.pushStyleColor(.frameBg, color: Color.blue)
+            
             let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
             f[0] = true
             imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
+
             // style
             imgui.setWindowFontScale(2.0)
             imgui.setNextWindowPos(CGPoint.zero, cond: .always)
             imgui.setNextWindowSize(self.view.frame.size)
             
             // items
-            imgui.pushStyleVar(.windowRounding, value: 0)
-            imgui.pushStyleColor(.frameBg, color: Color.blue)
+            imgui.beginGroup()
             imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
             imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
             
-            imgui.beginGroup()
             if imgui.button("Edit") {
                 dump(imgui)
             }
@@ -232,9 +236,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                 self.gameView.openScript()
             }
             imgui.endGroup()
+            
+            
+            imgui.end()
             imgui.popStyleColor()
             imgui.popStyleVar()
-            imgui.end()
         }
     #if DEBUG
         gameView.showsStatistics = true
@@ -243,15 +249,77 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.resizeView()
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func ckeyDown(key: String) {
+        switch key {
+            
+        case "\u{1B}": //ESC
+            gameView.clearView()
+            gameView.isDeforming = true
+        case "\t": // TAB
+            gameView.isDeforming = false
+        case "\u{7F}": //del
+            Editor.removeSelNode(selection: gameView.selection!)
+            gameView.gizmos.forEach {
+                $0.isHidden = true
+            }
+        case "\r": //Enter
+            break
+            
+        case "Q":
+            gameView.resetView(_mode: .Object)
+            return
+        case "W":
+            gameView.resetView(_mode: .PositionMode)
+            return
+        case "E":
+            gameView.resetView(_mode: .ScaleMode)
+            return
+        case "R":
+            gameView.resetView(_mode: .RotateMode)
+            return
+        case "A":
+            gameView.resetView(_mode: .Object)
+        case "S":
+            gameView.resetView(_part: .OverrideVertex)
+        case "D":
+            gameView.resetView(_part: .OverrideEdge)
+        case "F":
+            gameView.resetView(_part: .OverrideFace)
+        case "O":
+            #if os(iOS)
+            storeAndShare(withURLString: (gameView.model!.file ?? nil)!)
+//            storeAndShare(withURLString: "https://images5.alphacoders.com/581/581655.jpg")
+            #elseif os(OSX)
+            gameView.openScript()
+            #endif
+            return
+        case "Z":
+            gitRevert(url: (gameView.settings?.projectDir)!)
+        case "X":
+            gitCommit(url: (gameView.settings?.projectDir)!)
+        case "C":
+            break
+        case "V":
+            break
+        default:
+            break
+        }
+        
+//        self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+//        setNeedsDisplay()
+//        super.keyDown(with: event)
+        
     }
-
+    
 #if os(iOS)
-//    http://chicketen.blog.jp/archives/76071441.html
+    
     override func viewWillLayoutSubviews() {
         self.gameView.resizeView()
         super.viewWillLayoutSubviews()
+    }
+    
+    @objc func performCommand(sender: UIKeyCommand) {
+        return ckeyDown(sender.input)
     }
     
     override var keyCommands: [UIKeyCommand]? {
@@ -278,36 +346,21 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         ]
     }
     
-    @objc func performCommand(sender: UIKeyCommand) {
-        
-        switch sender.input {
-        case "Q":
-            gameView.resetView(_mode: .Object)
-            return
-        case "W":
-            gameView.resetView(_mode: .PositionMode)
-            return
-        case "E":
-            gameView.resetView(_mode: .ScaleMode)
-            return
-        case "R":
-            gameView.resetView(_mode: .RotateMode)
-            return
-        case "O":
-            storeAndShare(withURLString: (gameView.model!.file ?? nil)!)
-//            storeAndShare(withURLString: "https://images5.alphacoders.com/581/581655.jpg")
-            return
-        case .none:
-            break
-        case .some(_):
-            break
-        }
+#elseif os(OSX)
+
+    override func keyDown(with event: Event) {
+        return ckeyDown(key: event.characters!)
     }
+
 #endif
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }
 
 #if os(OSX)
+
 extension TextView {
     var text: String {
         get {
@@ -364,9 +417,9 @@ extension GameViewController: NSControlTextEditingDelegate {
         }
     }
 }
-#endif
 
-#if os(iOS)
+#elseif os(iOS)
+
 extension GameViewController {
     /// This function will set all the required properties, and then provide a preview for the document
     func share(url: URL) {
@@ -415,5 +468,5 @@ extension URL {
         return (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
     }
 }
-#endif
 
+#endif

@@ -19,7 +19,6 @@
 		E23D363622637808009D6DBB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D363322637808009D6DBB /* libcrypto.a */; };
 		E23D363722637808009D6DBB /* libpython3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D363422637808009D6DBB /* libpython3.a */; };
 		E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E25C20E421336ABA00EE861F /* USD-bind.hpp */; };
-		E26A788021E61DF900FBA0BB /* CoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26A787F21E61DF900FBA0BB /* CoreModel.m */; };
 		E26A788921E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
 		E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */ = {isa = PBXBuildFile; fileRef = E26A788821E77FEC00FBA0BB /* WHLSL */; };
 		E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */; };
@@ -130,8 +129,6 @@
 		E25C20EE2133750500EE861F /* libIexMath-2_2.12.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIexMath-2_2.12.0.0.dylib"; path = "USD/lib/libIexMath-2_2.12.0.0.dylib"; sourceTree = "<group>"; };
 		E25C20EF2133750500EE861F /* libMaterialXCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMaterialXCore.a; path = USD/lib/libMaterialXCore.a; sourceTree = "<group>"; };
 		E25C20F02133750500EE861F /* libusdLux.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdLux.dylib; path = USD/lib/libusdLux.dylib; sourceTree = "<group>"; };
-		E26A787F21E61DF900FBA0BB /* CoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreModel.m; sourceTree = "<group>"; };
-		E26A788121E61E1100FBA0BB /* CoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreModel.h; sourceTree = "<group>"; };
 		E26A788621E653F800FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/Mac/ImGui.framework; sourceTree = "<group>"; };
 		E26A788821E77FEC00FBA0BB /* WHLSL */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WHLSL; path = Merops/extra/WHLSL; sourceTree = SOURCE_ROOT; };
 		E26A788B21E7815900FBA0BB /* ImGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImGui.framework; path = Carthage/Build/iOS/ImGui.framework; sourceTree = "<group>"; };
@@ -748,8 +745,6 @@
 			children = (
 				E2C58D82226743E400807EF0 /* merops.py */,
 				E2C58D802267437800807EF0 /* BindGen.swift */,
-				E26A788121E61E1100FBA0BB /* CoreModel.h */,
-				E26A787F21E61DF900FBA0BB /* CoreModel.m */,
 				E25C20E421336ABA00EE861F /* USD-bind.hpp */,
 				E25C20E321336ABA00EE861F /* USD-bind.cpp */,
 				E2D5EE5A2268DF8F00010903 /* Server.swift */,
@@ -762,10 +757,10 @@
 			children = (
 				E281B79120B933E200232181 /* GeoBuilder.swift */,
 				E281B79220B933E200232181 /* GeoPrimitives.swift */,
+				E21859F921036D3400653DBD /* Serializer.swift */,
 				E281B78820B933B600232181 /* Cmd+Git.swift */,
 				E281B78720B933B600232181 /* Cmd+USD.swift */,
 				E216B24421299C4D004D0CE8 /* interpolate.swift */,
-				E21859F921036D3400653DBD /* Serializer.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1045,7 +1040,6 @@
 				E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */,
 				E2C58D812267437800807EF0 /* BindGen.swift in Sources */,
 				E281B79420B933E200232181 /* GeoBuilder.swift in Sources */,
-				E26A788021E61DF900FBA0BB /* CoreModel.m in Sources */,
 				ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */,
 				E2D5EE5B2268DF8F00010903 /* Server.swift in Sources */,
 				E281B7B020B94CCB00232181 /* Common.metal in Sources */,
@@ -1344,11 +1338,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
-					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
-					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
-					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
-					"\"$(SRCROOT)/USD/include\"",
-					"/Users/shosumioka/pyobjc/pyobjc-core/Modules/objc",
+					"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers",
+					"$(SRCROOT)/Merops/extra/pybind11/include",
+					"$(SRCROOT)/Merops/extra/MaterialX/source",
+					"$(SRCROOT)/USD/include/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1398,11 +1391,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT=DIR)/Carthage/Build/Mac/ObjectiveGit.framework/Headers",
-					"\"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers\"",
-					"\"$(SRCROOT)/Merops/extra/pybind11/include\"",
-					"\"$(SRCROOT)/Merops/extra/MaterialX/source\"",
-					"\"$(SRCROOT)/USD/include\"",
-					"/Users/shosumioka/pyobjc/pyobjc-core/Modules/objc",
+					"$(SRCROOT)/../Downloads/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Python.framework/Headers",
+					"$(SRCROOT)/Merops/extra/pybind11/include",
+					"$(SRCROOT)/Merops/extra/MaterialX/source",
+					"$(SRCROOT)/USD/include/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Merops/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

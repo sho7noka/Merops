@@ -17,6 +17,18 @@ typealias mFloat = Float
 typealias mFloat = SCNFloat
 #endif
 
+extension SCNNode {
+    func fromModel(model: Model) -> SCNNode {
+        return self
+    }
+}
+
+extension Model {
+    func fromScnNode(node: SCNNode) -> Model {
+        return self
+    }
+}
+
 extension MDLVertexDescriptor {
     var vertexAttributes: [MDLVertexAttribute] {
         return attributes as! [MDLVertexAttribute]

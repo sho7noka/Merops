@@ -498,6 +498,7 @@ class GameView: SCNView {
     
     func ctouchesEnded(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {
         if selection != nil && marken != nil {
+            
             #if os(OSX)
             if event.modifierFlags == Event.ModifierFlags.control {
                 marken!.opacity = 1.0
@@ -595,6 +596,7 @@ class GameView: SCNView {
     }
     
 #if os(OSX)
+    
     override func viewWillStartLiveResize() {
         clearView()
         resizeView()
@@ -608,95 +610,11 @@ class GameView: SCNView {
         resizeView()
     }
     
-    func openScript() {
-        #if os(iOS)
-        let pythonista = URL(string: "pythonista://\(model?.file)")!
-        UIApplication.shared.open(pythonista)
-        
-        #elseif os(OSX)
-        if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
-            let config = GTConfiguration.default()
-            
-            if ((self.settings?.editor.hasSuffix("Code"))!) {
-                config?.setString("vim", forKey: "core.editor")
-                config?.setString("vimdiff", forKey: "merge.tool")
-                NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
-            }
-            
-            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
-            if ((self.settings?.editor.hasSuffix("Vim"))!) {
-                config?.setString("code --wait", forKey: "core.editor")
-                config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
-                NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
-            }
-        }
-        #endif
-    }
-    
     var setsView: SettingDialog!
     
-    /*
-     * Mark : Key Event
-     */
-    
-    override func keyDown(with event: Event) {
-        switch event.characters! {
-        case "\u{1B}": //ESC
-            clearView()
-            isDeforming = true
-            ImGui.draw { (imgui) in
-                imgui.end()
-            }
-        case "1", "2", "3", "4":
-            self.debugOptions = SCNOptions[Int(event.characters!)!]
-        case "\t": // TAB
-            isDeforming = false
-        case "q":
-            self.resetView(_mode: .Object)
-        case "w":
-            self.resetView(_mode: .PositionMode)
-        case "e":
-            self.resetView(_mode: .ScaleMode)
-        case "r":
-            self.resetView(_mode: .RotateMode)
-        case "a":
-            self.resetView(_mode: .Object)
-        case "s":
-            self.resetView(_part: .OverrideVertex)
-        case "d":
-            self.resetView(_part: .OverrideEdge)
-        case "f":
-            self.resetView(_part: .OverrideFace)
-        case "z":
-            gitRevert(url: (settings?.projectDir)!)
-        case "x":
-            gitCommit(url: (settings?.projectDir)!)
-        case "c":
-            break
-        case "v":
-            break
-        case "\u{7F}": //del
-            Editor.removeSelNode(selection: selection!)
-            gizmos.forEach {
-                $0.isHidden = true
-            }
-        case "\r": //Enter
-            break
-        default:
-            break
-        }
-        
-        // ctrl + d
-        if keybind(modify: Event.ModifierFlags.command, k: "d", e: event) {
-        
-        }
-
-        // Update
-        self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        setNeedsDisplay()
-        super.keyDown(with: event)
-    }
 #endif
+    
+    var settings: Settings?
     
     func clearView() {        
         if txtField != nil {
@@ -775,13 +693,36 @@ class GameView: SCNView {
             }
         })
     }
-
-    var settings: Settings?
     
-    #if os(iOS) // iOS SKSceneオーバーライド
+    func openScript() {
+        #if os(iOS)
+        let pythonista = URL(string: "pythonista://\(model?.file)")!
+        UIApplication.shared.open(pythonista)
+        
+        #elseif os(OSX)
+        if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
+            let config = GTConfiguration.default()
+            
+            if ((self.settings?.editor.hasSuffix("Code"))!) {
+                config?.setString("vim", forKey: "core.editor")
+                config?.setString("vimdiff", forKey: "merge.tool")
+                NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
+            }
+            
+            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
+            if ((self.settings?.editor.hasSuffix("Vim"))!) {
+                config?.setString("code --wait", forKey: "core.editor")
+                config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
+                NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
+            }
+        }
+        #endif
+    }
+    
+    #if os(iOS)
+    
     let documentInteractionController = UIDocumentInteractionController()
     
-    // [ iOS ] : Touches Began
     override func touchesBegan(_ touches: Set<UITouch>, with event: Event?) {
         for touch: AnyObject in touches {
             let location = touch.location(in: self)
@@ -790,7 +731,6 @@ class GameView: SCNView {
         }
     }
     
-    // [ iOS ] : Touches Moved
     override func touchesMoved(_ touches: Set<UITouch>, with event: Event?) {
         for touch: AnyObject in touches {
             let location = touch.location(in: self)
@@ -799,7 +739,6 @@ class GameView: SCNView {
         }
     }
     
-    // [ iOS ] : Touches Ended
     override func touchesEnded(_ touches: Set<UITouch>, with event: Event?) {
         for touch: AnyObject in touches {
             let location = touch.location(in: self)
@@ -808,30 +747,26 @@ class GameView: SCNView {
         }
     }
     
-    #else   // OSX SKSceneオーバーライド
+    #elseif os(OSX)
     
-    // [ OSX ] : Mouse Down
     override func mouseDown(with event: Event) {
         let location = event.locationInWindow
         let previousLocation = location
         ctouchesBegan(touchLocation: location, previousLocation: previousLocation, event: event)
     }
     
-    // [ OSX ] : Mouse Moved
     override func mouseMoved(with event: Event) {
         let location = event.locationInWindow
         let previousLocation = location
         ctouchesMoved(touchLocation: location, previousLocation: previousLocation, event: event)
     }
     
-    // [ OSX ] : Mouse Dragged
     override func mouseDragged(with event: Event) {
         let location = event.locationInWindow
         let previousLocation = location
         ctouchesMoved(touchLocation: location, previousLocation: previousLocation, event: event)
     }
     
-    // [ OSX ] : Mouse Up
     override func mouseUp(with event: Event) {
         let location = event.locationInWindow
         let previousLocation = location

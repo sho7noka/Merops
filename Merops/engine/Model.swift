@@ -46,7 +46,7 @@ class Model : NSObject {
         
     }
 
-    func _copy () {
+    func _copy () -> Model {
         dump(self)
         models.removeAll()
 //        var tmp: [SCNNode] = []
@@ -56,10 +56,12 @@ class Model : NSObject {
 //            }
 //        })
 //        models = tmp
+        return self
     }
 
     func setModels() {
         models.removeAll()
+        _openStage(<#T##sPath: UnsafePointer<Int8>!##UnsafePointer<Int8>!#>)
 
 //        var tmp: [SCNNode] = []
 //        gameView.scene?.rootNode.enumerateChildNodes({ child, _ in
@@ -71,10 +73,11 @@ class Model : NSObject {
 //        models = tmp
     }
 
-    func getModels() {
+    func getModels() -> [Model] {
 //        models.forEach {
 //            gameView.scene?.rootNode.addChildNode($0)
 //        }
         models.removeAll()
+        return []
     }
 }
