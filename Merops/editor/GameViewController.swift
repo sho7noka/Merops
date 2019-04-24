@@ -199,49 +199,49 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
         
         /// - Tag: ImGui
-        ImGui.initialize(.metal)
+//        ImGui.initialize(.metal)
 //        ImGuiMetal.init(view: gameView)
         
-        if let vc = ImGui.vc {
-            self.addChild(vc)
-            view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: view.frame.width * 0.2,
-                                   y: view.frame.height * 0.3,
-                                   width: view.frame.width,
-                                   height: view.frame.height * 0.5)
-        }
+//        if let vc = ImGui.vc {
+//            self.addChild(vc)
+//            view.addSubview(vc.view)
+//            vc.view.frame = CGRect(x: view.frame.width * 0.2,
+//                                   y: view.frame.height * 0.3,
+//                                   width: view.frame.width,
+//                                   height: view.frame.height * 0.5)
+//        }
 
-        ImGui.draw { (imgui) in
-            imgui.pushStyleVar(.windowRounding, value: 0)
-            imgui.pushStyleColor(.frameBg, color: Color.blue)
-            
-            let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
-            f[0] = true
-            imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
-
-            // style
-            imgui.setWindowFontScale(2.0)
-            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
-            imgui.setNextWindowSize(self.view.frame.size)
-            
-            // items
-            imgui.beginGroup()
-            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
-            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
-            
-            if imgui.button("Edit") {
-                dump(imgui)
-            }
-            if imgui.button("Script") {
-                self.gameView.openScript()
-            }
-            imgui.endGroup()
-            
-            
-            imgui.end()
-            imgui.popStyleColor()
-            imgui.popStyleVar()
-        }
+//        ImGui.draw { (imgui) in
+//            imgui.pushStyleVar(.windowRounding, value: 0)
+//            imgui.pushStyleColor(.frameBg, color: Color.blue)
+//
+//            let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
+//            f[0] = true
+//            imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
+//
+//            // style
+//            imgui.setWindowFontScale(2.0)
+//            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
+//            imgui.setNextWindowSize(self.view.frame.size)
+//
+//            // items
+//            imgui.beginGroup()
+//            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
+//            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
+//
+//            if imgui.button("Edit") {
+//                dump(imgui)
+//            }
+//            if imgui.button("Script") {
+//                self.gameView.openScript()
+//            }
+//            imgui.endGroup()
+//
+//
+//            imgui.end()
+//            imgui.popStyleColor()
+//            imgui.popStyleVar()
+//        }
     #if DEBUG
         gameView.showsStatistics = true
     #endif
@@ -250,6 +250,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     }
 
     func ckeyDown(key: String) {
+        print(key)
         switch key {
             
         case "\u{1B}": //ESC
@@ -349,7 +350,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 #elseif os(OSX)
 
     override func keyDown(with event: Event) {
-        return ckeyDown(key: event.characters!)
+        print(event.characters!)
+        ckeyDown(key: event.characters!)
     }
 
 #endif

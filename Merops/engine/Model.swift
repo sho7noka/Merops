@@ -61,7 +61,7 @@ class Model : NSObject {
 
     func setModels() {
         models.removeAll()
-        _openStage(<#T##sPath: UnsafePointer<Int8>!##UnsafePointer<Int8>!#>)
+//        _openStage(<#T##sPath: UnsafePointer<Int8>!##UnsafePointer<Int8>!#>)
 
 //        var tmp: [SCNNode] = []
 //        gameView.scene?.rootNode.enumerateChildNodes({ child, _ in

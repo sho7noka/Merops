@@ -336,7 +336,16 @@ class GameView: SCNView {
             let data = outBuffer.contents().bindMemory(to: float2.self, capacity: 1)
             switch part {
             case .OverrideVertex:
-                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
+                let outlineNode = duplicateNode(selectedNode)
+                root?.addChildNode(outlineNode)
+                outlineNode.removeFromParentNode()
+                
+                let outlineProgram = SCNProgram()
+                outlineProgram.vertexFunctionName = "point_vertex"
+                outlineProgram.fragmentFunctionName = "point_fragment"
+                outlineNode.geometry?.firstMaterial?.program = outlineProgram
+                outlineNode.geometry?.firstMaterial?.cullMode = .front
+//                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             case .OverrideEdge:
                 let outlineNode = duplicateNode(selectedNode)
                 root?.addChildNode(outlineNode)
@@ -350,7 +359,16 @@ class GameView: SCNView {
                 
 //                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             case .OverrideFace:
-                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
+                let outlineNode = duplicateNode(selectedNode)
+                root?.addChildNode(outlineNode)
+                outlineNode.removeFromParentNode()
+                
+                let outlineProgram = SCNProgram()
+                outlineProgram.vertexFunctionName = "face_vertex"
+                outlineProgram.fragmentFunctionName = "face_fragment"
+                outlineNode.geometry?.firstMaterial?.program = outlineProgram
+                outlineNode.geometry?.firstMaterial?.cullMode = .front
+//                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [CGFloat(data[0].x), CGFloat(data[1].x)])
             default:
                 break
             }
@@ -719,7 +737,7 @@ class GameView: SCNView {
         #endif
     }
     
-    #if os(iOS)
+#if os(iOS)
     
     let documentInteractionController = UIDocumentInteractionController()
     
@@ -747,7 +765,12 @@ class GameView: SCNView {
         }
     }
     
-    #elseif os(OSX)
+#elseif os(OSX)
+    
+    override func keyDown(with event: Event) {
+        print(event.characters!)
+//        ckeyDown(key: event.characters!)
+    }
     
     override func mouseDown(with event: Event) {
         let location = event.locationInWindow
@@ -773,7 +796,8 @@ class GameView: SCNView {
         ctouchesEnded(touchLocation: location, previousLocation: previousLocation, event: event)
     }
     
-    #endif
+#endif
+
 }
 
 extension GameView {
@@ -786,7 +810,6 @@ extension GameView {
     // root
     internal var root: SCNNode? {
         return self.scene?.rootNode
-//        return self.scene!.rootNode
     }
     
     // node
@@ -794,16 +817,14 @@ extension GameView {
         return self.scene!.rootNode.childNode(withName: name, recursively: true)
     }
     
-    // SCNView layer は iOS/macOS 両方で扱える
+    // iOS/macOS 両方で扱える
     internal var metalLayer: CAMetalLayer {
         let metalLayer = (self.layer as? CAMetalLayer)!
         metalLayer.framebufferOnly = false
         return metalLayer
     }
-}
 
-extension View {
-    #if os(OSX)
+#if os(OSX)
     
     func keybind(modify: Event.ModifierFlags, k: String, e: Event) -> Bool {
         return (e.characters! == k &&
@@ -815,7 +836,7 @@ extension View {
         self.needsDisplay = true
     }
 
-    #elseif os(iOS)
+#elseif os(iOS)
     
     var gestureRecognizers: [UIGestureRecognizer] {
         return self.gestureRecognizers
@@ -825,5 +846,6 @@ extension View {
         return CGPoint(x: 0, y: 0)
     }
     
-    #endif
+#endif
+
 }
