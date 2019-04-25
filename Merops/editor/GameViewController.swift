@@ -242,74 +242,12 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 //            imgui.popStyleColor()
 //            imgui.popStyleVar()
 //        }
-    #if DEBUG
-        gameView.showsStatistics = true
-    #endif
-        Editor.EditorGrid(view: gameView)
+//        Editor.EditorGrid(view: gameView)
+        
         gameView.resizeView()
-    }
-
-    func ckeyDown(key: String) {
-        print(key)
-        switch key {
-            
-        case "\u{1B}": //ESC
-            gameView.clearView()
-            gameView.isDeforming = true
-        case "\t": // TAB
-            gameView.isDeforming = false
-        case "\u{7F}": //del
-            Editor.removeSelNode(selection: gameView.selection!)
-            gameView.gizmos.forEach {
-                $0.isHidden = true
-            }
-        case "\r": //Enter
-            break
-            
-        case "Q":
-            gameView.resetView(_mode: .Object)
-            return
-        case "W":
-            gameView.resetView(_mode: .PositionMode)
-            return
-        case "E":
-            gameView.resetView(_mode: .ScaleMode)
-            return
-        case "R":
-            gameView.resetView(_mode: .RotateMode)
-            return
-        case "A":
-            gameView.resetView(_mode: .Object)
-        case "S":
-            gameView.resetView(_part: .OverrideVertex)
-        case "D":
-            gameView.resetView(_part: .OverrideEdge)
-        case "F":
-            gameView.resetView(_part: .OverrideFace)
-        case "O":
-            #if os(iOS)
-            storeAndShare(withURLString: (gameView.model!.file ?? nil)!)
-//            storeAndShare(withURLString: "https://images5.alphacoders.com/581/581655.jpg")
-            #elseif os(OSX)
-            gameView.openScript()
-            #endif
-            return
-        case "Z":
-            gitRevert(url: (gameView.settings?.projectDir)!)
-        case "X":
-            gitCommit(url: (gameView.settings?.projectDir)!)
-        case "C":
-            break
-        case "V":
-            break
-        default:
-            break
-        }
-        
-//        self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-//        setNeedsDisplay()
-//        super.keyDown(with: event)
-        
+        #if DEBUG
+        gameView.showsStatistics = true
+        #endif
     }
     
 #if os(iOS)
@@ -320,40 +258,33 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     }
     
     @objc func performCommand(sender: UIKeyCommand) {
-        return ckeyDown(sender.input)
+        return gameView.ckeyDown(key: sender.input!)
     }
     
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(input: "Q",
+            UIKeyCommand(input: "q",
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:))),
 
-            UIKeyCommand(input: "W",
+            UIKeyCommand(input: "w",
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:))),
 
-            UIKeyCommand(input: "E",
+            UIKeyCommand(input: "e",
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:))),
             
-            UIKeyCommand(input: "R",
+            UIKeyCommand(input: "r",
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:))),
             
-            UIKeyCommand(input: "O",
+            UIKeyCommand(input: "o",
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:)))
         ]
     }
     
-#elseif os(OSX)
-
-    override func keyDown(with event: Event) {
-        print(event.characters!)
-        ckeyDown(key: event.characters!)
-    }
-
 #endif
     
     override func awakeFromNib() {

@@ -757,10 +757,10 @@
 			children = (
 				E281B79120B933E200232181 /* GeoBuilder.swift */,
 				E281B79220B933E200232181 /* GeoPrimitives.swift */,
-				E21859F921036D3400653DBD /* Serializer.swift */,
 				E281B78820B933B600232181 /* Cmd+Git.swift */,
 				E281B78720B933B600232181 /* Cmd+USD.swift */,
 				E216B24421299C4D004D0CE8 /* interpolate.swift */,
+				E21859F921036D3400653DBD /* Serializer.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";

@@ -103,7 +103,7 @@ FVertexOut face_vertex(FVertexIn in [[stage_in]],
     
     FVertexOut out;
     out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
-    out.color = float4(1, 1, 0, 1);
+    out.color = float4(1, 0, 0, 1);
     out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
     return out;
 }
@@ -124,7 +124,7 @@ PVertexOut point_vertex(PVertexIn in [[stage_in]],
     
     PVertexOut out;
     out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
-    out.color = float4(1, 1, 0, 1);
+    out.color = float4(0, 0, 1, 1);
     out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
     return out;
 }

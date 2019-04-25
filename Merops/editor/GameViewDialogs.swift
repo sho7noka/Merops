@@ -7,37 +7,45 @@
 //
 
 #if os(OSX)
-    import Cocoa
-#elseif os(iOS)
-    import UIKit
-#endif
 
-final class SettingDialog: View, TextFieldDelegate {
-    
-    let colorPallete = NSColorPanel()
-    let txtProject = TextView()
-    let btnProject = NSButton()
-    let txtUsd = TextView()
-    let btnUsd = NSButton()
-    let txtPython = TextView()
-    let btnPython = NSButton()
-    
-    init(frame: CGRect, setting: Settings) {
-        super.init(frame: frame)
+    import Cocoa
+
+    final class SettingDialog: View, TextFieldDelegate {
         
-        txtProject.text = setting.projectDir
-        btnProject.title = "..."
-        txtUsd.text = setting.usdDir
-        btnUsd.title = "..."
-        txtPython.text = setting.pythonDir
-        btnPython.title = "..."
+        let colorPallete = NSColorPanel()
+        let txtProject = TextView()
+        let btnProject = NSButton()
+        let txtUsd = TextView()
+        let btnUsd = NSButton()
+        let txtPython = TextView()
+        let btnPython = NSButton()
         
-        [txtProject, txtUsd, txtPython].forEach {
-            self.addSubview($0)
+        init(frame: CGRect, setting: Settings) {
+            super.init(frame: frame)
+            
+            txtProject.text = setting.projectDir
+            btnProject.title = "..."
+            txtUsd.text = setting.usdDir
+            btnUsd.title = "..."
+            txtPython.text = setting.pythonDir
+            btnPython.title = "..."
+            
+            [txtProject, txtUsd, txtPython].forEach {
+                self.addSubview($0)
+            }
+        }
+        
+        required init?(coder decoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
         }
     }
-    
-    required init?(coder decoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+#elseif os(iOS)
+
+    import UIKit
+
+    final class SettingDialog: View, TextFieldDelegate {
+
     }
-}
+
+#endif

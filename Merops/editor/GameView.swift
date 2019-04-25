@@ -10,49 +10,10 @@ import SpriteKit
 import SceneKit
 import ImGui
 
-enum CameraPosition {
-    case top, right, left, back, bottom, front
-    
-    var vec : SCNVector3 {
-        switch self {
-        case .top:
-            return SCNVector3(0, 1, 0)
-        case .right:
-            return SCNVector3(1, 0, 0)
-        case .left:
-            return SCNVector3(-1, 0, 0)
-        case .front:
-            return SCNVector3(0, 0, 1)
-        case .back:
-            return SCNVector3(0, 0, -1)
-        case .bottom:
-            return SCNVector3(0, -1, 0)
-        }
-    }
-}
-
-let SCNOptions: [SCNDebugOptions] = [
-    .showPhysicsShapes,
-    .showBoundingBoxes,
-    .showLightInfluences,
-    .showLightExtents,
-    .showPhysicsFields,
-    .showWireframe,
-]
 
 class GameView: SCNView {
     
-    // Mark: Mouse hit point
-    var p = CGPoint()
-    var selection: SCNHitTestResult? = nil
-    var selectedNode: SCNNode!
-    var zDepth: SCNFloat!
-    var pos = float2()
-    var mouseBuffer: MTLBuffer!
-    var outBuffer: MTLBuffer!
-    var queue: MTLCommandQueue! = nil
-    var cps: MTLComputePipelineState! = nil
-    
+    /// Mark: Mouse hit point
     let options = [
         SCNHitTestOption.sortResults: NSNumber(value: true),
         SCNHitTestOption.boundingBoxOnly: NSNumber(value: true),
@@ -63,6 +24,12 @@ class GameView: SCNView {
         let bufferPointer = mouseBuffer.contents()
         memcpy(bufferPointer, &pos, MemoryLayout<float2>.size)
     }
+    
+    var pos = float2()
+    var mouseBuffer: MTLBuffer!
+    var outBuffer: MTLBuffer!
+    var queue: MTLCommandQueue! = nil
+    var cps: MTLComputePipelineState! = nil
     
     override func draw(_ dirtyRect: CGRect) {
         if let drawable = metalLayer.nextDrawable() {
@@ -90,15 +57,14 @@ class GameView: SCNView {
     }
     
     /*
-     * MARK: Mouse Event
+     * MARK: Attributes
      */
     
     var model: Model?
     
     var val = 0.0 {
         didSet {
-            dump(val)
-//            self.pointOfView?.position.z = CGFloat(val)
+            self.pointOfView?.position.z = CGFloat(Float(val))
         }
     }
     
@@ -109,6 +75,15 @@ class GameView: SCNView {
                 self.scene = SCNScene(mdlAsset: asset)
                 isEdit = false
             }
+        }
+    }
+    
+    var isDeforming = true {
+        didSet {
+            self.gestureRecognizers.forEach {
+                $0.isEnabled = !isDeforming
+            }
+            //            self.allowsCameraControl = !isDeforming
         }
     }
     
@@ -123,21 +98,89 @@ class GameView: SCNView {
         didSet {
             self.overRay?.label_message.text = cameraName + " / " + mode.toString
             self.overRay?.label_message.fontColor = Color.white
-        }
-    }
-    
-    var isDeforming = true {
-        didSet {
-            self.gestureRecognizers.forEach {
-                $0.isEnabled = !isDeforming
+            
+            switch mode {
+            case .PositionMode:
+                node(name: "pos")?.isHidden = false
+                gizmos.forEach {
+                    if $0.name != "pos" {
+                        $0.removeFromParentNode()
+                    }
+                }
+            case .ScaleMode:
+                node(name: "scl")?.isHidden = false
+                gizmos.forEach {
+                    if $0.name != "scl" {
+                        $0.removeFromParentNode()
+                    }
+                }
+            case .RotateMode:
+                node(name: "rot")?.isHidden = false
+                gizmos.forEach {
+                    if $0.name != "rot" {
+                        $0.removeFromParentNode()
+                    }
+                }
+            default:
+                gizmos.forEach {
+                    $0.removeFromParentNode()
+                }
             }
-//            self.allowsCameraControl = !isDeforming
         }
     }
     
-    var txtField: TextView!
-    var gizmos: [ManipulatorBase] = []
-    var numFields: [TextView] = []
+    var part = DrawOverride.Object {
+        didSet {
+            if let selNode = selection?.node {
+                let outlineNode = duplicateNode(selNode)
+                root?.addChildNode(outlineNode)
+                
+                switch part {
+                case .OverrideVertex:
+                    let outlineProgram = SCNProgram()
+                    outlineProgram.vertexFunctionName = "point_vertex"
+                    outlineProgram.fragmentFunctionName = "point_fragment"
+                    outlineNode.geometry?.firstMaterial?.program = outlineProgram
+                    outlineNode.geometry?.firstMaterial?.cullMode = .front
+                //  prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [])
+                    
+                case .OverrideEdge:
+                    let outlineProgram = SCNProgram()
+                    outlineProgram.vertexFunctionName = "outline_vertex"
+                    outlineProgram.fragmentFunctionName = "outline_fragment"
+                    outlineNode.geometry?.firstMaterial?.program = outlineProgram
+                    outlineNode.geometry?.firstMaterial?.cullMode = .front
+                //  prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [])
+                    
+                case .OverrideFace:
+                    let outlineProgram = SCNProgram()
+                    outlineProgram.vertexFunctionName = "face_vertex"
+                    outlineProgram.fragmentFunctionName = "face_fragment"
+                    outlineNode.geometry?.firstMaterial?.program = outlineProgram
+                    outlineNode.geometry?.firstMaterial?.cullMode = .front
+                //  prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [])
+                    
+                default:
+                    outlineNode.removeFromParentNode()
+                    prim = nil
+                }
+            }
+        }
+    }
+    
+    var p = CGPoint()
+    var selection: SCNHitTestResult? = nil
+    var selectedNode: SCNNode!
+    var zDepth: SCNFloat!
+    
+    var prim: MetalPrimitiveData?
+    var marken: SCNNode? = nil
+    var hit_old = SCNVector3Zero
+    var deformData: DeformData? = nil
+    
+    /*
+     * MARK: Mouse Event
+     */
     
     func ctouchesBegan(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {
         p = self.convert(touchLocation, from: nil)
@@ -283,8 +326,6 @@ class GameView: SCNView {
             default:
                 break
             }
-
-//            ctouchesBegan(touchLocation: touchLocation, previousLocation: previousLocation, event: event)
             return
         }
         
@@ -509,11 +550,6 @@ class GameView: SCNView {
         }
     }
     
-    // Draggable
-    var marken: SCNNode? = nil
-    var hit_old = SCNVector3Zero
-    var deformData: DeformData? = nil
-    
     func ctouchesEnded(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {
         if selection != nil && marken != nil {
             
@@ -562,7 +598,11 @@ class GameView: SCNView {
         
         // set nil
 //        isEdit = true
-        selection = nil
+        p = self.convert(touchLocation, from: nil)
+        let hitResults = self.hitTest(p, options: options)
+        if (hitResults.count < 0) {
+            selection = nil
+        }
         marken = nil
         
         #if os(OSX)
@@ -576,26 +616,24 @@ class GameView: SCNView {
         setNeedsDisplay()
     }
     
-    var part = DrawOverride.Object
-    var prim: MetalPrimitiveData?
-    
     private func cameraZaxis(_ view: SCNView) -> SCNVector3 {
         let cameraMat = view.pointOfView!.transform
         return SCNVector3Make(cameraMat.m31, cameraMat.m32, cameraMat.m33) * -1
     }
-
+    
     /*
      * MARK: Resize Event
      */
+    
     func resizeView() {
         let size = self.frame.size
-
-    #if os(OSX)
+        
+        #if os(OSX)
         subView?.frame.origin = CGPoint(x: size.width - 88 , y: 16)
-    #elseif os(iOS)
+        #elseif os(iOS)
         subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 80)
-    #endif        
-        /// TODO: ノッチ幅を下げる必要がある
+        /// TODO: ノッチ幅を下げる
+        #endif
         overRay?.label_name.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 1))
         overRay?.label_position.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 2))
         overRay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))
@@ -613,27 +651,6 @@ class GameView: SCNView {
         overRay?.label_message.position = CGPoint(x: 0 - round(size.width / 14), y: -size.height / 2 + 20)
     }
     
-#if os(OSX)
-    
-    override func viewWillStartLiveResize() {
-        clearView()
-        resizeView()
-    }
-    
-    override func resize(withOldSuperviewSize oldSize: NSSize) {
-        resizeView()
-    }
-    
-    override func viewDidEndLiveResize() {
-        resizeView()
-    }
-    
-    var setsView: SettingDialog!
-    
-#endif
-    
-    var settings: Settings?
-    
     func clearView() {        
         if txtField != nil {
             txtField.isHidden = true
@@ -644,27 +661,7 @@ class GameView: SCNView {
         }
     }
     
-    var subView: SCNView?
-    
-    func resetView(_mode: EditContext = EditContext.Object, _part: DrawOverride = DrawOverride.Object) {
-        part = _part
-        
-        // MARK: curret override mode
-        if let selNode = selection?.node {
-            switch part {
-            case .OverrideVertex:
-                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [])
-                
-            case .OverrideEdge:
-                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [])
-                
-            case .OverrideFace:
-                prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [])
-                
-            default:
-                prim = nil
-            }
-        }
+    func resetView() {
         
         // track gizmo position
         gizmos.forEach {
@@ -674,36 +671,6 @@ class GameView: SCNView {
             }
             $0.isHidden = true
         }
-        mode = _mode
-        
-        switch mode {
-        case .PositionMode:
-            node(name: "pos")?.isHidden = false
-            gizmos.forEach {
-                if $0.name != "pos" {
-                    $0.removeFromParentNode()
-                }
-            }
-        case .ScaleMode:
-            node(name: "scl")?.isHidden = false
-            gizmos.forEach {
-                if $0.name != "scl" {
-                    $0.removeFromParentNode()
-                }
-            }
-        case .RotateMode:
-            node(name: "rot")?.isHidden = false
-            gizmos.forEach {
-                if $0.name != "rot" {
-                    $0.removeFromParentNode()
-                }
-            }
-        default:
-            gizmos.forEach {
-                $0.removeFromParentNode()
-            }
-        }
-        
         // reset color
         root?.enumerateChildNodes({ child, _ in
             if let geo = child.geometry {
@@ -712,29 +679,55 @@ class GameView: SCNView {
         })
     }
     
-    func openScript() {
-        #if os(iOS)
-        let pythonista = URL(string: "pythonista://\(model?.file)")!
-        UIApplication.shared.open(pythonista)
-        
-        #elseif os(OSX)
-        if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
-            let config = GTConfiguration.default()
+    func ckeyDown(key: String) {
+        switch key {
             
-            if ((self.settings?.editor.hasSuffix("Code"))!) {
-                config?.setString("vim", forKey: "core.editor")
-                config?.setString("vimdiff", forKey: "merge.tool")
-                NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
+        case "\u{1B}": //ESC
+            self.clearView()
+            self.isDeforming = true
+        case "\t": // TAB
+            self.isDeforming = false
+        case "\u{7F}": //del
+            Editor.removeSelNode(selection: self.selection!)
+            self.gizmos.forEach {
+                $0.isHidden = true
             }
+        case "\r": //Enter
+            break
             
-            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
-            if ((self.settings?.editor.hasSuffix("Vim"))!) {
-                config?.setString("code --wait", forKey: "core.editor")
-                config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
-                NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
-            }
+        case "q":
+            mode = .Object
+        case "w":
+            mode = .PositionMode
+        case "e":
+            mode = .ScaleMode
+        case "r":
+            mode = .RotateMode
+        case "a":
+            mode = .Object
+        case "s":
+            part = .OverrideVertex
+        case "d":
+            part = .OverrideEdge
+        case "f":
+            part = .OverrideFace
+        case "o":
+            self.openScript()
+        case "z":
+            gitRevert(url: (self.settings?.projectDir)!)
+        case "x":
+            gitCommit(url: (self.settings?.projectDir)!)
+        case "c":
+            break
+        case "v":
+            break
+        default:
+            break
         }
-        #endif
+        
+        self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        setNeedsDisplay()
+//        super.keyDown(with: event)
     }
     
 #if os(iOS)
@@ -742,7 +735,12 @@ class GameView: SCNView {
     let documentInteractionController = UIDocumentInteractionController()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: Event?) {
-        for touch: AnyObject in touches {
+        for touch: UITouch in touches {
+            if touch.type == .pencil {
+                touch.altitudeAngle
+                touch.azimuthAngle(in: self)
+                touch.force
+            }
             let location = touch.location(in: self)
             let previousLocation = location
             ctouchesBegan(touchLocation: location, previousLocation: previousLocation, event: event!)
@@ -766,10 +764,22 @@ class GameView: SCNView {
     }
     
 #elseif os(OSX)
+
+    override func viewWillStartLiveResize() {
+        clearView()
+        resizeView()
+    }
+    
+    override func resize(withOldSuperviewSize oldSize: NSSize) {
+        resizeView()
+    }
+    
+    override func viewDidEndLiveResize() {
+        resizeView()
+    }
     
     override func keyDown(with event: Event) {
-        print(event.characters!)
-//        ckeyDown(key: event.characters!)
+        ckeyDown(key: event.characters!)
     }
     
     override func mouseDown(with event: Event) {
@@ -796,16 +806,48 @@ class GameView: SCNView {
         ctouchesEnded(touchLocation: location, previousLocation: previousLocation, event: event)
     }
     
+    var setsView: SettingDialog!
+    
 #endif
+    
+    var settings: Settings?
+    var subView: SCNView?
+    var txtField: TextView!
+    var gizmos: [ManipulatorBase] = []
+    var numFields: [TextView] = []
+    
+    func openScript() {
+        #if os(iOS)
+        
+        let pythonista = URL(string: "pythonista://\(model?.file)")!
+        UIApplication.shared.open(pythonista)
+//        storeAndShare(withURLString: (self.model!.file ?? nil)!)
+        
+        #elseif os(OSX)
+        
+        if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
+            let config = GTConfiguration.default()
+            
+            if ((self.settings?.editor.hasSuffix("Code"))!) {
+                config?.setString("vim", forKey: "core.editor")
+                config?.setString("vimdiff", forKey: "merge.tool")
+                NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
+            }
+            
+            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
+            if ((self.settings?.editor.hasSuffix("Vim"))!) {
+                config?.setString("code --wait", forKey: "core.editor")
+                config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
+                NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
+            }
+        }
+        
+        #endif
+    }
 
 }
 
 extension GameView {
-    
-    // event
-    internal var overRay: GameViewOverlay? {
-        return (overlaySKScene as? GameViewOverlay)
-    }
     
     // root
     internal var root: SCNNode? {
@@ -822,6 +864,11 @@ extension GameView {
         let metalLayer = (self.layer as? CAMetalLayer)!
         metalLayer.framebufferOnly = false
         return metalLayer
+    }
+    
+    // event
+    internal var overRay: GameViewOverlay? {
+        return (overlaySKScene as? GameViewOverlay)
     }
 
 #if os(OSX)
