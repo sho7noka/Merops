@@ -28,20 +28,22 @@ final class Builder {
         scene.rootNode.addChildNode(cubeNode)
     }
 
-    class func Grid(scene: SCNScene) {
+    class func Grid(scene: SCNScene) -> SCNNode {
         let grid = SCNFloor()
 
         let gridNode = SCNNode(geometry: grid)
         gridNode.name = "grid"
         scene.rootNode.addChildNode(gridNode)
+        return gridNode
     }
 
-    class func Cone(scene: SCNScene) {
+    class func Cone(scene: SCNScene) -> SCNNode {
         let cone = SCNCone()
 
         let coneNode = SCNNode(geometry: cone)
         coneNode.name = "cone"
         scene.rootNode.addChildNode(coneNode)
+        return coneNode
     }
 
     class func Torus(scene: SCNScene) {

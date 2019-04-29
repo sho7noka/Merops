@@ -71,7 +71,6 @@ https://github.com/libgit2/objective-git/blob/master/README.md
 ### [Debug](https://developer.apple.com/videos/play/wwdc2018/608/)
 
 1. [スキーマ](https://cocoaengineering.com/2018/01/01/some-useful-url-schemes-in-xcode-9/)
-- `/// - Tag: TextField (x-source-tag://TextField)`
 
 2. [break point](https://qiita.com/shu223/items/1e88d19fbb31298146ca)
 先に以下の設定が必要。

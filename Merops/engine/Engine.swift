@@ -49,7 +49,7 @@ class MetalRender : SCNRenderer {
     }
 }
 
-func duplicateNode(_ node: SCNNode) -> SCNNode {
+func duplicate(_ node: SCNNode) -> SCNNode {
     let nodeCopy = node.copy() as? SCNNode ?? SCNNode()
     if let geometry = node.geometry?.copy() as? SCNGeometry {
         nodeCopy.geometry = geometry

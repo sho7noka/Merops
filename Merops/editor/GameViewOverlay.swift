@@ -226,10 +226,10 @@ final class PositionNode: ManipulatorBase {
         yLineNode.addChildNode(yBoxNode)
         zLineNode.addChildNode(zBoxNode)
 
-        xLineNode.name = "xmove"
-        yLineNode.name = "ymove"
-        zLineNode.name = "zmove"
-        controlNode.name = "amove"
+        xLineNode.name = "pos.xmove"
+        yLineNode.name = "pos.ymove"
+        zLineNode.name = "pos.zmove"
+        controlNode.name = "pos.amove"
 
         [controlNode, xLineNode, yLineNode, zLineNode, xBoxNode, yBoxNode, zBoxNode].forEach {
             if $0 == controlNode || $0 == xLineNode || $0 == yLineNode || $0 == zLineNode {
@@ -280,10 +280,10 @@ final class RotateNode: ManipulatorBase {
         let controlNode = SCNNode(geometry: control)
         controlNode.opacity = opaque
 
-        xCircleNode.name = "xrotate"
-        yCircleNode.name = "yrotate"
-        zCircleNode.name = "zrotate"
-        controlNode.name = "arotate"
+        xCircleNode.name = "rot.xrotate"
+        yCircleNode.name = "rot.yrotate"
+        zCircleNode.name = "rot.zrotate"
+        controlNode.name = "rot.arotate"
 
         // append
         [controlNode, xCircleNode, yCircleNode, zCircleNode].forEach {
@@ -354,10 +354,10 @@ final class ScaleNode: ManipulatorBase {
         yLineNode.addChildNode(yBoxNode)
         zLineNode.addChildNode(zBoxNode)
 
-        xLineNode.name = "xscale"
-        yLineNode.name = "yscale"
-        zLineNode.name = "zscale"
-        controlNode.name = "ascale"
+        xLineNode.name = "scl.xscale"
+        yLineNode.name = "scl.yscale"
+        zLineNode.name = "scl.zscale"
+        controlNode.name = "scl.ascale"
 
         [controlNode, xLineNode, yLineNode, zLineNode].forEach {
             self.addChildNode($0)

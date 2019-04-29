@@ -97,13 +97,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.delegate = self
         gameView.isPlaying = true
         uiInit()
-        
-        executeCallback()
-        start()
     }
     
     private func sceneInit() {
         gameView.model = Model()
+        executeCallback()
         
         // MARK: replace object
         meshData = MetalMeshDeformable.buildPlane(device, width: 150, length: 70, step: 1)
@@ -157,7 +155,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.subView?.scene?.rootNode.addChildNode(pos)
         gameView.addSubview(gameView.subView!)
         
-        // MARK: Overray
+        // MARK: Overlay
         gameView.overlaySKScene = GameViewOverlay(view: gameView)
         overRay = gameView.overlaySKScene as? GameViewOverlay
         overRay.isUserInteractionEnabled = false
@@ -178,6 +176,14 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.isHidden = true
         gameView.addSubview(gameView.txtField!)
         
+        /// - Tag: Mouse Buffer
+        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
+        gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
+        gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
+        
+        //        Editor.EditorGrid(view: gameView)
+        gameView.resizeView()
+        
     #if os(OSX)
         
         gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
@@ -193,61 +199,20 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
     #endif
         
-        /// - Tag: Mouse Buffer
-        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
-        gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
-        gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
-        
         /// - Tag: ImGui
-//        ImGui.initialize(.metal)
-//        ImGuiMetal.init(view: gameView)
-        
+        ImGui.initialize(.metal)
 //        if let vc = ImGui.vc {
 //            self.addChild(vc)
 //            view.addSubview(vc.view)
-//            vc.view.frame = CGRect(x: view.frame.width * 0.2,
-//                                   y: view.frame.height * 0.3,
-//                                   width: view.frame.width,
-//                                   height: view.frame.height * 0.5)
+//            vc.view.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3,
+//                                   width: view.frame.width, height: view.frame.height * 0.5)
+//            
 //        }
-
-//        ImGui.draw { (imgui) in
-//            imgui.pushStyleVar(.windowRounding, value: 0)
-//            imgui.pushStyleColor(.frameBg, color: Color.blue)
-//
-//            let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
-//            f[0] = true
-//            imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
-//
-//            // style
-//            imgui.setWindowFontScale(2.0)
-//            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
-//            imgui.setNextWindowSize(self.view.frame.size)
-//
-//            // items
-//            imgui.beginGroup()
-//            imgui.sliderFloat("index", v: &self.gameView.val, minV: 0.0, maxV: 10.0)
-//            imgui.colorEdit("backgroundColor", color: &(self.gameView.backgroundColor))
-//
-//            if imgui.button("Edit") {
-//                dump(imgui)
-//            }
-//            if imgui.button("Script") {
-//                self.gameView.openScript()
-//            }
-//            imgui.endGroup()
-//
-//
-//            imgui.end()
-//            imgui.popStyleColor()
-//            imgui.popStyleVar()
-//        }
-//        Editor.EditorGrid(view: gameView)
         
-        gameView.resizeView()
-        #if DEBUG
+    #if DEBUG
         gameView.showsStatistics = true
-        #endif
+    #endif
+
     }
     
 #if os(iOS)

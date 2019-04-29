@@ -8,6 +8,7 @@ import ModelIO
 import SceneKit
 import SceneKit.ModelIO
 import JavaScriptCore
+import ImageIO
 
 // https://stackoverflow.com/questions/48354804/how-to-import-modules-in-swifts-javascriptcore
 func jsc () {
