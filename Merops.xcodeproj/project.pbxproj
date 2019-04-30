@@ -27,6 +27,7 @@
 		E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
 		E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
+		E2817C242277E1B4009EAD05 /* GameViewDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewDialogs.swift */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78D20B933D000232181 /* GameViewSettings.swift */; };
@@ -994,7 +995,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n\nswiftc -emit-library $SRCROOT/Merops/engine/BindGen.swift $SRCROOT/Merops/engine/Model.swift -module-name Merops\ncp $SRCROOT/Merops/engine/libMerops.dylib $BUILT_PRODUCTS_DIR\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\nswiftc -emit-library $SRCROOT/Merops/engine/BindGen.swift $SRCROOT/Merops/engine/Model.swift -module-name Merops\ncp $SRCROOT/Merops/engine/libMerops.dylib $BUILT_PRODUCTS_DIR\ncp $SRCROOT/Merops/engine/merops.py $BUILT_PRODUCTS_DIR\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1016,6 +1017,7 @@
 				E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */,
 				E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */,
 				E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */,
+				E2817C242277E1B4009EAD05 /* GameViewDialogs.swift in Sources */,
 				E2E4612C210D5E7A00C0DB39 /* Shaders.metal in Sources */,
 				E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */,
 				E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */,

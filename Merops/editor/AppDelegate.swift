@@ -36,8 +36,11 @@ os.environ[\"PATH\"] = pwd + \"/USD/bin\"
 os.environ[\"PATH\"] = pwd + \"/USD/lib\"
 os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
 sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
-sys.path.append(os.path.join(pwd, \"Python\"))
+sys.path.append(pwd)
 os.chdir(os.path.join(pwd, \"USD/lib/python\"))
+
+import merops
+merops.main()
 """, nil)
     }
 

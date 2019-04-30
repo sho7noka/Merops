@@ -22,7 +22,7 @@
         
         init(frame: CGRect, setting: Settings) {
             super.init(frame: frame)
-            
+
             txtProject.text = setting.projectDir
             btnProject.title = "..."
             txtUsd.text = setting.usdDir

@@ -1,3 +1,4 @@
 #github "mnmly/Swift-imgui" "master"
 #github "libgit2/objective-git"
 github "socketio/socket.io-client-swift" ~> 15.0.0
+github "nicklockwood/Euclid" ~> 0.1

@@ -5,17 +5,15 @@
 //  Created by sumioka-air on 2017/04/30.
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
 //
-
+#if os(iOS)
+import UIKit
+#endif
 import Metal
 import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
 import ImGui
-
-#if os(iOS)
-import UIKit
-#endif
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
     
@@ -26,13 +24,12 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
     
     // View
     @IBOutlet weak var gameView: GameView!
-    var overRay: GameViewOverlay!
+    var overLay: GameViewOverlay!
     
     // Metal
     var render: MetalRender!
     var meshData: MetalMeshData!
     var deform: MetalMeshDeformer!
-    var primData: MetalPrimitiveData!
     var primHandle: MetalPrimitiveHandle!
     
     /*
@@ -40,11 +37,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
      */
     @objc
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
-        
-        /// - Tag: DrawOverride
-        if let primData = gameView.prim {
-            primHandle.typeRender(prim: primData)
-        }
 
         // Mark: Deformer
         guard let deformData = gameView.deformData else {
@@ -137,8 +129,19 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             color: Color.lightGray,
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
             pyDir: "/usr/bin/python",
-            editor: "Visual Studio Code"
+            editor: "MacVim"
         )
+        let config = GTConfiguration.default()
+        
+        if (gameView.settings!.editor.hasSuffix("Code")) {
+            config?.setString("code --wait", forKey: "core.editor")
+            config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
+        }
+        if (gameView.settings!.editor.hasSuffix("Vim")) {
+            config?.setString("vim", forKey: "core.editor")
+            config?.setString("vimdiff", forKey: "merge.tool")
+        }
+        
         gameView.queue = device.makeCommandQueue()
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
@@ -157,9 +160,11 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         // MARK: Overlay
         gameView.overlaySKScene = GameViewOverlay(view: gameView)
-        overRay = gameView.overlaySKScene as? GameViewOverlay
-        overRay.isUserInteractionEnabled = false
+        overLay = gameView.overlaySKScene as? GameViewOverlay
+        overLay.isUserInteractionEnabled = false
         gameView.cameraName = (gameView.defaultCameraController.pointOfView?.name)!
+        
+        Editor.EditorGrid(view: gameView)
         
         // MARK: Text Field
         gameView.numFields.append(contentsOf: [TextView(), TextView(), TextView()])
@@ -180,34 +185,30 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
         gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
         gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
-        
-        //        Editor.EditorGrid(view: gameView)
-        gameView.resizeView()
+        gameView.resize()
         
     #if os(OSX)
         
-        gameView.setsView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
-        gameView.setsView?.isHidden = true
-        gameView.addSubview(gameView.setsView!)
+        gameView.settingView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
+        gameView.settingView?.isHidden = true
+        gameView.addSubview(gameView.settingView!)
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
         
     #elseif os(iOS)
         
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
-        gameView.documentInteractionController.delegate = (self as! UIDocumentInteractionControllerDelegate)
+        gameView.documentInteractionController.delegate = (self as UIDocumentInteractionControllerDelegate)
         
     #endif
         
         /// - Tag: ImGui
         ImGui.initialize(.metal)
-//        if let vc = ImGui.vc {
-//            self.addChild(vc)
-//            view.addSubview(vc.view)
-//            vc.view.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3,
-//                                   width: view.frame.width, height: view.frame.height * 0.5)
-//            
-//        }
+        if let vc = ImGui.vc {
+            self.addChild(vc)
+            view.addSubview(vc.view)
+            vc.view.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3, width: 0, height: 0)
+        }
         
     #if DEBUG
         gameView.showsStatistics = true
@@ -218,7 +219,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
 #if os(iOS)
     
     override func viewWillLayoutSubviews() {
-        self.gameView.resizeView()
+        self.gameView.resize()
         super.viewWillLayoutSubviews()
     }
     

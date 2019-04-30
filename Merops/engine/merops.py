@@ -9,7 +9,7 @@ def main():
     native_lib = CDLL('./libMerops.dylib')
     native_lib.set_callback(byref(callback))
     native_lib.execute_callback()
-    print dir(native_lib)
+    print (dir(native_lib))
     del native_lib
 
 if __name__ == "__main__":

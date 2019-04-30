@@ -22,9 +22,9 @@ struct Settings {
 }
 
 enum NodeOptions: Int {
-    case noSelect = 1
-    case noExport = 2
-    case noDelete = 3
+    case noSelect = 2
+    case noExport = 3
+    case noDelete = 4
 }
 
 enum DrawOverride {

@@ -37,13 +37,13 @@ final class Builder {
         return gridNode
     }
 
-    class func Cone(scene: SCNScene) -> SCNNode {
-        let cone = SCNCone()
+    class func Sphere(scene: SCNScene) -> SCNNode {
+        let sphere = SCNSphere()
 
-        let coneNode = SCNNode(geometry: cone)
-        coneNode.name = "cone"
-        scene.rootNode.addChildNode(coneNode)
-        return coneNode
+        let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.name = "sphere"
+        scene.rootNode.addChildNode(sphereNode)
+        return sphereNode
     }
 
     class func Torus(scene: SCNScene) {
@@ -185,56 +185,83 @@ final class Builder {
 
 final class Editor {
     
-    class func removeSelNode(selection: SCNHitTestResult) {
-        if selection.node.categoryBitMask != NodeOptions.noExport.rawValue {
-            selection.node.removeFromParentNode()
+    class func openScript(model: Model, settings: Settings) {
+        #if os(iOS)
+        
+        if model.file.endsWith(".py") {
+            let pythonista = URL(string: "pythonista://\(model.file)")!
+            UIApplication.shared.open(pythonista)
+        } else {
+            storeAndShare(withURLString: (model!.file ?? nil)!)
+        }
+        
+        #elseif os(OSX)
+        
+        if (NSWorkspace.shared.fullPath(forApplication: settings.editor) != nil) {
+            
+            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
+            if (settings.editor.hasSuffix("Code")) {
+                NSWorkspace.shared.open((URL(string: "vscode://file\(model.file)") ?? nil)!)
+            }
+            
+            // https://github.com/macvim-dev/macvim/blob/e06ff0d83a1687e19679e9bddec2745e06a144ae/runtime/doc/gui_mac.txt
+            if (settings.editor.hasSuffix("Vim")) {
+                NSWorkspace.shared.open((URL(string: "mvim://open?url=file://\(model.file)") ?? nil)!)
+            }
+        }
+        
+        #endif
+    }
+    
+    class func remove(selection: SCNHitTestResult?) {
+        if selection?.node.categoryBitMask != NodeOptions.noExport.rawValue {
+            selection?.node.removeFromParentNode()
         }
     }
     
 //    https://github.com/warrenm/SCNOutline
 //    https://github.com/warrenm/SCNShadableSky
     class func EditorDome(view: GameView) {
-        
         let skyGeometry = SCNSphere(radius: 700)
-        let skyMaterial = skyGeometry.firstMaterial!
+        let skyTexture = SCNMaterialProperty(contents: Image(named: "sky") as Any)
+        
         let skyProgram = SCNProgram()
         skyProgram.library = view.device!.makeDefaultLibrary()
         skyProgram.vertexFunctionName = "sky_vertex"
         skyProgram.fragmentFunctionName = "sky_fragment"
+        
+        let skyMaterial = skyGeometry.firstMaterial!
         skyMaterial.program = skyProgram
         skyMaterial.isDoubleSided = true
-
-//        let skyImage = NSImage(color: view.settings!.bgColor, size: .init(width: 1024, height: 1024))
-        let skyImage = Image(named: "sky")
-        let skyTexture = SCNMaterialProperty(contents: skyImage as Any)
-        skyMaterial.setValue(skyTexture, forKey: "timeOfDay")
+//        skyMaterial.setValue(skyTexture, forKey: "timeOfDay")
 
         let node = SCNNode(geometry: skyGeometry)
         node.name = "sky"
+        node.categoryBitMask = NodeOptions.noSelect.rawValue
         view.scene!.rootNode.addChildNode(node)
     }
     
     class func EditorGrid(view: GameView) {
-//        let grid = SCNFloor()
-//        grid.firstMaterial?.isDoubleSided = true
-//        grid.width = 100000
-//        grid.length = 100000
-//
-//        let node = SCNNode(geometry: grid)
-//        node.name = "grid"
-//        node.categoryBitMask = NodeOptions.noSelect.rawValue
-//        scene.rootNode.addChildNode(node)
+        let grid = SCNFloor()
+        grid.width = 100000
+        grid.length = 100000
+        
+        let skyProgram = SCNProgram()
+        skyProgram.library = view.device!.makeDefaultLibrary()
+        skyProgram.vertexFunctionName = "sky_vertex"
+        skyProgram.fragmentFunctionName = "sky_fragment"
+        
+        let gridMaterial = grid.firstMaterial!
+        gridMaterial.program = skyProgram
+        gridMaterial.isDoubleSided = true
+        //        gridMaterial.setValue(skyTexture, forKey: "timeOfDay")
+        
+        let node = SCNNode(geometry: grid)
+        node.name = "grid"
+        node.categoryBitMask = NodeOptions.noSelect.rawValue
+        view.scene!.rootNode.addChildNode(node)
         
         EditorDome(view: view)
-    }
-}
-
-final class MyApplication {
-    // 自動的に遅延初期化される(初回アクセスのタイミングでインスタンス生成)
-    static let shared = MyApplication()
-
-    // 外部からのインスタンス生成をコンパイルレベルで禁止
-    private init() {
     }
 }
 

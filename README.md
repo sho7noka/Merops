@@ -29,14 +29,14 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 他のソフトのコンテクストを参考に実装を進めていますが統合ソフトは目指しません。
 
 ### Editor
+- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://github.com/metal-by-example/metal-picking)  動的MSL の[Scenekit 割当](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
+- [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [x] マウスイベントの両立
 - [x] [libgit2でcommitとrevert](x-source-tag://libgit)
 - [x] [TextField からオブジェクトの状態を変更](x-source-tag://TextField)
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
-- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://github.com/metal-by-example/metal-picking)  動的MSL の[Scenekit 割当](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
-- [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
-- [ ] PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)
+- [x] ~~PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)~~ Swift SIL を ctypes から
     - [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring)
     - [2](https://www.hardcoded.net/articles/) 
     - [3](https://www.hardcoded.net/articles/embedding-python-in-objc)
@@ -50,6 +50,7 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 - [ ] interpolation を [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でモディファイヤ テッセレーションとリダクション + ml/noise/lattice/edit 
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
+- [ ] Server から GET/POST
 
 ### Research
 - [tensorflow lite](https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7)

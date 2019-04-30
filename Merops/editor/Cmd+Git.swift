@@ -67,13 +67,13 @@ func gitRevert(url: String) {
     }
 }
 
-func gitStatus(dir: String) {
+func gitStatus(url: String) {
     do {
         let manager = FileManager.default
-        let list = try manager.contentsOfDirectory(atPath: dir)
+        let list = try manager.contentsOfDirectory(atPath: url)
         try list.forEach {
             if ($0.hasPrefix(".git") == false) {
-                let status = try GTRepository(url: URL(fileURLWithPath: dir))
+                let status = try GTRepository(url: URL(fileURLWithPath: url))
                         .status(forFile: $0, success: nil, error: nil)
                 print(status)
             }

@@ -8,21 +8,21 @@
 
 #include <metal_stdlib>
 using namespace metal;
-
 #include <SceneKit/scn_metal>
 
-fragment float4
-vertex_fill() {
+
+fragment
+float4 vertex_fill() {
     return float4(1, 0, 0, 1);
 }
 
-fragment float4
-line_fill() {
+fragment
+float4 line_fill() {
     return float4(0, 1, 0, 1);
 }
 
-fragment float4
-face_fill() {
+fragment
+float4 face_fill() {
     return float4(0, 0, 1, 1);
 }
 
@@ -72,9 +72,7 @@ lNodeConstants {
 };
 
 vertex
-lVertexOut outline_vertex(lVertexIn in [[stage_in]],
-                          constant lNodeConstants &scn_node [[buffer(1)]])
-{
+lVertexOut outline_vertex(lVertexIn in [[stage_in]], constant lNodeConstants &scn_node [[buffer(1)]]) {
     float3 modelNormal = normalize(in.normal);
     float3 modelPosition = in.position;
     const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
@@ -87,15 +85,13 @@ lVertexOut outline_vertex(lVertexIn in [[stage_in]],
     return out;
 }
 
-fragment half4
-outline_fragment(lVertexOut in [[stage_in]]) {
+fragment
+half4 outline_fragment(lVertexOut in [[stage_in]]) {
     return half4(in.color);
 }
 
 vertex
-FVertexOut face_vertex(FVertexIn in [[stage_in]],
-                       constant lNodeConstants &scn_node [[buffer(1)]])
-{
+FVertexOut face_vertex(FVertexIn in [[stage_in]], constant lNodeConstants &scn_node [[buffer(1)]]) {
     float3 modelNormal = normalize(in.normal);
     float3 modelPosition = in.position;
     const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
@@ -108,15 +104,13 @@ FVertexOut face_vertex(FVertexIn in [[stage_in]],
     return out;
 }
 
-fragment half4
-face_fragment(FVertexOut in [[stage_in]]) {
+fragment
+half4 face_fragment(FVertexOut in [[stage_in]]) {
     return half4(in.color);
 }
 
 vertex
-PVertexOut point_vertex(PVertexIn in [[stage_in]],
-                       constant lNodeConstants &scn_node [[buffer(1)]])
-{
+PVertexOut point_vertex(PVertexIn in [[stage_in]], constant lNodeConstants &scn_node [[buffer(1)]]) {
     float3 modelNormal = normalize(in.normal);
     float3 modelPosition = in.position;
     const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
@@ -129,8 +123,8 @@ PVertexOut point_vertex(PVertexIn in [[stage_in]],
     return out;
 }
 
-fragment half4
-point_fragment(PVertexOut in [[stage_in]]) {
+fragment
+half4 point_fragment(PVertexOut in [[stage_in]]) {
     return half4(in.color);
 }
 
@@ -158,23 +152,39 @@ NodeConstants {
 };
 
 vertex
-VertexOut sky_vertex(VertexIn in [[stage_in]],
-                     constant NodeConstants &scn_node [[buffer(1)]])
-{
+VertexOut sky_vertex(VertexIn in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
     VertexOut out;
     out.position = scn_node.modelViewProjectionTransform * float4(in.position, 1);
     out.texCoords = in.texCoords;
     return out;
 }
 
-fragment half4
-sky_fragment(VertexOut in [[stage_in]],
+fragment
+half4 sky_fragment(VertexOut in [[stage_in]],
              texture2d<float, access::sample> skyTexture [[texture(0)]],
-             constant SCNSceneBuffer &scn_frame [[buffer(0)]],
-             constant float &timeOfDay [[buffer(2)]])
+             constant SCNSceneBuffer &scn_frame [[buffer(0)]])
+//             constant float &timeOfDay [[buffer(2)]])
 {
     constexpr sampler skySampler(coord::normalized, address::repeat, filter::linear);
-    float2 skyCoords(timeOfDay, in.texCoords.y);
+    float2 skyCoords(1, in.texCoords.y);
     float4 skyColor = skyTexture.sample(skySampler, skyCoords);
     return half4(half3(skyColor.rgb), 1);
+}
+
+//https://qiita.com/edo_m18/items/5e03f7fa317b922b5a42#gl_fragcoord相当の処理
+fragment
+half4　grid_fragment(VertexOut in [[stage_in]], SCNSceneBuffer &scn_node [[buffer(0)]]){
+    float2 pos = gl_FragCoord.xy;
+
+    float x = pos.x - (resolution.x/2.0);
+    float y = pos.y - (resolution.y/2.0);
+
+    float3 color = float3(sin((pos.x * 100.0)/7500.0)/4.0 + 0.5);
+
+    color += float3(sin((pos.y * 100.0)/7500.0)/4.0 + 0.5);
+
+    if (fmod(pos.x, 40.0) > 0.5 && fmod(pos.y, 40.0) > 0.5)
+    color = float3(0.5);
+
+    return half4(color, 1.0);
 }

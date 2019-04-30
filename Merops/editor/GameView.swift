@@ -63,7 +63,10 @@ class GameView: SCNView {
     
     var val = 0.0 {
         didSet {
-            self.pointOfView?.position.z = CGFloat(Float(val))
+//            self.pointOfView?.position.z = CGFloat(val)
+        }
+        willSet {
+            
         }
     }
     
@@ -79,10 +82,16 @@ class GameView: SCNView {
     
     var isDeforming = true {
         didSet {
+            #if os(OSX)
             self.gestureRecognizers.forEach {
                 $0.isEnabled = !isDeforming
             }
-            self.allowsCameraControl = !isDeforming
+            #elseif os(iOS)
+            self.gestureRecognizers!.forEach {
+                $0.isEnabled = !isDeforming
+            }
+            #endif
+//            self.allowsCameraControl = !isDeforming
         }
     }
     
@@ -139,38 +148,38 @@ class GameView: SCNView {
     var part = DrawOverride.Object {
         didSet {
             if let selNode = selection?.node {
-                let outlineNode = duplicate(selNode)
-                root?.addChildNode(outlineNode)
+                outlineNode = duplicate(selNode)
+                root?.addChildNode(outlineNode!)
                 
                 switch part {
                 case .OverrideVertex:
                     let outlineProgram = SCNProgram()
                     outlineProgram.vertexFunctionName = "point_vertex"
                     outlineProgram.fragmentFunctionName = "point_fragment"
-                    outlineNode.geometry?.firstMaterial?.program = outlineProgram
-                    outlineNode.geometry?.firstMaterial?.cullMode = .front
-                //  prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.point, vertex: [])
+                    outlineNode?.geometry?.firstMaterial?.program = outlineProgram
+                    outlineNode?.geometry?.firstMaterial?.cullMode = .front
                     
                 case .OverrideEdge:
                     let outlineProgram = SCNProgram()
                     outlineProgram.vertexFunctionName = "outline_vertex"
                     outlineProgram.fragmentFunctionName = "outline_fragment"
-                    outlineNode.geometry?.firstMaterial?.program = outlineProgram
-                    outlineNode.geometry?.firstMaterial?.cullMode = .front
-                //  prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.line, vertex: [])
+                    outlineNode?.geometry?.firstMaterial?.program = outlineProgram
+                    outlineNode?.geometry?.firstMaterial?.cullMode = .front
                     
                 case .OverrideFace:
                     let outlineProgram = SCNProgram()
                     outlineProgram.vertexFunctionName = "face_vertex"
                     outlineProgram.fragmentFunctionName = "face_fragment"
-                    outlineNode.geometry?.firstMaterial?.program = outlineProgram
-                    outlineNode.geometry?.firstMaterial?.cullMode = .front
-                //  prim = MetalPrimitiveData(node: selNode, type: MTLPrimitiveType.triangleStrip, vertex: [])
+                    outlineNode?.geometry?.firstMaterial?.program = outlineProgram
+                    outlineNode?.geometry?.firstMaterial?.cullMode = .front
                     
-                default:
-                    outlineNode.removeFromParentNode()
-                    prim = nil
+                case .Object:
+                    outlineNode?.geometry?.firstMaterial?.program = nil
+                    outlineNode?.removeFromParentNode()
                 }
+            } else {
+                outlineNode?.geometry?.firstMaterial?.program = nil
+                outlineNode?.removeFromParentNode()
             }
         }
     }
@@ -178,16 +187,16 @@ class GameView: SCNView {
     var selectedNode: SCNNode? = nil {
         didSet {
             if (selectedNode != nil) {
-//                // Label
-//                overLay?.label_name.text = "Name: \(String(describing: selectedNode!.name!))"
-//                overLay?.label_position.text = "Position: \(String(describing: selectedNode!.position.xyz))"
-//                overLay?.label_rotate.text = "Rotate: \(String(describing: selectedNode!.eulerAngles.xyz))"
-//                overLay?.label_scale.text = "Scale: \(selectedNode!.scale.xyz)"
-//
-//                // Material
-//                selectedNode!.geometry!.firstMaterial!.emission.contents = (
-//                    (selectedNode!.geometry != nil) ? Color.red : Color.yellow
-//                )
+                // Label
+                overLay?.label_name.text = "Name: \(String(describing: selectedNode!.name!))"
+                overLay?.label_position.text = "Position: \(String(describing: selectedNode!.position.xyz))"
+                overLay?.label_rotate.text = "Rotate: \(String(describing: selectedNode!.eulerAngles.xyz))"
+                overLay?.label_scale.text = "Scale: \(selectedNode!.scale.xyz)"
+
+                // Material
+                selectedNode!.geometry!.firstMaterial!.emission.contents = (
+                    (selectedNode!.geometry != nil) ? Color.red : Color.yellow
+                )
 
             } else {
                 // Label
@@ -202,16 +211,14 @@ class GameView: SCNView {
                         geo.firstMaterial?.emission.contents = Color.black
                     }
                 })
-                clearView()
+                clear()
             }
         }
     }
     var selection: SCNHitTestResult? = nil
     var p = CGPoint()
     var zDepth: SCNFloat!
-    
-    var prim: MetalPrimitiveData?
-    var marken: SCNNode? = nil
+    var outlineNode: SCNNode?
     var hit_old = SCNVector3Zero
     var deformData: DeformData? = nil
     
@@ -232,42 +239,41 @@ class GameView: SCNView {
         
         // MARK: overLay
         if let first = overLay?.nodes(at: _p!).first {
-            resizeView()
             
             switch first.name {
                 
             case "NSMultipleDocuments"?:
-                selectedNode = Builder.Cone(scene: self.scene!)
+                selectedNode = Builder.Sphere(scene: self.scene!)
                 
             case "NSColorPanel"?:
                 selectedNode = Builder.Grid(scene: self.scene!)
                 
+            case "NSInfo"?:
+                Editor.openScript(model: model!, settings: settings!)
+                
             case "NSComputer"?:
                 cameraName = "camera"
-                
-            case "NSInfo"?:
-                openScript()
         
             case "NSNetwork"?:
                 cameraName = "camera1"
                 
-            case "NSAdvanced"?:
-                setsView?.isHidden = false
-
             case "NSFolder"?:
+                settingView?.isHidden = false
+                
+            case "NSAdvanced"?:
                 break
                 
             case "Info":
-                break
+                properties()
                 
             case "Name":
-                clearView()
+                clear()
                 
                 if selectedNode != nil {
                 #if os(OSX)
                     txtField.stringValue = selectedNode!.name!
                 #elseif os(iOS)
-                    txtField.text = selectedNode.name!
+                    txtField.text = selectedNode?.name!
                 #endif
                     txtField.isHidden = false
                     txtField.frame.origin = CGPoint(x: 56, y: first.position.y * 2 + 16)
@@ -275,7 +281,7 @@ class GameView: SCNView {
                 }
                 
             case "Position":
-                clearView()
+                clear()
                 
                 if selectedNode != nil {
                     for (i, item) in numFields.enumerated() {
@@ -302,7 +308,7 @@ class GameView: SCNView {
                 }
                 
             case "Rotate":
-                clearView()
+                clear()
                 
                 if selectedNode != nil {
                     for (i, item) in numFields.enumerated() {
@@ -329,7 +335,7 @@ class GameView: SCNView {
                 }
                 
             case "Scale":
-                clearView()
+                clear()
                 
                 if selectedNode != nil {
                     for (i, item) in numFields.enumerated() {
@@ -375,13 +381,16 @@ class GameView: SCNView {
         
         // MARK: SCNNode
         if hitResults.count > 0 {
-            clearView()
+            clear()
             
             let result: AnyObject = hitResults[0]
             if result is SCNHitTestResult {
                 selection = result as? SCNHitTestResult
             }
             guard let selectedNode = selection?.node else {
+                return
+            }
+            if selection?.node.categoryBitMask == NodeOptions.noSelect.rawValue {
                 return
             }
             
@@ -459,7 +468,7 @@ class GameView: SCNView {
             var offset = (hit - hit_old) * 100
             hit_old = hit
             
-            if marken != nil {
+            if outlineNode != nil {
                 switch mode {
                     
                 case .PositionMode:
@@ -479,9 +488,9 @@ class GameView: SCNView {
                     default:
                         node(name: "pos")?.isHidden = true
                     }
-                    marken!.position = marken!.position + offset
+                    outlineNode!.position = outlineNode!.position + offset
                     overLay?.label_position.text = (
-                        "Position: \(String(describing: marken!.position.xyz))"
+                        "Position: \(String(describing: outlineNode!.position.xyz))"
                     )
                     
                 case .RotateMode:
@@ -502,9 +511,9 @@ class GameView: SCNView {
                         node(name: "rot")?.isHidden = true
                     }
                     
-                    marken!.eulerAngles = marken!.eulerAngles + offset
+                    outlineNode!.eulerAngles = outlineNode!.eulerAngles + offset
                     overLay?.label_rotate.text = (
-                        "Rotate: \(String(describing: marken!.eulerAngles.xyz))"
+                        "Rotate: \(String(describing: outlineNode!.eulerAngles.xyz))"
                     )
                     
                 case .ScaleMode:
@@ -525,9 +534,9 @@ class GameView: SCNView {
                         node(name: "scl")?.isHidden = true
                     }
                     
-                    marken!.scale = marken!.scale + offset
+                    outlineNode!.scale = outlineNode!.scale + offset
                     overLay?.label_scale.text = (
-                        "Scale: \(String(describing: marken!.scale.xyz))"
+                        "Scale: \(String(describing: outlineNode!.scale.xyz))"
                     )
                     
                 default:
@@ -535,36 +544,36 @@ class GameView: SCNView {
                 }
                 
                 gizmos.forEach {
-                    $0.position = marken!.position + offset
+                    $0.position = outlineNode!.position + offset
                 }
                 
             } else {
                 /// MARK: clone node
-                marken = selection!.node.clone()
-                marken!.opacity = 0.333
+                outlineNode = selection!.node.clone()
+                outlineNode!.opacity = 0.333
                 
                 let invertFilter = CIFilter(name: "CIColorInvert")
                 invertFilter?.name = "invert"
                 let pixellateFilter = CIFilter(name:"CIPixellate")
                 pixellateFilter?.name = "pixellate"
-                marken!.filters = [ pixellateFilter, invertFilter ] as? [CIFilter]
+                outlineNode!.filters = [ pixellateFilter, invertFilter ] as? [CIFilter]
                 
                 switch mode {
                     
                 case .PositionMode:
-                    marken!.position = selection!.node.position
+                    outlineNode!.position = selection!.node.position
                     overLay?.label_position.text = (
                         "Position: \(String(describing: selection!.node.position.xyz))"
                     )
                     
                 case .RotateMode:
-                    marken!.rotation = selection!.node.rotation
+                    outlineNode!.rotation = selection!.node.rotation
                     overLay?.label_rotate.text = (
                         "Rotate: \(String(describing: selection!.node.eulerAngles.xyz))"
                     )
                     
                 case .ScaleMode:
-                    marken!.scale = selection!.node.scale
+                    outlineNode!.scale = selection!.node.scale
                     overLay?.label_scale.text = (
                         "Scale: \(String(describing: selection!.node.scale.xyz))"
                     )
@@ -577,7 +586,7 @@ class GameView: SCNView {
                 gizmos.forEach {
                     $0.position = selection!.node.position
                 }
-                selection!.node.parent!.addChildNode(marken!)
+                selection!.node.parent!.addChildNode(outlineNode!)
             }
             
         } else {
@@ -588,12 +597,12 @@ class GameView: SCNView {
     }
     
     func ctouchesEnded(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {
-        if selection != nil && marken != nil {
+        if selection != nil && outlineNode != nil {
             
             #if os(OSX)
             if event.modifierFlags == Event.ModifierFlags.control {
-                marken!.opacity = 1.0
-                marken!.filters = nil
+                outlineNode!.opacity = 1.0
+                outlineNode!.filters = nil
             }
             #endif
                 
@@ -605,7 +614,7 @@ class GameView: SCNView {
                 node(name: "pos.ymove")?.isHidden = false
                 node(name: "pos.zmove")?.isHidden = false
                 selection!.node.position = selection!.node.convertPosition(
-                    marken!.position, from: selection!.node
+                    outlineNode!.position, from: selection!.node
                 )
                 overLay?.label_position.text = (
                     "Position: \(String(describing: selection!.node.position.xyz))"
@@ -616,7 +625,7 @@ class GameView: SCNView {
                 node(name: "rot.yrotate")?.isHidden = false
                 node(name: "rot.zrotate")?.isHidden = false
                 selection!.node.eulerAngles = selection!.node.convertVector(
-                    marken!.eulerAngles, from: selection!.node
+                    outlineNode!.eulerAngles, from: selection!.node
                 )
                 overLay?.label_rotate.text = (
                     "Rotate: \(String(describing: selection!.node.eulerAngles.xyz))"
@@ -627,7 +636,7 @@ class GameView: SCNView {
                 node(name: "scl.yscale")?.isHidden = false
                 node(name: "scl.zscale")?.isHidden = false
                 selection!.node.position = selection!.node.convertVector(
-                    marken!.scale, from: selection!.node
+                    outlineNode!.scale, from: selection!.node
                 )
                 overLay?.label_scale.text = (
                     "Scale: \(String(describing: selection!.node.position.xyz))"
@@ -639,10 +648,10 @@ class GameView: SCNView {
             
             gizmos.forEach {
                 $0.position = selection!.node.convertPosition(
-                    marken!.position, from: selection!.node
+                    outlineNode!.position, from: selection!.node
                 )
             }
-            marken!.removeFromParentNode()
+            outlineNode!.removeFromParentNode()
         }
         
         // set nil
@@ -651,24 +660,75 @@ class GameView: SCNView {
         if (hitResults.count < 0) {
             selection = nil
         }
-        marken = nil
+        outlineNode = nil
+        
+        #if os(OSX)
+        super.mouseUp(with: event)
+        #endif
         
         // Update
         isDeforming = false
         p = self.convert(touchLocation, to: nil)
         self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         setNeedsDisplay()
+    }
+    
+    /*
+     * MARK: Key Event
+     */
+    
+    func ckeyDown(key: String) {
+        switch key {
+        case "\u{1B}": //ESC
+            clear()
+        case "\t": // TAB
+            gitDiff(url: (self.settings?.projectDir)!)
+        case "o":
+            Editor.openScript(model: model!, settings: settings!)
+        case "\u{7F}": //del
+            if self.selection != nil {
+                Editor.remove(selection: self.selection)
+                selectedNode = nil
+            }
+        case "\r": //Enter
+            gitStatus(url: (self.settings?.projectDir)!)
+        case "q":
+            mode = .Object
+        case "w":
+            mode = .PositionMode
+        case "e":
+            mode = .ScaleMode
+        case "r":
+            mode = .RotateMode
+        case "a":
+            part = .Object
+        case "s":
+            part = .OverrideVertex
+        case "d":
+            part = .OverrideEdge
+        case "f":
+            part = .OverrideFace
+        case "z":
+            gitRevert(url: (self.settings?.projectDir)!)
+        case "x":
+            gitCommit(url: (self.settings?.projectDir)!)
+        case "c":
+            break
+        case "v":
+            break
+        default:
+            break
+        }
         
-        #if os(OSX)
-        super.mouseUp(with: event)
-        #endif
+        self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        setNeedsDisplay()
     }
     
     /*
      * MARK: Resize Event
      */
     
-    func resizeView() {
+    func resize() {
         let size = self.frame.size
         
         #if os(OSX)
@@ -694,7 +754,7 @@ class GameView: SCNView {
         overLay?.label_message.position = CGPoint(x: 0 - round(size.width / 14), y: -size.height / 2 + 20)
     }
     
-    func clearView() {
+    func clear() {
         isDeforming = false
         
         if txtField != nil {
@@ -708,74 +768,49 @@ class GameView: SCNView {
         gizmos.forEach {
             $0.removeFromParentNode()
         }
+        
+        settingView?.isHidden = true
     }
     
-    func resetView() {
-        
-        // track gizmo position
-        gizmos.forEach {
-            root?.addChildNode($0)
-            if let selNode = selection?.node {
-                $0.position = selNode.position
-            }
-            $0.isHidden = true
-        }
+    func properties() {
+//        self.subviews.frame = CGRect(x: self.frame.width * 0.2, y: self.frame.height * 0.3,
+//                               width: self.frame.width, height: self.frame.height * 0.5)
+        ImGui.draw { (imgui) in
+            imgui.pushStyleVar(.windowRounding, value: 0)
+            imgui.pushStyleColor(.frameBg, color: Color.blue)
 
-        // reset color
-        root?.enumerateChildNodes({ child, _ in
-            if let geo = child.geometry {
-                geo.firstMaterial?.emission.contents = Color.black
+            let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
+            f[0] = true
+            imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
+
+            // style
+            imgui.setWindowFontScale(2.0)
+            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
+            imgui.setNextWindowSize(self.frame.size)
+
+            // items
+            imgui.beginGroup()
+            imgui.sliderFloat("index", v: &self.val, minV: 0.0, maxV: 10.0)
+            imgui.colorEdit("backgroundColor", color: &(self.backgroundColor))
+
+            if imgui.button("Edit") {
+                dump(imgui)
             }
-        })
+            if imgui.button("Script") {
+                Editor.openScript(model: self.model!, settings: self.settings!)
+            }
+            imgui.endGroup()
+
+            imgui.end()
+            imgui.popStyleColor()
+            imgui.popStyleVar()
+        }
     }
     
-    func ckeyDown(key: String) {
-        switch key {
-            
-        case "\u{1B}": //ESC
-            clearView()
-        case "\t": // TAB
-            break
-            
-        case "o":
-            self.openScript()
-        case "\u{7F}": //del
-            Editor.removeSelNode(selection: self.selection!)
-            selectedNode = nil
-        case "\r": //Enter
-            break
-            
-        case "q":
-            mode = .Object
-        case "w":
-            mode = .PositionMode
-        case "e":
-            mode = .ScaleMode
-        case "r":
-            mode = .RotateMode
-        case "a":
-            mode = .Object
-        case "s":
-            part = .OverrideVertex
-        case "d":
-            part = .OverrideEdge
-        case "f":
-            part = .OverrideFace
-        case "z":
-            gitRevert(url: (self.settings?.projectDir)!)
-        case "x":
-            gitCommit(url: (self.settings?.projectDir)!)
-        case "c":
-            break
-        case "v":
-            break
-        default:
-            break
-        }
-        
-        self.draw(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        setNeedsDisplay()
-    }
+    var subView: SCNView?
+    var gizmos: [ManipulatorBase] = []
+    var numFields: [TextView] = []
+    var txtField: TextView!
     
 #if os(iOS)
     
@@ -813,16 +848,15 @@ class GameView: SCNView {
 #elseif os(OSX)
 
     override func viewWillStartLiveResize() {
-        clearView()
-        resizeView()
+        resize()
     }
     
     override func resize(withOldSuperviewSize oldSize: NSSize) {
-        resizeView()
+        resize()
     }
     
     override func viewDidEndLiveResize() {
-        resizeView()
+        resize()
     }
     
     override func keyDown(with event: Event) {
@@ -853,79 +887,10 @@ class GameView: SCNView {
         ctouchesEnded(touchLocation: location, previousLocation: previousLocation, event: event)
     }
     
-    var setsView: SettingDialog!
-    
 #endif
-    
+    var settingView: SettingDialog!
     var settings: Settings?
-    var subView: SCNView?
-    var txtField: TextView!
-    var gizmos: [ManipulatorBase] = []
-    var numFields: [TextView] = []
     
-    func showProperty() {
-//        ImGui.draw { (imgui) in
-//            imgui.pushStyleVar(.windowRounding, value: 0)
-//            imgui.pushStyleColor(.frameBg, color: Color.blue)
-//
-//            let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
-//            f[0] = true
-//            imgui.begin("Attributes", show: f, flags: .alwaysAutoResize)
-//
-//            // style
-//            imgui.setWindowFontScale(2.0)
-//            imgui.setNextWindowPos(CGPoint.zero, cond: .always)
-//            imgui.setNextWindowSize(self.frame.size)
-//
-//            // items
-//            imgui.beginGroup()
-//            imgui.sliderFloat("index", v: &self.val, minV: 0.0, maxV: 10.0)
-//            imgui.colorEdit("backgroundColor", color: &(self.backgroundColor))
-//
-//            if imgui.button("Edit") {
-//                dump(imgui)
-//            }
-//            if imgui.button("Script") {
-//                self.openScript()
-//            }
-//            imgui.endGroup()
-//
-//
-//            imgui.end()
-//            imgui.popStyleColor()
-//            imgui.popStyleVar()
-//        }
-    }
-    
-    func openScript() {
-        #if os(iOS)
-        
-        let pythonista = URL(string: "pythonista://\(model?.file)")!
-        UIApplication.shared.open(pythonista)
-//        storeAndShare(withURLString: (self.model!.file ?? nil)!)
-        
-        #elseif os(OSX)
-        
-        if (NSWorkspace.shared.fullPath(forApplication: self.settings!.editor) != nil) {
-            let config = GTConfiguration.default()
-            
-            if ((self.settings?.editor.hasSuffix("Code"))!) {
-                config?.setString("vim", forKey: "core.editor")
-                config?.setString("vimdiff", forKey: "merge.tool")
-                NSWorkspace.shared.open((URL(string: "mvim://open?url=\(model!.file)") ?? nil)!)
-            }
-            
-            // https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
-            if ((self.settings?.editor.hasSuffix("Vim"))!) {
-                config?.setString("code --wait", forKey: "core.editor")
-                config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
-                NSWorkspace.shared.open((URL(string: "vscode://\(model!.file)") ?? nil)!)
-            }
-        }
-        
-        #endif
-    }
-
 }
 
 extension GameView {
@@ -965,10 +930,6 @@ extension GameView {
     }
 
 #elseif os(iOS)
-    
-    var gestureRecognizers: [UIGestureRecognizer] {
-        return self.gestureRecognizers
-    }
     
     func convertToLayer(_ p: CGPoint) -> CGPoint {
         return CGPoint(x: 0, y: 0)
