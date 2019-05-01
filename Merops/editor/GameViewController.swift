@@ -129,7 +129,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             color: Color.lightGray,
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
             pyDir: "/usr/bin/python",
-            editor: "MacVim"
+            editor: "Visual Studio Code"
         )
         let config = GTConfiguration.default()
         
@@ -284,7 +284,7 @@ extension TextView {
 extension GameViewController: NSControlTextEditingDelegate {
     open func controlTextDidChange(_ notification: Notification) {
         if let textField = notification.object as? TextView {
-            guard let node = (self as! GameViewController).gameView.selection?.node else { return }
+            guard let node = self.gameView.selection?.node else { return }
             
             switch textField.placeholder {
             case "Name":

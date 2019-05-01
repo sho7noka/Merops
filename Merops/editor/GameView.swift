@@ -233,7 +233,7 @@ class GameView: SCNView {
     
     func ctouchesBegan(touchLocation: CGPoint, previousLocation: CGPoint, event: Event) {
         
-        /// MARK: point
+        // MARK: point
         p = self.convert(touchLocation, from: nil)
         let _p = overLay?.convertPoint(fromView: touchLocation)
         
@@ -811,6 +811,8 @@ class GameView: SCNView {
     var gizmos: [ManipulatorBase] = []
     var numFields: [TextView] = []
     var txtField: TextView!
+    var settingView: SettingDialog!
+    var settings: Settings?
     
 #if os(iOS)
     
@@ -888,9 +890,6 @@ class GameView: SCNView {
     }
     
 #endif
-    var settingView: SettingDialog!
-    var settings: Settings?
-    
 }
 
 extension GameView {

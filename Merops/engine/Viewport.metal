@@ -6,185 +6,136 @@
 //  Copyright © 2019 sho sumioka. All rights reserved.
 //
 
-#include <metal_stdlib>
-using namespace metal;
-#include <SceneKit/scn_metal>
+#include "Common.metal"
 
+vertex
+float4 vertex_main(const VertexIn4 vertex_in [[ stage_in ]]) {
+    return vertex_in.position;
+}
 
 fragment
-float4 vertex_fill() {
+float4 fragment_main() {
     return float4(1, 0, 0, 1);
 }
 
-fragment
-float4 line_fill() {
-    return float4(0, 1, 0, 1);
+kernel
+void compute(texture2d<float, access::write> output [[texture(0)]],
+             constant float2 &mouse [[buffer(1)]],
+             device float2 *out [[buffer(2)]],
+             uint2 gid [[thread_position_in_grid]])
+{
+    out[0] = mouse[0];
+    out[1] = mouse[1];
+    output.write(float4(0, 0.5, 0.5, 1), gid);
 }
-
-fragment
-float4 face_fill() {
-    return float4(0, 0, 1, 1);
-}
-
-struct
-PVertexIn {
-    float3 position [[attribute(SCNVertexSemanticPosition)]];
-    float3 normal   [[attribute(SCNVertexSemanticNormal)]];
-};
-
-struct
-PVertexOut {
-    float4 position [[position]];
-    float4 color;
-    float3 normal;
-};
-
-struct
-FVertexIn {
-    float3 position [[attribute(SCNVertexSemanticPosition)]];
-    float3 normal   [[attribute(SCNVertexSemanticNormal)]];
-};
-
-struct
-FVertexOut {
-    float4 position [[position]];
-    float4 color;
-    float3 normal;
-};
-
-struct
-lVertexIn {
-    float3 position [[attribute(SCNVertexSemanticPosition)]];
-    float3 normal   [[attribute(SCNVertexSemanticNormal)]];
-};
-
-struct
-lVertexOut {
-    float4 position [[position]];
-    float4 color;
-    float3 normal;
-};
-
-struct
-lNodeConstants {
-    float4x4 modelViewProjectionTransform;
-    float4x4 normalTransform;
-};
-
-vertex
-lVertexOut outline_vertex(lVertexIn in [[stage_in]], constant lNodeConstants &scn_node [[buffer(1)]]) {
-    float3 modelNormal = normalize(in.normal);
-    float3 modelPosition = in.position;
-    const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
-    modelPosition += modelNormal * extrusionMagnitude;
-
-    lVertexOut out;
-    out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
-    out.color = float4(1, 1, 0, 1);
-    out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
-    return out;
-}
-
-fragment
-half4 outline_fragment(lVertexOut in [[stage_in]]) {
-    return half4(in.color);
-}
-
-vertex
-FVertexOut face_vertex(FVertexIn in [[stage_in]], constant lNodeConstants &scn_node [[buffer(1)]]) {
-    float3 modelNormal = normalize(in.normal);
-    float3 modelPosition = in.position;
-    const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
-    modelPosition += modelNormal * extrusionMagnitude;
-    
-    FVertexOut out;
-    out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
-    out.color = float4(1, 0, 0, 1);
-    out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
-    return out;
-}
-
-fragment
-half4 face_fragment(FVertexOut in [[stage_in]]) {
-    return half4(in.color);
-}
-
-vertex
-PVertexOut point_vertex(PVertexIn in [[stage_in]], constant lNodeConstants &scn_node [[buffer(1)]]) {
-    float3 modelNormal = normalize(in.normal);
-    float3 modelPosition = in.position;
-    const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
-    modelPosition += modelNormal * extrusionMagnitude;
-    
-    PVertexOut out;
-    out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
-    out.color = float4(0, 0, 1, 1);
-    out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
-    return out;
-}
-
-fragment
-half4 point_fragment(PVertexOut in [[stage_in]]) {
-    return half4(in.color);
-}
-
-
-
-
 
 struct
 VertexIn {
-    float3 position  [[attribute(SCNVertexSemanticPosition)]];
-    float2 texCoords [[attribute(SCNVertexSemanticTexcoord0)]];
-};
-
-struct
-VertexOut {
-    float4 position [[position]];
-    float2 texCoords;
-};
-
-// 自前定義
-struct
-NodeConstants {
-    float4x4 modelTransform;
-    float4x4 modelViewProjectionTransform;
+    float3 position [[attribute(SCNVertexSemanticPosition)]];
+    float3 normal   [[attribute(SCNVertexSemanticNormal)]];
 };
 
 vertex
-VertexOut sky_vertex(VertexIn in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
+VertexOut outline_vertex(VertexIn in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
+    float3 modelNormal = normalize(in.normal);
+    float3 modelPosition = in.position;
+    const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
+    modelPosition += modelNormal * extrusionMagnitude;
+
+    VertexOut out;
+    out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
+    out.wireColor = fill_line;
+    out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
+    return out;
+}
+
+fragment
+half4 outline_fragment(VertexOut in [[stage_in]]) {
+    return half4(in.wireColor);
+}
+
+vertex
+VertexOut face_vertex(VertexIn in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
+    float3 modelNormal = normalize(in.normal);
+    float3 modelPosition = in.position;
+    const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
+    modelPosition += modelNormal * extrusionMagnitude;
+    
+    VertexOut out;
+    out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
+    out.wireColor = fill_vertex;
+    out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
+    return out;
+}
+
+fragment
+half4 face_fragment(VertexOut in [[stage_in]]) {
+    return half4(in.wireColor);
+}
+
+vertex
+VertexOut point_vertex(VertexIn in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
+    float3 modelNormal = normalize(in.normal);
+    float3 modelPosition = in.position;
+    const float extrusionMagnitude = 0.05; // Ideally this would scale so as to be resolution and distance independent
+    modelPosition += modelNormal * extrusionMagnitude;
+    
+    VertexOut out;
+    out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
+    out.wireColor = fill_vertex;
+    out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
+    return out;
+}
+
+fragment
+half4 point_fragment(VertexOut in [[stage_in]]) {
+    return half4(in.wireColor);
+}
+
+// https://developer.apple.com/documentation/scenekit/scnprogram
+vertex
+VertexOut sky_vertex(VertexInput in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
     VertexOut out;
     out.position = scn_node.modelViewProjectionTransform * float4(in.position, 1);
-    out.texCoords = in.texCoords;
+    out.texcoord = in.texcoord;
     return out;
 }
 
 fragment
 half4 sky_fragment(VertexOut in [[stage_in]],
              texture2d<float, access::sample> skyTexture [[texture(0)]],
-             constant SCNSceneBuffer &scn_frame [[buffer(0)]])
-//             constant float &timeOfDay [[buffer(2)]])
+             constant SCNSceneBuffer &scn_frame [[buffer(0)]],
+             constant float &timeOfDay [[buffer(2)]])
 {
     constexpr sampler skySampler(coord::normalized, address::repeat, filter::linear);
-    float2 skyCoords(1, in.texCoords.y);
+    float2 skyCoords(timeOfDay, in.texcoord.y);
     float4 skyColor = skyTexture.sample(skySampler, skyCoords);
     return half4(half3(skyColor.rgb), 1);
 }
 
+vertex
+VertexOut grid_vertex(VertexInput in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
+    VertexOut out;
+    out.position = scn_node.modelViewProjectionTransform * float4(in.position, 1);
+    out.texcoord = in.texcoord;
+    return out;
+}
+
 //https://qiita.com/edo_m18/items/5e03f7fa317b922b5a42#gl_fragcoord相当の処理
 fragment
-half4　grid_fragment(VertexOut in [[stage_in]], SCNSceneBuffer &scn_node [[buffer(0)]]){
-    float2 pos = gl_FragCoord.xy;
-
-    float x = pos.x - (resolution.x/2.0);
-    float y = pos.y - (resolution.y/2.0);
-
-    float3 color = float3(sin((pos.x * 100.0)/7500.0)/4.0 + 0.5);
-
-    color += float3(sin((pos.y * 100.0)/7500.0)/4.0 + 0.5);
-
-    if (fmod(pos.x, 40.0) > 0.5 && fmod(pos.y, 40.0) > 0.5)
-    color = float3(0.5);
-
-    return half4(color, 1.0);
+half4　grid_fragment(VertexOut in [[stage_in]], constant Uniform uniforms [[buffer(0)]]){
+////    float2 pos = gl_FragCoord.xy;
+//    float2 resolution = float2(uniforms.resolution[0], uniforms.resolution[1]);
+//    float x = pos.x - (resolution.x/2.0);
+//    float y = pos.y - (resolution.y/2.0);
+//
+//    float3 color = float3(sin((pos.x * 100.0)/7500.0)/4.0 + 0.5);
+//
+//    color += float3(sin((pos.y * 100.0)/7500.0)/4.0 + 0.5);
+//
+//    if (fmod(pos.x, 40.0) > 0.5 && fmod(pos.y, 40.0) > 0.5)
+//    color = float3(0.5);
+//
+//    return half4(color, 1.0);
+    return fill_vertex;
 }

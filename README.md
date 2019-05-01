@@ -46,8 +46,8 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 
 ### Engine
 - [x] [Rendererの分離](x-source-tag://engine)
-- [ ] [arm 64 USD 19 を組み込む / C++ のビルド](https://github.com/mzyy94/ARKit-Live2D) / [USDKit](https://github.com/superfunc/USDKit)
-- [ ] interpolation を [simdベースに変更](https://developer.apple.com/videos/play/wwdc2018/701/) 
+- [ ] [arm64 USD](https://github.com/lighttransport/USD-android) を組み込む / [USDKit](https://github.com/jacques-gasselin/usdview-native)
+- [ ] interpolation を [simdベースに](https://developer.apple.com/videos/play/wwdc2018/701/) 
 - [ ] Metal2 でモディファイヤ テッセレーションとリダクション + ml/noise/lattice/edit 
 - [ ] Model I/O で書き出せないgeometryとマテリアル以外を後変更
 - [ ] Server から GET/POST

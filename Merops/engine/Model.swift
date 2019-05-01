@@ -30,7 +30,7 @@ class Model : NSObject {
     
 //    var transform: vector_int3 = []
     private var models: [SCNNode] = []
-    var file: String = "/Users/shosumioka/Merops/Merops/engine/merops.py"
+    var file: String = "/Users/shosumioka/Merops/DerivedData/Merops/Build/Products/Debug/merops.py"
     var geom: String?
     var material: Material?
     func create(name: String) {}

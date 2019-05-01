@@ -4,6 +4,7 @@
 //
 
 import SceneKit
+import Euclid
 
 final class Builder {
 
@@ -233,7 +234,7 @@ final class Editor {
         let skyMaterial = skyGeometry.firstMaterial!
         skyMaterial.program = skyProgram
         skyMaterial.isDoubleSided = true
-//        skyMaterial.setValue(skyTexture, forKey: "timeOfDay")
+        skyMaterial.setValue(skyTexture, forKey: "timeOfDay")
 
         let node = SCNNode(geometry: skyGeometry)
         node.name = "sky"
@@ -248,8 +249,8 @@ final class Editor {
         
         let skyProgram = SCNProgram()
         skyProgram.library = view.device!.makeDefaultLibrary()
-        skyProgram.vertexFunctionName = "sky_vertex"
-        skyProgram.fragmentFunctionName = "sky_fragment"
+        skyProgram.vertexFunctionName = "grid_vertex"
+        skyProgram.fragmentFunctionName = "grid_fragment"
         
         let gridMaterial = grid.firstMaterial!
         gridMaterial.program = skyProgram

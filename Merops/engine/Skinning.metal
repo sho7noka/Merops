@@ -10,9 +10,14 @@
 
 #include <metal_stdlib>
 #include <simd/simd.h>
-#import "ShaderTypes.h"
 using namespace metal;
 
+typedef struct
+{
+    float4x4 projectionMatrix;
+    float4x4 modelViewMatrix;
+    float3x3 normalMatrix;
+} Uniforms;
 
 typedef struct
 {
@@ -30,7 +35,8 @@ typedef struct
 	float4 bone3;
 } bones;
 
-struct ColorInOut
+struct
+ColorInOut
 {
     float4 position [[position]];
     float2 texCoord;
@@ -49,33 +55,35 @@ ColorInOut vertexShader(device vertex_t* vertex_array   [[ buffer(0) ]],
     int boneId = int(vertex_array[vid].bone);
     if (boneId >= 0)
     {
-    float4 bone0 = bone_array[boneId].bone0;
-    float4 bone1 = bone_array[boneId].bone1;
-    float4 bone2 = bone_array[boneId].bone2;
-    float4 bone3 = bone_array[boneId].bone3;
-    float4x4 bone = float4x4(bone0,bone1,bone2,bone3);
-    out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * bone * position;
-    float3x3 bone3x3 = float3x3(bone0.xyz,bone1.xyz,bone2.xyz);
-    out.transformedNormal = matrix_float3x3(uniforms.normalMatrix) * bone3x3 * vector_float3(vertex_array[vid].normal);
+        float4 bone0 = bone_array[boneId].bone0;
+        float4 bone1 = bone_array[boneId].bone1;
+        float4 bone2 = bone_array[boneId].bone2;
+        float4 bone3 = bone_array[boneId].bone3;
+        float4x4 bone = float4x4(bone0,bone1,bone2,bone3);
+        out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * bone * position;
+        
+        float3x3 bone3x3 = float3x3(bone0.xyz,bone1.xyz,bone2.xyz);
+        out.transformedNormal = matrix_float3x3(uniforms.normalMatrix) * bone3x3 * vector_float3(vertex_array[vid].normal);
     }
     else
     {
-    out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * position;
-    out.transformedNormal = matrix_float3x3(uniforms.normalMatrix) * vector_float3(vertex_array[vid].normal);
+        out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * position;
+        out.transformedNormal = matrix_float3x3(uniforms.normalMatrix) * vector_float3(vertex_array[vid].normal);
     }
     out.texCoord = vertex_array[vid].uv;
     return out;
 }
 
-fragment float4 fragmentShader(
-    ColorInOut in                   [[ stage_in   ]],
-    texture2d<half> texture         [[ texture(0) ]],
-    sampler texSampler              [[ sampler(0) ]],
-    const constant float4& diffuse  [[ buffer(0)  ]])
+fragment
+float4 fragmentShader(ColorInOut in                   [[ stage_in   ]],
+                      texture2d<half> texture         [[ texture(0) ]],
+                      sampler texSampler              [[ sampler(0) ]],
+                      const constant float4 &diffuse  [[ buffer(0)  ]])
 {
     float3 lightDirection = normalize(float3(-400,-200,-500));
     float3 normal = normalize(in.transformedNormal);
     float lightWeighting = dot(normal,lightDirection);
+    
     if ( lightWeighting < 0.4 )
     {
         lightWeighting = 0.2;

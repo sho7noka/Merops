@@ -25,18 +25,19 @@
 #include <metal_stdlib>
 using namespace metal;
 
-struct DeformData {
+struct
+DeformData {
     float3 location;
     float3 direction;
     float radiusSquared;
     float deformationAmplitude;
 };
 
-kernel void deformVertex(
-    const device float3 *inVerts [[ buffer(0) ]],
-    device float3 *outVerts [[ buffer(1) ]],
-    constant DeformData &deformD [[ buffer(2)]],
-    uint id [[ thread_position_in_grid ]])
+kernel
+void deformVertex(const device float3 *inVerts  [[ buffer(0) ]],
+                  device float3 *outVerts       [[ buffer(1) ]],
+                  constant DeformData &deformD  [[ buffer(2)]],
+                  uint id                       [[ thread_position_in_grid ]])
 {
     const float3 inVert = inVerts[id];
     const float3 toVert = inVert - deformD.location;
@@ -45,11 +46,11 @@ kernel void deformVertex(
     outVerts[id] = outVert;
 }
 
-kernel void deformNormal(
-    const device float3 *inVerts [[ buffer(0) ]],
-    device float3 *outVerts [[ buffer(1) ]],
-    device float3 *outNormals [[ buffer(2) ]],
-    uint id [[ thread_position_in_grid ]])
+kernel
+void deformNormal(const device float3 *inVerts  [[ buffer(0) ]],
+                  device float3 *outVerts       [[ buffer(1) ]],
+                  device float3 *outNormals     [[ buffer(2) ]],
+                  uint id                       [[ thread_position_in_grid ]])
 {
     if (id % 3 == 0) {
         const float3 v1 = inVerts[id];

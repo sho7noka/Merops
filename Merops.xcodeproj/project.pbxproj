@@ -28,6 +28,8 @@
 		E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
 		E2817C242277E1B4009EAD05 /* GameViewDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewDialogs.swift */; };
+		E2817C2622792A67009EAD05 /* Euclid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2817C2522792A67009EAD05 /* Euclid.framework */; };
+		E2817C2822792A94009EAD05 /* Euclid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2817C2722792A94009EAD05 /* Euclid.framework */; };
 		E281B78A20B933B600232181 /* Cmd+USD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78720B933B600232181 /* Cmd+USD.swift */; };
 		E281B78B20B933B600232181 /* Cmd+Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78820B933B600232181 /* Cmd+Git.swift */; };
 		E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78D20B933D000232181 /* GameViewSettings.swift */; };
@@ -39,7 +41,7 @@
 		E281B7A820B94CAE00232181 /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
 		E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E281B7AA20B94CAE00232181 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Model.swift */; };
-		E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Shaders.metal */; };
+		E281B7AC20B94CBB00232181 /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Lighting.metal */; };
 		E281B7B020B94CCB00232181 /* Common.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AD20B94CCA00232181 /* Common.metal */; };
 		E281B7B120B94CCB00232181 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
 		E281B7B220B94CCB00232181 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
@@ -66,7 +68,7 @@
 		E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78D20B933D000232181 /* GameViewSettings.swift */; };
 		E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79120B933E200232181 /* GeoBuilder.swift */; };
 		E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79220B933E200232181 /* GeoPrimitives.swift */; };
-		E2E4612C210D5E7A00C0DB39 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Shaders.metal */; };
+		E2E4612C210D5E7A00C0DB39 /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Lighting.metal */; };
 		E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
@@ -84,7 +86,6 @@
 		ED32B9641EB5D298000D8823 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
 		ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9671EB5D298000D8823 /* MainMenu.xib */; };
 		ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */; };
-		EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */; };
 		EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +137,8 @@
 		E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/iOS/ObjectiveGit.framework; sourceTree = "<group>"; };
 		E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Merops-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		E26ABEC021EB769600487FA4 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		E2817C2522792A67009EAD05 /* Euclid.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Euclid.framework; path = Carthage/Build/iOS/Euclid.framework; sourceTree = "<group>"; };
+		E2817C2722792A94009EAD05 /* Euclid.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Euclid.framework; path = Carthage/Build/Mac/Euclid.framework; sourceTree = "<group>"; };
 		E281B78720B933B600232181 /* Cmd+USD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+USD.swift"; sourceTree = "<group>"; };
 		E281B78820B933B600232181 /* Cmd+Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cmd+Git.swift"; sourceTree = "<group>"; };
 		E281B78D20B933D000232181 /* GameViewSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewSettings.swift; sourceTree = "<group>"; };
@@ -148,7 +151,7 @@
 		E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLPolygonReduction.swift; sourceTree = "<group>"; };
 		E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTLMeshDeformable.swift; sourceTree = "<group>"; };
 		E281B7A020B94CAE00232181 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		E281B7AB20B94CBB00232181 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		E281B7AB20B94CBB00232181 /* Lighting.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
 		E281B7AD20B94CCA00232181 /* Common.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Common.metal; sourceTree = "<group>"; };
 		E281B7AE20B94CCA00232181 /* Lambert.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lambert.metal; sourceTree = "<group>"; };
 		E281B7AF20B94CCA00232181 /* Tessellation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Tessellation.metal; sourceTree = "<group>"; };
@@ -276,7 +279,7 @@
 		E2CDF1D021357B6B004D8E39 /* py_module */ = {isa = PBXFileReference; lastKnownFileType = folder; name = py_module; path = Merops/extra/py_module; sourceTree = SOURCE_ROOT; };
 		E2D5EE562268DEF400010903 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/Mac/SocketIO.framework; sourceTree = "<group>"; };
 		E2D5EE582268DF0B00010903 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
-		E2D5EE5A2268DF8F00010903 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		E2D5EE5A2268DF8F00010903 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = ../engine/Server.swift; sourceTree = "<group>"; };
 		E2D5EE5C2268E06A00010903 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		E2D5EE5E2268E07B00010903 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -326,7 +329,6 @@
 		ED32B9681EB5D298000D8823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ED32B96A1EB5D298000D8823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewOverlay.swift; sourceTree = "<group>"; };
-		EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		EDEEFF531F8A35CB00E4785F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveGit.framework; path = Carthage/Build/Mac/ObjectiveGit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -340,6 +342,7 @@
 				E215AC2F22678C750052BCBD /* ImGui.framework in Frameworks */,
 				E26A788E21E7815900FBA0BB /* ObjectiveGit.framework in Frameworks */,
 				E2D5EE5F2268E07C00010903 /* Starscream.framework in Frameworks */,
+				E2817C2622792A67009EAD05 /* Euclid.framework in Frameworks */,
 				E23D355D22636A2A009D6DBB /* libsqlite3.tbd in Frameworks */,
 				E23D355E22636A2A009D6DBB /* libz.tbd in Frameworks */,
 				E23D355F22636A2A009D6DBB /* libbz2.tbd in Frameworks */,
@@ -367,6 +370,7 @@
 				E215AC2E22678C630052BCBD /* ImGui.framework in Frameworks */,
 				E2FDEBB021ECCB110024CDC1 /* Python.framework in Frameworks */,
 				EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */,
+				E2817C2822792A94009EAD05 /* Euclid.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,8 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				EDEEFF531F8A35CB00E4785F /* README.md */,
-				E26ABEC021EB769600487FA4 /* Cartfile */,
 				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
+				E26ABEC021EB769600487FA4 /* Cartfile */,
 				E2C58D0B22663F3D00807EF0 /* python3 */,
 				E2FB3999225D09A0000C4064 /* Assets.xcassets */,
 				ED32B9631EB5D298000D8823 /* art.scnassets */,
@@ -389,14 +393,13 @@
 		E281B7B320B94CE700232181 /* shader */ = {
 			isa = PBXGroup;
 			children = (
-				E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */,
-				E281B7AB20B94CBB00232181 /* Shaders.metal */,
 				E281B7AD20B94CCA00232181 /* Common.metal */,
+				E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */,
 				E281B7AE20B94CCA00232181 /* Lambert.metal */,
-				E281B7AF20B94CCA00232181 /* Tessellation.metal */,
+				E281B7AB20B94CBB00232181 /* Lighting.metal */,
 				ED2221822021E17C00427606 /* DeformCompute.metal */,
 				E281B79C20B94CAE00232181 /* Skinning.metal */,
-				EDA91BBE1FF2886600E14B8D /* ShaderTypes.h */,
+				E281B7AF20B94CCA00232181 /* Tessellation.metal */,
 			);
 			name = shader;
 			sourceTree = "<group>";
@@ -597,6 +600,8 @@
 		ED24CD2D1F26623A000CC0BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2817C2522792A67009EAD05 /* Euclid.framework */,
+				E2817C2722792A94009EAD05 /* Euclid.framework */,
 				E2D5EE5C2268E06A00010903 /* Starscream.framework */,
 				E2D5EE5E2268E07B00010903 /* Starscream.framework */,
 				E2D5EE562268DEF400010903 /* SocketIO.framework */,
@@ -748,7 +753,6 @@
 				E2C58D802267437800807EF0 /* BindGen.swift */,
 				E25C20E421336ABA00EE861F /* USD-bind.hpp */,
 				E25C20E321336ABA00EE861F /* USD-bind.cpp */,
-				E2D5EE5A2268DF8F00010903 /* Server.swift */,
 			);
 			name = extends;
 			sourceTree = "<group>";
@@ -762,6 +766,7 @@
 				E281B78720B933B600232181 /* Cmd+USD.swift */,
 				E216B24421299C4D004D0CE8 /* interpolate.swift */,
 				E21859F921036D3400653DBD /* Serializer.swift */,
+				E2D5EE5A2268DF8F00010903 /* Server.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -793,7 +798,6 @@
 			files = (
 				E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */,
 				E25C20E621336ABA00EE861F /* USD-bind.hpp in Headers */,
-				EDA91BC81FF2886600E14B8D /* ShaderTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +955,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ImGui.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Euclid.framework",
 			);
 			name = "Carthage copy";
 			outputFileListPaths = (
@@ -989,6 +994,7 @@
 				"$(SRCROOT)/Carthage/Build/Mac/ImGui.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/SocketIO.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Starscream.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Euclid.framework",
 			);
 			name = "Carthage copy";
 			outputPaths = (
@@ -1018,7 +1024,7 @@
 				E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */,
 				E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */,
 				E2817C242277E1B4009EAD05 /* GameViewDialogs.swift in Sources */,
-				E2E4612C210D5E7A00C0DB39 /* Shaders.metal in Sources */,
+				E2E4612C210D5E7A00C0DB39 /* Lighting.metal in Sources */,
 				E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */,
 				E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */,
 				E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */,
@@ -1057,7 +1063,7 @@
 				ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */,
 				E2FDEBAF21ECBEDC0024CDC1 /* Viewport.metal in Sources */,
 				E281B78F20B933D000232181 /* GameViewSettings.swift in Sources */,
-				E281B7AC20B94CBB00232181 /* Shaders.metal in Sources */,
+				E281B7AC20B94CBB00232181 /* Lighting.metal in Sources */,
 				E281B7A120B94CAE00232181 /* MTLSkinningMesh.swift in Sources */,
 				E2DD2649213A6C3D00242943 /* Extensions.swift in Sources */,
 				E281B7A920B94CAE00232181 /* MTLMeshDeformable.swift in Sources */,
