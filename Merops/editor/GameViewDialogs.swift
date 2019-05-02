@@ -45,7 +45,13 @@
     import UIKit
 
     final class SettingDialog: View, TextFieldDelegate {
-
+        init(frame: CGRect, setting: Settings) {
+            super.init(frame: frame)
+        }
+        
+        required init?(coder decoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     }
 
 #endif

@@ -6,6 +6,7 @@
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
 //
 #if os(OSX)
+
 import Cocoa
 import Python
 
@@ -17,7 +18,6 @@ public typealias TextView = NSTextField
 public typealias SuperViewController = NSViewController
 public typealias GestureRecognizer = NSPanGestureRecognizer
 public typealias TextFieldDelegate = NSTextFieldDelegate
-
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -33,6 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
     
 #elseif os(iOS)
+
 import UIKit
 
 public typealias View = UIView

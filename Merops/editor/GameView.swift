@@ -25,7 +25,6 @@ class GameView: SCNView {
     var cps: MTLComputePipelineState! = nil
     
     override func draw(_ dirtyRect: CGRect) {
-        return
         if let drawable = metalLayer.nextDrawable() {
             guard let commandBuffer = queue.makeCommandBuffer() else { return }
             commandBuffer.pushDebugGroup("Mouse Buffer")
@@ -240,7 +239,6 @@ class GameView: SCNView {
         
         // MARK: overLay
         if let first = overLay?.nodes(at: _p!).first {
-            print (first.name)
             switch first.name {
                 
             case "NSMultipleDocuments"?:
@@ -771,11 +769,15 @@ class GameView: SCNView {
         }
         
         settingView?.isHidden = true
+        
+        self.subviews.last!.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
     func properties() {
-//        self.subviews.frame = CGRect(x: self.frame.width * 0.2, y: self.frame.height * 0.3,
-//                               width: self.frame.width, height: self.frame.height * 0.5)
+        self.subviews.last!.frame = CGRect(x: self.frame.width * 0.2, y: self.frame.height * 0.3,
+                                           width: self.frame.width, height: self.frame.height * 0.5)
+        
+        
         ImGui.draw { (imgui) in
             imgui.pushStyleVar(.windowRounding, value: 0)
             imgui.pushStyleColor(.frameBg, color: Color.blue)
@@ -821,11 +823,14 @@ class GameView: SCNView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: Event?) {
         for touch: UITouch in touches {
+            
+            /// - Tag: Pencil
             if touch.type == .pencil {
-                touch.altitudeAngle
-                touch.azimuthAngle(in: self)
-                touch.force
+                print(touch.altitudeAngle)
+                print(touch.azimuthAngle(in: self))
+                print(touch.force)
             }
+            
             let location = touch.location(in: self)
             let previousLocation = location
             ctouchesBegan(touchLocation: location, previousLocation: previousLocation, event: event!)
@@ -933,6 +938,33 @@ extension GameView {
     
     func convertToLayer(_ p: CGPoint) -> CGPoint {
         return CGPoint(x: 0, y: 0)
+    }
+    
+    func share(url: URL) {
+        self.documentInteractionController.url = url
+        self.documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
+        self.documentInteractionController.name = url.localizedName ?? url.lastPathComponent
+        self.documentInteractionController.presentPreview(animated: true)
+    }
+    
+    /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
+    func storeAndShare(withURLString: String) {
+        guard let url = URL(string: withURLString) else { return }
+        /// START YOUR ACTIVITY INDICATOR HERE
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            let tmpURL = FileManager.default.temporaryDirectory
+                .appendingPathComponent(response?.suggestedFilename ?? "fileName.png")
+            do {
+                try data.write(to: tmpURL)
+            } catch {
+                print(error)
+            }
+            DispatchQueue.main.async {
+                /// STOP YOUR ACTIVITY INDICATOR HERE
+                self.share(url: tmpURL)
+            }
+        }.resume()
     }
     
 #endif

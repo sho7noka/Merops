@@ -242,7 +242,7 @@ final class Editor {
         view.scene!.rootNode.addChildNode(node)
     }
     
-    class func EditorGrid(view: GameView) {
+    class func BackGround(view: GameView) {
         let grid = SCNFloor()
         grid.width = 100000
         grid.length = 100000

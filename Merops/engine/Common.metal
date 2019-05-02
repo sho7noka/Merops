@@ -24,11 +24,11 @@ VertexIn4 {
 
 struct
 VertexOut {
-    float4 position    [[position]];
+    float pointsize     [[point_size]];
+    float4 position     [[position]];
     float3 normal;
     float2 texcoord;
     float4 wireColor;
-    float pointsize[[point_size]];
 };
 
 struct

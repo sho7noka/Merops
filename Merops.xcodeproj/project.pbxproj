@@ -25,7 +25,6 @@
 		E26A789421E8C5FF00FBA0BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD2648213A6C3D00242943 /* Extensions.swift */; };
 		E26A789621E8CBCD00FBA0BB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B7A020B94CAE00232181 /* Model.swift */; };
 		E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */; };
-		E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
 		E26ABEC121EB769600487FA4 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
 		E2817C242277E1B4009EAD05 /* GameViewDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78E20B933D000232181 /* GameViewDialogs.swift */; };
 		E2817C2622792A67009EAD05 /* Euclid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2817C2522792A67009EAD05 /* Euclid.framework */; };
@@ -66,7 +65,6 @@
 		E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B78D20B933D000232181 /* GameViewSettings.swift */; };
 		E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79120B933E200232181 /* GeoBuilder.swift */; };
 		E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79220B933E200232181 /* GeoPrimitives.swift */; };
-		E2E4612C210D5E7A00C0DB39 /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Lighting.metal */; };
 		E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
@@ -76,6 +74,13 @@
 		E2FB399B225D09A1000C4064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3999225D09A0000C4064 /* Assets.xcassets */; };
 		E2FB9E9D227AD44100E450F6 /* pyinit.py in Resources */ = {isa = PBXBuildFile; fileRef = E2FB9E8E2279E5B700E450F6 /* pyinit.py */; };
 		E2FB9EA2227ADBC600E450F6 /* python3 in Resources */ = {isa = PBXBuildFile; fileRef = E2FB9EA1227ADBC600E450F6 /* python3 */; };
+		E2FB9EA3227B291900E450F6 /* Common.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AD20B94CCA00232181 /* Common.metal */; };
+		E2FB9EA4227B291B00E450F6 /* Lambert.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AE20B94CCA00232181 /* Lambert.metal */; };
+		E2FB9EA5227B291E00E450F6 /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AB20B94CBB00232181 /* Lighting.metal */; };
+		E2FB9EA6227B292100E450F6 /* DeformCompute.metal in Sources */ = {isa = PBXBuildFile; fileRef = ED2221822021E17C00427606 /* DeformCompute.metal */; };
+		E2FB9EA7227B292400E450F6 /* Skinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B79C20B94CAE00232181 /* Skinning.metal */; };
+		E2FB9EA8227B292700E450F6 /* Tessellation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E281B7AF20B94CCA00232181 /* Tessellation.metal */; };
+		E2FB9EA9227B292A00E450F6 /* Viewport.metal in Sources */ = {isa = PBXBuildFile; fileRef = E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */; };
 		E2FBFD2F21EDFA0C00BDB646 /* Merops-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */; };
 		E2FDEBAF21ECBEDC0024CDC1 /* Viewport.metal in Sources */ = {isa = PBXBuildFile; fileRef = E2FDEBAE21ECBEDC0024CDC1 /* Viewport.metal */; };
 		E2FDEBB021ECCB110024CDC1 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E46157210DE97800C0DB39 /* Python.framework */; };
@@ -742,6 +747,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2FB9EA3227B291900E450F6 /* Common.metal in Sources */,
+				E2FB9EA4227B291B00E450F6 /* Lambert.metal in Sources */,
+				E2FB9EA5227B291E00E450F6 /* Lighting.metal in Sources */,
+				E2FB9EA6227B292100E450F6 /* DeformCompute.metal in Sources */,
+				E2FB9EA8227B292700E450F6 /* Tessellation.metal in Sources */,
+				E2FB9EA7227B292400E450F6 /* Skinning.metal in Sources */,
+				E2FB9EA9227B292A00E450F6 /* Viewport.metal in Sources */,
 				E2D5EE602268E8B100010903 /* Server.swift in Sources */,
 				E2C58D8522674FA800807EF0 /* BindGen.swift in Sources */,
 				E26A789621E8CBCD00FBA0BB /* Model.swift in Sources */,
@@ -753,10 +765,8 @@
 				E2E46125210D5E4A00C0DB39 /* GameViewSettings.swift in Sources */,
 				E2C58D08226542BD00807EF0 /* Cmd+Git.swift in Sources */,
 				E2E46126210D5E5500C0DB39 /* GeoBuilder.swift in Sources */,
-				E26A78B821EB06A100FBA0BB /* DeformCompute.metal in Sources */,
 				E2E46127210D5E5900C0DB39 /* GeoPrimitives.swift in Sources */,
 				E2817C242277E1B4009EAD05 /* GameViewDialogs.swift in Sources */,
-				E2E4612C210D5E7A00C0DB39 /* Lighting.metal in Sources */,
 				E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */,
 				E26A789721E8CDCA00FBA0BB /* MTLPolygonReduction.swift in Sources */,
 				E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */,

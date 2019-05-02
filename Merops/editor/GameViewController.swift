@@ -41,7 +41,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
      */
     @objc
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
-
+        
         // Mark: Deformer
         guard let deformData = gameView.deformData else {
             return
@@ -64,8 +64,8 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         render.pointOfView = gameView.pointOfView
         render.render(atTime: 0,
                       viewport: CGRect(x: 0, y: 0, width: gameView.frame.width, height: gameView.frame.height),
-                      commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor())
-        
+                      commandBuffer: commandBuffer!, passDescriptor: render.renderPassDescriptor()
+        )
         commandBuffer?.commit()
         commandBuffer?.popDebugGroup()
     }
@@ -135,30 +135,25 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             pyDir: "/usr/bin/python",
             editor: "Visual Studio Code"
         )
-        let config = GTConfiguration.default()
+        gameView.settingView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
+        gameView.settingView?.isHidden = true
+        gameView.addSubview(gameView.settingView!)
         
-        if (gameView.settings!.editor.hasSuffix("Code")) {
-            config?.setString("code --wait", forKey: "core.editor")
-            config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
-        }
-        if (gameView.settings!.editor.hasSuffix("Vim")) {
-            config?.setString("vim", forKey: "core.editor")
-            config?.setString("vimdiff", forKey: "merge.tool")
-        }
-        
-        gameView.queue = device.makeCommandQueue()
         gameView.allowsCameraControl = true
         gameView.autoenablesDefaultLighting = true
         gameView.backgroundColor = (gameView.settings?.bgColor)!
+        gameView.queue = device.makeCommandQueue()
+        Editor.BackGround(view: gameView)
         
         /// - Tag: addSubView
+        let pos = PositionNode()
+        pos.isHidden = false
+        
         gameView.subView = SCNView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         gameView.subView?.scene = SCNScene()
         gameView.subView?.allowsCameraControl = true
         gameView.subView?.backgroundColor = .clear
         gameView.subView?.isPlaying = true
-        let pos = PositionNode()
-        pos.isHidden = false
         gameView.subView?.scene?.rootNode.addChildNode(pos)
         gameView.addSubview(gameView.subView!)
         
@@ -167,8 +162,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         overLay = gameView.overlaySKScene as? GameViewOverlay
         overLay.isUserInteractionEnabled = false
         gameView.cameraName = (gameView.defaultCameraController.pointOfView?.name)!
-        
-        Editor.EditorGrid(view: gameView)
         
         // MARK: Text Field
         gameView.numFields.append(contentsOf: [TextView(), TextView(), TextView()])
@@ -186,32 +179,32 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.addSubview(gameView.txtField!)
         
         /// - Tag: Mouse Buffer
-//        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
-//        gameView.mouseBuffer = device?.makeBuffer(length: MemoryLayout<float2>.size, options: [])
-//        gameView.outofBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
-        
+        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
+        gameView.mouseBuffer = device?.makeBuffer(length: MemoryLayout<float2>.size, options: [])
+        gameView.outofBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2),
+                                                  length: 2 * MemoryLayout<float2>.size, options: [])
         /// - Tag: ImGui
         ImGui.initialize(.metal)
         if let vc = ImGui.vc {
             self.addChild(vc)
-            view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3, width: 0, height: 0)
+            vc.view.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+            gameView.addSubview(vc.view)
         }
-        gameView.resize()
         
     #if DEBUG
         
         gameView.debugOptions = [.showCameras, .showLightExtents]
         gameView.showsStatistics = true
         
-    #elseif os(OSX)
+    #endif
         
-        gameView.settingView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
-        gameView.settingView?.isHidden = true
-        gameView.addSubview(gameView.settingView!)
+        gameView.resize()
+        
+    #if os(OSX)
+        
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
-        
+    
     #elseif os(iOS)
         
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
@@ -223,18 +216,23 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
     #endif
         
-//        Py_Initialize()
-//        let p = Bundle.main.resourcePath! + "/pyinit.py"
-//        PyRun_SimpleFileExFlags(fopen(p, "r"), p, 0, nil)
+        Py_Initialize()
+        let p = Bundle.main.resourcePath! + "/pyinit.py"
+        PyRun_SimpleFileExFlags(fopen(p, "r"), p, 0, nil)
         
+        let config = GTConfiguration.default()
+        
+        if (gameView.settings!.editor.hasSuffix("Code")) {
+            config?.setString("code --wait", forKey: "core.editor")
+            config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
+        }
+        if (gameView.settings!.editor.hasSuffix("Vim")) {
+            config?.setString("vim", forKey: "core.editor")
+            config?.setString("vimdiff", forKey: "merge.tool")
+        }
     }
     
 #if os(iOS)
-    
-    override func viewWillLayoutSubviews() {
-        self.gameView.resize()
-        super.viewWillLayoutSubviews()
-    }
     
     @objc func performCommand(sender: UIKeyCommand) {
         return gameView.ckeyDown(key: sender.input!)
@@ -262,6 +260,14 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
                          modifierFlags: .init(rawValue: 0),
                          action: #selector(self.performCommand(sender:)))
         ]
+    }
+    
+    override func viewWillLayoutSubviews() {
+        self.gameView.resize()
+        super.viewWillLayoutSubviews()
+        if let vc = ImGui.vc as? ImGuiSceneViewController {
+            vc.viewDidLayoutSubviews()
+        }
     }
     
 #endif
@@ -334,32 +340,32 @@ extension GameViewController: NSControlTextEditingDelegate {
 
 extension GameViewController {
     /// This function will set all the required properties, and then provide a preview for the document
-    func share(url: URL) {
-        self.gameView.documentInteractionController.url = url
-        self.gameView.documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
-        self.gameView.documentInteractionController.name = url.localizedName ?? url.lastPathComponent
-        self.gameView.documentInteractionController.presentPreview(animated: true)
-    }
-    
-    /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
-    func storeAndShare(withURLString: String) {
-        guard let url = URL(string: withURLString) else { return }
-        /// START YOUR ACTIVITY INDICATOR HERE
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            let tmpURL = FileManager.default.temporaryDirectory
-                .appendingPathComponent(response?.suggestedFilename ?? "fileName.png")
-            do {
-                try data.write(to: tmpURL)
-            } catch {
-                print(error)
-            }
-            DispatchQueue.main.async {
-                /// STOP YOUR ACTIVITY INDICATOR HERE
-                self.share(url: tmpURL)
-            }
-        }.resume()
-    }
+//    func share(url: URL) {
+//        self.gameView.documentInteractionController.url = url
+//        self.gameView.documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
+//        self.gameView.documentInteractionController.name = url.localizedName ?? url.lastPathComponent
+//        self.gameView.documentInteractionController.presentPreview(animated: true)
+//    }
+//    
+//    /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
+//    func storeAndShare(withURLString: String) {
+//        guard let url = URL(string: withURLString) else { return }
+//        /// START YOUR ACTIVITY INDICATOR HERE
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let data = data, error == nil else { return }
+//            let tmpURL = FileManager.default.temporaryDirectory
+//                .appendingPathComponent(response?.suggestedFilename ?? "fileName.png")
+//            do {
+//                try data.write(to: tmpURL)
+//            } catch {
+//                print(error)
+//            }
+//            DispatchQueue.main.async {
+//                /// STOP YOUR ACTIVITY INDICATOR HERE
+//                self.share(url: tmpURL)
+//            }
+//        }.resume()
+//    }
 }
 
 extension GameViewController: UIDocumentInteractionControllerDelegate {
