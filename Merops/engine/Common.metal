@@ -28,6 +28,7 @@ VertexOut {
     float3 normal;
     float2 texcoord;
     float4 wireColor;
+    float pointsize[[point_size]];
 };
 
 struct

@@ -13,24 +13,19 @@ import ImGui
 class GameView: SCNView {
     
     /// Mark: Mouse hit point
-    let options = [
-        SCNHitTestOption.sortResults: NSNumber(value: true),
-        SCNHitTestOption.boundingBoxOnly: NSNumber(value: true),
-        SCNHitTestOption.categoryBitMask: NSNumber(value: true),
-    ]
-    
     private func update() {
         let bufferPointer = mouseBuffer.contents()
         memcpy(bufferPointer, &pos, MemoryLayout<float2>.size)
     }
     
-    var pos = float2()
     var mouseBuffer: MTLBuffer!
-    var outBuffer: MTLBuffer!
+    var pos = float2()
+    var outofBuffer: MTLBuffer!
     var queue: MTLCommandQueue! = nil
     var cps: MTLComputePipelineState! = nil
     
     override func draw(_ dirtyRect: CGRect) {
+        return
         if let drawable = metalLayer.nextDrawable() {
             guard let commandBuffer = queue.makeCommandBuffer() else { return }
             commandBuffer.pushDebugGroup("Mouse Buffer")
@@ -38,7 +33,7 @@ class GameView: SCNView {
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()
             commandEncoder?.setComputePipelineState(cps)
             commandEncoder?.setBuffer(mouseBuffer, offset: 0, index: 1)
-            commandEncoder?.setBuffer(outBuffer, offset: 0, index: 2)
+            commandEncoder?.setBuffer(outofBuffer, offset: 0, index: 2)
             
             update()
             
@@ -227,6 +222,12 @@ class GameView: SCNView {
         return SCNVector3Make(cameraMat.m31, cameraMat.m32, cameraMat.m33) * -1
     }
     
+    let options = [
+        SCNHitTestOption.sortResults: NSNumber(value: true),
+        SCNHitTestOption.boundingBoxOnly: NSNumber(value: true),
+        SCNHitTestOption.categoryBitMask: NSNumber(value: true),
+    ]
+    
     /*
      * MARK: Mouse Event
      */
@@ -239,7 +240,7 @@ class GameView: SCNView {
         
         // MARK: overLay
         if let first = overLay?.nodes(at: _p!).first {
-            
+            print (first.name)
             switch first.name {
                 
             case "NSMultipleDocuments"?:

@@ -8,6 +8,7 @@
 
 #include "Common.metal"
 
+/// - Tag: Mouse
 vertex
 float4 vertex_main(const VertexIn4 vertex_in [[ stage_in ]]) {
     return vertex_in.position;
@@ -29,6 +30,7 @@ void compute(texture2d<float, access::write> output [[texture(0)]],
     output.write(float4(0, 0.5, 0.5, 1), gid);
 }
 
+/// - Tag: DrawOverride
 struct
 VertexIn {
     float3 position [[attribute(SCNVertexSemanticPosition)]];
@@ -81,6 +83,7 @@ VertexOut point_vertex(VertexIn in [[stage_in]], constant NodeConstants &scn_nod
     modelPosition += modelNormal * extrusionMagnitude;
     
     VertexOut out;
+    out.pointsize = 10.0;
     out.position = scn_node.modelViewProjectionTransform * float4(modelPosition, 1);
     out.wireColor = fill_vertex;
     out.normal = (scn_node.normalTransform * float4(in.normal, 1)).xyz;
@@ -92,9 +95,12 @@ half4 point_fragment(VertexOut in [[stage_in]]) {
     return half4(in.wireColor);
 }
 
+
+/// - Tag: BG & Grid
 // https://developer.apple.com/documentation/scenekit/scnprogram
 vertex
-VertexOut sky_vertex(VertexInput in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
+VertexOut sky_vertex(VertexInput in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]])
+{
     VertexOut out;
     out.position = scn_node.modelViewProjectionTransform * float4(in.position, 1);
     out.texcoord = in.texcoord;
@@ -113,17 +119,31 @@ half4 sky_fragment(VertexOut in [[stage_in]],
     return half4(half3(skyColor.rgb), 1);
 }
 
-vertex
-VertexOut grid_vertex(VertexInput in [[stage_in]], constant NodeConstants &scn_node [[buffer(1)]]) {
-    VertexOut out;
-    out.position = scn_node.modelViewProjectionTransform * float4(in.position, 1);
-    out.texcoord = in.texcoord;
-    return out;
-}
+//vertex
+//VertexOut grid_vertex(VertexInput in [[stage_in]])
+//{
+//    VertexOut out;
+//    out.position = in.position;
+//    out.texcoord = in.texcoord;
+//    return out;
+//}
 
 //https://qiita.com/edo_m18/items/5e03f7fa317b922b5a42#gl_fragcoord相当の処理
-fragment
-half4　grid_fragment(VertexOut in [[stage_in]], constant Uniform uniforms [[buffer(0)]]){
+//fragment
+//half4　grid_fragment(VertexOut in [[stage_in]], constant Uniform uniforms [[buffer(0)]]){
+//https://www.geeks3d.com/hacklab/20180611/demo-simple-2d-grid-in-glsl/
+//    varying vec4 v_uv;
+//    uniform vec4 params;
+//
+//    float grid(vec2 st, float res);
+//
+//    float2 grid = fract(st * res);
+//    step(res, grid.x) * step(res, grid.y);
+//
+//    float2 grid_uv = float4.xy * params.x; // scale
+//    float x = grid(grid_uv, params.y); // resolution
+//    return float4(float3(0.5) * x, 1.0);
+    
 ////    float2 pos = gl_FragCoord.xy;
 //    float2 resolution = float2(uniforms.resolution[0], uniforms.resolution[1]);
 //    float x = pos.x - (resolution.x/2.0);
@@ -137,5 +157,5 @@ half4　grid_fragment(VertexOut in [[stage_in]], constant Uniform uniforms [[buf
 //    color = float3(0.5);
 //
 //    return half4(color, 1.0);
-    return fill_vertex;
-}
+//    return fill_vertex;
+//}

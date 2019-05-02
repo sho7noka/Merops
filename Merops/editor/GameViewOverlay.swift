@@ -36,6 +36,7 @@ extension SKScene {
         btn.name = (name as! String)
     #elseif os(iOS)
         let btn = SKSpriteNode(color: name as! Color, size: size)
+        btn.name = "NSInfo" // test
     #endif
         btn.size = size
         return btn

@@ -37,10 +37,6 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 - [x] [subview 3Dコントローラー](x-source-tag://addSubView) ~~[bug](https://stackoverflow.com/questions/47517902/pixel-format-error-with-scenekit-spritekit-overlay-on-iphone-x) SpriteKit で 透明 HUD の描画~~
 - [x] Blender like な [imgui Slider](https://github.com/mnmly/Swift-imgui) の実装
 - [x] ~~PyRun_SimpleStringFlags と PyObjC の [GIL 回避](x-source-tag://gil)~~ Swift SIL を ctypes から
-    - [1](http://pyobjc-dev.narkive.com/EgqnPAdl/crash-with-pyobjc-1-1-when-i-call-recursively-pyrun-simplestring)
-    - [2](https://www.hardcoded.net/articles/) 
-    - [3](https://www.hardcoded.net/articles/embedding-python-in-objc)
-    - [4](https://gist.github.com/jiaaro/e111f0f64d0cdb8aca38)
 - [x] [mouseEvent/TouchEvent](https://qiita.com/RichQiitaJp/items/79a52c55c9762b60f292) と Float をマルチプラットフォーム化
 - [x] ~~WebKit View への書き込みと読み込み~~ vscode や vim に外部化
 

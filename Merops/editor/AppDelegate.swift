@@ -25,23 +25,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     
     func applicationDidBecomeActive(_ notification: Notification) {
-
-        Py_Initialize()
-        
-        PyRun_SimpleStringFlags("""
-import sys, os
-pwd = os.environ[\"PWD\"]
-
-os.environ[\"PATH\"] = pwd + \"/USD/bin\"
-os.environ[\"PATH\"] = pwd + \"/USD/lib\"
-os.environ[\"PYTHONPATH\"] = pwd + \"/USD/lib/python\"
-sys.path.append(os.path.join(pwd, \"USD/lib/python\"))
-sys.path.append(pwd)
-os.chdir(os.path.join(pwd, \"USD/lib/python\"))
-
-import merops
-merops.main()
-""", nil)
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -68,36 +51,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        let resourcePath = Bundle.main.resourcePath! + "/python3"
-        let python_home = "PYTHONHOME=\(resourcePath)" as NSString
-        unsetenv("PYTHONHOME")
-        unsetenv("PYTHONPATH")
-        putenv(UnsafeMutablePointer(mutating: python_home.utf8String))
-        
-//        Py_Initialize()
-//        PyRun_SimpleStringFlags("import sys\nprint (sys.executable)", nil)
-//        Py_Finalize()
-        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        Py_Finalize()
     }
 
 }

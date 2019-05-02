@@ -5,15 +5,19 @@
 //  Created by sumioka-air on 2017/04/30.
 //  Copyright (c) 2017年 sho sumioka. All rights reserved.
 //
-#if os(iOS)
-import UIKit
-#endif
+
 import Metal
 import MetalKit
 import SpriteKit
 import SceneKit
 import QuartzCore
 import ImGui
+
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Python
+#endif
 
 class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFieldDelegate {
     
@@ -182,12 +186,25 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.addSubview(gameView.txtField!)
         
         /// - Tag: Mouse Buffer
-        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
-        gameView.mouseBuffer = device!.makeBuffer(length: MemoryLayout<float2>.size, options: [])
-        gameView.outBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
+//        gameView.cps = try! device.makeComputePipelineState(function: render.mouseFunction)
+//        gameView.mouseBuffer = device?.makeBuffer(length: MemoryLayout<float2>.size, options: [])
+//        gameView.outofBuffer = device?.makeBuffer(bytes: [Float](repeating: 0, count: 2), length: 2 * MemoryLayout<float2>.size, options: [])
+        
+        /// - Tag: ImGui
+        ImGui.initialize(.metal)
+        if let vc = ImGui.vc {
+            self.addChild(vc)
+            view.addSubview(vc.view)
+            vc.view.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3, width: 0, height: 0)
+        }
         gameView.resize()
         
-    #if os(OSX)
+    #if DEBUG
+        
+        gameView.debugOptions = [.showCameras, .showLightExtents]
+        gameView.showsStatistics = true
+        
+    #elseif os(OSX)
         
         gameView.settingView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
         gameView.settingView?.isHidden = true
@@ -200,20 +217,16 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.txtField.addTarget(self, action: Selector(("textFieldEditingChanged:")), for: .editingChanged)
         gameView.documentInteractionController.delegate = (self as UIDocumentInteractionControllerDelegate)
         
+        let resourceHome = Bundle.main.resourcePath! + "/python3"
+        let python_home = "PYTHONHOME=\(resourceHome)" as NSString
+        putenv(UnsafeMutablePointer(mutating: python_home.utf8String))
+        
     #endif
         
-        /// - Tag: ImGui
-        ImGui.initialize(.metal)
-        if let vc = ImGui.vc {
-            self.addChild(vc)
-            view.addSubview(vc.view)
-            vc.view.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3, width: 0, height: 0)
-        }
+//        Py_Initialize()
+//        let p = Bundle.main.resourcePath! + "/pyinit.py"
+//        PyRun_SimpleFileExFlags(fopen(p, "r"), p, 0, nil)
         
-    #if DEBUG
-        gameView.showsStatistics = true
-    #endif
-
     }
     
 #if os(iOS)

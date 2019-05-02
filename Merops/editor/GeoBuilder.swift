@@ -189,11 +189,11 @@ final class Editor {
     class func openScript(model: Model, settings: Settings) {
         #if os(iOS)
         
-        if model.file.endsWith(".py") {
+        if model.file.hasSuffix(".py") {
             let pythonista = URL(string: "pythonista://\(model.file)")!
             UIApplication.shared.open(pythonista)
         } else {
-            storeAndShare(withURLString: (model!.file ?? nil)!)
+//            storeAndShare(withURLString: (model!.file ?? nil)!)
         }
         
         #elseif os(OSX)

@@ -6,6 +6,9 @@
 //
 
 /// - Tag: libgit
+/// - [概念](http://keijinsonyaban.blogspot.jp/2011/05/git.html#ct3_1)
+/// - [git undo](http://sota1235.hatenablog.com/entry/2015/07/11/230051)
+
 import ObjectiveGit
 
 func gitInit(dir: String) {

@@ -22,7 +22,7 @@ public func executeCallback() {
     if let callback = callback {
         let model = Model.init()
         print("swift: executing callback with number ", number, model.name)
-        model._copy()
+//        model._copy()
         callback(number)
     } else {
         print("swift: no callback was set")
