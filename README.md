@@ -29,7 +29,8 @@ Merops は `Apple Metal２2` と `Git`、`PixarUSD` をベースにした、次�
 他のソフトのコンテクストを参考に実装を進めていますが統合ソフトは目指しません。
 
 ### Editor
-- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride) / [primitive override マウス選択の実現](https://github.com/metal-by-example/metal-picking)  動的MSL の[Scenekit 割当](https://qiita.com/shu223/items/b5729fdf1d95721d07b7)
+- [ ] [point, line, face の DrawOverrideを選択オブジェクトから作る](x-source-tag://DrawOverride)
+- [ ] [primitive選択の実現](https://github.com/metal-by-example/metal-picking) 
 - [ ] 背景とグリッドを描画 /[カメラコントロールを同期](https://developer.apple.com/videos/play/wwdc2017/604/?time=789) /設定画面を表示
 - [x] マウスイベントの両立
 - [x] [libgit2でcommitとrevert](x-source-tag://libgit)

@@ -9,7 +9,7 @@ import SceneKit
 struct Attribute {
     var name : String
     var index : Int
-//    var attr : String { set get }
+    var attr : String
 }
 
 class Material {

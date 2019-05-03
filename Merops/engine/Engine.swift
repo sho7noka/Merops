@@ -11,6 +11,7 @@ import SceneKit
 class MetalRender : SCNRenderer {
     
     var library: MTLLibrary {
+//        try self.device?.makeLibrary(source: "", options: nil)
         return self.device!.makeDefaultLibrary()!
     }
     

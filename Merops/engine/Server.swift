@@ -9,7 +9,7 @@
 import SocketIO
 
 func start () {
-    let manager = SocketManager(socketURL: URL(string: "http://localhost:8080")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "http://localhost:32040")!, config: [.log(true), .compress])
     let socket = manager.defaultSocket
 
     socket.on(clientEvent: .connect) {data, ack in

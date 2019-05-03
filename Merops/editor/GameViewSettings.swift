@@ -5,6 +5,12 @@
 
 import Foundation
 
+enum NodeOptions: Int {
+    case noSelect = 2
+    case noExport = 3
+    case noDelete = 4
+}
+
 struct Settings {
     let projectDir: String
     let bgColor: Color
@@ -19,12 +25,6 @@ struct Settings {
         self.pythonDir = pyDir
         self.editor = editor
     }
-}
-
-enum NodeOptions: Int {
-    case noSelect = 2
-    case noExport = 3
-    case noDelete = 4
 }
 
 enum DrawOverride {

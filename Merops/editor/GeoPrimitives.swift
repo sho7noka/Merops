@@ -374,3 +374,163 @@ extension SCNGeometry {
 //        )
 //    }
 //}
+
+func addLineBetweenVertices(vertexA: simd_float3,
+                            vertexB: simd_float3,
+                            inScene scene: SCNScene,
+                            useSpheres: Bool = false,
+                            color: Color = .yellow) {
+    if useSpheres {
+        addSphereAt(position: vertexB,
+                    radius: 0.01,
+                    color: .red,
+                    scene: scene)
+    } else {
+        let geometrySource = SCNGeometrySource(vertices: [SCNVector3(x: vertexA.x,
+                                                                     y: vertexA.y,
+                                                                     z: vertexA.z),
+                                                          SCNVector3(x: vertexB.x,
+                                                                     y: vertexB.y,
+                                                                     z: vertexB.z)])
+        let indices: [Int8] = [0, 1]
+        let indexData = Data(bytes: indices, count: 2)
+        let element = SCNGeometryElement(data: indexData,
+                                         primitiveType: .line,
+                                         primitiveCount: 1,
+                                         bytesPerIndex: MemoryLayout<Int8>.size)
+        
+        let geometry = SCNGeometry(sources: [geometrySource],
+                                   elements: [element])
+        
+        geometry.firstMaterial?.isDoubleSided = true
+        geometry.firstMaterial?.emission.contents = color
+        
+        let node = SCNNode(geometry: geometry)
+        
+        scene.rootNode.addChildNode(node)
+    }
+}
+
+@discardableResult
+func addTriangle(vertices: [simd_float3], inScene scene: SCNScene) -> SCNNode {
+    assert(vertices.count == 3, "vertices count must be 3")
+    
+    let vector1 = vertices[2] - vertices[1]
+    let vector2 = vertices[0] - vertices[1]
+    let normal = simd_normalize(simd_cross(vector1, vector2))
+    
+    let normalSource = SCNGeometrySource(normals: [SCNVector3(x: normal.x, y: normal.y, z: normal.z),
+                                                   SCNVector3(x: normal.x, y: normal.y, z: normal.z),
+                                                   SCNVector3(x: normal.x, y: normal.y, z: normal.z)])
+    
+    let sceneKitVertices = vertices.map {
+        return SCNVector3(x: $0.x, y: $0.y, z: $0.z)
+    }
+    let geometrySource = SCNGeometrySource(vertices: sceneKitVertices)
+    
+    let indices: [Int8] = [0, 1, 2]
+    let indexData = Data(bytes: indices, count: 3)
+    let element = SCNGeometryElement(data: indexData,
+                                     primitiveType: .triangles,
+                                     primitiveCount: 1,
+                                     bytesPerIndex: MemoryLayout<Int8>.size)
+    
+    let geometry = SCNGeometry(sources: [geometrySource, normalSource],
+                               elements: [element])
+    
+    geometry.firstMaterial?.isDoubleSided = true
+    geometry.firstMaterial?.diffuse.contents = Color.orange
+    
+    let node = SCNNode(geometry: geometry)
+    
+    scene.rootNode.addChildNode(node)
+    
+    return node
+}
+
+func addCube(vertices: [simd_float3], inScene scene: SCNScene) -> SCNNode {
+    assert(vertices.count == 8, "vertices count must be 3")
+    
+    let sceneKitVertices = vertices.map {
+        return SCNVector3(x: $0.x, y: $0.y, z: $0.z)
+    }
+    let geometrySource = SCNGeometrySource(vertices: sceneKitVertices)
+    
+    let indices: [Int8] = [
+        // bottom
+        0, 2, 1,
+        1, 2, 3,
+        // back
+        2, 6, 3,
+        3, 6, 7,
+        // left
+        0, 4, 2,
+        2, 4, 6,
+        // right
+        1, 3, 5,
+        3, 7, 5,
+        // front
+        0, 1, 4,
+        1, 5, 4,
+        // top
+        4, 5, 6,
+        5, 7, 6 ]
+    
+    let indexData = Data(bytes: indices, count: indices.count)
+    let element = SCNGeometryElement(data: indexData,
+                                     primitiveType: .triangles,
+                                     primitiveCount: 12,
+                                     bytesPerIndex: MemoryLayout<Int8>.size)
+    
+    let geometry = SCNGeometry(sources: [geometrySource],
+                               elements: [element])
+    
+    geometry.firstMaterial?.isDoubleSided = true
+    geometry.firstMaterial?.diffuse.contents = Color.purple
+    geometry.firstMaterial?.lightingModel = .physicallyBased
+    
+    let node = SCNNode(geometry: geometry)
+    
+    scene.rootNode.addChildNode(node)
+    
+    return node
+}
+
+func addAxisArrows(scene: SCNScene) {
+    let xArrow = arrow(color: Color.red)
+    xArrow.simdEulerAngles = simd_float3(x: 0, y: 0, z: -.pi * 0.5)
+    
+    let yArrow = arrow(color: Color.green)
+    
+    let zArrow = arrow(color: Color.blue)
+    zArrow.simdEulerAngles = simd_float3(x: .pi * 0.5, y: 0, z: 0)
+    
+    let node = SCNNode()
+    node.addChildNode(xArrow)
+    node.addChildNode(yArrow)
+    node.addChildNode(zArrow)
+    
+    node.simdPosition = simd_float3(x: -1.5, y: -1.25, z: 0.0)
+    
+    scene.rootNode.addChildNode(node)
+}
+
+func arrow(color: Color) -> SCNNode {
+    let cylinder = SCNCylinder(radius: 0.01, height: 0.5)
+    cylinder.firstMaterial?.diffuse.contents = color
+    let cylinderNode = SCNNode(geometry: cylinder)
+    
+    let cone = SCNCone(topRadius: 0, bottomRadius: 0.03, height: 0.1)
+    cone.firstMaterial?.diffuse.contents = color
+    let coneNode = SCNNode(geometry: cone)
+    
+    coneNode.simdPosition = simd_float3(x: 0, y: 0.25, z: 0)
+    
+    let returnNode = SCNNode()
+    returnNode.addChildNode(cylinderNode)
+    returnNode.addChildNode(coneNode)
+    
+    returnNode.pivot = SCNMatrix4MakeTranslation(0, -0.25, 0)
+    
+    return returnNode
+}

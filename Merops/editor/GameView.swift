@@ -271,11 +271,12 @@ class GameView: SCNView {
                 if selectedNode != nil {
                 #if os(OSX)
                     txtField.stringValue = selectedNode!.name!
+                    txtField.frame.origin = CGPoint(x: 56, y: first.position.y * 2 + 16)
                 #elseif os(iOS)
                     txtField.text = selectedNode?.name!
+                    txtField.frame.origin = CGPoint(x: 56, y: 48)
                 #endif
                     txtField.isHidden = false
-                    txtField.frame.origin = CGPoint(x: 56, y: first.position.y * 2 + 16)
                     overLay?.label_name.text = "Name"
                 }
                 
@@ -300,8 +301,12 @@ class GameView: SCNView {
                             }
                             return "positionZ"
                         }()
-                        item.isHidden = false
+                    #if os(OSX)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 36)
+                    #elseif os(iOS)
+                        item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 68)
+                    #endif
+                        item.isHidden = false
                         overLay?.label_position.text = "Position"
                     }
                 }
@@ -327,8 +332,12 @@ class GameView: SCNView {
                             }
                             return "rotationZ"
                         }()
-                        item.isHidden = false
+                    #if os(OSX)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 56)
+                    #elseif os(iOS)
+                        item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 88)
+                    #endif
+                        item.isHidden = false
                         overLay?.label_rotate.text = "Rotate"
                     }
                 }
@@ -354,8 +363,12 @@ class GameView: SCNView {
                             }
                             return "scaleZ"
                         }()
-                        item.isHidden = false
+                    #if os(OSX)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 76)
+                    #elseif os(iOS)
+                        item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 108)
+                    #endif
+                        item.isHidden = false
                         overLay?.label_scale.text = "Scale"
                     }
                 }
@@ -730,18 +743,21 @@ class GameView: SCNView {
     func resize() {
         let size = self.frame.size
         
-        #if os(OSX)
+    #if os(OSX)
         subView?.frame.origin = CGPoint(x: size.width - 88 , y: 16)
-        #elseif os(iOS)
-        subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 80)
-        /// TODO: ノッチ幅を下げる
-        #endif
         overLay?.label_name.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 1))
         overLay?.label_position.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 2))
         overLay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))
         overLay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 4))
         overLay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
-        
+    #elseif os(iOS)
+        subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 80)
+        overLay?.label_name.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))
+        overLay?.label_position.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 4))
+        overLay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
+        overLay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 6))
+        overLay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 7))
+    #endif
         overLay?.button_red.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 300)
         overLay?.button_green.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 268)
         overLay?.button_blue.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 236)
@@ -758,28 +774,35 @@ class GameView: SCNView {
         
         if txtField != nil {
             txtField.isHidden = true
+            #if os(iOS)
+            txtField.endEditing(true)
+            #endif
         }
         
         numFields.forEach {
             $0.isHidden = true
+            #if os(iOS)
+            $0.endEditing(true)
+            #endif
         }
         
         gizmos.forEach {
             $0.removeFromParentNode()
         }
         
-        settingView?.isHidden = true
+//        settingView?.isHidden = true
         
         self.subviews.last!.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
     func properties() {
         self.subviews.last!.frame = CGRect(x: self.frame.width * 0.2, y: self.frame.height * 0.3,
-                                           width: self.frame.width, height: self.frame.height * 0.5)
-        
-        
+                                           width: self.frame.width * 0.3, height: self.frame.height)
         ImGui.draw { (imgui) in
             imgui.pushStyleVar(.windowRounding, value: 0)
+//            imgui.getStyle().antiAliasedLines
+//            imgui.getStyle().antiAliasedShapes
+            
             imgui.pushStyleColor(.frameBg, color: Color.blue)
 
             let f = UnsafeMutablePointer<Bool>.allocate(capacity: 1)
@@ -803,8 +826,8 @@ class GameView: SCNView {
                 Editor.openScript(model: self.model!, settings: self.settings!)
             }
             imgui.endGroup()
-
             imgui.end()
+            
             imgui.popStyleColor()
             imgui.popStyleVar()
         }

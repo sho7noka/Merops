@@ -109,7 +109,6 @@
 /* Begin PBXFileReference section */
 		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		E2101237211EBE08001664AD /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = USD/lib; sourceTree = "<group>"; };
-		E216B24421299C4D004D0CE8 /* interpolate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interpolate.swift; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Serializer.swift; path = ../engine/Serializer.swift; sourceTree = "<group>"; };
 		E23D355A22636A2A009D6DBB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		E23D355B22636A2A009D6DBB /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
@@ -176,7 +175,7 @@
 		E2CDF1D021357B6B004D8E39 /* py_module */ = {isa = PBXFileReference; lastKnownFileType = folder; name = py_module; path = Merops/extra/py_module; sourceTree = SOURCE_ROOT; };
 		E2D5EE562268DEF400010903 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/Mac/SocketIO.framework; sourceTree = "<group>"; };
 		E2D5EE582268DF0B00010903 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
-		E2D5EE5A2268DF8F00010903 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = ../engine/Server.swift; sourceTree = "<group>"; };
+		E2D5EE5A2268DF8F00010903 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		E2D5EE5C2268E06A00010903 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		E2D5EE5E2268E07B00010903 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		E2DD2648213A6C3D00242943 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -309,8 +308,8 @@
 				ED32B95F1EB5D298000D8823 /* GameView.swift */,
 				ED32B9611EB5D298000D8823 /* GameViewController.swift */,
 				ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */,
-				E281B78D20B933D000232181 /* GameViewSettings.swift */,
 				E281B78E20B933D000232181 /* GameViewDialogs.swift */,
+				E281B78D20B933D000232181 /* GameViewSettings.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -475,6 +474,7 @@
 			children = (
 				E281B7A020B94CAE00232181 /* Model.swift */,
 				94B26A2A79BC7112A5660547 /* Engine.swift */,
+				E2D5EE5A2268DF8F00010903 /* Server.swift */,
 				E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */,
 				E281B79B20B94CAE00232181 /* MTLTessellator.swift */,
 				E281B79E20B94CAE00232181 /* MTLPolygonReduction.swift */,
@@ -501,9 +501,7 @@
 				E281B79220B933E200232181 /* GeoPrimitives.swift */,
 				E281B78820B933B600232181 /* Cmd+Git.swift */,
 				E281B78720B933B600232181 /* Cmd+USD.swift */,
-				E216B24421299C4D004D0CE8 /* interpolate.swift */,
 				E21859F921036D3400653DBD /* Serializer.swift */,
-				E2D5EE5A2268DF8F00010903 /* Server.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -701,7 +699,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n\nswiftc -emit-library $SRCROOT/Merops/engine/BindGen.swift $SRCROOT/Merops/engine/Model.swift -module-name Merops -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk -target arm64e-apple-ios12.2\ncp $SRCROOT/Merops/engine/libMerops.dylib $SRCROOT/python3/lib/python3.7/site-packages\ncp $SRCROOT/Merops/engine/merops.py $BUILT_PRODUCTS_DIR\ncp -r $SRCROOT/python3 $BUILT_PRODUCTS_DIR\ncp $SRCROOT/Merops/engine/pyinit.py $BUILT_PRODUCTS_DIR\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\nswiftc -emit-library $SRCROOT/Merops/engine/BindGen.swift $SRCROOT/Merops/engine/Model.swift -module-name Merops -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk -target arm64e-apple-ios12.2\ncodesign --force --deep-verify --verbose --sign \"merops\" $SRCROOT/Merops/engine/libMerops.dylib\ncp $SRCROOT/Merops/engine/libMerops.dylib $SRCROOT/python3/lib/python3.7/site-packages\ncp $SRCROOT/Merops/engine/merops.py $BUILT_PRODUCTS_DIR\ncp -r $SRCROOT/python3 $BUILT_PRODUCTS_DIR\ncp $SRCROOT/Merops/engine/pyinit.py $BUILT_PRODUCTS_DIR\n";
 		};
 		E2CDF1CF21356BE6004D8E39 /* Copy Python lib  */ = {
 			isa = PBXShellScriptBuildPhase;
