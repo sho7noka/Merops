@@ -10,6 +10,8 @@
 		94B267081AAA6682547C87FA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E215AC2E22678C630052BCBD /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788621E653F800FBA0BB /* ImGui.framework */; };
 		E215AC2F22678C750052BCBD /* ImGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26A788B21E7815900FBA0BB /* ImGui.framework */; };
+		E217C62F2281D3BC00E66B6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E217C62E2281D3BB00E66B6B /* GoogleService-Info.plist */; };
+		E217C6302281D3BC00E66B6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E217C62E2281D3BB00E66B6B /* GoogleService-Info.plist */; };
 		E21859FA21036D3400653DBD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
 		E23D355D22636A2A009D6DBB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D355A22636A2A009D6DBB /* libsqlite3.tbd */; };
 		E23D355E22636A2A009D6DBB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E23D355B22636A2A009D6DBB /* libz.tbd */; };
@@ -107,6 +109,7 @@
 /* Begin PBXFileReference section */
 		94B26A2A79BC7112A5660547 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		E2101237211EBE08001664AD /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = USD/lib; sourceTree = "<group>"; };
+		E217C62E2281D3BB00E66B6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E21859F921036D3400653DBD /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Serializer.swift; path = ../engine/Serializer.swift; sourceTree = "<group>"; };
 		E23D355A22636A2A009D6DBB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		E23D355B22636A2A009D6DBB /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
@@ -278,6 +281,7 @@
 			children = (
 				EDEEFF531F8A35CB00E4785F /* README.md */,
 				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
+				E217C62E2281D3BB00E66B6B /* GoogleService-Info.plist */,
 				E26ABEC021EB769600487FA4 /* Cartfile */,
 				E248937A2280642A00B826CB /* icons.sketch */,
 				E2FB3999225D09A0000C4064 /* Assets.xcassets */,
@@ -340,20 +344,20 @@
 				E2D5EE5E2268E07B00010903 /* Starscream.framework */,
 				E2D5EE562268DEF400010903 /* SocketIO.framework */,
 				E2D5EE582268DF0B00010903 /* SocketIO.framework */,
-				E23D363322637808009D6DBB /* libcrypto.a */,
+				E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */,
+				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
+				E26A788621E653F800FBA0BB /* ImGui.framework */,
+				E26A788B21E7815900FBA0BB /* ImGui.framework */,
+				E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */,
+				E2E46157210DE97800C0DB39 /* Python.framework */,
 				E23D363422637808009D6DBB /* libpython3.a */,
+				E23D363322637808009D6DBB /* libcrypto.a */,
 				E23D363222637808009D6DBB /* libssl.a */,
 				E23D356022636A5F009D6DBB /* libffi.a */,
 				E23D356122636A5F009D6DBB /* libpython2.a */,
 				E23D355C22636A2A009D6DBB /* libbz2.tbd */,
 				E23D355A22636A2A009D6DBB /* libsqlite3.tbd */,
 				E23D355B22636A2A009D6DBB /* libz.tbd */,
-				EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */,
-				E26A788621E653F800FBA0BB /* ImGui.framework */,
-				E26A788B21E7815900FBA0BB /* ImGui.framework */,
-				E2AD5D9C212817AC0080F3F2 /* ModelIO.framework */,
-				E2E46157210DE97800C0DB39 /* Python.framework */,
-				E26A788C21E7815900FBA0BB /* ObjectiveGit.framework */,
 				E2F5172A21337604005F1515 /* libar.dylib */,
 				E2F5172321337603005F1515 /* libboost_atomic.dylib */,
 				E2F5171521337603005F1515 /* libboost_regex.dylib */,
@@ -560,6 +564,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2FBFD3E21EE119E00BDB646 /* Build configuration list for PBXNativeTarget "merops" */;
 			buildPhases = (
+				CBC7E7865062BE165C3F0A6E /* [CP] Check Pods Manifest.lock */,
 				E2FBFD3621EE119E00BDB646 /* Sources */,
 				E2FBFD3721EE119E00BDB646 /* Frameworks */,
 				E2FBFD3821EE119E00BDB646 /* CopyFiles */,
@@ -651,6 +656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E4611B210D5D7100C0DB39 /* LaunchScreen.storyboard in Resources */,
+				E217C6302281D3BC00E66B6B /* GoogleService-Info.plist in Resources */,
 				E2E46116210D5D6F00C0DB39 /* Main.storyboard in Resources */,
 				E26A788A21E77FEC00FBA0BB /* WHLSL in Resources */,
 				E2FB9E9D227AD44100E450F6 /* pyinit.py in Resources */,
@@ -666,6 +672,7 @@
 			files = (
 				E2CDF1D121357B6B004D8E39 /* py_module in Resources */,
 				E26A788921E77FEC00FBA0BB /* WHLSL in Resources */,
+				E217C62F2281D3BC00E66B6B /* GoogleService-Info.plist in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
 				E2FB399A225D09A1000C4064 /* Assets.xcassets in Resources */,
 			);
@@ -674,6 +681,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CBC7E7865062BE165C3F0A6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-merops-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E2AD5D9B212727FD0080F3F2 /* Carthage copy */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -868,6 +897,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/kivy-ios/dist/lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sho.Merops;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1100,6 +1130,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lboost_system";
 				OTHER_SWIFT_FLAGS = "-D Debug";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;

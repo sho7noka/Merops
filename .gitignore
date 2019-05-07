@@ -1,5 +1,6 @@
 .DS_Store
 .idea
+.vscode
 Carthage
 USD
 MDOC
@@ -7,3 +8,4 @@ DerivedData
 Merops.xcodeproj/project.xcworkspace/*
 Merops.xcodeproj/xcuserdata/*
 *.pyc
+GoogleService-Info.plist
