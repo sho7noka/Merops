@@ -241,27 +241,30 @@ class GameView: SCNView {
         if let first = overLay?.nodes(at: _p!).first {
             switch first.name {
                 
-            case "NSMultipleDocuments"?:
+            case "geom"?:
                 selectedNode = Builder.Sphere(scene: self.scene!)
-                
-            case "NSColorPanel"?:
+
+            case "camera"?:
+                cameraName = "camera"
+
+            case "deform"?:
                 selectedNode = Builder.Grid(scene: self.scene!)
                 
-            case "NSInfo"?:
+            case "material"?:
+                cameraName = "camera1"
+            
+            case "python"?:
                 Editor.openScript(model: model!, settings: settings!)
                 
-            case "NSComputer"?:
-                cameraName = "camera"
-        
-            case "NSNetwork"?:
-                cameraName = "camera1"
-                
-            case "NSFolder"?:
+            case "settings"?:
                 settingView?.isHidden = false
                 
-            case "NSAdvanced"?:
-                break
-                
+            case "undo"?:
+                gitRevert(url: (self.settings?.projectDir)!)
+
+            case "redo"?:
+                gitCommit(url: (self.settings?.projectDir)!)
+
             case "Info":
                 properties()
                 
@@ -757,14 +760,16 @@ class GameView: SCNView {
         overLay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
         overLay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 6))
         overLay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 7))
+        
+        overLay?.button_undo.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 120)
+        overLay?.button_redo.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 120)
     #endif
-        overLay?.button_red.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 300)
-        overLay?.button_green.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 268)
-        overLay?.button_blue.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 236)
-        overLay?.button_magenta.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 212)
-        overLay?.button_cyan.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 184)
-        overLay?.button_yellow.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 156)
-        overLay?.button_black.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 120)
+        overLay?.button_geom.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 300)
+        overLay?.button_camera.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 268)
+        overLay?.button_deform.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 236)
+        overLay?.button_material.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 212)
+        overLay?.button_python.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 184)
+        overLay?.button_settings.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 156)
         
         overLay?.label_message.position = CGPoint(x: 0 - round(size.width / 14), y: -size.height / 2 + 20)
     }

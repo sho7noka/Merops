@@ -33,11 +33,10 @@ extension SKScene {
         let size = CGSize(width: 32, height: 32)
     #if os(OSX)
         let btn = SKSpriteNode(imageNamed: name as! String)
-        btn.name = (name as! String)
     #elseif os(iOS)
         let btn = SKSpriteNode(color: name as! Color, size: size)
-        btn.name = "NSInfo" // test
     #endif
+        btn.name = (name as! String)
         btn.size = size
         return btn
     }
@@ -68,13 +67,14 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
     var label_info: SKLabelNode!
     var label_message: SKLabelNode!
 
-    var button_red: SKSpriteNode!
-    var button_blue: SKSpriteNode!
-    var button_green: SKSpriteNode!
-    var button_magenta: SKSpriteNode!
-    var button_cyan: SKSpriteNode!
-    var button_yellow: SKSpriteNode!
-    var button_black: SKSpriteNode!
+    var button_geom: SKSpriteNode!
+    var button_deform: SKSpriteNode!
+    var button_camera: SKSpriteNode!
+    var button_material: SKSpriteNode!
+    var button_python: SKSpriteNode!
+    var button_settings: SKSpriteNode!
+    var button_undo: SKSpriteNode!
+    var button_redo: SKSpriteNode!
 
     init(view: GameView) {
         super.init(size: view.frame.size)
@@ -89,29 +89,23 @@ class GameViewOverlay: SKScene, SKSceneDelegate, SCNSceneRendererDelegate {
         label_info = mLabel(name: "Info")
         label_message = mLabel(name: "")
         
-    // macOS: https://developer.apple.com/documentation/appkit/nsimage/name
-    #if os(OSX)
         // "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns"
-        button_red = mButton(name: Image.multipleDocumentsName)
-        button_green = mButton(name: Image.colorPanelName)
-        button_blue = mButton(name: Image.infoName)
-        button_magenta = mButton(name: Image.computerName)
-        button_cyan = mButton(name: Image.networkName)
-        button_yellow = mButton(name: Image.folderName)
-        button_black = mButton(name: Image.advancedName)
-        
-    // iOS: https://developer.apple.com/documentation/uikit/uibarbuttonitem/systemitem
-    #elseif os(iOS)
-        button_red = mButton(name: Color.red)
-        button_green = mButton(name: Color.blue)
-        button_blue = mButton(name: Color.green)
-        button_magenta = mButton(name: Color.yellow)
-        button_cyan = mButton(name: Color.magenta)
-        button_yellow = mButton(name: Color.cyan)
-        button_black = mButton(name: Color.black)
-    #endif
+        button_geom = mButton(name: "geom")
+        button_camera = mButton(name: "camera")
+        button_deform = mButton(name: "deform")
+        button_material = mButton(name: "material")
+        button_python = mButton(name: "python")
+        button_settings = mButton(name: "settings")
+        button_undo = mButton(name: "undo")
+        button_redo = mButton(name: "redo")
 
-        let guis : [SKNode] = [label_name, label_position, label_rotate, label_scale, label_info, button_red, button_green, button_blue, label_message, button_magenta, button_cyan, button_yellow, button_black]
+        var guis : [SKNode] = [label_name, label_position, label_rotate, label_scale, label_info, button_geom, button_camera, button_deform, label_message, button_material, button_python, button_settings]
+        
+        #if os(iOS)
+        guis.append(button_undo)
+        guis.append(button_redo)
+        #endif
+        
         DispatchQueue.main.async {
             guis.forEach {
                 self.addChild(($0))

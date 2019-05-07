@@ -68,7 +68,6 @@
 		E2E4612D210D5E8000C0DB39 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B26A2A79BC7112A5660547 /* Engine.swift */; };
 		E2E4612E210D619300C0DB39 /* MTLMeshDeformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281B79F20B94CAE00232181 /* MTLMeshDeformable.swift */; };
 		E2E46153210D80DA00C0DB39 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21859F921036D3400653DBD /* Serializer.swift */; };
-		E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
 		E2FB3998225A1808000C4064 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3997225A1808000C4064 /* Default-568h@2x.png */; };
 		E2FB399A225D09A1000C4064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3999225D09A0000C4064 /* Assets.xcassets */; };
 		E2FB399B225D09A1000C4064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FB3999225D09A0000C4064 /* Assets.xcassets */; };
@@ -88,7 +87,6 @@
 		ED32B95E1EB5D298000D8823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95D1EB5D298000D8823 /* AppDelegate.swift */; };
 		ED32B9601EB5D298000D8823 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B95F1EB5D298000D8823 /* GameView.swift */; };
 		ED32B9621EB5D298000D8823 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B9611EB5D298000D8823 /* GameViewController.swift */; };
-		ED32B9641EB5D298000D8823 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9631EB5D298000D8823 /* art.scnassets */; };
 		ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED32B9671EB5D298000D8823 /* MainMenu.xib */; };
 		ED32B99D1EBA0BAD000D8823 /* GameViewOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */; };
 		EDF08DC81FF3D2770036F476 /* ObjectiveGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF08DC71FF3D2770036F476 /* ObjectiveGit.framework */; };
@@ -118,6 +116,7 @@
 		E23D363222637808009D6DBB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "kivy-ios/dist/lib/libssl.a"; sourceTree = "<group>"; };
 		E23D363322637808009D6DBB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "kivy-ios/dist/lib/libcrypto.a"; sourceTree = "<group>"; };
 		E23D363422637808009D6DBB /* libpython3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpython3.a; path = "kivy-ios/dist/lib/libpython3.a"; sourceTree = "<group>"; };
+		E248937A2280642A00B826CB /* icons.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.sketch; sourceTree = "<group>"; };
 		E24FC7DD21337549006860D9 /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = USD/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
 		E24FC7DE21337549006860D9 /* libusdGeom.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusdGeom.dylib; path = USD/lib/libusdGeom.dylib; sourceTree = "<group>"; };
 		E24FC7DF21337549006860D9 /* libIlmThread-2_2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libIlmThread-2_2.dylib"; path = "USD/lib/libIlmThread-2_2.dylib"; sourceTree = "<group>"; };
@@ -223,7 +222,6 @@
 		ED32B95D1EB5D298000D8823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED32B95F1EB5D298000D8823 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		ED32B9611EB5D298000D8823 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		ED32B9631EB5D298000D8823 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ED32B9681EB5D298000D8823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ED32B96A1EB5D298000D8823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED32B99C1EBA0BAD000D8823 /* GameViewOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewOverlay.swift; sourceTree = "<group>"; };
@@ -281,9 +279,9 @@
 				EDEEFF531F8A35CB00E4785F /* README.md */,
 				E26ABEBF21EB769600487FA4 /* Merops-Bridging-Header.h */,
 				E26ABEC021EB769600487FA4 /* Cartfile */,
-				E2FB9EA1227ADBC600E450F6 /* python3 */,
+				E248937A2280642A00B826CB /* icons.sketch */,
 				E2FB3999225D09A0000C4064 /* Assets.xcassets */,
-				ED32B9631EB5D298000D8823 /* art.scnassets */,
+				E2FB9EA1227ADBC600E450F6 /* python3 */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -659,7 +657,6 @@
 				E2FB9EA2227ADBC600E450F6 /* python3 in Resources */,
 				E2FB3998225A1808000C4064 /* Default-568h@2x.png in Resources */,
 				E2FB399B225D09A1000C4064 /* Assets.xcassets in Resources */,
-				E2E46154210DB4BC00C0DB39 /* art.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,7 +666,6 @@
 			files = (
 				E2CDF1D121357B6B004D8E39 /* py_module in Resources */,
 				E26A788921E77FEC00FBA0BB /* WHLSL in Resources */,
-				ED32B9641EB5D298000D8823 /* art.scnassets in Resources */,
 				ED32B9691EB5D298000D8823 /* MainMenu.xib in Resources */,
 				E2FB399A225D09A1000C4064 /* Assets.xcassets in Resources */,
 			);
