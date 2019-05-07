@@ -1,11 +1,13 @@
 .DS_Store
 .idea
 .vscode
-Carthage
+*.pyc
 USD
 MDOC
+Carthage
+Podfile.lock
 DerivedData
 Merops.xcodeproj/project.xcworkspace/*
 Merops.xcodeproj/xcuserdata/*
-*.pyc
 GoogleService-Info.plist
+libMerops.dylib
