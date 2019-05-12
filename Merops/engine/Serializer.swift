@@ -118,18 +118,17 @@ public func write(url: URL, text: String) -> Bool {
 }
 
 public func userDocument(fileName: String) -> URL {
-    let documentsPath = NSURL(fileURLWithPath:
-        NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
     
+    let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let path = documentsPath.appendingPathComponent("Merops")
     do {
-        try FileManager.default.createDirectory(at: path!, withIntermediateDirectories: true, attributes: nil)
+        try FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
     } catch let error as NSError {
         NSLog("Unable to create directory \(error.debugDescription)")
     }
-    
-    let exportFile = path?.appendingPathComponent(fileName)
-    return exportFile!
+
+    let exportFile = path.appendingPathComponent(fileName)
+    return exportFile
 }
 
 extension MDLAsset {

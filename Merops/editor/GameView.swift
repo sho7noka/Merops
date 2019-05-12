@@ -96,6 +96,13 @@ class GameView: SCNView {
         }
     }
     
+    var logmsg = "" {
+        didSet {
+            self.overLay?.label_message.text = logmsg
+            self.overLay?.label_message.fontColor = Color.white
+        }
+    }
+    
     var mode = EditContext.PositionMode {
         didSet {
             self.overLay?.label_message.text = cameraName + " / " + mode.toString
@@ -243,6 +250,7 @@ class GameView: SCNView {
                 
             case "geom"?:
                 selectedNode = Builder.Sphere(scene: self.scene!)
+                isEdit = true
 
             case "camera"?:
                 cameraName = "camera"
@@ -278,6 +286,7 @@ class GameView: SCNView {
                 #elseif os(iOS)
                     txtField.text = selectedNode?.name!
                     txtField.frame.origin = CGPoint(x: 56, y: 48)
+                    txtField.keyboardType = .asciiCapable
                 #endif
                     txtField.isHidden = false
                     overLay?.label_name.text = "Name"
@@ -308,6 +317,7 @@ class GameView: SCNView {
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 36)
                     #elseif os(iOS)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 68)
+                        item.keyboardType = .numberPad
                     #endif
                         item.isHidden = false
                         overLay?.label_position.text = "Position"
@@ -339,6 +349,7 @@ class GameView: SCNView {
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 56)
                     #elseif os(iOS)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 88)
+                        item.keyboardType = .numberPad
                     #endif
                         item.isHidden = false
                         overLay?.label_rotate.text = "Rotate"
@@ -370,6 +381,7 @@ class GameView: SCNView {
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 76)
                     #elseif os(iOS)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 108)
+                        item.keyboardType = .numberPad
                     #endif
                         item.isHidden = false
                         overLay?.label_scale.text = "Scale"
@@ -754,22 +766,22 @@ class GameView: SCNView {
         overLay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 4))
         overLay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
     #elseif os(iOS)
-        subView?.frame.origin = CGPoint(x: size.width - 88 , y: size.height - 80)
+        subView?.frame.origin = CGPoint(x: size.width - 28, y: size.height - 64)
         overLay?.label_name.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 3))
         overLay?.label_position.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 4))
         overLay?.label_rotate.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 5))
         overLay?.label_scale.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 6))
         overLay?.label_info.position = CGPoint(x: -size.width / 2 + 16, y: size.height / 2 - CGFloat(20 * 7))
         
-        overLay?.button_undo.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 120)
-        overLay?.button_redo.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 120)
+        overLay?.button_undo.position = CGPoint(x: -size.width / 2 + 32, y: -size.height / 2 + 60)
+        overLay?.button_redo.position = CGPoint(x: -size.width / 2 + 80, y: -size.height / 2 + 60)
     #endif
-        overLay?.button_geom.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 300)
-        overLay?.button_camera.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 268)
-        overLay?.button_deform.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 236)
-        overLay?.button_material.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 212)
-        overLay?.button_python.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 184)
-        overLay?.button_settings.position = CGPoint(x: size.width / 2 - 18, y: -size.height / 2 + 156)
+        overLay?.button_geom.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 300)
+        overLay?.button_camera.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 252)
+        overLay?.button_deform.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 208)
+        overLay?.button_material.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 160)
+        overLay?.button_python.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 112)
+        overLay?.button_settings.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 64)
         
         overLay?.label_message.position = CGPoint(x: 0 - round(size.width / 14), y: -size.height / 2 + 20)
     }

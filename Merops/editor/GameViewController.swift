@@ -132,7 +132,7 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
             color: Color.lightGray,
             usdDir: Bundle.main.bundleURL.deletingLastPathComponent().path,
             pyDir: "/usr/bin/python",
-            editor: "Visual Studio Code"
+            editor: "MacVim"
         )
         gameView.settingView = SettingDialog(frame: gameView.frame, setting: gameView.settings!)
         gameView.settingView?.isHidden = true
@@ -143,6 +143,17 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         gameView.backgroundColor = (gameView.settings?.bgColor)!
         gameView.queue = device.makeCommandQueue()
         
+        gitInit(dir: "/Users/shosumioka/Documents/Merops")
+        let config = GTConfiguration.default()
+        if (gameView.settings!.editor.hasSuffix("Code")) {
+            config?.setString("code --wait", forKey: "core.editor")
+            config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "diff.tool")
+        }
+        if (gameView.settings!.editor.hasSuffix("Vim")) {
+            config?.setString("vim", forKey: "core.editor")
+            config?.setString("vimdiff", forKey: "diff.tool")
+            config?.setBool(false, forKey: "difftool.prompt")
+        }
         /// - Tag: addSubView
         let pos = PositionNode()
         pos.isHidden = false
@@ -207,16 +218,6 @@ class GameViewController: SuperViewController, SCNSceneRendererDelegate, TextFie
         
         gameView.txtField.placeholder = "Name"
         gameView.txtField.delegate = self
-    
-        let config = GTConfiguration.default()
-        if (gameView.settings!.editor.hasSuffix("Code")) {
-            config?.setString("code --wait", forKey: "core.editor")
-            config?.setString("code --wait --diff $LOCAL $REMOTE", forKey: "merge.tool")
-        }
-        if (gameView.settings!.editor.hasSuffix("Vim")) {
-            config?.setString("vim", forKey: "core.editor")
-            config?.setString("vimdiff", forKey: "merge.tool")
-        }
         
     #elseif os(iOS)
         
