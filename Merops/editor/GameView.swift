@@ -317,7 +317,7 @@ class GameView: SCNView {
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 36)
                     #elseif os(iOS)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 68)
-                        item.keyboardType = .numberPad
+                        item.keyboardType = .numbersAndPunctuation
                     #endif
                         item.isHidden = false
                         overLay?.label_position.text = "Position"
@@ -349,7 +349,7 @@ class GameView: SCNView {
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 56)
                     #elseif os(iOS)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 88)
-                        item.keyboardType = .numberPad
+                        item.keyboardType = .numbersAndPunctuation
                     #endif
                         item.isHidden = false
                         overLay?.label_rotate.text = "Rotate"
@@ -381,7 +381,7 @@ class GameView: SCNView {
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: first.position.y * 2 + 76)
                     #elseif os(iOS)
                         item.frame.origin = CGPoint(x: CGFloat(64 + 32 * i), y: 108)
-                        item.keyboardType = .numberPad
+                        item.keyboardType = .numbersAndPunctuation
                     #endif
                         item.isHidden = false
                         overLay?.label_scale.text = "Scale"
@@ -784,6 +784,8 @@ class GameView: SCNView {
         overLay?.button_settings.position = CGPoint(x: size.width / 2 - 28, y: -size.height / 2 + 64)
         
         overLay?.label_message.position = CGPoint(x: 0 - round(size.width / 14), y: -size.height / 2 + 20)
+        
+        self.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     }
     
     func clear() {
